@@ -1,14 +1,21 @@
 from enum import Enum
-
+from GameObjects.Player import *
 class EventCards():
     """description of class"""
     totalEventCards = 10
     EventCardType = Enum('EventCardType','ResourceEC WormEC TaskEC InputEC')
 
-    def ECFunc1(self):
+    def ECFunc0(self, p = Player()):
+        p.PlayerVars.Total = p.PlayerVars.Total +100 
+        mystr = 'f0:'
+        return(mystr)
+
+    def ECFunc1(self, p = Player()):
+        p.PlayerVars.Total = p.PlayerVars.Total +100 
         mystr = 'f1:'
         return(mystr)
-    def ECFunc2(self):
+    def ECFunc2(self, p= Player()):
+        p.PlayerVars.Total = p.PlayerVars.Total +200  
         mystr = 'f2:'
         return(mystr)
     def ECFunc3(self):
@@ -36,4 +43,7 @@ class EventCards():
         mystr = 'f10:'
         return(mystr)
 
+    def ECFunc11(self):
+        mystr = 'f10:'
+        return(mystr)
 
