@@ -18,7 +18,7 @@ class Player():
 
     def printstatus(self):
         print('The status of player is:')
-        print('1.List of Hardwares:')
-        print(list(Player.PlayerPC))
+        #print('1.List of Hardwares:')
+        #print(list(Player.PlayerPC))
         print('2.The Variables-Values of Main RAM are:')
         self.PlayerVars.print()
