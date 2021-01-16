@@ -14,5 +14,6 @@ class MainRAMVars():
     def print(self):
         print(' VarA = ' + str(self.VarA) + '')
         print(' VarB = ' + str(self.VarB) + '')
+        print(' VarC = ' + str(self.VarB) + '')
         print(' Total = ' + str(self.Total) + '')
     

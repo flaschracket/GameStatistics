@@ -12,13 +12,18 @@ class Player():
     PlayerVars = MainRAMVars()
 
 
+    def _init_(self,name):
+        self.Name = name
     def _init_(self):
-        self.Name = 'MiniBit'
-        Name = 'Asghar'
-
+        self.Name ='player1' 
+        
     def printstatus(self):
         print('The status of player is:')
-        #print('1.List of Hardwares:')
-        #print(list(Player.PlayerPC))
-        print('2.The Variables-Values of Main RAM are:')
+        print('PlayerName : '+self.Name)        
+        print('List of Hardwares : ')
+        print(list(Player.PlayerPC))
+        print('The Variables-Values of Main RAM are:')
+        self.PlayerVars.print()
+    def printVarsValue(self):
+        print('the variable values of '+self.Name + ' are : ')
         self.PlayerVars.print()
