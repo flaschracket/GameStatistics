@@ -6,13 +6,11 @@ from random import randrange
 #Game Setup information
 numberofPlayers = 0
 listofPlayers = []
-#allPlaylers[10] = Player()
+EC = EventCards()
+Winer = ''
 CurrentStep = 0
 sumplayedEC = 0
 playedCardsSet = {0}
-
-firstplayer = Player()
-EC = EventCards()
 
 def SelectEC(self):
     choosingEC= 0
@@ -28,22 +26,29 @@ def TestPrint():
     firstplayer._init_()
     firstplayer.printstatus()
 
-def GoForward(self):
+def GoForward(self,whosTurn):
     self.CurrentStep = self.CurrentStep+1
     choosingEC = SelectEC(self)
-    CallECFunc(choosingEC)
+    CallECFunc(choosingEC,self.listofPlayers[whosTurn])
     self.sumplayedEC = self.sumplayedEC + 1
     if (self.sumplayedEC == EC.totalEventCards):
         print('All EC Cards are played')
+        self.sumplayedEC = 0
         playedCardsSet.clear()
 
-def CallECFunc(EventCardNummber):
-  #  print('Hello from call funtion')
+def CallECFunc(EventCardNummber,Player):
     """calling a function with making its name as string"""
     FuncName = 'ECFunc'+ str(EventCardNummber)
     funcresult = getattr(EC, FuncName)()
-   # print('Random function is called:')
-   # print(funcresult)
+
+def WhoIsWinner(self):
+    for x in range(len(listofPlayers)):
+        if (listofPlayers[x].PlayerVars.Total > 49):
+            winer = listofPlayers[x].Name
+        else:
+            winer = ''
+    return(winer)
+   
     
 
 def Gamesetup(self):
@@ -53,3 +58,10 @@ def Gamesetup(self):
         ply.Name = input("what is the name of Player" + str(x+1) + " : ")        
         listofPlayers.append(ply)
         listofPlayers[x].printstatus()
+
+def playARound(self):
+    for x in range(len(listofPlayers)):
+        GoForward(self,x)
+        self.Winer = WhoIsWinner(self)
+        if (self.Winer != ''):
+             break
