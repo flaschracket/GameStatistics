@@ -24,6 +24,7 @@ class Player():
         print(list(Player.PlayerPC))
         print('The Variables-Values of Main RAM are:')
         self.PlayerVars.print()
+
     def printVarsValue(self):
         print('the variable values of '+self.Name + ' are : ')
         self.PlayerVars.print()

@@ -21,6 +21,15 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="GameObjects\Game.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GameObjects\Step.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GameObjects\WormCards.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="game_simulation.py" />
     <Compile Include="module1.py">
       <SubType>Code</SubType>

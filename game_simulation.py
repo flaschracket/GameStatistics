@@ -13,12 +13,11 @@ currentround = 1
 while condition:
     module1.playARound(module1)
     currentround = currentround + 1 
-    print('current round is' + str(currentround))
-    print('winer:' + module1.Winer)
-    if (module1.Winer != ''): 
+    print('current round is' + str(currentround)) 
+    if (module1.G.Winer != ''): 
         condition = False
 print('*****Congradulation*****')
-print(module1.Winer +' is the winer!')
+print(module1.G.Winer +' is the winer!')
 
 
 
