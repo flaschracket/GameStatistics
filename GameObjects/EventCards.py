@@ -1,19 +1,42 @@
 from enum import Enum
+from random import randrange
+
 from GameObjects.Player import *
 class EventCards():
     """description of class"""
     totalEventCards = 10
+    myrange = 11
     #EventCardType = Enum('EventCardType','ResourceEC WormEC TaskEC InputEC')
+    playedCardsSet = {0}
+    currentEC = 0
 
+    def SelectEC(self):
+        while self.currentEC in self.playedCardsSet:
+            self.currentEC = randrange(self.myrange)        
+        self.playedCardsSet.add(self.currentEC)
+        print(self.playedCardsSet)
+        return self.currentEC
+    
+    def Set(self,sumplayedEC):
+        sumplayedEC = sumplayedEC +1
+        if (sumplayedEC == self.totalEventCards):
+        #   print('All EC Cards are played')
+            sumplayedEC = 0
+            self.playedCardsSet.clear()
+        return(sumplayedEC)
+
+
+
+    # list of Cards
     def ECFunc0(self, p = Player()):
         p.PlayerVars.VarA = 5 
         mypenalty = 1
-        return(mypenalty)
+        return(p,mypenalty)
 
     def ECFunc1(self, p = Player()):
         p.PlayerVars.VarB = 10
         mypenalty = 2
-        return(mypenalty)
+        return(p)
     
     def ECFunc2(self, p= Player()):
         p.PlayerVars.VarC = 2  

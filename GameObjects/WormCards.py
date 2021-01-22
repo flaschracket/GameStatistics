@@ -5,9 +5,12 @@ class WormCards():
     p = Player()
     totalWormCards = 10
     Name = ''
-
+    wormCardsSet = {0}
+    
     def _init_(self):
         return('1') 
+    def selectWC(self):
+        return 1
     def WCFunc0(self, p = Player()):
         p.PlayerVars.VarA = 0
         mystr = 'wf0:'
