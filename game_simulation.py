@@ -1,4 +1,4 @@
-import module1
+
 from random import randrange
 from GameObjects.Player import *
 from GameObjects.Game import *
@@ -10,15 +10,18 @@ tempply = Player()
 print("Hello From Game Simulation! Data Generation is begining:")
 mygame.nofPlayers = int(input("how many players are playing the game?"))
 for x in range(mygame.nofPlayers):
-    tempply.Name = "player" + str(x)
+    mygame.listofPlayers.append(Player())
+    mygame.listofPlayers[x].Name = "player" + str(x)
     #print("x"+str(x))
     #print(tempply.Name)
     #mygame.listofPlayers.append((copy.copy(tempply)))
-    mygame.listofPlayers.append(tempply)
+    #mygame.listofPlayers.append(tempply)
+    
 
 #play
 condition = True
-
+mygame.printgame("game simulation")
+#mygame.printgame("game_simulation")
 while condition:
     #print(str(mygame.nofPlayers))
     

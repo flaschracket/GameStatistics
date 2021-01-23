@@ -75,12 +75,14 @@ class Game():
     
     def playOneRound(self):
         for x in range(self.nofPlayers):
-            print("round is:"+str(x))
-            print(self.listofPlayers[x].Name)
+            #print("round is:"+str(x))
+            #print(self.listofPlayers[x].Name)
             self.currentPlayer = copy.deepcopy(self.listofPlayers[x])
-            #self.currentPlayer.printMainRAM()
+            #print(self.currentPlayer.Name)
+            self.currentPlayer.printMainRAM()
             #self.listofPlayers[x].printMainRAM()
             self.sumPlayedEC = self.sumplayedEC + 1
+            self.printgame("round:")
             self.playOneStep()
             #print("t in r="+ str(self.currentPlayer.PlayerVars.Total))             
             self.listofPlayers[x] = copy.deepcopy(self.currentPlayer)
@@ -102,3 +104,9 @@ class Game():
         s.currentWorm = self.currentWorm
         self.listofSteps.append(s)
 
+    def printgame(self,s):
+        print("it is a game print in " +s)
+        print(self.currentPlayer.Name)
+        for i in range(self.nofPlayers):
+            print("name"+str(i)+":")
+            print(self.listofPlayers[i].Name)        
