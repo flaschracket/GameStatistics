@@ -16,4 +16,4 @@ class Step():
     def stepstatus(self):
         stepHeaderInfo =  "Round number: " +str(self.roundNr)+" Step : " + str(self.currentStep)+" Player of this step: "  + self.P.Name 
         print(stepHeaderInfo)
-        self.P.printMainRAM()
+        #self.printMainRAM()

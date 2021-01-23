@@ -2,7 +2,7 @@ import module1
 from random import randrange
 from GameObjects.Player import *
 from GameObjects.Game import *
-
+from copy import *
 mygame = Game()
 tempply = Player()
 #initial
@@ -16,12 +16,12 @@ for x in range(mygame.nofPlayers):
 condition = True
 
 while condition:
-    print(str(mygame.nofPlayers))
+    #print(str(mygame.nofPlayers))
     mygame.currentRound = mygame.currentRound + 1
     mygame.playOneRound()   
-    mygame.playOneRound()   
+    #print("t in main:"+str(mygame.currentPlayer.PlayerVars.Total))
 #    print("main round "+str(module1.mygame.currentRound))
-    print(str(mygame.nofPlayers)) 
+    #print(str(mygame.nofPlayers)) 
     if (mygame.winer != ''): 
         condition = False
 print('*****Congradulation*****')

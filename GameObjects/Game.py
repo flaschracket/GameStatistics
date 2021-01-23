@@ -5,6 +5,7 @@ from GameObjects.Player import *
 from GameObjects.EventCards import *
 from GameObjects.WormCards import *
 from random import randrange
+import copy
 
 
 class Game():
@@ -18,6 +19,7 @@ class Game():
     currentEC = 0
     currentWorm = 0
     currentStep = 0
+    currentPenalty = 0
     currentPlayer = Player()
     
     
@@ -33,8 +35,8 @@ class Game():
 
     def ifWined(self):
         wined= False
+        print("check winer:" + self.currentPlayer.Name)
         if (self.currentPlayer.PlayerVars.Total > self.DE.winGoal):
-            print("winer true:" + self.winer)
             wined = True
             self.winer = self.currentPlayer.Name
         print("winer:" + self.winer)
@@ -43,11 +45,11 @@ class Game():
     def playEC(self):
         """calling a function with making its name as string"""
         self.currentEC = 1
-        #self.currentEC = self.EC.SelectEC()
-        #print("EC-a "+ str(self.currentEC))
+        self.EC.PV = copy.deepcopy(self.currentPlayer.PlayerVars)
         FuncName = 'ECFunc' + str(self.currentEC)
-        funcresult_player = getattr(self.EC, FuncName)()
-        return(funcresult_player)
+        getattr(self.EC, FuncName)()
+        self.currentPlayer.PlayerVars = copy.deepcopy(self.EC.PV)
+        return(self)
 
     def playWC(self):
         self.currentWC = self.WC.selectWC()
@@ -57,35 +59,30 @@ class Game():
         return True
 
     def playOneStep(self):
- #       print("step:"+str(self.currentStep))
         self.currentStep = self.currentStep+1
-        self.currentPlayer = self.playEC()
-        ####step corruption should be developed
-#        print("step corruption:"+str(self.nOfCorruption))
-        self.currentPlayer.printMainRAM()
-        self.currentPlayer.PlayerVars.Total = 100
-        #print("T:"+str(self.currentPlayer.PlayerVars.Total))
-
-        if (self.ifWined() == True):
+        self.playEC()
+        #print("T in step:"+str(self.currentPlayer.PlayerVars.Total))
+        self.ifWined()
+        if (self.winer != ''):
             self.Stepsnapshot()    
             return (self)
         for i in range(self.nOfCorruption):
             self.playWC()
         self.sumplayedEC = self.EC.Set(self.sumplayedEC)
+        self.currentPlayer.printMainRAM()
         self.Stepsnapshot()
         return (self)
     
     def playOneRound(self):
-        #print("round " +str(self.currentRound))
-        #print("players of round"+str(self.nofPlayers))
         for x in range(self.nofPlayers):
-            #print("x is " + str(x))
-            self.currentPlayer = self.listofPlayers[x]
+            self.currentPlayer = copy.deepcopy(self.listofPlayers[x])
             self.sumPlayedEC = self.sumplayedEC + 1
             self.playOneStep()
-            self.currentPlayer.printMainRAM()
-            #print("t="+ str(self.currentPlayer.PlayerVars.Total))             
-            #print("winer:"+self.winer)
+            #print("t in r="+ str(self.currentPlayer.PlayerVars.Total))             
+            self.listofPlayers[x] = copy.deepcopy(self.currentPlayer)
+            #print("palyer: "+ self.currentPlayer.Name)
+            #print("t in list="+ str(self.listofPlayers[x].PlayerVars.Total))
+            #print("winer"+self.winer)
             if (self.winer != ''):
                 break            
         return self
