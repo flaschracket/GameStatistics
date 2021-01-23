@@ -26,10 +26,7 @@ while condition:
     
     mygame.currentRound = mygame.currentRound + 1
     mygame.playOneRound()   
-    mygame.printgame("game simulation")
-    #print("t in main:"+str(mygame.currentPlayer.PlayerVars.Total))
-#    print("main round "+str(module1.mygame.currentRound))
-    #print(str(mygame.nofPlayers)) 
+    #mygame.printgame("game simulation")
     if (mygame.winer != ''): 
         condition = False
 print('*****Congradulation*****')

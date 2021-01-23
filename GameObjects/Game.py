@@ -14,22 +14,18 @@ class Game():
     sumplayedEC = 0 
     nofPlayers = 0
     nOfCorruption = 0
-
     currentRound = 0
     currentEC = 0
-    currentWorm = 0
+    currentWormsSet = {}
     currentStep = 0
     currentPenalty = 0
     currentPlayer = Player()
-    
-    
-       
     listofPlayers = []
     listofSteps = []
     EC = EventCards()
     WC = WormCards()
     DE = DefinedEnums()
-
+    #s = Step()
 
     
 
@@ -59,18 +55,20 @@ class Game():
         return True
 
     def playOneStep(self):
+        #s = Step()
         self.currentStep = self.currentStep+1
         self.playEC()
         #print("T in step:"+str(self.currentPlayer.PlayerVars.Total))
         self.ifWined()
         if (self.winer != ''):
-            self.Stepsnapshot()    
+            s = copy.deepcopy(self.Stepsnapshot())    
             return (self)
         for i in range(self.nOfCorruption):
             self.playWC()
         self.sumplayedEC = self.EC.Set(self.sumplayedEC)
         #self.currentPlayer.printMainRAM()
-        self.Stepsnapshot()
+        self.listofSteps.append(self.Stepsnapshot())
+        self.listofSteps[self.currentStep].printStepStatus()
         return (self)
     
     def playOneRound(self):
@@ -95,14 +93,18 @@ class Game():
 
     def Stepsnapshot(self):
         s = Step()
-        s.CurrentStep = self.currentStep
-        s.currentRound = self.currentRound
-        s.P = self.currentPlayer
+        s.roundNr = self.currentRound
+        s.stepNr = self.currentStep
+        s.P = copy.deepcopy(self.currentPlayer)
+        for i in range(self.nOfCorruption):
+            s.wormSet.add(self.currentWormsSet[i])
+        s.winer =    self.winer
+        s.nofcorruption = self.nOfCorruption
         s.ECset = self.EC.playedCardsSet
         s.Wormset = self.WC.wormCardsSet 
-        s.currentEC = self.currentEC
-        s.currentWorm = self.currentWorm
+        s.currentEC = copy.deepcopy(self.currentEC)
         self.listofSteps.append(s)
+        return s
 
     def printgame(self,s):
         print("it is a game print in " +s)
