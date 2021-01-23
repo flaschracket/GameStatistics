@@ -69,13 +69,17 @@ class Game():
         for i in range(self.nOfCorruption):
             self.playWC()
         self.sumplayedEC = self.EC.Set(self.sumplayedEC)
-        self.currentPlayer.printMainRAM()
+        #self.currentPlayer.printMainRAM()
         self.Stepsnapshot()
         return (self)
     
     def playOneRound(self):
         for x in range(self.nofPlayers):
+            print("round is:"+str(x))
+            print(self.listofPlayers[x].Name)
             self.currentPlayer = copy.deepcopy(self.listofPlayers[x])
+            #self.currentPlayer.printMainRAM()
+            #self.listofPlayers[x].printMainRAM()
             self.sumPlayedEC = self.sumplayedEC + 1
             self.playOneStep()
             #print("t in r="+ str(self.currentPlayer.PlayerVars.Total))             
