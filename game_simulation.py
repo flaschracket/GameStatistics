@@ -20,13 +20,13 @@ for x in range(mygame.nofPlayers):
 
 #play
 condition = True
-mygame.printgame("game simulation")
 #mygame.printgame("game_simulation")
 while condition:
     #print(str(mygame.nofPlayers))
     
     mygame.currentRound = mygame.currentRound + 1
     mygame.playOneRound()   
+    mygame.printgame("game simulation")
     #print("t in main:"+str(mygame.currentPlayer.PlayerVars.Total))
 #    print("main round "+str(module1.mygame.currentRound))
     #print(str(mygame.nofPlayers)) 

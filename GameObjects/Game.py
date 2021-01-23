@@ -35,11 +35,11 @@ class Game():
 
     def ifWined(self):
         wined= False
-        print("check winer:" + self.currentPlayer.Name)
+        #print("check winer:" + self.currentPlayer.Name)
         if (self.currentPlayer.PlayerVars.Total > self.DE.winGoal):
             wined = True
             self.winer = self.currentPlayer.Name
-        print("winer:" + self.winer)
+        #print("winer:" + self.winer)
         return (self)
     
     def playEC(self):
@@ -79,10 +79,10 @@ class Game():
             #print(self.listofPlayers[x].Name)
             self.currentPlayer = copy.deepcopy(self.listofPlayers[x])
             #print(self.currentPlayer.Name)
-            self.currentPlayer.printMainRAM()
+            #self.currentPlayer.printMainRAM()
             #self.listofPlayers[x].printMainRAM()
             self.sumPlayedEC = self.sumplayedEC + 1
-            self.printgame("round:")
+            #self.printgame("round:")
             self.playOneStep()
             #print("t in r="+ str(self.currentPlayer.PlayerVars.Total))             
             self.listofPlayers[x] = copy.deepcopy(self.currentPlayer)
@@ -106,7 +106,13 @@ class Game():
 
     def printgame(self,s):
         print("it is a game print in " +s)
+        print("current player is")
         print(self.currentPlayer.Name)
+        print("list of players")
         for i in range(self.nofPlayers):
-            print("name"+str(i)+":")
-            print(self.listofPlayers[i].Name)        
+            print(str(i)+":")
+            print(self.listofPlayers[i].Name)
+        for i in range(self.nofPlayers):
+            print(str(i)+ ": ")
+            self.listofPlayers[i].printMainRAM()
+            
