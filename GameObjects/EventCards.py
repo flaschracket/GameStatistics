@@ -8,6 +8,7 @@ from GameObjects.MainRAMVars import *
 class EventCards():
     """description of class"""
     totalEventCards = 5
+    const = DefinedEnums()
     myrange = 5
     PV = MainRAMVars()
     #EventCardType = Enum('EventCardType','ResourceEC WormEC TaskEC InputEC')
@@ -23,8 +24,7 @@ class EventCards():
     
     def Set(self,sumplayedEC):
         sumplayedEC = sumplayedEC +1
-        if (sumplayedEC == self.totalEventCards):
-        #   print('All EC Cards are played')
+        if (sumplayedEC == self.const.NrofEC):
             sumplayedEC = 0
             self.playedCardsSet.clear()
         return(sumplayedEC)
