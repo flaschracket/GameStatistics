@@ -32,6 +32,7 @@ class Step():
         print("roundnr,stepnr,player,winer,ec,wcnr,wc,A,B,C,Total;")
         print(str(self.roundNr)+",",end=" ")
         print(str(self.stepNr) +",",end=" ")
+        print(self.P.Name+",",end=" ")
         print(self.winer+",",end=" ")
         print(str(self.currentEC)+",",end=" ")
         print(str(self.nofcorruption)+",",end=" ")

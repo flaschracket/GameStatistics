@@ -31,9 +31,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="game_simulation.py" />
-    <Compile Include="aaa.py">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="GameObjects\EventCards.py">
       <SubType>Code</SubType>
     </Compile>
