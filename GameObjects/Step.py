@@ -25,5 +25,5 @@ class Step():
         print("-------- Variable Values of Main RAM ---------")
         self.P.printMainRAM()
         print("-------- played EC set ---------")
-        print(self.ECset)     
+        print("EC set: "+str(self.ECset))
         print("----------------------------------------------")

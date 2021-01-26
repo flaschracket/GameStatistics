@@ -40,7 +40,7 @@ class Game():
     
     def playEC(self):
         """calling a function with making its name as string"""
-        self.currentEC = 1
+        self.currentEC = self.EC.SelectEC()
         self.EC.PV = copy.deepcopy(self.currentPlayer.PlayerVars)
         FuncName = 'ECFunc' + str(self.currentEC)
         getattr(self.EC, FuncName)()
@@ -55,10 +55,8 @@ class Game():
         return True
 
     def playOneStep(self):
-        #s = Step()
         self.currentStep = self.currentStep+1
         self.playEC()
-        #print("T in step:"+str(self.currentPlayer.PlayerVars.Total))
         self.ifWined()
         if (self.winer != ''):
             s = copy.deepcopy(self.Stepsnapshot())    
@@ -67,9 +65,8 @@ class Game():
         for i in range(self.nOfCorruption):
             self.playWC()
         self.sumplayedEC = self.EC.Set(self.sumplayedEC)
-        #self.currentPlayer.printMainRAM()
         self.listofSteps.append(self.Stepsnapshot())
-        #self.listofSteps[self.currentStep].printStepStatus()
+        self.listofSteps[self.currentStep].printStepStatus()
         return (self)
     
     def playOneRound(self):
@@ -105,7 +102,6 @@ class Game():
         s.Wormset = self.WC.wormCardsSet 
         s.currentEC = copy.deepcopy(self.currentEC)
         s.ECset = self.EC.playedCardsSet
-        print("step ec"+str(self.EC.playedCardsSet))
         self.listofSteps.append(s)
         return s
 
