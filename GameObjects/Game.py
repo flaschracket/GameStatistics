@@ -65,7 +65,7 @@ class Game():
         for i in range(self.nOfCorruption):
             self.playWC()
         self.listofSteps.append(self.Stepsnapshot())
-        self.listofSteps[self.currentStep].printStepStatus()
+        self.listofSteps[self.currentStep].printCSV()
         return (self)
     
     def playOneRound(self):

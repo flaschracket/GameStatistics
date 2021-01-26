@@ -27,3 +27,18 @@ class Step():
         print("-------- played EC set ---------")
         print("EC set: "+str(self.ECset))
         print("----------------------------------------------")
+
+    def printCSV(self):
+        print("roundnr,stepnr,player,winer,ec,wcnr,wc,A,B,C,Total;")
+        print(str(self.roundNr)+",",end=" ")
+        print(str(self.stepNr) +",",end=" ")
+        print(self.winer+",",end=" ")
+        print(str(self.currentEC)+",",end=" ")
+        print(str(self.nofcorruption)+",",end=" ")
+        print(str(self.Wormset)+",",end=" ")
+        print(str(self.P.PlayerVars.VarA)+",",end=" ")
+        print(str(self.P.PlayerVars.VarB)+",",end=" ")
+        print(str(self.P.PlayerVars.VarC)+",",end=" ")
+        print(str(self.P.PlayerVars.Total)+",",end=" ")
+        print(";")
+        
