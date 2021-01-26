@@ -1,4 +1,4 @@
-from GameObjects.DefinedEnums import *
+from GameObjects.GameSettings import *
 from GameObjects.Step import *
 from GameObjects.MainRAMVars import *
 from GameObjects.Player import *
@@ -11,7 +11,7 @@ import copy
 class Game():
     """description of class"""
     winer = ''
-    sumplayedEC = 0 
+#    sumplayedEC = 0 
     nofPlayers = 0
     nOfCorruption = 0
     currentRound = 0
@@ -24,7 +24,7 @@ class Game():
     listofSteps = []
     EC = EventCards()
     WC = WormCards()
-    DE = DefinedEnums()
+    DE = GameSettings()
     
 
     
@@ -64,7 +64,6 @@ class Game():
         self.EC.playedCardsSet.add(self.currentEC)
         for i in range(self.nOfCorruption):
             self.playWC()
-        self.sumplayedEC = self.EC.Set(self.sumplayedEC)
         self.listofSteps.append(self.Stepsnapshot())
         self.listofSteps[self.currentStep].printStepStatus()
         return (self)
@@ -77,7 +76,7 @@ class Game():
             #print(self.currentPlayer.Name)
             #self.currentPlayer.printMainRAM()
             #self.listofPlayers[x].printMainRAM()
-            self.sumPlayedEC = self.sumplayedEC + 1
+            self.EC.reset()
             #self.printgame("round:")
             self.playOneStep()
             #print("t in r="+ str(self.currentPlayer.PlayerVars.Total))             

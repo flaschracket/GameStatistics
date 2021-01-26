@@ -8,7 +8,8 @@ from GameObjects.MainRAMVars import *
 class EventCards():
     """description of class"""
     totalEventCards = 5
-    const = DefinedEnums()
+    sumPlayedEC = 0
+    const = GameSettings()
     myrange = 5
     PV = MainRAMVars()
     #EventCardType = Enum('EventCardType','ResourceEC WormEC TaskEC InputEC')
@@ -19,15 +20,14 @@ class EventCards():
         while self.currentEC in self.playedCardsSet:
             self.currentEC = randrange(self.myrange)        
         self.playedCardsSet.add(self.currentEC)
-        print(self.playedCardsSet)
         return self.currentEC
     
-    def Set(self,sumplayedEC):
-        sumplayedEC = sumplayedEC +1
-        if (sumplayedEC == self.const.NrofEC):
-            sumplayedEC = 0
+    def reset(self):
+        self.sumPlayedEC = self.sumPlayedEC+1
+        if (self.sumPlayedEC == self.const.NrofEC):
+            self.sumPlayedEC = 0
             self.playedCardsSet.clear()
-        return(sumplayedEC)
+        return(self)
 
 
 

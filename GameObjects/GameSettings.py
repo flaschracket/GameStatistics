@@ -1,5 +1,5 @@
 from enum import Enum
-class DefinedEnums():
+class GameSettings():
 
     GameResourceType = Enum('GameResourceType','Hardware EventCard Variable')
     ResourceEventCard = Enum('GameEventCard','Bazar Freelancer Restart')

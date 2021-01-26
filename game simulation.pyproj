@@ -37,7 +37,7 @@
     <Compile Include="GameObjects\EventCards.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="GameObjects\DefinedEnums.py">
+    <Compile Include="GameObjects\GameSettings.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="GameObjects\Player.py">

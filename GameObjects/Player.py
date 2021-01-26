@@ -1,5 +1,5 @@
 from GameObjects.MainRAMVars import MainRAMVars
-from GameObjects.DefinedEnums import *
+from GameObjects.GameSettings import *
 from enum import Enum
 
 
