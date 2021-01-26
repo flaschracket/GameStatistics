@@ -25,7 +25,7 @@ class Game():
     EC = EventCards()
     WC = WormCards()
     DE = DefinedEnums()
-    #s = Step()
+    
 
     
 
@@ -63,12 +63,13 @@ class Game():
         if (self.winer != ''):
             s = copy.deepcopy(self.Stepsnapshot())    
             return (self)
+        self.EC.playedCardsSet.add(self.currentEC)
         for i in range(self.nOfCorruption):
             self.playWC()
         self.sumplayedEC = self.EC.Set(self.sumplayedEC)
         #self.currentPlayer.printMainRAM()
         self.listofSteps.append(self.Stepsnapshot())
-        self.listofSteps[self.currentStep].printStepStatus()
+        #self.listofSteps[self.currentStep].printStepStatus()
         return (self)
     
     def playOneRound(self):
@@ -103,6 +104,8 @@ class Game():
         s.ECset = self.EC.playedCardsSet
         s.Wormset = self.WC.wormCardsSet 
         s.currentEC = copy.deepcopy(self.currentEC)
+        s.ECset = self.EC.playedCardsSet
+        print("step ec"+str(self.EC.playedCardsSet))
         self.listofSteps.append(s)
         return s
 

@@ -4,7 +4,7 @@ from GameObjects.Player import *
 from GameObjects.Game import *
 from copy import deepcopy
 mygame = Game()
-testgame = Game()
+#testgame = Game()
 tempply = Player()
 #initial
 print("Hello From Game Simulation! Data Generation is begining:")
