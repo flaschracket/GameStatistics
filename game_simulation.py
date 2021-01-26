@@ -29,6 +29,7 @@ while condition:
     #mygame.printgame("game simulation")
     if (mygame.winer != ''): 
         condition = False
+print("WG:"+str(mygame.DE.winGoal))
 print('*****Congradulation*****')
 print(mygame.winer +' is the winer!')
 

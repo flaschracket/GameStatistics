@@ -1,12 +1,15 @@
 from enum import Enum
 class GameSettings():
-
+    winGoal = 100
+    NrofEC = 5
+    
+    
+    
     GameResourceType = Enum('GameResourceType','Hardware EventCard Variable')
     ResourceEventCard = Enum('GameEventCard','Bazar Freelancer Restart')
     ResourceEC = Enum('ResourceEC','Restart Freelancer Bazar')
     TaskEC = Enum('TaskEC','Add1 Add2')
-    winGoal = 100
-    NrofEC = 5
+    
     def _init_(self):
         return self
     class GameHardware(Enum): 

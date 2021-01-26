@@ -85,6 +85,7 @@ class Game():
             #print("t in list="+ str(self.listofPlayers[x].PlayerVars.Total))
             #print("winer"+self.winer)
             if (self.winer != ''):
+                print(self.currentPlayer.printMainRAM())
                 break            
         return self
 
@@ -95,12 +96,12 @@ class Game():
         s.P = copy.deepcopy(self.currentPlayer)
         for i in range(self.nOfCorruption):
             s.wormSet.add(self.currentWormsSet[i])
-        s.winer =    self.winer
+        s.winer = self.winer
         s.nofcorruption = self.nOfCorruption
-        s.ECset = self.EC.playedCardsSet
+        s.playedECset = self.EC.playedCardsSet
         s.Wormset = self.WC.wormCardsSet 
         s.currentEC = copy.deepcopy(self.currentEC)
-        s.ECset = self.EC.playedCardsSet
+        #s.ECset = self.EC.playedCardsSet
         self.listofSteps.append(s)
         return s
 

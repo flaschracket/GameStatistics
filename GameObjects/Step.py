@@ -9,10 +9,10 @@ class Step():
     roundNr = 0
     stepNr = 0
     P = Player()
-    ECset = {}
+    playedECset = {}
     wormSet = {}
-    totalECset ={}
-    totalWormsSet = {}
+    #totalECset ={}
+    playedWormsSet = {}
 
     def printStepStatus(self):
         print("----------------------------------------------")
@@ -25,21 +25,28 @@ class Step():
         print("-------- Variable Values of Main RAM ---------")
         self.P.printMainRAM()
         print("-------- played EC set ---------")
-        print("EC set: "+str(self.ECset))
+        print("EC set: "+str(self.playedECsett))
         print("----------------------------------------------")
 
     def printCSV(self):
-        print("roundnr,stepnr,player,winer,ec,wcnr,wc,A,B,C,Total;")
+      #  print("roundnr,stepnr,player,A,B,C,Total,winer,ec,wcnr,wcs,ecset,wormset;")
         print(str(self.roundNr)+",",end=" ")
         print(str(self.stepNr) +",",end=" ")
         print(self.P.Name+",",end=" ")
-        print(self.winer+",",end=" ")
-        print(str(self.currentEC)+",",end=" ")
-        print(str(self.nofcorruption)+",",end=" ")
-        print(str(self.Wormset)+",",end=" ")
         print(str(self.P.PlayerVars.VarA)+",",end=" ")
         print(str(self.P.PlayerVars.VarB)+",",end=" ")
         print(str(self.P.PlayerVars.VarC)+",",end=" ")
         print(str(self.P.PlayerVars.Total)+",",end=" ")
+        print(self.winer+",",end=" ")
+        print(str(self.currentEC)+",",end=" ")
+        print(str(self.Wormset)+",",end=" ")
+        
+        print(str(self.nofcorruption)+",",end=" ")
+        print(str(self.playedECset)+",",end=" ")
+        print(str(self.playedWormsSet)+",",end=" ")
+        
+
+
+
         print(";")
         
