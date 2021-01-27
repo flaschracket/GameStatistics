@@ -29,7 +29,7 @@ class Step():
         print("----------------------------------------------")
 
     def printCSV(self):
-      #  print("roundnr,stepnr,player,A,B,C,Total,winer,ec,wcnr,wcs,ecset,wormset;")
+      #  print("roundnr,stepnr,player,A,B,C,Total,winer,ec,ecset,wcnr,wcs,wormset;")
         print(str(self.roundNr)+",",end=" ")
         print(str(self.stepNr) +",",end=" ")
         print(self.P.Name+",",end=" ")
@@ -39,10 +39,12 @@ class Step():
         print(str(self.P.PlayerVars.Total)+",",end=" ")
         print(self.winer+",",end=" ")
         print(str(self.currentEC)+",",end=" ")
+        print(str(self.playedECset)+",",end=" ")
+
+        print(str(self.nofcorruption)+",",end=" ")
         print(str(self.Wormset)+",",end=" ")
         
-        print(str(self.nofcorruption)+",",end=" ")
-        print(str(self.playedECset)+",",end=" ")
+        
         print(str(self.playedWormsSet)+",",end=" ")
         
 

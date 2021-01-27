@@ -31,11 +31,9 @@ class Game():
 
     def ifWined(self):
         wined= False
-        #print("check winer:" + self.currentPlayer.Name)
         if (self.currentPlayer.PlayerVars.Total > self.DE.winGoal):
             wined = True
             self.winer = self.currentPlayer.Name
-        #print("winer:" + self.winer)
         return (self)
     
     def playEC(self):
@@ -45,6 +43,7 @@ class Game():
         FuncName = 'ECFunc' + str(self.currentEC)
         getattr(self.EC, FuncName)()
         self.currentPlayer.PlayerVars = copy.deepcopy(self.EC.PV)
+        #self.printgame("PlayEC")
         return(self)
 
     def playWC(self):
@@ -55,38 +54,33 @@ class Game():
         return True
 
     def playOneStep(self):
-        self.currentStep = self.currentStep+1
         self.playEC()
         self.ifWined()
-        if (self.winer != ''):
-            s = copy.deepcopy(self.Stepsnapshot())    
-            return (self)
         self.EC.playedCardsSet.add(self.currentEC)
+        if (self.winer != ''):
+            self.Stepsnapshot()
+            #s = copy.deepcopy(self.Stepsnapshot())    
+            return (self)
         for i in range(self.nOfCorruption):
             self.playWC()
-        self.listofSteps.append(self.Stepsnapshot())
+        self.Stepsnapshot()
         self.listofSteps[self.currentStep].printCSV()
+        #self.printgame("step")
+        self.currentStep = self.currentStep+1
         return (self)
     
     def playOneRound(self):
         for x in range(self.nofPlayers):
-            #print("round is:"+str(x))
-            #print(self.listofPlayers[x].Name)
             self.currentPlayer = copy.deepcopy(self.listofPlayers[x])
-            #print(self.currentPlayer.Name)
-            #self.currentPlayer.printMainRAM()
-            #self.listofPlayers[x].printMainRAM()
-            self.EC.reset()
-            #self.printgame("round:")
+            #self.printgame("round1:")
             self.playOneStep()
-            #print("t in r="+ str(self.currentPlayer.PlayerVars.Total))             
+            #self.printgame("round2:")
             self.listofPlayers[x] = copy.deepcopy(self.currentPlayer)
-            #print("palyer: "+ self.currentPlayer.Name)
-            #print("t in list="+ str(self.listofPlayers[x].PlayerVars.Total))
-            #print("winer"+self.winer)
             if (self.winer != ''):
-                print(self.currentPlayer.printMainRAM())
                 break            
+            self.EC.SelectEC()
+            # current ec should be deleted from game
+            self.currentEC = self.EC.currentEC
         return self
 
     def Stepsnapshot(self):
@@ -94,6 +88,7 @@ class Game():
         s.roundNr = self.currentRound
         s.stepNr = self.currentStep
         s.P = copy.deepcopy(self.currentPlayer)
+        
         for i in range(self.nOfCorruption):
             s.wormSet.add(self.currentWormsSet[i])
         s.winer = self.winer
@@ -101,19 +96,23 @@ class Game():
         s.playedECset = self.EC.playedCardsSet
         s.Wormset = self.WC.wormCardsSet 
         s.currentEC = copy.deepcopy(self.currentEC)
-        #s.ECset = self.EC.playedCardsSet
+        s.ECset = self.EC.playedCardsSet
         self.listofSteps.append(s)
+        #self.printgame("stepsnapshot")
         return s
 
     def printgame(self,s):
         print("it is a game print in " +s)
-        print("current player is")
-        print(self.currentPlayer.Name)
-        print("list of players")
-        for i in range(self.nofPlayers):
-            print(str(i)+":")
-            print(self.listofPlayers[i].Name)
-        for i in range(self.nofPlayers):
-            print(str(i)+ ": ")
-            self.listofPlayers[i].printMainRAM()
+        print("step nr:"+str(self.currentStep))
+        #print("current player is:", end =" ")
+        #print(self.currentPlayer.Name)
+        print("current winer is:"+self.winer)
+        
+        #print("list of players")
+        #for i in range(self.nofPlayers):
+         #   print(str(i)+":", end =" ")
+          #  print(self.listofPlayers[i].Name)
+        #for i in range(self.nofPlayers):
+            #print(str(i)+ ": ", end="")
+            #self.listofPlayers[i].printMainRAM()
             

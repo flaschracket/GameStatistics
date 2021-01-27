@@ -17,6 +17,7 @@ class EventCards():
     currentEC = 0
 
     def SelectEC(self):
+        self.reset()
         while self.currentEC in self.playedCardsSet:
             self.currentEC = randrange(self.myrange)        
         self.playedCardsSet.add(self.currentEC)
