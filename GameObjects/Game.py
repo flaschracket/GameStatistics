@@ -38,7 +38,7 @@ class Game():
     
     def playEC(self):
         """calling a function with making its name as string"""
-        self.currentEC = self.EC.SelectEC()
+        #self.currentEC = self.EC.SelectEC()
         self.EC.PV = copy.deepcopy(self.currentPlayer.PlayerVars)
         FuncName = 'ECFunc' + str(self.currentEC)
         getattr(self.EC, FuncName)()
@@ -56,7 +56,7 @@ class Game():
     def playOneStep(self):
         self.playEC()
         self.ifWined()
-        self.EC.playedCardsSet.add(self.currentEC)
+        #self.EC.playedCardsSet.add(self.currentEC)
         if (self.winer != ''):
             self.Stepsnapshot()
             #s = copy.deepcopy(self.Stepsnapshot())    

@@ -12,13 +12,9 @@ mygame.nofPlayers = int(input("how many players are playing the game?"))
 for x in range(mygame.nofPlayers):
     mygame.listofPlayers.append(Player())
     mygame.listofPlayers[x].Name = "player" + str(x)
-    #print("x"+str(x))
-    #print(tempply.Name)
-    #mygame.listofPlayers.append((copy.copy(tempply)))
-    #mygame.listofPlayers.append(tempply)
-    
 
 #play
+print("Game begins")
 condition = True
 #mygame.printgame("game_simulation")
 while condition:

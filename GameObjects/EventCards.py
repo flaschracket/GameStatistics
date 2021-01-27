@@ -13,7 +13,7 @@ class EventCards():
     myrange = 5
     PV = MainRAMVars()
     #EventCardType = Enum('EventCardType','ResourceEC WormEC TaskEC InputEC')
-    playedCardsSet = {0}
+    playedCardsSet = set()
     currentEC = 0
 
     def SelectEC(self):
