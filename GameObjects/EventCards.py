@@ -7,8 +7,8 @@ from GameObjects.MainRAMVars import *
 
 class EventCards():
     """description of class"""
-    totalEventCards = 5
-    sumPlayedEC = 0
+#    totalEventCards = 5
+ #   sumPlayedEC = 0
     const = GameSettings()
     myrange = 5
     PV = MainRAMVars()
@@ -16,17 +16,21 @@ class EventCards():
     playedCardsSet = set()
     currentEC = 0
 
-    def SelectEC(self):
+    def SelectNextEC(self):
         self.reset()
-        while self.currentEC in self.playedCardsSet:
-            self.currentEC = randrange(self.myrange)        
-        self.playedCardsSet.add(self.currentEC)
+        if len(self.playedCardsSet)==0:
+            self.playedCardsSet = {self.currentEC}
+        else:
+            while self.currentEC in self.playedCardsSet:
+                self.currentEC = randrange(self.myrange)        
+            self.playedCardsSet.add(self.currentEC)
+        
         return self.currentEC
     
     def reset(self):
-        self.sumPlayedEC = self.sumPlayedEC+1
-        if (self.sumPlayedEC == self.const.NrofEC):
-            self.sumPlayedEC = 0
+        #self.sumPlayedEC = self.sumPlayedEC+1
+        if (len(self.playedCardsSet) == self.const.NrofEC):
+            #self.sumPlayedEC = 0
             self.playedCardsSet.clear()
         return(self)
 

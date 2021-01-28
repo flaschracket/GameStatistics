@@ -38,7 +38,7 @@ class Game():
     
     def playEC(self):
         """calling a function with making its name as string"""
-        #self.currentEC = self.EC.SelectEC()
+        self.currentEC = self.EC.SelectNextEC()
         self.EC.PV = copy.deepcopy(self.currentPlayer.PlayerVars)
         FuncName = 'ECFunc' + str(self.currentEC)
         getattr(self.EC, FuncName)()
@@ -78,7 +78,7 @@ class Game():
             self.listofPlayers[x] = copy.deepcopy(self.currentPlayer)
             if (self.winer != ''):
                 break            
-            self.EC.SelectEC()
+            #self.EC.SelectNextEC()
             # current ec should be deleted from game
             self.currentEC = self.EC.currentEC
         return self
