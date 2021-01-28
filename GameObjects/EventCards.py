@@ -10,11 +10,13 @@ class EventCards():
 #    totalEventCards = 5
  #   sumPlayedEC = 0
     const = GameSettings()
+    #should be deleted?
     myrange = 5
     PV = MainRAMVars()
     #EventCardType = Enum('EventCardType','ResourceEC WormEC TaskEC InputEC')
     playedCardsSet = set()
     currentEC = 0
+    nOfWC= 0
 
     def SelectNextEC(self):
         self.reset()
@@ -39,32 +41,32 @@ class EventCards():
     # list of Cards
     def ECFunc0(self):
         self.PV.VarA = 5 
-        self.currentPenalty = 1
+        self.nOfWC = 0
         return(self)
 
     def ECFunc1(self):
         self.PV.Total = self.PV.Total + self.PV.VarA+ self.PV.VarB + self.PV.VarC+10
-        self.currentPenalty = 1
+        self.nOfWC = 1
         return(self)
     
     def ECFunc2(self):
         self.PV.VarC = 2  
-        self.currentPenalty = 1
+        self.nOfWC = 2
         return(self)
     
     def ECFunc3(self):
         self.PV.Total = self.PV.Total + self.PV.VarA+ self.PV.VarB + self.PV.VarC
-        self.currentPenalty = 1
+        self.nOfWC = 1
         return(self)
 
     def ECFunc4(self):
         self.PV.VarC = 2  
-        self.currentPenalty = 1
+        self.nOfWC = 2
         return(self)
 
     def ECFunc5(self):
         self.PV.VarC = 2  
-        self.currentPenalty = 1
+        self.nOfWC = 0
         return(self)
     
 

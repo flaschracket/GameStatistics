@@ -18,7 +18,7 @@ class Game():
     currentEC = 0
     currentWormsSet = {}
     currentStep = 0
-    currentPenalty = 0
+    #currentPenalty = 0
     currentPlayer = Player()
     listofPlayers = []
     listofSteps = []
@@ -61,7 +61,7 @@ class Game():
             self.Stepsnapshot()
             #s = copy.deepcopy(self.Stepsnapshot())    
             return (self)
-        for i in range(self.nOfCorruption):
+        for i in range(self.EC.nOfWC):
             self.playWC()
         self.Stepsnapshot()
         self.listofSteps[self.currentStep].printCSV()
@@ -97,6 +97,7 @@ class Game():
         s.Wormset = self.WC.wormCardsSet 
         s.currentEC = copy.deepcopy(self.currentEC)
         s.ECset = self.EC.playedCardsSet
+        s.nOfWC = self.EC.nOfWC
         self.listofSteps.append(s)
         #self.printgame("stepsnapshot")
         return s

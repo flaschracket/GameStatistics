@@ -4,7 +4,7 @@ from GameObjects.Player import *
 class Step():
     """Status of each step of game, it is like a copy of variable to save the result  at one place"""
     winer = ''
-    nofcorruption = 0
+    nOfWC = 0
     currentEC = 0
     roundNr = 0
     stepNr = 0
@@ -29,7 +29,7 @@ class Step():
         print("----------------------------------------------")
 
     def printCSV(self):
-      #  print("roundnr,stepnr,player,A,B,C,Total,winer,ec,ecset,wcnr,wcs,wormset;")
+      #  print("roundnr,stepnr,player,A,B,C,Total,winer,ec,ecset,nofworms,wcs,wormset;")
         print(str(self.roundNr)+",",end=" ")
         print(str(self.stepNr) +",",end=" ")
         print(self.P.Name+",",end=" ")
@@ -41,7 +41,7 @@ class Step():
         print(str(self.currentEC)+",",end=" ")
         print(str(self.playedECset)+",",end=" ")
 
-        print(str(self.nofcorruption)+",",end=" ")
+        print(str(self.nOfWC)+",",end=" ")
         print(str(self.Wormset)+",",end=" ")
         
         
