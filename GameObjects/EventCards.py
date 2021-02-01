@@ -1,19 +1,14 @@
-from enum import Enum
+#from enum import Enum
 from random import randrange
 import copy
-from GameObjects.Player import *
+#from GameObjects.Player import *
 from GameObjects.MainRAMVars import *
-
+from GameObjects.GameSettings import *
 
 class EventCards():
     """description of class"""
-#    totalEventCards = 5
- #   sumPlayedEC = 0
     const = GameSettings()
-    #should be deleted?
-    myrange = 5
     PV = MainRAMVars()
-    #EventCardType = Enum('EventCardType','ResourceEC WormEC TaskEC InputEC')
     playedCardsSet = set()
     currentEC = 0
     nOfWC= 0
@@ -24,7 +19,7 @@ class EventCards():
             self.playedCardsSet = {self.currentEC}
         else:
             while self.currentEC in self.playedCardsSet:
-                self.currentEC = randrange(self.myrange)        
+                self.currentEC = randrange(self.const.NrofEC)        
             self.playedCardsSet.add(self.currentEC)
         
         return self.currentEC

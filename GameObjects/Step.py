@@ -10,7 +10,7 @@ class Step():
     stepNr = 0
     P = Player()
     playedECset = {}
-    wormSet = {}
+    #wormSet = {}
     #totalECset ={}
     playedWormsSet = {}
 
@@ -40,15 +40,8 @@ class Step():
         print(self.winer+",",end=" ")
         print(str(self.currentEC)+",",end=" ")
         print(str(self.playedECset)+",",end=" ")
-
         print(str(self.nOfWC)+",",end=" ")
-        print(str(self.Wormset)+",",end=" ")
-        
-        
         print(str(self.playedWormsSet)+",",end=" ")
-        
-
-
 
         print(";")
         

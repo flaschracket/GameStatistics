@@ -2,6 +2,7 @@ from enum import Enum
 class GameSettings():
     winGoal = 100
     NrofEC = 5
+    NrOfWC = 5
     
     
     

@@ -10,12 +10,12 @@ import copy
 
 class Game():
     """description of class"""
+    const = GameSettings()
     winer = ''
-#    sumplayedEC = 0 
     nofPlayers = 0
-    nOfCorruption = 0
     currentRound = 0
     currentEC = 0
+    currentWC = 0
     currentWormsSet = {}
     currentStep = 0
     #currentPenalty = 0
@@ -47,11 +47,13 @@ class Game():
         return(self)
 
     def playWC(self):
-        self.currentWC = self.WC.selectWC()
-        FuncName = 'WCFunc' + str(self.currentWC)
+        self.WC.SelectNextWC()
+        self.WC.PV = copy.deepcopy(self.currentPlayer.PlayerVars)
+        FuncName = 'WCFunc' + str(self.WC.currentWC)
         funcresult = getattr(self.WC, FuncName)()
+        self.currentPlayer.PlayerVars = copy.deepcopy(self.WC.PV)
         #OMGCorruption(self,myturn)
-        return True
+        return (self)
 
     def playOneStep(self):
         self.playEC()
@@ -64,8 +66,8 @@ class Game():
         for i in range(self.EC.nOfWC):
             self.playWC()
         self.Stepsnapshot()
-        self.listofSteps[self.currentStep].printCSV()
-        #self.printgame("step")
+        #self.listofSteps[self.currentStep].printCSV()
+        self.printgame("step")
         self.currentStep = self.currentStep+1
         return (self)
     
@@ -78,8 +80,6 @@ class Game():
             self.listofPlayers[x] = copy.deepcopy(self.currentPlayer)
             if (self.winer != ''):
                 break            
-            #self.EC.SelectNextEC()
-            # current ec should be deleted from game
             self.currentEC = self.EC.currentEC
         return self
 
@@ -89,14 +89,14 @@ class Game():
         s.stepNr = self.currentStep
         s.P = copy.deepcopy(self.currentPlayer)
         
-        for i in range(self.nOfCorruption):
-            s.wormSet.add(self.currentWormsSet[i])
+        #for i in range(self.const.NrOfWC):
+        #s.wormSet.add((self.currentWormsSet))
         s.winer = self.winer
-        s.nofcorruption = self.nOfCorruption
+#        s.nofcorruption = self.nOfCorruption
         s.playedECset = self.EC.playedCardsSet
-        s.Wormset = self.WC.wormCardsSet 
+        s.Wormset = self.WC.playedWormCardsSet 
         s.currentEC = copy.deepcopy(self.currentEC)
-        s.ECset = self.EC.playedCardsSet
+        s.playedWormsSet = self.EC.playedCardsSet
         s.nOfWC = self.EC.nOfWC
         self.listofSteps.append(s)
         #self.printgame("stepsnapshot")
@@ -105,10 +105,11 @@ class Game():
     def printgame(self,s):
         print("it is a game print in " +s)
         print("step nr:"+str(self.currentStep))
+        print("nr of WCs:"+str(self.EC.nOfWC))
+       #print("nr of WCs:"+str(self.nOfWC))
+
         #print("current player is:", end =" ")
         #print(self.currentPlayer.Name)
-        print("current winer is:"+self.winer)
-        
         #print("list of players")
         #for i in range(self.nofPlayers):
          #   print(str(i)+":", end =" ")
@@ -116,4 +117,6 @@ class Game():
         #for i in range(self.nofPlayers):
             #print(str(i)+ ": ", end="")
             #self.listofPlayers[i].printMainRAM()
-            
+        #print("current winer is:"+self.winer)
+        print("playedWC: "+str(self.WC.playedWormCardsSet)+",", end= " ")   
+        print("Current WC:" + str(self.currentWC))
