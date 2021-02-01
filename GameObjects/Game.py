@@ -66,8 +66,8 @@ class Game():
         for i in range(self.EC.nOfWC):
             self.playWC()
         self.Stepsnapshot()
-        #self.listofSteps[self.currentStep].printCSV()
-        self.printgame("step")
+        self.listofSteps[self.currentStep].printCSV()
+        #self.printgame("step")
         self.currentStep = self.currentStep+1
         return (self)
     
@@ -94,9 +94,9 @@ class Game():
         s.winer = self.winer
 #        s.nofcorruption = self.nOfCorruption
         s.playedECset = self.EC.playedCardsSet
-        s.Wormset = self.WC.playedWormCardsSet 
+#        s.Wormset = self.WC.playedWormCardsSet 
         s.currentEC = copy.deepcopy(self.currentEC)
-        s.playedWormsSet = self.EC.playedCardsSet
+        s.playedWormsSet = self.WC.playedWormCardsSet
         s.nOfWC = self.EC.nOfWC
         self.listofSteps.append(s)
         #self.printgame("stepsnapshot")
@@ -106,8 +106,7 @@ class Game():
         print("it is a game print in " +s)
         print("step nr:"+str(self.currentStep))
         print("nr of WCs:"+str(self.EC.nOfWC))
-       #print("nr of WCs:"+str(self.nOfWC))
-
+        #print("nr of WCs:"+str(self.nOfWC))
         #print("current player is:", end =" ")
         #print(self.currentPlayer.Name)
         #print("list of players")

@@ -27,9 +27,13 @@ class Step():
         print("-------- played EC set ---------")
         print("EC set: "+str(self.playedECsett))
         print("----------------------------------------------")
+    
+    def printCSVHeader(self):
+        print("roundnr,stepnr,player,A,B,C,Total,winer,ec,ecset,nofworms,wcs,wormset;")
+        return (True)
 
     def printCSV(self):
-      #  print("roundnr,stepnr,player,A,B,C,Total,winer,ec,ecset,nofworms,wcs,wormset;")
+        self.printCSVHeader()
         print(str(self.roundNr)+",",end=" ")
         print(str(self.stepNr) +",",end=" ")
         print(self.P.Name+",",end=" ")
@@ -41,7 +45,6 @@ class Step():
         print(str(self.currentEC)+",",end=" ")
         print(str(self.playedECset)+",",end=" ")
         print(str(self.nOfWC)+",",end=" ")
-        print(str(self.playedWormsSet)+",",end=" ")
-
+        print(str(self.playedWormsSet),end="")
         print(";")
         
