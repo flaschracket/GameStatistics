@@ -1,5 +1,12 @@
 from GameObjects.Game import *
 from GameObjects.Player import *
+import csv
+from csv import writer
+
+
+#excel lib should be installed: pip install XlsxWriter
+#import xlwt
+#from xlwt import xlsxwriter
 
 class Step():
     """Status of each step of game, it is like a copy of variable to save the result  at one place"""
@@ -10,8 +17,6 @@ class Step():
     stepNr = 0
     P = Player()
     playedECset = {}
-    #wormSet = {}
-    #totalECset ={}
     playedWormsSet = {}
 
     def printStepStatus(self):
@@ -31,7 +36,7 @@ class Step():
     def printCSVHeader(self):
         print("roundnr,stepnr,player,A,B,C,Total,winer,ec,ecset,nofworms,wcs,wormset;")
         return (True)
-
+    
     def printCSV(self):
         self.printCSVHeader()
         print(str(self.roundNr)+",",end=" ")
@@ -48,3 +53,19 @@ class Step():
         print(str(self.playedWormsSet),end="")
         print(";")
         
+    def setAllValuesinLine(self):
+       #fnames = [ 'stepnr', 'player'] 
+                 #,'A', 'B', 'C', 'Total', 'winer', 'ec', 'ecset', 'nofworms', 'wcs', 'wormset']
+       allvalues = "{'roundnr':,"+str(self.roundNr)+"'player':,"+str(self.roundNr)+"}"
+       #+"," + str(self.stepNr) +"," + self.P.Name+"," + str(self.P.PlayerVars.VarA)+"," + str(self.P.PlayerVars.VarB)+"," + str(self.P.PlayerVars.VarC)+","+str(self.P.PlayerVars.Total)+"," + self.winer+","+str(self.currentEC)+","+ str(self.playedECset)+","+ str(self.nOfWC)+","+str(self.playedWormsSet)+";"
+       return(allvalues)
+
+    def addlinetoCSVF(self):
+        PV = (self.P.PlayerVars)
+        rowlist = [self.roundNr,self.stepNr,self.P.Name, PV.VarA, PV.VarB, PV.VarC, PV.Total, self.winer, self.currentEC,self.playedECset,self.nOfWC,self.playedWormsSet]
+        print(str(rowlist))
+        with open('gameData2.csv', 'a+', newline='') as f:
+            csvwriter = writer(f,delimiter=';')
+            csvwriter.writerow(rowlist)        
+        f.close()
+        return True

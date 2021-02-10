@@ -17,15 +17,12 @@ for x in range(mygame.nofPlayers):
 print("Game begins")
 condition = True
 #mygame.printgame("game_simulation")
+
 while condition:
-    #print(str(mygame.nofPlayers))
-    
     mygame.currentRound = mygame.currentRound + 1
-    mygame.playOneRound()   
-    #mygame.printgame("game simulation")
+    mygame = copy.deepcopy(mygame.playOneRound())          
     if (mygame.winer != ''): 
         condition = False
-print("WG:"+str(mygame.DE.winGoal))
 print('*****Congradulation*****')
 print(mygame.winer +' is the winer!')
 
