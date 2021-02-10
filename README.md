@@ -1,2 +1,3 @@
 # GameStatistics
- I would like to generate data about game posibilities and statistics
+ the goal is to have code that help generating data of game simulation in order to calculate posibilities and statistics.
+ these information will be used in Game Balancing
