@@ -1,18 +1,22 @@
 from enum import Enum
 class GameSettings():
     winGoal = 100
-    NrofEC = 5
+    NrofEC = 9
     NrOfWC = 5
-    
-    
-    
-    GameResourceType = Enum('GameResourceType','Hardware EventCard Variable')
-    ResourceEventCard = Enum('GameEventCard','Bazar Freelancer Restart')
-    ResourceEC = Enum('ResourceEC','Restart Freelancer Bazar')
-    TaskEC = Enum('TaskEC','Add1 Add2')
-    
+    resourceECtypes = ['Restart','Bazar','Freelancer']
+    #hardwareTypes = ['CPU1','CPU2','RAM1','RAM2', 'SSD'] 
+    #functionTypes = ['']
+    PCstatus = ['shutdown', 'CPU1Captured', '']
     def _init_(self):
         return self
+    def makeRandomDecision(self):
+        a = randrange(1000) % 2
+        if a == 0:
+            return True
+        return False
+#------------------
+#----------------
+    
     class GameHardware(Enum): 
         MainRAM = 0
         ExtraRAM = 1
@@ -23,5 +27,9 @@ class GameSettings():
     @property
     def primary_PC(self):
         return self.MainRAM, self.CPU1
-
-
+    
+    class ResourceECTypes(Enum): 
+        Restart = 0
+        Bazar = 1
+        Freelancer = 2
+        

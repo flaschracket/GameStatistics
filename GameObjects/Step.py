@@ -4,9 +4,6 @@ import csv
 from csv import writer
 
 
-#excel lib should be installed: pip install XlsxWriter
-#import xlwt
-#from xlwt import xlsxwriter
 
 class Step():
     """Status of each step of game, it is like a copy of variable to save the result  at one place"""
@@ -63,7 +60,6 @@ class Step():
     def addlinetoCSVF(self):
         PV = (self.P.PlayerVars)
         rowlist = [self.roundNr,self.stepNr,self.P.Name, PV.VarA, PV.VarB, PV.VarC, PV.Total, self.winer, self.currentEC,self.playedECset,self.nOfWC,self.playedWormsSet]
-        print(str(rowlist))
         with open('gameData2.csv', 'a+', newline='') as f:
             csvwriter = writer(f,delimiter=';')
             csvwriter.writerow(rowlist)        
