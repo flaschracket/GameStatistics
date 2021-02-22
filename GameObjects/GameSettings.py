@@ -2,18 +2,15 @@ from enum import Enum
 class GameSettings():
     winGoal = 100
     NrofEC = 9
-    NrOfWC = 5
+    NrOfWC = 6
+    pauseplayingcount = 2
     resourceECtypes = ['Restart','Bazar','Freelancer']
     #hardwareTypes = ['CPU1','CPU2','RAM1','RAM2', 'SSD'] 
     #functionTypes = ['']
     PCstatus = ['shutdown', 'CPU1Captured', '']
     def _init_(self):
         return self
-    def makeRandomDecision(self):
-        a = randrange(1000) % 2
-        if a == 0:
-            return True
-        return False
+    
 #------------------
 #----------------
     

@@ -1,4 +1,4 @@
-from GameObjects.MainRAMVars import MainRAMVars
+from GameObjects.MainRAMVars import *
 from GameObjects.GameSettings import *
 from enum import Enum
 
@@ -12,8 +12,16 @@ class Player():
     PlayerVars = MainRAMVars()
     GS = GameSettings()
     PlayerPC = [GS.GameHardware.CPU1, GS.GameHardware.MainRAM]
+
     PlayerReservedEC = []
+    
+    # decision parameters: parameters for making dicision
+    #dp = []
     PCStatus = []
+    counter = 0
+    mydesicion = False
+                
+
     def _init_(self):
         self.Name ='player1' 
         self.PlayerVars= self.PlayerVars._init_()
@@ -34,9 +42,4 @@ class Player():
         print('the MainRAM-variable values of '+ self.Name + ' are : ')
         self.PlayerVars.printinline()
 
-    def makeDecision(self):
-        if self.GS.makeRandomDecision(): 
-            if (self.GS.ResourceECTypes.Restart in (self.currentPlayer.PlayerReservedEC)):
-            
-            self.currentPlayer.PlayerReservedEC.remove(self.DE.ResourceECTypes.Restart)
             

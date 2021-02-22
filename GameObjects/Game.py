@@ -4,6 +4,8 @@ from GameObjects.MainRAMVars import *
 from GameObjects.Player import *
 from GameObjects.EventCards import *
 from GameObjects.WormCards import *
+from GameObjects.desicion import *
+
 from random import randrange
 import copy
 import csv
@@ -32,7 +34,7 @@ class Game():
     
     def ifWined(self):
         wined= False
-        if (self.currentPlayer.PlayerVars.Total > self.DE.winGoal):
+        if (self.currentPlayer.PlayerVars.VarsValue[3] > self.DE.winGoal):
             wined = True
             self.winer = self.currentPlayer.Name
         return (self)
@@ -53,7 +55,7 @@ class Game():
         #self.playerDecision()
         #self.EC.unreserve(7)
         self.EC.resourceEC.clear
-        self.printgame("PlayEC")
+        #self.printgame("PlayEC")
         return(self)
 
     def playWC(self):
@@ -62,17 +64,22 @@ class Game():
         FuncName = 'WCFunc' + str(self.WC.currentWC)
         funcresult = getattr(self.WC, FuncName)()
         self.currentPlayer.PlayerVars = copy.deepcopy(self.WC.PV)
-        #OMGCorruption(self,myturn)
+        self.currentPlayer.PCStatus = self.WC.damages 
+        
+        self.WC.damages = []
         return (self)
 
     def playOneStep(self):
-        self.playEC()
+        if (self.currentPlayer.mydesicion == True):
+            self.playEC()
         self.ifWined()
         if (self.winer != ''):
             self.Stepsnapshot()
+            self.listofSteps[self.currentStep].addlinetoCSVF()
             return (self)
-        for i in range(self.EC.nOfWC):
-            self.playWC()
+        if (self.currentPlayer.mydesicion == True):
+            for i in range(self.EC.nOfWC):
+                self.playWC()
         self.Stepsnapshot()
         self.listofSteps[self.currentStep].addlinetoCSVF()
         self.currentStep = self.currentStep+1
@@ -81,11 +88,13 @@ class Game():
     def playOneRound(self):
         for x in range(self.nofPlayers):
             self.currentPlayer = copy.deepcopy(self.listofPlayers[x])
+            d = desicion()._init_(self.currentPlayer)
+            self.currentPlayer = copy.deepcopy(d.playerdesicion())
             self.playOneStep()
+            self.currentEC = self.EC.currentEC
             self.listofPlayers[x] = copy.deepcopy(self.currentPlayer)
             if (self.winer != ''):
                 break            
-            self.currentEC = self.EC.currentEC
         return self
 
     def Stepsnapshot(self):
@@ -110,7 +119,7 @@ class Game():
         
     def writeCSVfile(self):
     # there is an error, the software change the values of sets in step array to {}. therefore there is not a last ergebnis.  
-        print("first line of csv"+self.listofSteps[1].winer)
+       # print("first line of csv"+self.listofSteps[1].winer)
         f = open('gameData.csv', 'w')
         w = csv.writer(f, delimiter = ',')
         with f:
@@ -127,7 +136,7 @@ class Game():
                 wcs = str(s.playedWormsSet)
                 #print("row:"+str(row)+":f:"+ecs)
                 #print(str(row)+":f:"+ecs)
-                writer.writerow({'roundnr' : s.roundNr, 'stepnr': s.stepNr, 'player': s.P.Name, 'A': PV.VarA, 'B': PV.VarB, 'C': PV.VarC, 'Total': PV.Total, 'winer': s.winer, 'ec': s.currentEC, 'ecset': ''.join(str(s.playedECset)), 'nofworms':s.nOfWC, 'wormset':str(s.playedWormsSet)})        
+                writer.writerow({'roundnr' : s.roundNr, 'stepnr': s.stepNr, 'player': s.P.Name, 'A': PV.VarsValue[0], 'B': PV.VarsValue[1], 'C': PV.VarsValue[2], 'Total': PV.VarsValue[3], 'winer': s.winer, 'ec': s.currentEC, 'ecset': ''.join(str(s.playedECset)), 'nofworms':s.nOfWC, 'wormset':str(s.playedWormsSet)})        
                 
     def printgame(self,s):
         print("it is a game print in " +s)
@@ -153,4 +162,4 @@ class Game():
          #    print(self.listofSteps[i].P.Name)
           #   print("playedWC in Step array: "+str(self.listofSteps[i].playedWormsSet)+";")        
            #  print("playedEC in Steparray: "+str(self.listofSteps[i].playedECset)+";")
-    print("end")
+        print("end")

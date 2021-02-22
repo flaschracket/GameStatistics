@@ -36,19 +36,19 @@ class Step():
     
     def printCSV(self):
         self.printCSVHeader()
-        print(str(self.roundNr)+",",end=" ")
-        print(str(self.stepNr) +",",end=" ")
-        print(self.P.Name+",",end=" ")
-        print(str(self.P.PlayerVars.VarA)+",",end=" ")
-        print(str(self.P.PlayerVars.VarB)+",",end=" ")
-        print(str(self.P.PlayerVars.VarC)+",",end=" ")
-        print(str(self.P.PlayerVars.Total)+",",end=" ")
-        print(self.winer+",",end=" ")
-        print(str(self.currentEC)+",",end=" ")
-        print(str(self.playedECset)+",",end=" ")
-        print(str(self.nOfWC)+",",end=" ")
-        print(str(self.playedWormsSet),end="")
-        print(";")
+       # print(str(self.roundNr)+",",end=" ")
+        #print(str(self.stepNr) +",",end=" ")
+        #print(self.P.Name+",",end=" ")
+        #print(str(self.P.PlayerVars.VarA)+",",end=" ")
+        #print(str(self.P.PlayerVars.VarB)+",",end=" ")
+        #print(str(self.P.PlayerVars.VarC)+",",end=" ")
+        #print(str(self.P.PlayerVars.Total)+",",end=" ")
+        #print(self.winer+",",end=" ")
+        #print(str(self.currentEC)+",",end=" ")
+        #print(str(self.playedECset)+",",end=" ")
+        #print(str(self.nOfWC)+",",end=" ")
+        #print(str(self.playedWormsSet),end="")
+        #print(";")
         
     def setAllValuesinLine(self):
        #fnames = [ 'stepnr', 'player'] 
@@ -59,7 +59,7 @@ class Step():
 
     def addlinetoCSVF(self):
         PV = (self.P.PlayerVars)
-        rowlist = [self.roundNr,self.stepNr,self.P.Name, PV.VarA, PV.VarB, PV.VarC, PV.Total, self.winer, self.currentEC,self.playedECset,self.nOfWC,self.playedWormsSet]
+        rowlist = [self.roundNr,self.stepNr,self.P.Name, PV.VarsValue[0], PV.VarsValue[1], PV.VarsValue[2], PV.VarsValue[3], self.winer, self.currentEC,self.playedECset,self.nOfWC,self.playedWormsSet,self.P.mydesicion ,self.P.PCStatus, self.P.counter]
         with open('gameData2.csv', 'a+', newline='') as f:
             csvwriter = writer(f,delimiter=';')
             csvwriter.writerow(rowlist)        

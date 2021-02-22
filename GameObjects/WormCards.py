@@ -13,6 +13,7 @@ class WormCards():
     #currentWormSet = {}
     currentWC = 0
     nOfWC = 0
+    damages = []
 
     def SelectNextWC(self):
         self.reset()
@@ -48,7 +49,7 @@ class WormCards():
         self.PV.VarA = 0 
         return(self)
     def WCFunc5(self):
-        self.PV.VarA = 0 
+        self.damages.append('CPU1Captured') 
         return(self)
  
 
