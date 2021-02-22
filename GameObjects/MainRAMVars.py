@@ -5,12 +5,6 @@ class MainRAMVars():
     VarsValue = [0,0,0,0]
     NullVars = ['-','-','-','-']
     
-    #VarB = 0
-    #VarBN = False
-    #VarC = 0
-    #VarCN = False
-    #Total = 0
-    
     def print(self):
         print(' Vars Value = ' + str(*self.VarsValue))
         return 

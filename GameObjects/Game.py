@@ -102,8 +102,7 @@ class Game():
         s.roundNr = self.currentRound
         s.stepNr = self.currentStep
         s.P = copy.deepcopy(self.currentPlayer)        
-        #for i in range(self.const.NrOfWC):
-        #s.wormSet.add((self.currentWormsSet))
+        s.PlayedECName = self.EC.ECName
         s.winer = self.winer
 #        s.nofcorruption = self.nOfCorruption
         s.playedECset = self.EC.playedCardsSet
