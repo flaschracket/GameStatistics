@@ -19,7 +19,7 @@ class Game():
     currentRound = 0
     currentEC = 0
     currentWC = 0
-    currentWormsSet = {}
+    currentWormsSet = []
     currentStep = 0
     #currentPenalty = 0
     currentPlayer = Player()
@@ -42,19 +42,24 @@ class Game():
     def playEC(self):
         """calling a function with making its name as string"""
         #initialize EC
+
         self.currentEC = self.EC.SelectNextEC()
-        self.EC.PV = copy.deepcopy(self.currentPlayer.PlayerVars)
+#        self.EC.PV = copy.deepcopy(self.currentPlayer.PlayerVars)
         self.EC.hardware = copy.deepcopy(self.currentPlayer.PlayerPC)
+        #thisEC = EventCards().__init__(self.currentPlayer.PlayerVars, currentEC)   
         #run function
         FuncName = 'ECFunc' + str(self.currentEC)
+   
         getattr(self.EC, FuncName)()
+        #self.EC = copy.deepcopy(myECFunc())
+        self.printgame('4:')
         #initialize player
         self.currentPlayer.PlayerVars = copy.deepcopy(self.EC.PV)
         self.currentPlayer.PlayerPC = copy.deepcopy(self.EC.hardware)
         self.currentPlayer.PlayerReservedEC.append(self.EC.resourceEC)
-        #self.playerDecision()
-        #self.EC.unreserve(7)
+        
         self.EC.resourceEC.clear
+        self.EC.PV.VarsValue= [0,0,0,0]
         #self.printgame("PlayEC")
         return(self)
 
@@ -64,9 +69,9 @@ class Game():
         FuncName = 'WCFunc' + str(self.WC.currentWC)
         funcresult = getattr(self.WC, FuncName)()
         self.currentPlayer.PlayerVars = copy.deepcopy(self.WC.PV)
-        self.currentPlayer.PCStatus = self.WC.damages 
-        
+        self.currentPlayer.PCStatus = self.WC.damages         
         self.WC.damages = []
+        
         return (self)
 
     def playOneStep(self):
@@ -81,16 +86,21 @@ class Game():
             for i in range(self.EC.nOfWC):
                 self.playWC()
         self.Stepsnapshot()
+        self.printgame('5:')
+        self.WC.playedWCName= set()
         self.listofSteps[self.currentStep].addlinetoCSVF()
         self.currentStep = self.currentStep+1
         return (self)
     
     def playOneRound(self):
         for x in range(self.nofPlayers):
+            self.currentPlayer = Player()
             self.currentPlayer = copy.deepcopy(self.listofPlayers[x])
             d = desicion()._init_(self.currentPlayer)
             self.currentPlayer = copy.deepcopy(d.playerdesicion())
+            self.printgame('1:')
             self.playOneStep()
+            self.printgame('last:')
             self.currentEC = self.EC.currentEC
             self.listofPlayers[x] = copy.deepcopy(self.currentPlayer)
             if (self.winer != ''):
@@ -101,19 +111,15 @@ class Game():
         s = Step()
         s.roundNr = self.currentRound
         s.stepNr = self.currentStep
-        s.P = copy.deepcopy(self.currentPlayer)        
         s.PlayedECName = self.EC.ECName
         s.winer = self.winer
-#        s.nofcorruption = self.nOfCorruption
         s.playedECset = self.EC.playedCardsSet
-#        s.Wormset = self.WC.playedWormCardsSet 
+        s.P = copy.deepcopy(self.currentPlayer)        
         s.currentEC = copy.deepcopy(self.currentEC)
         s.playedWormsSet = self.WC.playedWormCardsSet
-        #print(str(s.playedWormsSet))
         s.nOfWC = self.EC.nOfWC
+        s.PlayedWCName = self.WC.playedWCName
         self.listofSteps.append(s)
-        #self.printgame("stepsnapshot")
-        #self.writeCSVfile()
         return self
         
     def writeCSVfile(self):
@@ -139,9 +145,9 @@ class Game():
                 
     def printgame(self,s):
         print("it is a game print in " +s)
-        print("step nr:"+str(self.currentStep))
+        #print("step nr:"+str(self.currentStep))
         #print("hardware:" + str(self.currentPlayer.PlayerPC))
-        print("reserved EC: "+ str(self.EC.reservedCardsSet))
+        #print("reserved EC: "+ str(self.EC.reservedCardsSet))
         #print("nr of WCs:"+str(self.EC.nOfWC))
         #print("nr of WCs:"+str(self.nOfWC))
         #print("current player is:", end =" ")
@@ -150,9 +156,9 @@ class Game():
         #for i in range(self.nofPlayers):
          #   print(str(i)+":", end =" ")
           #  print(self.listofPlayers[i].Name)
-        #for i in range(self.nofPlayers):
-            #print(str(i)+ ": ", end="")
-            #self.listofPlayers[i].printMainRAM()
+        for i in range(self.nofPlayers):
+            print(str(i)+ ": ", end="")
+            self.listofPlayers[i].printMainRAM()
         #print("current winer is:"+self.winer)
         # print("playedWC: "+str(self.WC.playedWormCardsSet)+",", end= " ")   
         #slen = len(self.listofSteps)

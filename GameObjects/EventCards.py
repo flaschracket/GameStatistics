@@ -15,13 +15,13 @@ class EventCards():
     playedCardsSet = set()
     reservedCardsSet =set()
     ECName = ''
-    
+    a = np.array(PV.VarsValue)    
     hardware= []
     # initial which resource is added after playing an EC card
     resourceEC = []
     currentEC = 0
     nOfWC= 0
-
+    
     def SelectNextEC(self):
         self.reset()
         if len(self.playedCardsSet)==0:
@@ -40,18 +40,33 @@ class EventCards():
         return(self)
     def unreserve(self,ec):
         self.reservedCardsSet.discard(ec)
-
+        return
     def selectVar(self):
-        try:
-            r = self.PV.NullVars.index('N')
-        except ValueError:
+       if len(self.PV.Nullindex)>0:     
+            #pop remove item and get its value
+            r = self.PV.Nullindex.pop(0)
+       else: 
             try:
-                x = min(self.PV.VarsValue)
-                r = self.PV.VarsValue.index(x)
+                r = self.PV.VarsValue.argmin()
+                #r = self.PV.VarsValue.index(x)
             except ValueError:
                 r=0
-        return r
-    
+       return r
+    def checknull(self,ind,add):
+        check = False
+        if 3  in self.PV.Nullindex:                
+                check = True
+        else:
+            a= any(item in ind for item in self.PV.Nullindex)
+            if   a==True:
+                check= True
+                if add== True:
+                    self.PV.Nullindex.append(3)
+            
+        return check        
+             
+                 
+        return (check)
     # list of Cards
     #-------------------
     #A: input Cards
@@ -61,7 +76,7 @@ class EventCards():
         self.ECName = 'EC:Input:2 digit number'
         n = randrange(100)
         i = self.selectVar()
-        self.PV.VarsValue[i] = n 
+        self.PV.VarsValue[i] = n  
         self.nOfWC = 1
         return(self)
 
@@ -199,62 +214,82 @@ class EventCards():
     def ECFunc20(self):
         self.ECName = 'EC:Task: T += A+B'
         ind= [0,1,3]
-        self.PV.VarsValue[3] = np.sum(self.PV.VarsValue[ind])
+        if not self.checknull(ind,True):
+                self.PV.VarsValue[3] = np.sum(self.PV.VarsValue[ind])
         self.nOfWC = 1   
         return(self)
 
     def ECFunc21(self):
         self.ECName = 'EC:Task: T = A*B'
-        self.PV.VarsValue[3] = self.PV.VarsValue[0] * self.PV.VarsValue[1]
+        ind = [0,1]
+        if not self.checknull(ind,False):
+            self.PV.VarsValue[3] = self.PV.VarsValue[0] * self.PV.VarsValue[1]
         self.nOfWC = 1   
         return(self)
 
     def ECFunc22(self):
         self.ECName = 'EC:Task: T += A+B+C'
-        self.PV.VarsValue[3] = sum(self.PV.VarsValue)
+        ind =[0,1,2,3]   
+        if not self.checknull(ind,True):
+            self.PV.VarsValue[3] = sum(self.PV.VarsValue)
         self.nOfWC = 1   
         return(self)
 
     def ECFunc23(self):
         self.ECName = 'EC:Task: T = xx9x'
-        t = self.PV.VarsValue[3]
-        strt = str(t)
-        strt[2]= 9
-        self.PV.VarsValue[3] = int(strt)
+        ind =[3]
+        if not self.checknull(ind,False):
+            t = self.PV.VarsValue[3]
+            strt = str(t)
+            a= strt[0]
+            b= strt[2:3]
+            strt =a+ '9'+ b
+            self.PV.VarsValue[3] = int(strt)
         self.nOfWC = 1   
         return(self)
    
     def ECFunc24(self):
         self.ECName = 'EC:Task: T += sum all/2'
         ind = [0,1,2]
-        self.PV.VarsValue[3] = self.PV.VarsValue[3]+np.sum(self.PV.VarsValue[ind])/2
+        
+        if not self.checknull(ind,True):
+            self.PV.VarsValue[3] = self.PV.VarsValue[3]+np.sum(self.PV.VarsValue[ind])/2
         self.nOfWC = 2  
         return(self)
 
     def ECFunc25(self):
         self.ECName = 'EC:Task: T += sum all'
-        self.PV.VarsValue[3] = sum(self.PV.VarsValue)
+        ind =[0,1,2,3]
+        if not self.checknull(ind,True):
+            self.PV.VarsValue[3] = sum(self.PV.VarsValue)
         self.nOfWC = 2
         return(self)
 
     def ECFunc26(self):
         self.ECName = 'EC:Task: T += B+(2*A)'
         ind = [3,1]
-        self.PV.VarsValue[3]=np.sum(self.PV.VarsValue[ind])+(self.PV.VarsValue[0]*2)
+        indif =[3,1,2]
+        if not self.checknull(indif,True):    
+            self.PV.VarsValue[3]=np.sum(self.PV.VarsValue[ind])+(self.PV.VarsValue[0]*2)
         self.nOfWC = 2
-        return self
+        return (self)
+
     def ECFunc27(self):
         self.ECName = 'EC:Task: T += 2*(A+B+C)'
         ind = [0,1,2]
-        self.PV.VarsValue[3]=np.sum(self.PV.VarsValue[ind])+(self.PV.VarsValue[3])
+        indif = [0,1,2,3]
+        if not self.checknull(indif,True):
+             self.PV.VarsValue[3]=np.sum(self.PV.VarsValue[ind])+(self.PV.VarsValue[3])
         self.nOfWC = 2
         return self
    
     def ECFunc27(self):
         self.ECName = 'EC:Task: x = 2x ! total'
-        self.PV.VarsValue[0]=self.PV.VarsValue[0]*2
-        self.PV.VarsValue[1]=self.PV.VarsValue[1]*2
-        self.PV.VarsValue[2]=self.PV.VarsValue[2]*2
+        indif = [0,1,2,3]
+        if not self.checknull(indif,True):
+            self.PV.VarsValue[0]=self.PV.VarsValue[0]*2
+            self.PV.VarsValue[1]=self.PV.VarsValue[1]*2
+            self.PV.VarsValue[2]=self.PV.VarsValue[2]*2
         self.nOfWC = 2
         return self
     

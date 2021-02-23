@@ -7,16 +7,13 @@ from enum import Enum
 class Player():
     """description of class"""
     Name = ' '
-#    PlayerResourceCards = Enum('PlayerResourceCards','')
-    
+
     PlayerVars = MainRAMVars()
     GS = GameSettings()
     PlayerPC = [GS.GameHardware.CPU1, GS.GameHardware.MainRAM]
 
     PlayerReservedEC = []
     
-    # decision parameters: parameters for making dicision
-    #dp = []
     PCStatus = []
     counter = 0
     mydesicion = False
@@ -41,5 +38,5 @@ class Player():
     def printMainRAM(self):
         print('the MainRAM-variable values of '+ self.Name + ' are : ')
         self.PlayerVars.printinline()
-
+        
             

@@ -1,8 +1,8 @@
 from enum import Enum
 class GameSettings():
     winGoal = 100
-    NrofEC = 29
-    NrOfWC = 6
+    NrofEC = 30
+    NrOfWC = 10
     NrOfP = 2
     pauseplayingcount = 2
     resourceECtypes = ['Restart','Bazar','Freelancer']
