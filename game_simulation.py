@@ -4,21 +4,22 @@ from GameObjects.Player import *
 from GameObjects.Game import *
 from copy import deepcopy
 mygame = Game()
-tempply = Player()
+tempply = Player('')
+GS = GameSettings()
 
 #initial
 
 print("Hello From Game Simulation! Data Generation is begining:")
-mygame.nofPlayers = int(input("how many players are playing the game?"))
+GS.NrOfP = int(input("how many players are playing the game?"))
 
-for x in range(mygame.nofPlayers):
-    mygame.listofPlayers.append(Player())
-    mygame.listofPlayers[x].Name = "player" + str(x)
+for x in range(GS.NrOfP):
+    name = 'Player '+ str(x)
+    mygame.listofPlayers.append(Player(name))
 
 #play
 print("Game begins")
 condition = True
-#mygame.printgame("game_simulation")
+mygame.printgame("game_simulation")
 
 while condition:
     mygame.currentRound = mygame.currentRound + 1

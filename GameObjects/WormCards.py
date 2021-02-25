@@ -8,30 +8,38 @@ from GameObjects.MainRAMVars import *
 class WormCards():
     """description of class"""
     const = GameSettings()
-    PV = MainRAMVars()
+    #PV = MainRAMVars()
     
-    playedWormCardsSet = set()
+    playedWC = set()
     currentWC = 0
     playedWCName = set()
     nOfWC = 0
     damages = []
 
+    def __init__(self,vars):
+        self.PV = copy.deepcopy(vars)
+        return 
+    #------------------
     def SelectNextWC(self):
         self.reset()
-        if len(self.playedWormCardsSet)==0:
-            self.playedWormCardsSet = {self.currentWC}
+        if len(self.playedWC)==0:
+            self.playedWC = {self.currentWC}
         else:
-            while self.currentWC in self.playedWormCardsSet:
+            while self.currentWC in self.playedWC:
                 self.currentWC = randrange(self.const.NrOfWC)        
-            self.playedWormCardsSet.add(self.currentWC)        
+            self.playedWC.add(self.currentWC)        
         return self.currentWC
     
     def reset(self):
-        if (len(self.playedWormCardsSet) == self.const.NrOfWC):
-            self.playedWormCardsSet.clear()
+        if (len(self.playedWC) == self.const.NrOfWC):
+            self.playedWC.clear()
         return(self)
 
-
+    def playFunc(self):
+        self.SelectNextWC()
+        FuncName = 'WCFunc' + str(self.currentWC)
+        getattr(self, FuncName)()
+        return self
 
     # list of Cards
     #A=Null
@@ -51,13 +59,13 @@ class WormCards():
 
     def WCFunc3(self):
         self.playedWCName.add(' WC Name: B,C=0; ')
-        self.PV.VarsValue[1] = 0 
-        self.PV.VarsValue[2] = 0 
+        self.PV.varsValue[1] = 0 
+        self.PV.varsValue[2] = 0 
         return(self)
 
     def WCFunc4(self):
         self.playedWCName.add(' WC Name: T -=100 ')
-        self.PV.VarsValue[3] = self.PV.VarsValue[3]-100 
+        self.PV.varsValue[3] = self.PV.varsValue[3]-100 
      
         return(self)
 
@@ -67,25 +75,25 @@ class WormCards():
  
     def WCFunc6(self):
         self.playedWCName.add(' WC Name: T =xx00 ')
-        mod = self.PV.VarsValue[3] % 100
-        self.PV.VarsValue[3] = self.PV.VarsValue[3]-mod 
+        mod = self.PV.varsValue[3] % 100
+        self.PV.varsValue[3] = self.PV.varsValue[3]-mod 
         return(self)
 
     def WCFunc7(self):
         self.playedWCName.add(' WC Name: A=0,B=-1,C=N ')
-        self.PV.VarsValue[0] = 0
-        self.PV.VarsValue[1] = -1
+        self.PV.varsValue[0] = 0
+        self.PV.varsValue[1] = -1
         self.PV.Nullindex.append(2)
         return(self)
 
     def WCFunc8(self):
         self.playedWCName.add(' WC Name: B=-10 ')
-        self.PV.VarsValue[1] = -10 
+        self.PV.varsValue[1] = -10 
         return(self)
 
     def WCFunc9(self):
         self.playedWCName.add(' WC Name: C=-20 ')
-        self.PV.VarsValue[2] = -20 
+        self.PV.varsValue[2] = -20 
         return(self)
 
 

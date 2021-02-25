@@ -14,7 +14,12 @@ class GameSettings():
     
 #------------------
 #----------------
-    
+    def ifWined(total):
+        wined= False
+        if (total >= self.DE.winGoal):
+            wined = True
+        return (true) 
+
     class GameHardware(Enum): 
         MainRAM = 0
         ExtraRAM = 1
