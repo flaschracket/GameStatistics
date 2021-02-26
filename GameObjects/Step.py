@@ -5,6 +5,7 @@ from GameObjects.Player import *
 import copy
 import csv
 from csv import writer
+from datetime import datetime
 
 
 
@@ -58,8 +59,12 @@ class Step():
 
 
  
-    def printCSVHeader(self):
-        print("roundnr,stepnr,player,A,B,C,Total,winer,ec,ecset,nofworms,wcs,wormset;")
+    def writeCSVHeader(self, file):
+        rowlist =['roundnr','stepnr','player','A:0','B:1','C:2','Total:3','NULL vars',	'ec']
+        rowlist = rowlist + ['nofworms','my decision',	'PC Status', 'count down paus',	'EC Name']
+        rowlist = rowlist + ['WC Name',	'Winner	ecset',	'wormset']
+        csvwriter = writer(file,delimiter=';')
+        csvwriter.writerow(rowlist)
         return (True)
     
  
@@ -87,7 +92,12 @@ class Step():
         rowlist = rowlist + [PV.varsValue[3], nullList , self.EC.currentEC,self.EC.nOfWC]
         rowlist = rowlist+ [self.playerDesicion ,playerPCStatus, self.P.roundCounter]
         rowlist = rowlist + [self.EC.ECName, playedWCName,self.winer,self.EC.playedEC, self.WC.playedWC]
-        with open('gameData2.csv', 'a+', newline='') as f:
+        now = datetime.now() # current date and time
+        fName = 'generated data/sample-'+ str(self.GS.NrOfP) +'player'+ now.strftime("%Y")
+        fName = fName+now.strftime("%m")+now.strftime("%Y")+now.strftime("%H%M")+'.csv'
+        with open(fName, 'a+', newline='') as f:
+            if self.stepNr == 0 :
+                self.writeCSVHeader(f)
             csvwriter = writer(f,delimiter=';')
             csvwriter.writerow(rowlist)        
         f.close()

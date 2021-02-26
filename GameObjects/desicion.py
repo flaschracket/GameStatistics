@@ -12,15 +12,13 @@ class desicion(object):
         self.step = copy.deepcopy(s)
 
         return self
-
-
 #-------------------------------
+
     def makeRandomDecision(self):
         a = randrange(1000) % 2
         if a == 0:
            return True
         return False
-
     def makeDecision(self):
             if self.GS.makeRandomDecision(): 
                 if (self.GS.ResourceECTypes.Restart in (self.step.PlayerReservedEC)):
