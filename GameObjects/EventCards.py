@@ -7,14 +7,15 @@ from GameObjects.GameSettings import *
 class EventCards():
     """description of class"""    
 
-    def __init__(self,vars,rcs,pcs):
+    def __init__(self,vars,pec,resEC,rec):
         self.PV = copy.deepcopy(vars)
         self.currentEC = 0
-        self.playedEC = rcs
-        self.reservedEC = pcs
+        self.playedEC = pec
+        self.reservedEC = resEC
+        self.resourceEC = rec
         self.GS = GameSettings()
         self.ECName = ''
-        nOfWC= 0
+        self.nOfWC = 0
         return
 
     def updateEC(self, vars,pc,rc):
@@ -124,7 +125,7 @@ class EventCards():
     # A =5    
     def ECFunc4(self):
         self.ECName = 'EC:Input:A =5'
-        self.PV.VarsValue[0] = 5
+        self.PV.varsValue[0] = 5
         self.nOfWC = 0
         return(self)
     # A =10    
@@ -312,13 +313,20 @@ class EventCards():
     #resource functions
     #-------------------
     def ECFunc28(self):
-#        if (self.GS.GameHardware.CPU2 not in self.hardware):
+        self.ECName = 'EC:Resource: Restart'
         self.resourceEC.append(self.GS.ResourceECTypes.Restart)
-        self.reservedEC.add(7)
+        self.reservedEC.add(28)
         return(self)
 
     def ECFunc29(self):
+        self.ECName = 'EC:Resource: Freelancer'
         self.resourceEC.append(self.GS.ResourceECTypes.Freelancer)
-        self.reservedEC.add(8)
+        self.reservedEC.add(29)
+        return(self)
+
+    def ECFunc30(self):
+        self.ECName = 'EC:Resource: Bazar'
+        self.resourceEC.append(self.GS.ResourceECTypes.Bazar)
+        self.reservedEC.add(30)
         return(self)
     

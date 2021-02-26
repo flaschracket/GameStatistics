@@ -16,7 +16,7 @@ class Player():
     PlayerReservedEC = []
     
     PCStatus = []
-    counter = 0
+    roundCounter = 0
     
                 
 

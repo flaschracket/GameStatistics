@@ -32,17 +32,21 @@ class Game():
     def playOneRound(self):
         ecp = set() 
         ecr = set()
+        pwc = set()
+        rec = set()
         for x in range(self.GS.NrOfP):
             if (len(self.listofSteps)>0):
                 ecp = self.listofSteps[self.currentStep-1].EC.playedEC
                 ecr = self.listofSteps[self.currentStep-1].EC.reservedEC
-            newStep = Step(self.listofPlayers[x],ecp,ecr,self)
+                pwc = self.listofSteps[self.currentStep-1].WC.playedWC
+                rec = self.listofPlayers[x].PlayerReservedEC
+                self.listofSteps[self.currentStep-1].EC.resourceEC
+            newStep = Step(self.listofPlayers[x],ecp,ecr,pwc,rec,self)
             d = desicion()._init_(newStep)
             newStep = copy.deepcopy(d.playerdesicion())            
             #play one STep
-            if newStep.playerDesicion:
-                newStep.playOneStep()
-                self.winer = newStep.winer
+            newStep.playOneStep()
+            self.winer = newStep.winer
             self.Stepsnapshot(newStep)
             self.currentStep = self.currentStep+1
             self.listofPlayers[x] = copy.deepcopy(newStep.P)

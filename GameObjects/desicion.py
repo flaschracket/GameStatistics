@@ -27,11 +27,11 @@ class desicion(object):
             
                   self.step.P.PlayerReservedEC.remove(self.DE.ResourceECTypes.Restart)
     def playerdesicion(self):
-   #     if 'CPU1Captured'  in (self.step.P.PCStatus):
-   #           FuncName = 'rule1'
-    #          funcresult = getattr(self, FuncName)()
-    #    else:
-        self.step.playerDesicion = True        
+        if 'CPU1Captured'  in (self.step.P.PCStatus):
+            FuncName = 'rule1'
+            funcresult = getattr(self, FuncName)()
+        else:
+            self.step.playerDesicion = True        
         return self.step
 #rule 1= cpu is captured  
     def rule1(self): 
@@ -39,13 +39,13 @@ class desicion(object):
                 self.step.P.PCStatus.remove('CPU1Captured')
                 self.step.P.PlayerReservedEC.extend('Restart')
                 self.step.playerDesicion = True
-                self.step.P.counter = 0
+                self.step.P.roundCounter = 0
             else: 
-                if (self.step.P.counter == self.gs.pauseplayingcount):
+                if (self.step.P.roundCounter == self.gs.pauseplayingcount):
                     self.step.P.PCStatus.remove('CPU1Captured')
-                    self.step.P.counter = 0
+                    self.step.P.roundCounter = 0
                     self.step.playerDesicion = True
                 else:
                     self.step.playerDesicion = False      
-                    self.step.P.counter = self.step.P.counter+1
+                    self.step.P.roundCounter = self.step.P.roundCounter+1
             return self.step

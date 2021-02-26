@@ -1,24 +1,23 @@
 from enum import Enum
 class GameSettings():
     winGoal = 100
-    NrofEC = 30
+    NrofEC = 31
     NrOfWC = 10
     NrOfP = 2
+    StoponThisRound = 100
     pauseplayingcount = 2
     resourceECtypes = ['Restart','Bazar','Freelancer']
-    #hardwareTypes = ['CPU1','CPU2','RAM1','RAM2', 'SSD'] 
-    #functionTypes = ['']
     PCstatus = ['shutdown', 'CPU1Captured', '']
     def _init_(self):
         return self
     
 #------------------
 #----------------
-    def ifWined(total):
+    def ifWined(self,total):
         wined= False
-        if (total >= self.DE.winGoal):
+        if (total >= self.winGoal):
             wined = True
-        return (true) 
+        return wined
 
     class GameHardware(Enum): 
         MainRAM = 0

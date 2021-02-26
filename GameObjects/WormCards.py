@@ -10,15 +10,23 @@ class WormCards():
     const = GameSettings()
     #PV = MainRAMVars()
     
-    playedWC = set()
+    
     currentWC = 0
-    playedWCName = set()
+    
     nOfWC = 0
-    damages = []
 
-    def __init__(self,vars):
+    def __init__(self,vars,pwc):
         self.PV = copy.deepcopy(vars)
+        self.playedWC = pwc
+        self.playedWCName = set()    
+        self.damages = []
         return 
+
+    def updateWC(self,vars,pwc):
+        self.PV = copy.deepcopy(vars)
+        playedWC =pwc
+        return self
+
     #------------------
     def SelectNextWC(self):
         self.reset()
@@ -35,26 +43,35 @@ class WormCards():
             self.playedWC.clear()
         return(self)
 
-    def playFunc(self):
+
+    def playFunc(self,s):
+        self.updateWC(s.P.playerVars,s.playedWC)
         self.SelectNextWC()
         FuncName = 'WCFunc' + str(self.currentWC)
         getattr(self, FuncName)()
+        s.P.updatePlayer(self.PV)
+        if (len(self.damages) > 0) and (self.damages[0] not in s.P.PCStatus):
+            s.P.PCStatus = s.P.PCStatus+self.damages
         return self
 
     # list of Cards
     #A=Null
     def WCFunc0(self):
         self.playedWCName.add(' WC Name: A=NULL; ')
-        self.PV.Nullindex.append(0) 
+        #A = 0
+        if 0 not in self.PV.Nullindex:
+            self.PV.Nullindex.append(0) 
         return(self)
     
     def WCFunc1(self):
         self.playedWCName.add(' WC Name: B=NULL; ')
-        self.PV.Nullindex.append(1) 
+        if 1 not in self.PV.Nullindex:
+            self.PV.Nullindex.append(1) 
         return(self)
     def WCFunc2(self):
         self.playedWCName.add(' WC Name: C=NULL; ')
-        self.PV.Nullindex.append(2) 
+        if 2 not in self.PV.Nullindex:    
+            self.PV.Nullindex.append(2) 
         return(self)
 
     def WCFunc3(self):
@@ -70,6 +87,7 @@ class WormCards():
         return(self)
 
     def WCFunc5(self):
+        self.playedWCName.add(' WC Name: Capture CPU ')
         self.damages.append('CPU1Captured') 
         return(self)
  
@@ -83,7 +101,8 @@ class WormCards():
         self.playedWCName.add(' WC Name: A=0,B=-1,C=N ')
         self.PV.varsValue[0] = 0
         self.PV.varsValue[1] = -1
-        self.PV.Nullindex.append(2)
+        if 2 not in self.PV.Nullindex:
+            self.PV.Nullindex.append(2)
         return(self)
 
     def WCFunc8(self):

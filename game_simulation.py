@@ -24,7 +24,7 @@ mygame.printgame("game_simulation")
 while condition:
     mygame.currentRound = mygame.currentRound + 1
     mygame = copy.deepcopy(mygame.playOneRound())          
-    if (mygame.winer != ''): 
+    if (mygame.winer != '') or (mygame.currentRound >= GS.StoponThisRound): 
         condition = False
 print('*****Congradulation*****')
 print(mygame.winer +' is the winer!')
