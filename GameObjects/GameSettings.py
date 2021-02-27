@@ -1,5 +1,6 @@
 from enum import Enum
 class GameSettings():
+    sampleDataNumber = 50
     winGoal = 100
     NrofEC = 31
     NrOfWC = 10

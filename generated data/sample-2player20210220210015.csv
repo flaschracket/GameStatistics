@@ -1,4 +1,0 @@
-roundnr;stepnr;player;A:0;B:1;C:2;Total:3;NULL vars;ec;nofworms;my decision;PC Status;count down paus;EC Name;WC Name;Winner	ecset;wormset
-1;0;Player 0;73;0;0;0;[0];0;1;True;;0;EC:Input:2 digit number;"{' WC Name: A=NULL; '}";;{0};{0}
-1;1;Player 1;0;50;0;0;;13;0;True;;0;EC:Input:B =50;;;{0, 13};{0}
-2;2;Player 0;73;0;0;146;[0];26;2;True;;0;EC:Task: T += B+(2*A);;Player 0;{0, 26, 13};{0}

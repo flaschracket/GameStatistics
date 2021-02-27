@@ -22,9 +22,10 @@ class Game():
     listofSteps = []
     
     
-    def __init__(self):
+    def __init__(self,sc):
         self.currentRound = 0
         self.currentStep = 0
+        self.samplecounter = sc
         return   
     #---------------------
     #---------------------

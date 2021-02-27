@@ -1,3 +1,8 @@
+#for file
+import tempfile
+import itertools as IT
+import os
+#------
 from GameObjects.Game import *
 from GameObjects.EventCards import *
 from GameObjects.WormCards import *
@@ -27,6 +32,7 @@ class Step():
         self.roundNr = g.currentRound
         self.winer = ''
         self.GS = copy.deepcopy(g.GS)
+        self.sampleNr = g.samplecounter
         return
 
     def updatePlayer(self):
@@ -93,7 +99,7 @@ class Step():
         rowlist = rowlist+ [self.playerDesicion ,playerPCStatus, self.P.roundCounter]
         rowlist = rowlist + [self.EC.ECName, playedWCName,self.winer,self.EC.playedEC, self.WC.playedWC]
         now = datetime.now() # current date and time
-        fName = 'generated data/sample-'+ str(self.GS.NrOfP) +'player'+ now.strftime("%Y")
+        fName = 'generated data/sample-'+str(self.sampleNr)+'-'+ str(self.GS.NrOfP) +'player'+now.strftime("%Y")
         fName = fName+now.strftime("%m")+now.strftime("%Y")+now.strftime("%H%M")+'.csv'
         with open(fName, 'a+', newline='') as f:
             if self.stepNr == 0 :
@@ -102,3 +108,20 @@ class Step():
             csvwriter.writerow(rowlist)        
         f.close()
         return True
+
+
+def uniquify(path, sep = ''):
+    def name_sequence():
+        count = IT.count()
+        yield ''
+        while True:
+            yield '{s}{n:d}'.format(s = sep, n = next(count))
+    orig = tempfile._name_sequence 
+    with tempfile._once_lock:
+        tempfile._name_sequence = name_sequence()
+        path = os.path.normpath(path)
+        dirname, basename = os.path.split(path)
+        filename, ext = os.path.splitext(basename)
+        fd, filename = tempfile.mkstemp(dir = dirname, prefix = filename, suffix = ext)
+        tempfile._name_sequence = orig
+    return filename
