@@ -9,6 +9,7 @@ from random import randrange
 import copy
 import csv
 from csv import writer
+import mssql
 
 class Game():
     """description of class"""
@@ -58,6 +59,7 @@ class Game():
     def Stepsnapshot(self,s):
         s.winer = self.winer
         self.listofSteps.append(s)
+        mssql.insertStep(s,self.samplecounter)
         return self
 
     def printgame(self,s):

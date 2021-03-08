@@ -1,0 +1,2 @@
+roundnr;stepnr;player;A:0;B:1;C:2;Total:3;NULL vars;ec;nofworms;my decision;PC Status;count down paus;EC Name;WC Name;Winner	ecset;wormset
+0;0;Player 0;50;15;45;1500;;0;1;True;;0;EC:Input:2 digit number;;Player 0;{0, 28, 29, 30};{0, 1, 5, 6}

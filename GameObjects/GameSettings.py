@@ -7,6 +7,7 @@ class GameSettings():
     NrOfP = 2
     StoponThisRound = 100
     pauseplayingcount = 2
+
     resourceECtypes = ['Restart','Bazar','Freelancer']
     PCstatus = ['shutdown', 'CPU1Captured', '']
     def _init_(self):

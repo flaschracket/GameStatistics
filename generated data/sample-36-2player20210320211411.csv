@@ -1,0 +1,2 @@
+roundnr;stepnr;player;A:0;B:1;C:2;Total:3;NULL vars;ec;nofworms;my decision;PC Status;count down paus;EC Name;WC Name;Winner	ecset;wormset
+1;0;Player 0;10;20;5;3920;;20;1;True;;0;EC:Task: T += A+B;;Player 0;{0, 3, 4, 5, 9, 10, 11, 14, 15, 16, 18, 20, 26, 28, 29, 30};{0, 5}
