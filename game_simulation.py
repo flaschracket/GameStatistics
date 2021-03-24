@@ -33,8 +33,10 @@ while sampleCounter <= GS.sampleDataNumber:
             condition = False
    
     mssql.updateGame(mygame)
+    print("lenp = " + str(len(mygame.listofSteps)))
+#    print("total = "+ (mygame.listofPlayers[mygame.currentRound-1].Name))
    # print('*****Congradulation*****')
-   # print(mygame.winer +' is the winer!')
+    print(mygame.winer +' is the winer!')
     sampleCounter = sampleCounter +1
 
 

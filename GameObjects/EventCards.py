@@ -239,7 +239,7 @@ class EventCards():
         self.ECName = 'EC:Task: T = A*B'
         ind = [0,1]
         if not self.checknull(ind,False):
-            self.PV.varsValue[3] = self.PV.varsValue[0] * self.PV.varsValue[1]
+            self.PV.varsValue[3] = self.PV.varsValue[0] + self.PV.varsValue[1]
         self.nOfWC = 1   
         return(self)
 
@@ -286,7 +286,7 @@ class EventCards():
         ind = [3,1]
         indif =[3,1,2]
         if not self.checknull(indif,True):    
-            self.PV.varsValue[3]=np.sum(self.PV.varsValue[ind])+(self.PV.varsValue[0]*2)
+            self.PV.varsValue[3]=np.sum(self.PV.varsValue[ind])+(self.PV.varsValue[0])
         self.nOfWC = 2
         return (self)
 

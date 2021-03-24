@@ -1,3 +1,0 @@
-roundnr;stepnr;player;A:0;B:1;C:2;Total:3;NULL vars;ec;nofworms;my decision;PC Status;count down paus;EC Name;WC Name;Winner	ecset;wormset
-1;0;Player 0;75;-10;0;-100;[3, 2];21;1;True;;0;EC:Task: T = A*B;{' WC Name: B=-10 '};;{0, 28, 21};{0, 8}
-1;1;Player 1;25;10;300;552;;6;0;True;;0;EC:Input:A =25;;Player 1;{0, 6};{0}

@@ -1,3 +1,0 @@
-roundnr;stepnr;player;A:0;B:1;C:2;Total:3;NULL vars;ec;nofworms;my decision;PC Status;count down paus;EC Name;WC Name;Winner	ecset;wormset
-1;0;Player 0;25;30;-20;-100;[3, 2];30;0;True;;0;EC:Resource: Bazar;;;{0, 27, 30};{0}
-1;1;Player 1;50;40;300;295;;24;2;True;;0;EC:Task: T += sum all/2;;Player 1;{0, 24};{0}

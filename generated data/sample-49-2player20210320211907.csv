@@ -1,3 +1,0 @@
-roundnr;stepnr;player;A:0;B:1;C:2;Total:3;NULL vars;ec;nofworms;my decision;PC Status;count down paus;EC Name;WC Name;Winner	ecset;wormset
-1;0;Player 0;75;0;0;0;[3, 2];26;2;True;['CPU1Captured'];0;EC:Task: T += B+(2*A);"{' WC Name: B,C=0; ', ' WC Name: Capture CPU '}";;{0, 8, 26};{0, 3, 5}
-1;1;Player 1;75;30;10;592;;2;1;True;;0;EC:Input:2 digit number<90;;Player 1;{0, 2};{0}

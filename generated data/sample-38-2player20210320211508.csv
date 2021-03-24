@@ -1,3 +1,0 @@
-roundnr;stepnr;player;A:0;B:1;C:2;Total:3;NULL vars;ec;nofworms;my decision;PC Status;count down paus;EC Name;WC Name;Winner	ecset;wormset
-1;0;Player 0;10;10;25;0;[0, 3, 2];17;0;True;;0;EC:Input:C =25;;;{0, 25, 17};{0}
-1;1;Player 1;150;140;4;1738;;24;2;True;;0;EC:Task: T += sum all/2;;Player 1;{0, 24};{0}

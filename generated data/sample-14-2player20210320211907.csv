@@ -1,3 +1,0 @@
-roundnr;stepnr;player;A:0;B:1;C:2;Total:3;NULL vars;ec;nofworms;my decision;PC Status;count down paus;EC Name;WC Name;Winner	ecset;wormset
-1;0;Player 0;50;44;0;-500;[3, 2];2;1;True;;0;EC:Input:2 digit number<90;"{' WC Name: C=NULL; '}";;{0, 2, 19};{0, 2}
-1;1;Player 1;5;20;75;294;;11;0;True;;0;EC:Input:B =20;;Player 1;{0, 11};{0}
