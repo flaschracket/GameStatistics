@@ -55,16 +55,26 @@ class EventCards():
         return
 
     def selectVar(self):
-       if len(self.PV.Nullindex)>0:     
+        vars = copy.deepcopy(self.PV)
+        #total should be removed from vars selection
+        vars.varsValue = copy.deepcopy(self.PV.varsValue[:3])
+#        np.delete(vars.varsValue,3,0)
+        if 3 in vars.Nullindex:
+            vars.Nullindex.remove(3)
+        print(self.ECName)
+        print("nullindex")
+        print(vars.Nullindex)
+        print("varvalues")
+        print(vars.varsValue)
+        if len(vars.Nullindex)>0:     
             #pop remove item and get its value
-            r = self.PV.Nullindex.pop(0)
-       else: 
+            r = vars.Nullindex.pop(0)
+        else: 
             try:
-                r = self.PV.varsValue.argmin()
-                #r = self.PV.VarsValue.index(x)
+                r = vars.varsValue.argmin()
             except ValueError:
                 r=0
-       return r
+        return r
    #name should change because it choose variable
     def checknull(self,ind,add):
         check = False
@@ -328,7 +338,7 @@ class EventCards():
    
     def ECFunc27(self):
         self.ECName = 'EC:Task: x = 2x ! total'
-        indif = [0,1,2,3]
+        indif = [0,1,2]
         if not self.checknull(indif,True):
             self.PV.varsValue[0]=self.PV.varsValue[0]*2
             self.PV.varsValue[1]=self.PV.varsValue[1]*2

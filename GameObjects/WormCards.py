@@ -28,6 +28,7 @@ class WormCards():
         if   a==True:
             return False
         return True
+
     def assignVar(self,var,value):
         if var in self.PV.Nullindex:
             self.PV.Nullindex.remove(var)
@@ -101,8 +102,10 @@ class WormCards():
  
     def WCFunc6(self):
         self.playedWCName.add(' WC Name: T =xx00 ')
-        mod = self.PV.varsValue[3] % 100
-        self.PV.varsValue[3] = self.PV.varsValue[3]-mod 
+        ind= [3]
+        if self.ifPossibleToPlay(ind):
+            mod = self.PV.varsValue[3] % 100
+            self.PV.varsValue[3] = self.PV.varsValue[3]-mod 
         return(self)
 
     def WCFunc7(self):
