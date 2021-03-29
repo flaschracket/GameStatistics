@@ -19,7 +19,9 @@ print("Hello From Game Simulation! Data Generation is begining:")
 while sampleCounter <= GS.sampleDataNumber:
     mygame = Game(sampleCounter)
     mssql.insertGame(mygame)
- 
+    for x in range(GS.NrOfP):
+        name = 'Player '+ str(x)
+        mygame.listofPlayers.append(Player(name))
 
     #play
     print("Game"+str(sampleCounter)+" begins")
