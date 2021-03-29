@@ -7,12 +7,8 @@ from GameObjects.MainRAMVars import *
 
 class WormCards():
     """description of class"""
-    const = GameSettings()
-    #PV = MainRAMVars()
-    
-    
+    const = GameSettings()        
     currentWC = 0
-    
     nOfWC = 0
 
     def __init__(self,vars,pwc):
@@ -27,6 +23,16 @@ class WormCards():
         playedWC =pwc
         return self
 
+    def ifPossibleToPlay(self,ind):
+        a= any(item in ind for item in self.PV.Nullindex)
+        if   a==True:
+            return False
+        return True
+    def assignVar(self,var,value):
+        if var in self.PV.Nullindex:
+            self.PV.Nullindex.remove(var)
+        self.PV.varsValue[var]=value
+        return
     #------------------
     def SelectNextWC(self):
         self.reset()
@@ -76,13 +82,15 @@ class WormCards():
 
     def WCFunc3(self):
         self.playedWCName.add(' WC Name: B,C=0; ')
-        self.PV.varsValue[1] = 0 
-        self.PV.varsValue[2] = 0 
+        self.assignVar(1,0)
+        self.assignVar(2,0)
         return(self)
 
     def WCFunc4(self):
         self.playedWCName.add(' WC Name: T -=100 ')
-        self.PV.varsValue[3] = self.PV.varsValue[3]-100 
+        ind= [3]
+        if self.ifPossibleToPlay(ind):
+            self.PV.varsValue[3] = self.PV.varsValue[3]-100 
      
         return(self)
 
@@ -99,20 +107,20 @@ class WormCards():
 
     def WCFunc7(self):
         self.playedWCName.add(' WC Name: A=0,B=-1,C=N ')
-        self.PV.varsValue[0] = 0
-        self.PV.varsValue[1] = -1
+        self.assignVar(0,0)
+        self.assignVar(1,-1)
         if 2 not in self.PV.Nullindex:
             self.PV.Nullindex.append(2)
         return(self)
 
     def WCFunc8(self):
         self.playedWCName.add(' WC Name: B=-10 ')
-        self.PV.varsValue[1] = -10 
+        self.assignVar(1,-10)
         return(self)
 
     def WCFunc9(self):
         self.playedWCName.add(' WC Name: C=-20 ')
-        self.PV.varsValue[2] = -20 
+        self.assignVar(2,-20) 
         return(self)
 
 
