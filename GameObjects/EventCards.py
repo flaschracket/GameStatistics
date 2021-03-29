@@ -61,11 +61,6 @@ class EventCards():
 #        np.delete(vars.varsValue,3,0)
         if 3 in vars.Nullindex:
             vars.Nullindex.remove(3)
-        print(self.ECName)
-        print("nullindex")
-        print(vars.Nullindex)
-        print("varvalues")
-        print(vars.varsValue)
         if len(vars.Nullindex)>0:     
             #pop remove item and get its value
             r = vars.Nullindex.pop(0)
@@ -75,6 +70,7 @@ class EventCards():
             except ValueError:
                 r=0
         return r
+
    #name should change because it choose variable
     def checknull(self,ind,add):
         check = False

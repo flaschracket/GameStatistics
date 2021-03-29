@@ -51,15 +51,16 @@ def updateGameStoped(g):
 
 def insertStep(step,gameID):
     PV = copy.deepcopy(step.P.playerVars)
-    #rowlist = (self.roundNr,self.stepNr,self.P.Name, PV.varsValue[0], PV.varsValue[1], PV.varsValue[2])
-#    rowlist = rowlist + [PV.varsValue[3] , self.EC.currentEC,self.EC.nOfWC]
-    #rowlist = rowlist+ [, nullList,self.playerDesicion ,playerPCStatus, self.P.roundCounter]
-    #    rowlist = rowlist + [self.EC.ECName, playedWCName,self.winer,self.EC.playedEC, self.WC.playedWC]
-
     myconn = connectdb()
     cursor = myconn.cursor()
-    
-
-    cursor.execute("INSERT INTO minibit.dbo.Step VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (str(gameID),str(step.roundNr),str(step.stepNr),step.P.Name, str(PV.varsValue[0]), str(PV.varsValue[1]), str(PV.varsValue[2]),str(PV.varsValue[3]),step.EC.currentEC,step.EC.nOfWC,str(step.playerDesicion),step.EC.ECName))
+    insertstr = "INSERT INTO minibit.dbo.Step VALUES (?, ?, ?, ?, ?, "
+    insertstr = insertstr + "?, ?, ?, ?, ?, "
+    insertstr = insertstr + "?, ?, ?, ?, ?, "
+    insertstr = insertstr+ "?, ?)"
+   
+    cursor.execute(insertstr, (str(gameID),str(step.roundNr),str(step.stepNr),step.P.Name, str(PV.varsValue[0]),str(PV.varsValue[1]),str(PV.varsValue[2]),str(PV.varsValue[3]),
+                              step.EC.currentEC,step.EC.nOfWC,str(step.playerDesicion),step.EC.ECName,str(PV.Nullindex),
+                              str(step.P.PCStatus),str(step.WC.playedWCName),
+                              ''.join(str(e) for e in step.EC.playedEC),''.join(str(e) for e in step.WC.playedWC)))
     myconn.commit()
     return True
