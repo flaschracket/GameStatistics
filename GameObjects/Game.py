@@ -13,20 +13,26 @@ import mssql
 
 class Game():
     """description of class"""
-    GS = GameSettings()
 
-    winer = ''
-    currentWormsSet = []
+
     
     #currentPenalty = 0
-    listofPlayers = []
-    listofSteps = []
+    
     
     
     def __init__(self,sc):
+        self.listofPlayers = []
+        self.listofSteps = []
         self.currentRound = 0
         self.currentStep = 0
         self.samplecounter = sc
+        self.GS = GameSettings()
+        for x in range(self.GS.NrOfP):
+           name = 'Player '+ str(x)
+           self.listofPlayers.append(Player(name))
+        self.winer = ''
+        self.currentWormsSet = []
+
         return   
     #---------------------
     #---------------------

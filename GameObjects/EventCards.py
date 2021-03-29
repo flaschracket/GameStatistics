@@ -340,9 +340,9 @@ class EventCards():
         self.ECName = 'EC:Task: x = 2x ! total'
         indif = [0,1,2]
         if not self.checknull(indif,True):
-            self.PV.varsValue[0]=self.PV.varsValue[0]*2
-            self.PV.varsValue[1]=self.PV.varsValue[1]*2
-            self.PV.varsValue[2]=self.PV.varsValue[2]*2
+            self.PV.varsValue[0]= (self.PV.varsValue[0]) * 2
+            self.PV.varsValue[1]= (self.PV.varsValue[1]) * 2
+            self.PV.varsValue[2]= (self.PV.varsValue[2]) * 2
         self.nOfWC = 2
         return self
     
