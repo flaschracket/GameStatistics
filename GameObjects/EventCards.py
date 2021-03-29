@@ -81,7 +81,7 @@ class EventCards():
              
                  
         return (check)
-
+    
     def playFunc(self,s):
         """calling a function with making its name as string"""  
         self.updateEC(s.P.playerVars,s.playedEC, s.reservedEC)
@@ -173,7 +173,7 @@ class EventCards():
     # sum of the dice of all players
     def ECFunc9(self):
         self.ECName = 'EC:Input: sum dice of all players'
-        a = 0
+        a = 1
         for i in range(self.GS.NrOfP):
             a = a + randrange(6)
         var = self.selectVar()
