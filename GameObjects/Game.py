@@ -43,28 +43,18 @@ class Game():
 
 
     def playOneRound(self):        
-        print("round a")
         for x in range(self.GS.NrOfP):
-            print("for a")
             self.initialStep(x)
             d = desicion()._init_(self.thisStep)
-            print("for a1")
             newStep = copy.deepcopy(d.playerdesicion())  
-            print("for a1-1")
             #play one STep
             newStep.playOneStep()
-            print("for a2")
             self.winer = newStep.winer
-            
             self.Stepsnapshot(newStep)
             self.currentStep = self.currentStep+1
-            print("for b")
             self.listofPlayers[x] = copy.deepcopy(newStep.P)
-            print("for c")
             if (self.winer != ''):
                 break            
-        
-        print("round end of func")
         return self
 
     def Stepsnapshot(self,s):

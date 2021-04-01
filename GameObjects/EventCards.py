@@ -19,7 +19,6 @@ class EventCards():
         return
 
     def updateEC(self, vars,pc,rc):
-      #  print("update EC")
         self.PV = copy.deepcopy(vars)        
         self.playedEC = pc
         self.reservedEC = rc
@@ -30,28 +29,16 @@ class EventCards():
         return self
 
     def SelectNextEC(self):
-        print(self.playedEC)
-        print(self.reservedEC)
         self.reset()
-        print("s f 128")
-        print(self.playedEC)
         if len(self.playedEC)==0:
             self.playedEC = {self.currentEC}
         else:
-            print(self.currentEC)
-            print(self.playedEC)
-            print(self.reservedEC)
             while ((self.currentEC in self.playedEC) or (self.currentEC in self.reservedEC)):
-                #print(self.playedEC)
-                #print("while")
                 self.currentEC = randrange(self.GS.NrofEC)  
-               # print(self.currentEC)
             self.playedEC.add(self.currentEC)        
-        print("s f 128")
         return self
     
     def reset(self):
-        #self.sumPlayedEC = self.sumPlayedEC+1
         if (len(self.playedEC) == self.GS.NrofEC):
             self.playedEC.clear()
             self.playedEC = copy.deepcopy(self.reservedEC)
@@ -103,13 +90,10 @@ class EventCards():
     
     def playFunc(self,s):
         """calling a function with making its name as string"""  
-        print("p f 0")
         self.updateEC(s.P.playerVars,s.playedEC, s.reservedEC)
         self.SelectNextEC()
-        print("p f 1")
         FuncName = 'ECFunc' + str(self.currentEC)
         getattr(self, FuncName)()
-        print("p f 2")
         s.P.updatePlayer(self.PV)
         return s
 
@@ -123,7 +107,6 @@ class EventCards():
         n = randrange(100)
         i = self.selectVar()
         self.asignVar(i,n)
-#        self.PV.varsValue[i] = n  
         self.nOfWC = 1
         return(self)
 
@@ -133,7 +116,6 @@ class EventCards():
         n = randrange(50)
         i = self.selectVar()
         self.asignVar(i,n)
-#        self.PV.varsValue[i] = n         
         self.nOfWC = 1
         return(self)
 
@@ -143,7 +125,6 @@ class EventCards():
         n = randrange(90)
         i = self.selectVar()
         self.asignVar(i,n)
-        #self.PV.varsValue[i] = n
         self.nOfWC = 1
         return(self)
     # 2 digit number less than 30    
@@ -152,7 +133,6 @@ class EventCards():
         n = randrange(30)
         i = self.selectVar()
         self.asignVar(i,n)
-        #self.PV.varsValue[i] = n
         self.nOfWC = 0
         return(self)
     
@@ -160,27 +140,23 @@ class EventCards():
     def ECFunc4(self):
         self.ECName = 'EC:Input:A =5'
         self.asignVar(0,5)
-        #self.PV.varsValue[0] = 5
         self.nOfWC = 0
         return(self)
     # A =10    
     def ECFunc5(self):
         self.ECName = 'EC:Input:A =10'
         self.asignVar(0,10)
-        #self.PV.varsValue[0] = 10
         self.nOfWC = 0
         return(self)
       # A =25    
     def ECFunc6(self):
         self.ECName = 'EC:Input:A =25'
         self.asignVar(0,25)
-        #self.PV.varsValue[0] = 25
         self.nOfWC = 0
         return(self)
     # A =50    
     def ECFunc7(self):
         self.ECName = 'EC:Input:A =50'
-        #self.PV.varsValue[0] = 50
         self.asignVar(0,50)
         self.nOfWC = 0
         return(self)
@@ -188,7 +164,6 @@ class EventCards():
     def ECFunc8(self):
         self.ECName = 'EC:Input:A =75'
         self.asignVar(0,75)
-        #self.PV.varsValue[0] = 75
         self.nOfWC = 0
         return(self)
   
@@ -206,70 +181,60 @@ class EventCards():
     def ECFunc10(self):
         self.ECName = 'EC:Input:B =10'
         self.asignVar(1,10)
-        #self.PV.varsValue[1] = 10  
         self.nOfWC = 0
         return(self)
     # B= 20
     def ECFunc11(self):
         self.ECName = 'EC:Input:B =20'
         self.asignVar(1,20)
-        #self.PV.varsValue[1] = 20
         self.nOfWC = 0
         return(self)
     # B=30
     def ECFunc12(self):
         self.ECName = 'EC:Input:B =30'
         self.asignVar(1,30)
-        #self.PV.varsValue[1] = 30  
         self.nOfWC = 0
         return(self)
     # B=50
     def ECFunc13(self):
         self.ECName = 'EC:Input:B =50'
         self.asignVar(1,50)
-        #self.PV.varsValue[1] = 50  
         self.nOfWC = 0
         return(self)
     # B=70
     def ECFunc14(self):
         self.ECName = 'EC:Input:B =70'
         self.asignVar(1,70)
-        #self.PV.varsValue[1] = 70  
         self.nOfWC = 1
         return(self)
     # C=5
     def ECFunc15(self):
         self.ECName = 'EC:Input:C =5'
         self.asignVar(2,5)
-        #self.PV.varsValue[2] = 5  
         self.nOfWC = 0
         return(self)
     # C=15
     def ECFunc16(self):
         self.ECName = 'EC:Input:C =15'
         self.asignVar(2,15)
-        #self.PV.varsValue[2] = 15
         self.nOfWC = 0
         return(self)
     # C=25
     def ECFunc17(self):
         self.ECName = 'EC:Input:C =25'
         self.asignVar(2,25)
-        #self.PV.varsValue[2] = 25  
         self.nOfWC = 0
         return(self)
     # C=45
     def ECFunc18(self):
         self.ECName = 'EC:Input:C =45'
         self.asignVar(2,45)
-        #self.PV.varsValue[2] = 45  
         self.nOfWC = 0
         return(self)
     # C=75
     def ECFunc19(self):
         self.ECName = 'EC:Input:C =75'
         self.asignVar(2,75)
-        #self.PV.varsValue[2] = 75  
         self.nOfWC = 1
         return(self)
     #-------------------

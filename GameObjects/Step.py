@@ -49,19 +49,13 @@ class Step():
     
     def playOneStep(self):
         total=0
-        print("s1")
         if self.playerDesicion:
-            print("s f 1")
-
             self.EC.playFunc(self)            
-            print("s f 2")
             total = self.P.playerVars.varsValue[3]
-        print("s2")
         if (self.GS.ifWined(total)):
              self.winer = self.P.Name
              self.addlinetoCSVF()
              return (self)
-        print("s3")
         if (self.playerDesicion):
             for i in range(self.EC.nOfWC):
                 self.WC.playFunc(self)
