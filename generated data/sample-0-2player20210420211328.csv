@@ -1,0 +1,6 @@
+roundnr;stepnr;player;A:0;B:1;C:2;Total:3;NULL vars;ec;nofworms;my decision;PC Status;count down paus;EC Name;WC Name;Winner	ecset;wormset
+1;0;Player 0;80;0;0;0;[0];0;1;True;;0;EC:Input:2 digit number;"{' WC Name: A=NULL; '}";;{0};{0}
+1;1;Player 1;0;0;0;0;;33;0;True;;0;EC:Resource: Restart;;;{0, 33};{0}
+2;2;Player 0;80;50;0;0;[0];13;0;True;;0;EC:Input:B =50;;;{0, 33, 13};{0}
+2;3;Player 1;0;-1;0;0;[2];25;2;True;;0;EC:Task: T += sum all;"{' WC Name: A=0,B=-1,C=N ', ' WC Name: B,C=0; '}";;{0, 33, 13, 25};{0, 3, 7}
+3;4;Player 0;80;50;0;130;[0];26;2;True;;0;EC:Task: T += B+((2*)A);;Player 0;{0, 33, 13, 25, 26};{0, 3, 7}

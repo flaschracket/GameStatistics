@@ -2,7 +2,8 @@ from enum import Enum
 class GameSettings():
     sampleDataNumber = 2
     winGoal = 100
-    NrofEC = 34
+    #it should be one more of last function number because the functions name are begining with number 0
+    NrofEC = 35
     NrOfWC = 10
     NrOfP = 2
     StoponThisRound = 60
@@ -11,8 +12,7 @@ class GameSettings():
     resourceECtypes = ['Restart','Bazar','Freelancer']
     PCstatus = ['shutdown', 'CPU1Captured', '']
     def _init_(self):
-        return self
-    
+        return self    
 #------------------
 #----------------
     def ifWined(self,total):

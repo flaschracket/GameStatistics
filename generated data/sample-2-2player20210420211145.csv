@@ -1,0 +1,121 @@
+roundnr;stepnr;player;A:0;B:1;C:2;Total:3;NULL vars;ec;nofworms;my decision;PC Status;count down paus;EC Name;WC Name;Winner	ecset;wormset
+1;0;Player 0;32;0;0;0;[0];0;1;True;;0;EC:Input:2 digit number;"{' WC Name: A=NULL; '}";;{0};{0}
+1;1;Player 1;0;-1;0;0;[2];0;1;True;;0;EC:Input:2 digit number;{' WC Name: A=0,B=-1,C=N '};;{0};{0, 7}
+2;2;Player 0;75;0;0;0;;0;1;True;['CPU1Captured'];0;EC:Input:2 digit number;{' WC Name: Capture CPU '};;{0};{0, 5, 7}
+2;3;Player 1;0;-1;95;-100;;0;1;True;;0;EC:Input:2 digit number;{' WC Name: T -=100 '};;{0};{0, 4, 5, 7}
+3;4;Player 0;75;0;0;0;;0;0;False;['CPU1Captured'];1;;;;{0};{0, 4, 5, 7}
+3;5;Player 1;0;0;0;-100;;0;1;True;;0;EC:Input:2 digit number;"{' WC Name: B,C=0; '}";;{0};{0, 3, 4, 5, 7}
+4;6;Player 0;75;0;0;0;;0;0;False;['CPU1Captured'];2;;;;{0};{0, 3, 4, 5, 7}
+4;7;Player 1;30;0;0;-100;;0;1;True;;0;EC:Input:2 digit number;{' WC Name: T =xx00 '};;{0};{0, 3, 4, 5, 6, 7}
+5;8;Player 0;75;32;0;0;[1];0;1;True;;0;EC:Input:2 digit number;"{' WC Name: B=NULL; '}";;{0};{0, 1, 3, 4, 5, 6, 7}
+5;9;Player 1;30;90;0;-100;[2];0;1;True;;0;EC:Input:2 digit number;"{' WC Name: C=NULL; '}";;{0};{0, 1, 2, 3, 4, 5, 6, 7}
+6;10;Player 0;75;83;-20;0;;0;1;True;;0;EC:Input:2 digit number;{' WC Name: C=-20 '};;{0};{0, 1, 2, 3, 4, 5, 6, 7, 9}
+6;11;Player 1;30;-10;1;-100;;0;1;True;;0;EC:Input:2 digit number;{' WC Name: B=-10 '};;{0};{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
+7;12;Player 0;75;83;68;0;[0];0;1;True;;0;EC:Input:2 digit number;"{' WC Name: A=NULL; '}";;{0};{0}
+7;13;Player 1;30;30;1;-100;[1];0;1;True;;0;EC:Input:2 digit number;"{' WC Name: B=NULL; '}";;{0};{0, 1}
+8;14;Player 0;0;-1;68;0;[2];0;1;True;;0;EC:Input:2 digit number;{' WC Name: A=0,B=-1,C=N '};;{0};{0, 1, 7}
+8;15;Player 1;30;14;-20;-100;;0;1;True;;0;EC:Input:2 digit number;{' WC Name: C=-20 '};;{0};{0, 1, 9, 7}
+9;16;Player 0;0;-1;98;-100;;0;1;True;;0;EC:Input:2 digit number;{' WC Name: T -=100 '};;{0};{0, 1, 4, 7, 9}
+9;17;Player 1;30;0;0;-100;;0;1;True;;0;EC:Input:2 digit number;"{' WC Name: B,C=0; '}";;{0};{0, 1, 3, 4, 7, 9}
+10;18;Player 0;0;26;98;-100;[2];0;1;True;;0;EC:Input:2 digit number;"{' WC Name: C=NULL; '}";;{0};{0, 1, 2, 3, 4, 7, 9}
+10;19;Player 1;30;47;0;-100;;0;1;True;['CPU1Captured'];0;EC:Input:2 digit number;{' WC Name: Capture CPU '};;{0};{0, 1, 2, 3, 4, 5, 7, 9}
+11;20;Player 0;0;-10;20;-100;;0;1;True;;0;EC:Input:2 digit number;{' WC Name: B=-10 '};;{0};{0, 1, 2, 3, 4, 5, 7, 8, 9}
+11;21;Player 1;30;47;0;-100;;0;0;False;['CPU1Captured'];1;;;;{0};{0, 1, 2, 3, 4, 5, 7, 8, 9}
+12;22;Player 0;0;59;20;-100;;0;1;True;;0;EC:Input:2 digit number;{' WC Name: T =xx00 '};;{0};{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
+12;23;Player 1;30;47;0;-100;;0;0;False;['CPU1Captured'];2;;;;{0};{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
+13;24;Player 0;34;59;20;-100;[0];0;1;True;;0;EC:Input:2 digit number;"{' WC Name: A=NULL; '}";;{0};{0}
+13;25;Player 1;30;-10;45;-100;;0;1;True;;0;EC:Input:2 digit number;{' WC Name: B=-10 '};;{0};{0, 8}
+14;26;Player 0;0;-1;20;-100;[2];0;1;True;;0;EC:Input:2 digit number;{' WC Name: A=0,B=-1,C=N '};;{0};{0, 8, 7}
+14;27;Player 1;30;97;45;-200;;0;1;True;;0;EC:Input:2 digit number;{' WC Name: T -=100 '};;{0};{0, 8, 4, 7}
+15;28;Player 0;0;-1;98;-100;;0;1;True;['CPU1Captured'];0;EC:Input:2 digit number;{' WC Name: Capture CPU '};;{0};{0, 4, 5, 7, 8}
+15;29;Player 1;98;0;0;-200;;0;1;True;;0;EC:Input:2 digit number;"{' WC Name: B,C=0; '}";;{0};{0, 3, 4, 5, 7, 8}
+16;30;Player 0;0;-1;98;-100;;0;0;False;['CPU1Captured'];1;;;;{0};{0, 3, 4, 5, 7, 8}
+16;31;Player 1;98;49;0;-200;;0;1;True;;0;EC:Input:2 digit number;{' WC Name: T =xx00 '};;{0};{0, 3, 4, 5, 6, 7, 8}
+17;32;Player 0;0;-1;98;-100;;0;0;False;['CPU1Captured'];2;;;;{0};{0, 3, 4, 5, 6, 7, 8}
+17;33;Player 1;98;49;-20;-200;;0;1;True;;0;EC:Input:2 digit number;{' WC Name: C=-20 '};;{0};{0, 3, 4, 5, 6, 7, 8, 9}
+18;34;Player 0;0;65;98;-100;[2];0;1;True;;0;EC:Input:2 digit number;"{' WC Name: C=NULL; '}";;{0};{0, 2, 3, 4, 5, 6, 7, 8, 9}
+18;35;Player 1;98;49;24;-200;[1];0;1;True;;0;EC:Input:2 digit number;"{' WC Name: B=NULL; '}";;{0};{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
+19;36;Player 0;0;65;59;-100;[0];0;1;True;;0;EC:Input:2 digit number;"{' WC Name: A=NULL; '}";;{0};{0}
+19;37;Player 1;98;-10;24;-200;;0;1;True;;0;EC:Input:2 digit number;{' WC Name: B=-10 '};;{0};{0, 8}
+20;38;Player 0;19;0;0;-100;;0;1;True;;0;EC:Input:2 digit number;"{' WC Name: B,C=0; '}";;{0};{0, 8, 3}
+20;39;Player 1;98;67;24;-200;;0;1;True;;0;EC:Input:2 digit number;{' WC Name: T =xx00 '};;{0};{0, 8, 3, 6}
+21;40;Player 0;0;-1;0;-100;[2];0;1;True;;0;EC:Input:2 digit number;{' WC Name: A=0,B=-1,C=N '};;{0};{0, 3, 6, 7, 8}
+21;41;Player 1;98;67;67;-200;[2];0;1;True;;0;EC:Input:2 digit number;"{' WC Name: C=NULL; '}";;{0};{0, 2, 3, 6, 7, 8}
+22;42;Player 0;0;-1;8;-200;;0;1;True;;0;EC:Input:2 digit number;{' WC Name: T -=100 '};;{0};{0, 2, 3, 4, 6, 7, 8}
+22;43;Player 1;98;67;72;-200;;0;1;True;['CPU1Captured'];0;EC:Input:2 digit number;{' WC Name: Capture CPU '};;{0};{0, 2, 3, 4, 5, 6, 7, 8}
+23;44;Player 0;0;69;-20;-200;;0;1;True;;0;EC:Input:2 digit number;{' WC Name: C=-20 '};;{0};{0, 2, 3, 4, 5, 6, 7, 8, 9}
+23;45;Player 1;98;67;72;-200;;0;0;False;['CPU1Captured'];1;;;;{0};{0, 2, 3, 4, 5, 6, 7, 8, 9}
+24;46;Player 0;0;69;20;-200;[1];0;1;True;;0;EC:Input:2 digit number;"{' WC Name: B=NULL; '}";;{0};{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
+24;47;Player 1;98;67;72;-200;;0;0;False;['CPU1Captured'];2;;;;{0};{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
+25;48;Player 0;0;33;20;-200;[0];0;1;True;;0;EC:Input:2 digit number;"{' WC Name: A=NULL; '}";;{0};{0}
+25;49;Player 1;98;99;72;-200;[2];0;1;True;;0;EC:Input:2 digit number;"{' WC Name: C=NULL; '}";;{0};{0, 2}
+26;50;Player 0;4;0;0;-200;;0;1;True;;0;EC:Input:2 digit number;"{' WC Name: B,C=0; '}";;{0};{0, 2, 3}
+26;51;Player 1;98;99;98;-200;;0;1;True;['CPU1Captured'];0;EC:Input:2 digit number;{' WC Name: Capture CPU '};;{0};{0, 2, 3, 5}
+27;52;Player 0;4;53;0;-200;;0;1;True;;0;EC:Input:2 digit number;{' WC Name: T =xx00 '};;{0};{0, 2, 3, 5, 6}
+27;53;Player 1;98;99;98;-200;;0;0;False;['CPU1Captured'];1;;;;{0};{0, 2, 3, 5, 6}
+28;54;Player 0;4;-10;46;-200;;0;1;True;;0;EC:Input:2 digit number;{' WC Name: B=-10 '};;{0};{0, 2, 3, 5, 6, 8}
+28;55;Player 1;98;99;98;-200;;0;0;False;['CPU1Captured'];2;;;;{0};{0, 2, 3, 5, 6, 8}
+29;56;Player 0;4;29;46;-200;[1];0;1;True;;0;EC:Input:2 digit number;"{' WC Name: B=NULL; '}";;{0};{0, 1, 2, 3, 5, 6, 8}
+29;57;Player 1;0;-1;98;-200;[2];0;1;True;;0;EC:Input:2 digit number;{' WC Name: A=0,B=-1,C=N '};;{0};{0, 1, 2, 3, 5, 6, 7, 8}
+30;58;Player 0;4;82;46;-300;;0;1;True;;0;EC:Input:2 digit number;{' WC Name: T -=100 '};;{0};{0, 1, 2, 3, 4, 5, 6, 7, 8}
+30;59;Player 1;0;-1;-20;-200;;0;1;True;;0;EC:Input:2 digit number;{' WC Name: C=-20 '};;{0};{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
+31;60;Player 0;82;82;46;-300;[0];0;1;True;;0;EC:Input:2 digit number;"{' WC Name: A=NULL; '}";;{0};{0}
+31;61;Player 1;0;-1;65;-200;;0;1;True;['CPU1Captured'];0;EC:Input:2 digit number;{' WC Name: Capture CPU '};;{0};{0, 5}
+32;62;Player 0;66;82;-20;-300;;0;1;True;;0;EC:Input:2 digit number;{' WC Name: C=-20 '};;{0};{0, 9, 5}
+32;63;Player 1;0;-1;65;-200;;0;0;False;['CPU1Captured'];1;;;;{0};{0, 9, 5}
+33;64;Player 0;66;82;95;-300;;0;1;True;;0;EC:Input:2 digit number;{' WC Name: T =xx00 '};;{0};{0, 9, 5, 6}
+33;65;Player 1;0;-1;65;-200;;0;0;False;['CPU1Captured'];2;;;;{0};{0, 9, 5, 6}
+34;66;Player 0;56;0;0;-300;;0;1;True;;0;EC:Input:2 digit number;"{' WC Name: B,C=0; '}";;{0};{0, 3, 5, 6, 9}
+34;67;Player 1;0;-10;65;-200;;0;1;True;;0;EC:Input:2 digit number;{' WC Name: B=-10 '};;{0};{0, 3, 5, 6, 8, 9}
+35;68;Player 0;56;63;0;-300;[1];0;1;True;;0;EC:Input:2 digit number;"{' WC Name: B=NULL; '}";;{0};{0, 1, 3, 5, 6, 8, 9}
+35;69;Player 1;0;19;65;-300;;0;1;True;;0;EC:Input:2 digit number;{' WC Name: T -=100 '};;{0};{0, 1, 3, 4, 5, 6, 8, 9}
+36;70;Player 0;56;51;0;-300;[2];0;1;True;;0;EC:Input:2 digit number;"{' WC Name: C=NULL; '}";;{0};{0, 1, 2, 3, 4, 5, 6, 8, 9}
+36;71;Player 1;0;-1;65;-300;[2];0;1;True;;0;EC:Input:2 digit number;{' WC Name: A=0,B=-1,C=N '};;{0};{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
+37;72;Player 0;56;51;87;-300;[0];0;1;True;;0;EC:Input:2 digit number;"{' WC Name: A=NULL; '}";;{0};{0}
+37;73;Player 1;0;-1;61;-300;[1];0;1;True;;0;EC:Input:2 digit number;"{' WC Name: B=NULL; '}";;{0};{0, 1}
+38;74;Player 0;72;51;87;-300;;0;1;True;['CPU1Captured'];0;EC:Input:2 digit number;{' WC Name: Capture CPU '};;{0};{0, 1, 5}
+38;75;Player 1;0;-1;61;-300;[2];0;1;True;;0;EC:Input:2 digit number;{' WC Name: A=0,B=-1,C=N '};;{0};{0, 1, 5, 7}
+39;76;Player 0;72;51;87;-300;;0;0;False;['CPU1Captured'];1;;;;{0};{0, 1, 5, 7}
+39;77;Player 1;0;-1;17;-300;[2];0;1;True;;0;EC:Input:2 digit number;"{' WC Name: C=NULL; '}";;{0};{0, 1, 2, 5, 7}
+40;78;Player 0;72;51;87;-300;;0;0;False;['CPU1Captured'];2;;;;{0};{0, 1, 2, 5, 7}
+40;79;Player 1;0;-1;1;-300;;0;1;True;;0;EC:Input:2 digit number;{' WC Name: T =xx00 '};;{0};{0, 1, 2, 5, 6, 7}
+41;80;Player 0;72;0;0;-300;;0;1;True;;0;EC:Input:2 digit number;"{' WC Name: B,C=0; '}";;{0};{0, 1, 2, 3, 5, 6, 7}
+41;81;Player 1;0;14;1;-400;;0;1;True;;0;EC:Input:2 digit number;{' WC Name: T -=100 '};;{0};{0, 1, 2, 3, 4, 5, 6, 7}
+42;82;Player 0;72;-10;0;-300;;0;1;True;;0;EC:Input:2 digit number;{' WC Name: B=-10 '};;{0};{0, 1, 2, 3, 4, 5, 6, 7, 8}
+42;83;Player 1;5;14;-20;-400;;0;1;True;;0;EC:Input:2 digit number;{' WC Name: C=-20 '};;{0};{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
+43;84;Player 0;72;18;0;-300;[0];0;1;True;;0;EC:Input:2 digit number;"{' WC Name: A=NULL; '}";;{0};{0}
+43;85;Player 1;5;14;-20;-400;;0;1;True;;0;EC:Input:2 digit number;{' WC Name: C=-20 '};;{0};{0, 9}
+44;86;Player 0;44;18;0;-300;;0;1;True;;0;EC:Input:2 digit number;{' WC Name: T =xx00 '};;{0};{0, 9, 6}
+44;87;Player 1;0;-1;98;-400;[2];0;1;True;;0;EC:Input:2 digit number;{' WC Name: A=0,B=-1,C=N '};;{0};{0, 9, 6, 7}
+45;88;Player 0;44;18;35;-300;[1];0;1;True;;0;EC:Input:2 digit number;"{' WC Name: B=NULL; '}";;{0};{0, 1, 6, 7, 9}
+45;89;Player 1;0;-1;95;-400;;0;1;True;['CPU1Captured'];0;EC:Input:2 digit number;{' WC Name: Capture CPU '};;{0};{0, 1, 5, 6, 7, 9}
+46;90;Player 0;44;0;0;-300;;0;1;True;;0;EC:Input:2 digit number;"{' WC Name: B,C=0; '}";;{0};{0, 1, 3, 5, 6, 7, 9}
+46;91;Player 1;0;-1;95;-400;;0;0;False;['CPU1Captured'];1;;;;{0};{0, 1, 3, 5, 6, 7, 9}
+47;92;Player 0;44;-10;0;-300;;0;1;True;;0;EC:Input:2 digit number;{' WC Name: B=-10 '};;{0};{0, 1, 3, 5, 6, 7, 8, 9}
+47;93;Player 1;0;-1;95;-400;;0;0;False;['CPU1Captured'];2;;;;{0};{0, 1, 3, 5, 6, 7, 8, 9}
+48;94;Player 0;44;21;0;-400;;0;1;True;;0;EC:Input:2 digit number;{' WC Name: T -=100 '};;{0};{0, 1, 3, 4, 5, 6, 7, 8, 9}
+48;95;Player 1;0;44;95;-400;[2];0;1;True;;0;EC:Input:2 digit number;"{' WC Name: C=NULL; '}";;{0};{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
+49;96;Player 0;44;21;59;-400;[0];0;1;True;;0;EC:Input:2 digit number;"{' WC Name: A=NULL; '}";;{0};{0}
+49;97;Player 1;0;44;87;-400;;0;1;True;;0;EC:Input:2 digit number;{' WC Name: T =xx00 '};;{0};{0, 6}
+50;98;Player 0;74;21;59;-500;;0;1;True;;0;EC:Input:2 digit number;{' WC Name: T -=100 '};;{0};{0, 4, 6}
+50;99;Player 1;7;44;87;-400;[2];0;1;True;;0;EC:Input:2 digit number;"{' WC Name: C=NULL; '}";;{0};{0, 2, 4, 6}
+51;100;Player 0;0;-1;59;-500;[2];0;1;True;;0;EC:Input:2 digit number;{' WC Name: A=0,B=-1,C=N '};;{0};{0, 2, 4, 6, 7}
+51;101;Player 1;7;44;15;-400;[1];0;1;True;;0;EC:Input:2 digit number;"{' WC Name: B=NULL; '}";;{0};{0, 1, 2, 4, 6, 7}
+52;102;Player 0;0;-1;93;-500;;0;1;True;['CPU1Captured'];0;EC:Input:2 digit number;{' WC Name: Capture CPU '};;{0};{0, 1, 2, 4, 5, 6, 7}
+52;103;Player 1;7;48;-20;-400;;0;1;True;;0;EC:Input:2 digit number;{' WC Name: C=-20 '};;{0};{0, 1, 2, 4, 5, 6, 7, 9}
+53;104;Player 0;0;-1;93;-500;;0;0;False;['CPU1Captured'];1;;;;{0};{0, 1, 2, 4, 5, 6, 7, 9}
+53;105;Player 1;7;0;0;-400;;0;1;True;;0;EC:Input:2 digit number;"{' WC Name: B,C=0; '}";;{0};{0, 1, 2, 3, 4, 5, 6, 7, 9}
+54;106;Player 0;0;-1;93;-500;;0;0;False;['CPU1Captured'];2;;;;{0};{0, 1, 2, 3, 4, 5, 6, 7, 9}
+54;107;Player 1;7;-10;0;-400;;0;1;True;;0;EC:Input:2 digit number;{' WC Name: B=-10 '};;{0};{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
+55;108;Player 0;0;93;93;-500;[0];0;1;True;;0;EC:Input:2 digit number;"{' WC Name: A=NULL; '}";;{0};{0}
+55;109;Player 1;7;8;-20;-400;;0;1;True;;0;EC:Input:2 digit number;{' WC Name: C=-20 '};;{0};{0, 9}
+56;110;Player 0;30;93;93;-600;;0;1;True;;0;EC:Input:2 digit number;{' WC Name: T -=100 '};;{0};{0, 9, 4}
+56;111;Player 1;7;8;2;-400;;0;1;True;['CPU1Captured'];0;EC:Input:2 digit number;{' WC Name: Capture CPU '};;{0};{0, 9, 4, 5}
+57;112;Player 0;62;93;93;-600;[2];0;1;True;;0;EC:Input:2 digit number;"{' WC Name: C=NULL; '}";;{0};{0, 2, 4, 5, 9}
+57;113;Player 1;7;8;2;-400;;0;0;False;['CPU1Captured'];1;;;;{0};{0, 2, 4, 5, 9}
+58;114;Player 0;0;-1;98;-600;[2];0;1;True;;0;EC:Input:2 digit number;{' WC Name: A=0,B=-1,C=N '};;{0};{0, 2, 4, 5, 7, 9}
+58;115;Player 1;7;8;2;-400;;0;0;False;['CPU1Captured'];2;;;;{0};{0, 2, 4, 5, 7, 9}
+59;116;Player 0;0;-10;51;-600;;0;1;True;;0;EC:Input:2 digit number;{' WC Name: B=-10 '};;{0};{0, 2, 4, 5, 7, 8, 9}
+59;117;Player 1;7;0;0;-400;;0;1;True;;0;EC:Input:2 digit number;"{' WC Name: B,C=0; '}";;{0};{0, 2, 3, 4, 5, 7, 8, 9}
+60;118;Player 0;0;99;51;-600;;0;1;True;;0;EC:Input:2 digit number;{' WC Name: T =xx00 '};;{0};{0, 2, 3, 4, 5, 6, 7, 8, 9}
+60;119;Player 1;7;24;0;-400;[1];0;1;True;;0;EC:Input:2 digit number;"{' WC Name: B=NULL; '}";;{0};{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}

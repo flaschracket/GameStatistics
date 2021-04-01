@@ -31,8 +31,7 @@ def insertGame(g):
     return True
 
 def updateGame(g):
-    laststep = len(g.listofSteps)-1
-    Total = str(g.listofSteps[laststep].P.playerVars.varsValue[3])
+    Total = str(g.thisStep.P.playerVars.varsValue[3])
     myconn = connectdb()
     cursor = myconn.cursor()
     lastrounds= str(g.currentRound) 

@@ -26,8 +26,8 @@ while sampleCounter <= GS.sampleDataNumber:
         mygame.currentRound = mygame.currentRound + 1
         print("b")
         print(str(mygame.currentStep))
-        #mygame = copy.deepcopy(mygame.playOneRound()) 
-        mygame.playOneRound()
+        mygame = copy.deepcopy(mygame.playOneRound()) 
+        #mygame.playOneRound()
         print("c")
         print(str(mygame.currentStep))
         if (mygame.winer != '') or (mygame.currentRound >= GS.StoponThisRound): 

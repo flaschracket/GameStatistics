@@ -16,7 +16,7 @@ class Game():
 
     def __init__(self,sc,s):
         self.listofPlayers = []
-        self.listofSteps = []
+        #self.listofSteps = []
         self.thisStep = Step(sc)
         self.previousStep = copy.deepcopy(s)
         self.currentRound = 0
@@ -35,34 +35,41 @@ class Game():
         resEC = self.previousStep.EC.reservedEC
         pwc = self.previousStep.WC.playedWC
         rec = self.previousStep.EC.resourceEC                
-        self.thisStep = Step(self.listofPlayers[x],pwc,pec,resEC,self.currentStep,self.currentRound,self.samplecounter)
+        self.thisStep = Step(p = self.listofPlayers[x], playedWC = pwc,playedEC = pec, reservedEC = resEC,resourceEC = rec, currentStep = self.currentStep,currentRound = self.currentRound, samplecounter = self.samplecounter)
         return self
     #---------------------
      
+ 
 
 
     def playOneRound(self):        
         print("round a")
         for x in range(self.GS.NrOfP):
+            print("for a")
             self.initialStep(x)
             d = desicion()._init_(self.thisStep)
-            newStep = copy.deepcopy(d.playerdesicion())            
+            print("for a1")
+            newStep = copy.deepcopy(d.playerdesicion())  
+            print("for a1-1")
             #play one STep
             newStep.playOneStep()
+            print("for a2")
             self.winer = newStep.winer
+            
             self.Stepsnapshot(newStep)
-            self.previousStep = copy.deepcopy(newStep)
             self.currentStep = self.currentStep+1
+            print("for b")
             self.listofPlayers[x] = copy.deepcopy(newStep.P)
+            print("for c")
             if (self.winer != ''):
                 break            
-            self.printgame("Round")
-            print("round z")
+        
+        print("round end of func")
         return self
 
     def Stepsnapshot(self,s):
         s.winer = self.winer
-        self.listofSteps.append(s)
+        self.previousStep = copy.deepcopy(s)
         mssql.insertStep(s,self.samplecounter)
         return self
 

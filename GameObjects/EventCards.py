@@ -19,7 +19,8 @@ class EventCards():
         return
 
     def updateEC(self, vars,pc,rc):
-        self.PV = copy.deepcopy(vars)
+      #  print("update EC")
+        self.PV = copy.deepcopy(vars)        
         self.playedEC = pc
         self.reservedEC = rc
         return self
@@ -29,13 +30,24 @@ class EventCards():
         return self
 
     def SelectNextEC(self):
+        print(self.playedEC)
+        print(self.reservedEC)
         self.reset()
+        print("s f 128")
+        print(self.playedEC)
         if len(self.playedEC)==0:
             self.playedEC = {self.currentEC}
         else:
+            print(self.currentEC)
+            print(self.playedEC)
+            print(self.reservedEC)
             while ((self.currentEC in self.playedEC) or (self.currentEC in self.reservedEC)):
-                self.currentEC = randrange(self.GS.NrofEC)        
+                #print(self.playedEC)
+                #print("while")
+                self.currentEC = randrange(self.GS.NrofEC)  
+               # print(self.currentEC)
             self.playedEC.add(self.currentEC)        
+        print("s f 128")
         return self
     
     def reset(self):
@@ -44,6 +56,7 @@ class EventCards():
             self.playedEC.clear()
             self.playedEC = copy.deepcopy(self.reservedEC)
         return(self)
+
     def asignVar(self,var,value):
         if var in self.PV.Nullindex:
             self.PV.Nullindex.remove(var)
@@ -90,10 +103,13 @@ class EventCards():
     
     def playFunc(self,s):
         """calling a function with making its name as string"""  
+        print("p f 0")
         self.updateEC(s.P.playerVars,s.playedEC, s.reservedEC)
         self.SelectNextEC()
+        print("p f 1")
         FuncName = 'ECFunc' + str(self.currentEC)
         getattr(self, FuncName)()
+        print("p f 2")
         s.P.updatePlayer(self.PV)
         return s
 
@@ -332,7 +348,7 @@ class EventCards():
         self.nOfWC = 2
         return self
    
-    def ECFunc27(self):
+    def ECFunc28(self):
         self.ECName = 'EC:Task: x = 2x ! total'
         indif = [0,1,2]
         if not self.checknull(indif,True):
@@ -345,36 +361,36 @@ class EventCards():
     #-------------------
     #resource functions
     #-------------------
-    def ECFunc28(self):
+    def ECFunc29(self):
         self.ECName = 'EC:Resource: Restart'
         self.resourceEC.append(self.GS.ResourceECTypes.Restart)
-        self.reservedEC.add(28)
-        return(self)
-
-    def ECFunc29(self):
-        self.ECName = 'EC:Resource: Freelancer'
-        self.resourceEC.append(self.GS.ResourceECTypes.Freelancer)
         self.reservedEC.add(29)
         return(self)
 
     def ECFunc30(self):
-        self.ECName = 'EC:Resource: Bazar'
-        self.resourceEC.append(self.GS.ResourceECTypes.Bazar)
+        self.ECName = 'EC:Resource: Freelancer'
+        self.resourceEC.append(self.GS.ResourceECTypes.Freelancer)
         self.reservedEC.add(30)
         return(self)
-#copy of functions  
+
     def ECFunc31(self):
-        self.ECName = 'EC:Resource: Restart'
-        self.resourceEC.append(self.GS.ResourceECTypes.Restart)
-        self.reservedEC.add(28)
+        self.ECName = 'EC:Resource: Bazar'
+        self.resourceEC.append(self.GS.ResourceECTypes.Bazar)
+        self.reservedEC.add(31)
         return(self)
+#copy of functions  
     def ECFunc32(self):
         self.ECName = 'EC:Resource: Restart'
         self.resourceEC.append(self.GS.ResourceECTypes.Restart)
-        self.reservedEC.add(28)
+        self.reservedEC.add(32)
         return(self)
     def ECFunc33(self):
         self.ECName = 'EC:Resource: Restart'
         self.resourceEC.append(self.GS.ResourceECTypes.Restart)
-        self.reservedEC.add(28)
+        self.reservedEC.add(33)
+        return(self)
+    def ECFunc34(self):
+        self.ECName = 'EC:Resource: Restart'
+        self.resourceEC.append(self.GS.ResourceECTypes.Restart)
+        self.reservedEC.add(34)
         return(self)
