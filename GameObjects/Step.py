@@ -18,22 +18,44 @@ class Step():
     """Status of each step of game, it is like a copy of variable to save the result  at one place"""
       
 
-    def __init__(self,p,ecp,ecr,pwc,rec,g):      
-        self.playedWC = pwc
-        self.playedEC = ecp
-        self.reservedEC = ecr
-
-        self.P  = copy.deepcopy(p)
+   # def __init__(self,*p,ecp,ecr,pwc,rec,g):
+    def __init__(self,*args,**kwargs):     
+        
+        self.playedWC = kwargs.get('playedWC',set())
+        self.playedEC= kwargs.get('playedEC',set())  
+        self.reservedEC = kwargs.get('reservedEC',set())
+        self.P = kwargs.get('p',Player('N'))
+        self.resourceEC = kwargs.get('resourceEC',set())
+           #self.playedWC = pwc
+#            self.playedEC = ecp
+ #           self.reservedEC = ecr
+  #          self.P  = copy.deepcopy(p)
         pv = copy.deepcopy(self.P.playerVars)
-        self.EC = EventCards(pv,ecp,ecr,rec)
-        self.WC = WormCards(pv,pwc)
+        self.EC = EventCards(pv,self.playedEC,self.reservedEC,self.resourceEC)
+        self.WC = WormCards(pv,self.playedWC)
         self.playerDesicion = False
-        self.stepNr = g.currentStep
-        self.roundNr = g.currentRound
+        self.stepNr = kwargs.get('currentStep',0)
+        self.roundNr = kwargs.get('currentRound',0)
         self.winer = ''
-        self.GS = copy.deepcopy(g.GS)
-        self.sampleNr = g.samplecounter
+        self.GS = GameSettings()
+        self.sampleNr = kwargs.get('samplecounter',0)
         return
+
+   # def __init__(self, samplecounter):      
+   #     self.playedWC = set()
+    #    self.playedEC = set()
+     #   self.reservedEC = set()
+      #  self.P  = Player('')
+       # pv = copy.deepcopy(self.P.playerVars)
+    #    self.EC = EventCards(pv,set(),set(),set())
+     #   self.WC = WormCards(pv,set())
+      #  self.playerDesicion = False
+       # self.stepNr = 0
+   #     self.roundNr = 0
+    #    self.winer = ''
+     #   self.GS = GameSettings()
+      #  self.sampleNr = samplecounter
+       # return
 
     def updatePlayer(self):
         self.P.playerVars = copy.deepcopy(self.WC.PV) 

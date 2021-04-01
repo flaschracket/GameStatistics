@@ -14,15 +14,11 @@ import mssql
 class Game():
     """description of class"""
 
-
-    
-    #currentPenalty = 0
-    
-    
-    
-    def __init__(self,sc):
+    def __init__(self,sc,s):
         self.listofPlayers = []
         self.listofSteps = []
+        self.thisStep = Step(sc)
+        self.previousStep = copy.deepcopy(s)
         self.currentRound = 0
         self.currentStep = 0
         self.samplecounter = sc
@@ -32,34 +28,36 @@ class Game():
            self.listofPlayers.append(Player(name))
         self.winer = ''
         self.currentWormsSet = []
-
         return   
     #---------------------
+    def initialStep(self,x):
+        pec = self.previousStep.EC.playedEC
+        resEC = self.previousStep.EC.reservedEC
+        pwc = self.previousStep.WC.playedWC
+        rec = self.previousStep.EC.resourceEC                
+        self.thisStep = Step(self.listofPlayers[x],pwc,pec,resEC,self.currentStep,self.currentRound,self.samplecounter)
+        return self
     #---------------------
-    
-    def playOneRound(self):
-        ecp = set() 
-        ecr = set()
-        pwc = set()
-        rec = set()
+     
+
+
+    def playOneRound(self):        
+        print("round a")
         for x in range(self.GS.NrOfP):
-            if (len(self.listofSteps)>0):
-                ecp = self.listofSteps[self.currentStep-1].EC.playedEC
-                ecr = self.listofSteps[self.currentStep-1].EC.reservedEC
-                pwc = self.listofSteps[self.currentStep-1].WC.playedWC
-                rec = self.listofPlayers[x].PlayerReservedEC
-                self.listofSteps[self.currentStep-1].EC.resourceEC
-            newStep = Step(self.listofPlayers[x],ecp,ecr,pwc,rec,self)
-            d = desicion()._init_(newStep)
+            self.initialStep(x)
+            d = desicion()._init_(self.thisStep)
             newStep = copy.deepcopy(d.playerdesicion())            
             #play one STep
             newStep.playOneStep()
             self.winer = newStep.winer
             self.Stepsnapshot(newStep)
+            self.previousStep = copy.deepcopy(newStep)
             self.currentStep = self.currentStep+1
             self.listofPlayers[x] = copy.deepcopy(newStep.P)
             if (self.winer != ''):
                 break            
+            self.printgame("Round")
+            print("round z")
         return self
 
     def Stepsnapshot(self,s):

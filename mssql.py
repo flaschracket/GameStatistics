@@ -26,7 +26,7 @@ def insertGame(g):
     Total = '0'
     myconn = connectdb()
     cursor = myconn.cursor()
-    cursor.execute("INSERT INTO minibit.dbo.Game VALUES (?,?,?)", ((g.samplecounter),g.winer,Total))
+    cursor.execute("INSERT INTO minibit.dbo.Game VALUES (?,?,?,?,?)", ((g.samplecounter),g.winer,Total,0,0))
     myconn.commit()
     return True
 
@@ -35,7 +35,10 @@ def updateGame(g):
     Total = str(g.listofSteps[laststep].P.playerVars.varsValue[3])
     myconn = connectdb()
     cursor = myconn.cursor()
-    cursor.execute("UPDATE minibit.dbo.Game SET winner= ?, Total = ? where GameID =?", (g.winer,Total, (g.samplecounter)))
+    lastrounds= str(g.currentRound) 
+    laststep = str(g.currentStep) 
+    cursor.execute("UPDATE minibit.dbo.Game SET winner= ?, Total = ?, lastStep =?, lastRound =? where samplenumber =?", 
+                   (g.winer,Total,laststep,lastrounds, (g.samplecounter)))
     myconn.commit()
     print("update game"+ str(Total))
     return True
@@ -43,7 +46,9 @@ def updateGameStoped(g):
     Total = str(g.listofSteps[g.currentStep-1].P.playerVars.varsValue[3])
     myconn = connectdb()
     cursor = myconn.cursor()
-    cursor.execute("UPDATE minibit.dbo.Game SET winner= ?, Total = ? where GameID =?", (g.winer,Total, (g.samplecounter)))
+    lastrounds= str(g.currentRound) 
+    laststep = str(g.currentStep) 
+    cursor.execute("UPDATE minibit.dbo.Game SET  ?, ?, ?, ?, ?", (g.winer,Total, (g.samplecounter),lastround,laststep))
     myconn.commit()
     print("update game"+ str(Total))
     return True
