@@ -16,7 +16,6 @@ class Game():
 
     def __init__(self,sc,s):
         self.listofPlayers = []
-        #self.listofSteps = []
         self.thisStep = Step(sc)
         self.previousStep = copy.deepcopy(s)
         self.currentRound = 0
@@ -46,13 +45,13 @@ class Game():
         for x in range(self.GS.NrOfP):
             self.initialStep(x)
             d = desicion()._init_(self.thisStep)
-            newStep = copy.deepcopy(d.playerdesicion())  
-            #play one STep
-            newStep.playOneStep()
-            self.winer = newStep.winer
-            self.Stepsnapshot(newStep)
+            self.thisStep = copy.deepcopy(d.playerdesicion())  
+            #play one Step
+            self.thisStep.playOneStep()
+            self.winer = self.thisStep.winer
+            self.Stepsnapshot(self.thisStep)
             self.currentStep = self.currentStep+1
-            self.listofPlayers[x] = copy.deepcopy(newStep.P)
+            self.listofPlayers[x] = copy.deepcopy(self.thisStep.P)
             if (self.winer != ''):
                 break            
         return self

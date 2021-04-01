@@ -21,13 +21,11 @@ while sampleCounter <= GS.sampleDataNumber:
     #play
     print("Game"+str(sampleCounter)+" begins")
     condition = True
-    while condition:
-        
+    while condition:        
         mygame.currentRound = mygame.currentRound + 1
         mygame = copy.deepcopy(mygame.playOneRound()) 
         if (mygame.winer != '') or (mygame.currentRound >= GS.StoponThisRound): 
-            condition = False       
-       
+            condition = False              
     mssql.updateGame(mygame)
     print(mygame.winer +' is the winer!')
     sampleCounter = sampleCounter +1

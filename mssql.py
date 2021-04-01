@@ -39,19 +39,8 @@ def updateGame(g):
     cursor.execute("UPDATE minibit.dbo.Game SET winner= ?, Total = ?, lastStep =?, lastRound =? where samplenumber =?", 
                    (g.winer,Total,laststep,lastrounds, (g.samplecounter)))
     myconn.commit()
-    print("update game"+ str(Total))
+    print("updating game, total is: "+ str(Total))
     return True
-def updateGameStoped(g):
-    Total = str(g.listofSteps[g.currentStep-1].P.playerVars.varsValue[3])
-    myconn = connectdb()
-    cursor = myconn.cursor()
-    lastrounds= str(g.currentRound) 
-    laststep = str(g.currentStep) 
-    cursor.execute("UPDATE minibit.dbo.Game SET  ?, ?, ?, ?, ?", (g.winer,Total, (g.samplecounter),lastround,laststep))
-    myconn.commit()
-    print("update game"+ str(Total))
-    return True
-
 
 def insertStep(step,gameID):
     PV = copy.deepcopy(step.P.playerVars)
