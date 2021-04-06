@@ -37,12 +37,11 @@ class Game():
         self.thisStep = Step(p = self.listofPlayers[x], playedWC = pwc,playedEC = pec, reservedEC = resEC,resourceEC = rec, currentStep = self.currentStep,currentRound = self.currentRound, samplecounter = self.samplecounter)
         return self
     #---------------------
-     
- 
 
-
-    def playOneRound(self):        
+    def playOneRound(self):    
+        
         for x in range(self.GS.NrOfP):
+            self.listofPlayers[x].Ec
             self.initialStep(x)
             d = desicion()._init_(self.thisStep)
             self.thisStep = copy.deepcopy(d.playerdesicion())  

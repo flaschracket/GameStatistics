@@ -27,7 +27,9 @@ class EventCards():
     def update_Vars(self,vars):
         self.PV = copy.deepcopy(vars)
         return self
-
+    def selectECfromCollection(self):
+        print(gs.ECCollections)
+        return self
     def SelectNextEC(self):
         self.reset()
         if len(self.playedEC)==0:

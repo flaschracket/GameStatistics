@@ -1,16 +1,18 @@
 from enum import Enum
 class GameSettings():
-    sampleDataNumber = 100
+    sampleDataNumber = 1
     winGoal = 100
     #it should be one more of last function number because the functions name are begining with number 0
-    NrofEC = 35
+    NrofEC = 16
+    #35
     NrOfWC = 10
     NrOfP = 2
-    StoponThisRound = 60
+    StoponThisRound = 40
     pauseplayingcount = 2
 
     resourceECtypes = ['Restart','Bazar','Freelancer']
     PCstatus = ['shutdown', 'CPU1Captured', '']
+    ECCollections = {1:3,2:5,3:4,4:1,5:1,6:1,7:1,8:1,9:1,10:1,11:1,12:1,13:1,14:1,15:1,16:1}
     def _init_(self):
         return self    
 #------------------
