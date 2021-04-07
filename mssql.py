@@ -56,9 +56,6 @@ def insertStep(step,gameID):
     cursor.execute(insertstr, (str(gameID),str(step.roundNr),str(step.stepNr),step.P.Name, str(PV.varsValue[0]),str(PV.varsValue[1]),str(PV.varsValue[2]),str(PV.varsValue[3]),
                               step.EC.currentEC,step.EC.nOfWC,str(step.playerDesicion),step.EC.ECName,str(PV.Nullindex),
                               str(step.P.PCStatus),str(step.WC.playedWCName),
-                              #plyECstr,
-                            #  ''.join(str(e) for e in step.WC.playedWC)))
                                ','.join(str(e) for e in step.EC.ECPlayedcollection),''.join(str(e) for e in step.WC.playedWC)))
-                            #  ','.join(str(e) for e in step.EC.playedEC),','.join(str(e) for e in step.WC.playedWC)))
     myconn.commit()
     return True

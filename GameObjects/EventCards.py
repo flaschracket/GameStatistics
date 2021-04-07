@@ -39,21 +39,16 @@ class EventCards():
             myEC = randrange(self.GS.NrofEC)
             if (self.ECPlayedcollection[myEC] < self.GS.ECCollections[myEC]):
                 condition = False
-                print('choosed EC'+str(myEC))
                 self.currentEC = myEC
                 self.ECPlayedcollection[myEC] += 1
-                print('played on select: '+str(self.ECPlayedcollection))
-            #reserved
+                #reserved
         return self
    
     def resetCollection(self):
         diffEC = Counter(self.GS.ECCollections) - self.ECPlayedcollection
-        #print("diference is :" + str(diffEC))
         if len(diffEC) == 0 :
             self.ECPlayedcollection = Counter(self.GS.ECPlayedCollections)
             self.ECPlayedcollection = self.ECPlayedcollection + Counter(self.reservedECcollection)
-            #reverved should added here
-            #print("diference is : Empty" )
         return self
    
     def SelectNextEC(self):
