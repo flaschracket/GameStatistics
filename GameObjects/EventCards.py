@@ -1,19 +1,21 @@
 from random import randrange
 import copy
 import numpy as np
+from collections import Counter
 from GameObjects.MainRAMVars import *
 from GameObjects.GameSettings import *
 
 class EventCards():
     """description of class"""    
 
-    def __init__(self,vars,pec,resEC,rec):
+    def __init__(self,vars,pec,resEC,rec,plyECcoll):
         self.PV = copy.deepcopy(vars)
         self.currentEC = 0
         self.playedEC = pec
         self.reservedEC = resEC
         self.resourceEC = rec
         self.GS = GameSettings()
+        self.ECPlayedcollection = Counter(plyECcoll)
         self.ECName = ''
         self.nOfWC = 0
         return
@@ -27,9 +29,16 @@ class EventCards():
     def update_Vars(self,vars):
         self.PV = copy.deepcopy(vars)
         return self
+
     def selectECfromCollection(self):
-        print(gs.ECCollections)
+        
+        myEC = randrange(self.GS.NrofEC)
+        #for myEC in self.ECPlayedcollection:
+        self.ECPlayedcollection[myEC] += 1
+        print('count '+ str(myEC) + 'is: '+ str(self.ECPlayedcollection[myEC]))
+        print(self.ECPlayedcollection)
         return self
+
     def SelectNextEC(self):
         self.reset()
         if len(self.playedEC)==0:
@@ -93,6 +102,7 @@ class EventCards():
     def playFunc(self,s):
         """calling a function with making its name as string"""  
         self.updateEC(s.P.playerVars,s.playedEC, s.reservedEC)
+        self.selectECfromCollection()
         self.SelectNextEC()
         FuncName = 'ECFunc' + str(self.currentEC)
         getattr(self, FuncName)()

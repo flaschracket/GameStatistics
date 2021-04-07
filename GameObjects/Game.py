@@ -33,15 +33,16 @@ class Game():
         pec = self.previousStep.EC.playedEC
         resEC = self.previousStep.EC.reservedEC
         pwc = self.previousStep.WC.playedWC
-        rec = self.previousStep.EC.resourceEC                
-        self.thisStep = Step(p = self.listofPlayers[x], playedWC = pwc,playedEC = pec, reservedEC = resEC,resourceEC = rec, currentStep = self.currentStep,currentRound = self.currentRound, samplecounter = self.samplecounter)
+        rec = self.previousStep.EC.resourceEC    
+        plyECColl = self.previousStep.EC.ECPlayedcollection
+        self.thisStep = Step(p = self.listofPlayers[x], playedWC = pwc,playedEC = pec, reservedEC = resEC,resourceEC = rec, currentStep = self.currentStep,currentRound = self.currentRound, samplecounter = self.samplecounter, ECPlayedcollection = plyECColl)
         return self
     #---------------------
 
     def playOneRound(self):    
         
         for x in range(self.GS.NrOfP):
-            self.listofPlayers[x].Ec
+#            self.listofPlayers[x].Ec
             self.initialStep(x)
             d = desicion()._init_(self.thisStep)
             self.thisStep = copy.deepcopy(d.playerdesicion())  

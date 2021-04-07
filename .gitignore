@@ -338,3 +338,21 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+
+#Samira / python environment files
+env/Lib/site-packages/pip/_vendor/distlib/t32.exe
+ env/Lib/site-packages/pip/_vendor/distlib/t64.exe 
+env/Lib/site-packages/pip/_vendor/distlib/w32.exe 
+env/Lib/site-packages/pip/_vendor/distlib/w64.exe
+env/Lib/site-packages/setuptools/cli-32.exe
+env/Lib/site-packages/setuptools/cli-64.exe
+env/Lib/site-packages/setuptools/cli.exe
+env/Lib/site-packages/setuptools/gui-32.exe
+ env/Lib/site-packages/setuptools/gui-64.exe
+ env/Lib/site-packages/setuptools/gui.exe
+env/Scripts/easy_install-3.8.exe
+env/Scripts/easy_install.exe
+env/Scripts/f2py.exe, env/Scripts/pip.exe
+ env/Scripts/pip3.8.exe, env/Scripts/pip3.exe
+env/Scripts/python.exe
+env/Scripts/pythonw.exe

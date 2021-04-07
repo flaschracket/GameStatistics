@@ -3,7 +3,7 @@ class GameSettings():
     sampleDataNumber = 1
     winGoal = 100
     #it should be one more of last function number because the functions name are begining with number 0
-    NrofEC = 16
+    NrofEC = 10
     #35
     NrOfWC = 10
     NrOfP = 2
@@ -12,7 +12,9 @@ class GameSettings():
 
     resourceECtypes = ['Restart','Bazar','Freelancer']
     PCstatus = ['shutdown', 'CPU1Captured', '']
-    ECCollections = {1:3,2:5,3:4,4:1,5:1,6:1,7:1,8:1,9:1,10:1,11:1,12:1,13:1,14:1,15:1,16:1}
+    ECCollections = {0:1,1:3,2:5,3:4,4:1,5:1,6:1,7:1,8:1,9:1,10:1}
+    ECPlayedCoolections = {0:0,1:0,2:0,3:0,4:0,5:0,6:0,7:0,8:0,9:0,10:0}
+
     def _init_(self):
         return self    
 #------------------

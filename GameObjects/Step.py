@@ -11,6 +11,7 @@ import copy
 import csv
 from csv import writer
 from datetime import datetime
+from collections import Counter
 
 
 
@@ -23,10 +24,11 @@ class Step():
         self.playedWC = kwargs.get('playedWC',set())
         self.playedEC= kwargs.get('playedEC',set())  
         self.reservedEC = kwargs.get('reservedEC',set())
+        self.ECplayedcollection = kwargs.get('ECPlayedcollection', Counter())
         self.P = kwargs.get('p',Player('N'))
         self.resourceEC = kwargs.get('resourceEC',[])
         pv = copy.deepcopy(self.P.playerVars)
-        self.EC = EventCards(pv,self.playedEC,self.reservedEC,self.resourceEC)
+        self.EC = EventCards(pv,self.playedEC,self.reservedEC,self.resourceEC,self.ECplayedcollection)
         self.WC = WormCards(pv,self.playedWC)
         self.playerDesicion = False
         self.stepNr = kwargs.get('currentStep',0)
@@ -50,7 +52,8 @@ class Step():
     def playOneStep(self):
         total=0
         if self.playerDesicion:
-            self.EC.playFunc(self)            
+            self.EC.playFunc(self)    
+            print('step:' + str(self.EC.ECPlayedcollection))
             total = self.P.playerVars.varsValue[3]
         if (self.GS.ifWined(total)):
              self.winer = self.P.Name
