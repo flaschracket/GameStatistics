@@ -25,10 +25,11 @@ class Step():
         self.playedEC= kwargs.get('playedEC',set())  
         self.reservedEC = kwargs.get('reservedEC',set())
         self.ECplayedcollection = kwargs.get('ECPlayedcollection', Counter())
+        self.resECcollection = kwargs.get('PlyECcoll', Counter())
         self.P = kwargs.get('p',Player('N'))
         self.resourceEC = kwargs.get('resourceEC',[])
         pv = copy.deepcopy(self.P.playerVars)
-        self.EC = EventCards(pv,self.playedEC,self.reservedEC,self.resourceEC,self.ECplayedcollection)
+        self.EC = EventCards(pv,self.playedEC,self.reservedEC,self.resourceEC,self.ECplayedcollection, self.resECcollection)
         self.WC = WormCards(pv,self.playedWC)
         self.playerDesicion = False
         self.stepNr = kwargs.get('currentStep',0)
@@ -53,7 +54,6 @@ class Step():
         total=0
         if self.playerDesicion:
             self.EC.playFunc(self)    
-            print('step:' + str(self.EC.ECPlayedcollection))
             total = self.P.playerVars.varsValue[3]
         if (self.GS.ifWined(total)):
              self.winer = self.P.Name

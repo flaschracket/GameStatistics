@@ -42,12 +42,15 @@ class Game():
     def playOneRound(self):    
         
         for x in range(self.GS.NrOfP):
-#            self.listofPlayers[x].Ec
             self.initialStep(x)
             d = desicion()._init_(self.thisStep)
             self.thisStep = copy.deepcopy(d.playerdesicion())  
             #play one Step
+            print('on round :'+str(self.currentRound))
             self.thisStep.playOneStep()
+            #print('on round :'+str(self.currentRound))
+            print('played on round after step:'+str(self.thisStep.ECplayedcollection))
+            print(str(self.thisStep.EC.currentEC))
             self.winer = self.thisStep.winer
             self.Stepsnapshot(self.thisStep)
             self.currentStep = self.currentStep+1

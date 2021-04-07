@@ -8,7 +8,7 @@ from GameObjects.GameSettings import *
 class EventCards():
     """description of class"""    
 
-    def __init__(self,vars,pec,resEC,rec,plyECcoll):
+    def __init__(self,vars,pec,resEC,rec,plyECcoll,resECcoll):
         self.PV = copy.deepcopy(vars)
         self.currentEC = 0
         self.playedEC = pec
@@ -16,14 +16,16 @@ class EventCards():
         self.resourceEC = rec
         self.GS = GameSettings()
         self.ECPlayedcollection = Counter(plyECcoll)
+        self.reservedECcollection = Counter(resECcoll)
         self.ECName = ''
         self.nOfWC = 0
         return
 
-    def updateEC(self, vars,pc,rc):
+    def updateEC(self, vars,pc,rc,plyECcoll):
         self.PV = copy.deepcopy(vars)        
         self.playedEC = pc
         self.reservedEC = rc
+        self.ECPlayedcollection = plyECcoll
         return self
 
     def update_Vars(self,vars):
@@ -31,22 +33,26 @@ class EventCards():
         return self
 
     def selectECfromCollection(self):
-      self.resetCollection()
-      condition = True
-      while condition:  
-        myEC = randrange(self.GS.NrofEC)
-        if (self.ECPlayedcollection[myEC] < self.GS.ECCollections[myEC]):
-            condition = False
-            self.currentEC = myEC
-            self.ECPlayedcollection[myEC] += 1
-      #reserved
-      return self
+        self.resetCollection()
+        condition = True
+        while condition:  
+            myEC = randrange(self.GS.NrofEC)
+            if (self.ECPlayedcollection[myEC] < self.GS.ECCollections[myEC]):
+                condition = False
+                print('choosed EC'+str(myEC))
+                self.currentEC = myEC
+                self.ECPlayedcollection[myEC] += 1
+                print('played on select: '+str(self.ECPlayedcollection))
+            #reserved
+        return self
    
     def resetCollection(self):
         diffEC = Counter(self.GS.ECCollections) - self.ECPlayedcollection
         #print("diference is :" + str(diffEC))
         if len(diffEC) == 0 :
             self.ECPlayedcollection = self.GS.ECPlayedCollections
+            self.ECPlayedcollection = self.ECPlayedcollection + self.reservedECcollection
+            #reverved should added here
             #print("diference is : Empty" )
         return self
    
@@ -112,9 +118,9 @@ class EventCards():
     
     def playFunc(self,s):
         """calling a function with making its name as string"""  
-        self.updateEC(s.P.playerVars,s.playedEC, s.reservedEC)
+        self.updateEC(s.P.playerVars,s.playedEC, s.reservedEC,s.ECplayedcollection)
         self.selectECfromCollection()
-        self.SelectNextEC()
+       # self.SelectNextEC()
         FuncName = 'ECFunc' + str(self.currentEC)
         getattr(self, FuncName)()
         s.P.updatePlayer(self.PV)
@@ -352,12 +358,14 @@ class EventCards():
     def ECFunc29(self):
         self.ECName = 'EC:Resource: Restart'
         self.resourceEC.append(self.GS.ResourceECTypes.Restart)
+        self.reservedECcollection[29] += 1 
         self.reservedEC.add(29)
         return(self)
 
     def ECFunc30(self):
         self.ECName = 'EC:Resource: Freelancer'
         self.resourceEC.append(self.GS.ResourceECTypes.Freelancer)
+
         self.reservedEC.add(30)
         return(self)
 
