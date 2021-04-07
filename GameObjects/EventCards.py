@@ -50,8 +50,8 @@ class EventCards():
         diffEC = Counter(self.GS.ECCollections) - self.ECPlayedcollection
         #print("diference is :" + str(diffEC))
         if len(diffEC) == 0 :
-            self.ECPlayedcollection = self.GS.ECPlayedCollections
-            self.ECPlayedcollection = self.ECPlayedcollection + self.reservedECcollection
+            self.ECPlayedcollection = Counter(self.GS.ECPlayedCollections)
+            self.ECPlayedcollection = self.ECPlayedcollection + Counter(self.reservedECcollection)
             #reverved should added here
             #print("diference is : Empty" )
         return self
