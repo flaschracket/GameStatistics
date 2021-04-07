@@ -31,14 +31,25 @@ class EventCards():
         return self
 
     def selectECfromCollection(self):
-        
+      self.resetCollection()
+      condition = True
+      while condition:  
         myEC = randrange(self.GS.NrofEC)
-        #for myEC in self.ECPlayedcollection:
-        self.ECPlayedcollection[myEC] += 1
-        print('count '+ str(myEC) + 'is: '+ str(self.ECPlayedcollection[myEC]))
-        print(self.ECPlayedcollection)
+        if (self.ECPlayedcollection[myEC] < self.GS.ECCollections[myEC]):
+            condition = False
+            self.currentEC = myEC
+            self.ECPlayedcollection[myEC] += 1
+      #reserved
+      return self
+   
+    def resetCollection(self):
+        diffEC = Counter(self.GS.ECCollections) - self.ECPlayedcollection
+        #print("diference is :" + str(diffEC))
+        if len(diffEC) == 0 :
+            self.ECPlayedcollection = self.GS.ECPlayedCollections
+            #print("diference is : Empty" )
         return self
-
+   
     def SelectNextEC(self):
         self.reset()
         if len(self.playedEC)==0:
@@ -48,7 +59,7 @@ class EventCards():
                 self.currentEC = randrange(self.GS.NrofEC)  
             self.playedEC.add(self.currentEC)        
         return self
-    
+   
     def reset(self):
         if (len(self.playedEC) == self.GS.NrofEC):
             self.playedEC.clear()
