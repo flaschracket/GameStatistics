@@ -20,7 +20,8 @@ class Step():
       
 
     def __init__(self,*args,**kwargs):     
-        
+        self.winer = ''
+        self.GS = GameSettings()        
         self.playedWC = kwargs.get('playedWC',set())
         self.playedEC= kwargs.get('playedEC',set())  
         self.reservedEC = kwargs.get('reservedEC',set())
@@ -30,12 +31,12 @@ class Step():
         self.resourceEC = kwargs.get('resourceEC',[])
         pv = copy.deepcopy(self.P.playerVars)
         self.EC = EventCards(pv,self.playedEC,self.reservedEC,self.resourceEC,self.ECplayedcollection, self.resECcollection)
-        self.WC = WormCards(pv,self.playedWC)
+        self.WCplayedcollection= kwargs.get("WCplyColl", self.GS.WCPlayedCollection)
+        self.WCresCollection = kwargs.get("WCresColl",self.GS.WCPlayedCollection)
+        self.WC = WormCards(pv,self.playedWC,self.WCplayedcollection,self.WCresCollection)
         self.playerDesicion = False
         self.stepNr = kwargs.get('currentStep',0)
         self.roundNr = kwargs.get('currentRound',0)
-        self.winer = ''
-        self.GS = GameSettings()
         self.sampleNr = kwargs.get('samplecounter',0)
         return
 
@@ -62,7 +63,8 @@ class Step():
         if (self.playerDesicion):
             for i in range(self.EC.nOfWC):
                 self.WC.playFunc(self)
-        self.addlinetoCSVF()
+        #self.addlinetoCSVF()
+        #print(str(self.WC.WCPlayedcollection))
         return (self)
 
 

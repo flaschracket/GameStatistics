@@ -43,6 +43,7 @@ def updateGame(g):
     return True
 
 def insertStep(step,gameID):
+    #print(str(step.WC.WCPlayedcollection))
     PV = copy.deepcopy(step.P.playerVars)
     myconn = connectdb()
     cursor = myconn.cursor()
@@ -50,12 +51,10 @@ def insertStep(step,gameID):
     insertstr = insertstr + "?, ?, ?, ?, ?, "
     insertstr = insertstr + "?, ?, ?, ?, ?, "
     insertstr = insertstr+ "?, ?)"
-    step.EC.ECPlayedcollection.elements()
-    plyECstr = str(step.EC.ECPlayedcollection)
-    plyECstr = "' "+plyECstr + " '"
+
     cursor.execute(insertstr, (str(gameID),str(step.roundNr),str(step.stepNr),step.P.Name, str(PV.varsValue[0]),str(PV.varsValue[1]),str(PV.varsValue[2]),str(PV.varsValue[3]),
                               step.EC.currentEC,step.EC.nOfWC,str(step.playerDesicion),step.EC.ECName,str(PV.Nullindex),
                               str(step.P.PCStatus),str(step.WC.playedWCName),
-                               ','.join(str(e) for e in step.EC.ECPlayedcollection),''.join(str(e) for e in step.WC.playedWC)))
+                               ','.join(str(e) for e in step.EC.ECPlayedcollection),' , '.join(str(el) for el in step.WC.WCPlayedcollection)))
     myconn.commit()
     return True

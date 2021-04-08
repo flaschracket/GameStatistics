@@ -37,7 +37,7 @@ class EventCards():
         condition = True
         while condition:  
             myEC = randrange(self.GS.NrofEC)
-            if (self.ECPlayedcollection[myEC] < self.GS.ECCollections[myEC]):
+            if (self.ECPlayedcollection[myEC] < self.GS.ECCollection[myEC]):
                 condition = False
                 self.currentEC = myEC
                 self.ECPlayedcollection[myEC] += 1
@@ -45,9 +45,9 @@ class EventCards():
         return self
    
     def resetCollection(self):
-        diffEC = Counter(self.GS.ECCollections) - self.ECPlayedcollection
+        diffEC = Counter(self.GS.ECCollection) - self.ECPlayedcollection
         if len(diffEC) == 0 :
-            self.ECPlayedcollection = Counter(self.GS.ECPlayedCollections)
+            self.ECPlayedcollection = Counter(self.GS.ECPlayedCollection)
             self.ECPlayedcollection = self.ECPlayedcollection + Counter(self.reservedECcollection)
         return self
    
@@ -360,28 +360,13 @@ class EventCards():
     def ECFunc30(self):
         self.ECName = 'EC:Resource: Freelancer'
         self.resourceEC.append(self.GS.ResourceECTypes.Freelancer)
-
+        self.reservedECcollection[30] += 1 
         self.reservedEC.add(30)
         return(self)
 
     def ECFunc31(self):
         self.ECName = 'EC:Resource: Bazar'
         self.resourceEC.append(self.GS.ResourceECTypes.Bazar)
+        self.reservedECcollection[31] += 1
         self.reservedEC.add(31)
-        return(self)
-#copy of functions  
-    def ECFunc32(self):
-        self.ECName = 'EC:Resource: Restart'
-        self.resourceEC.append(self.GS.ResourceECTypes.Restart)
-        self.reservedEC.add(32)
-        return(self)
-    def ECFunc33(self):
-        self.ECName = 'EC:Resource: Restart'
-        self.resourceEC.append(self.GS.ResourceECTypes.Restart)
-        self.reservedEC.add(33)
-        return(self)
-    def ECFunc34(self):
-        self.ECName = 'EC:Resource: Restart'
-        self.resourceEC.append(self.GS.ResourceECTypes.Restart)
-        self.reservedEC.add(34)
         return(self)

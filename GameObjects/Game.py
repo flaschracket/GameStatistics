@@ -30,12 +30,14 @@ class Game():
         return   
     #---------------------
     def initialStep(self,x):
+
         pec = self.previousStep.EC.playedEC
         resEC = self.previousStep.EC.reservedEC
         pwc = self.previousStep.WC.playedWC
         rec = self.previousStep.EC.resourceEC    
+        WCpc = self.previousStep.WC.WCPlayedcollection
         plyECColl = self.previousStep.EC.ECPlayedcollection
-        self.thisStep = Step(p = self.listofPlayers[x], playedWC = pwc,playedEC = pec, reservedEC = resEC,resourceEC = rec, currentStep = self.currentStep,currentRound = self.currentRound, samplecounter = self.samplecounter, ECPlayedcollection = plyECColl)
+        self.thisStep = Step(p = self.listofPlayers[x], playedWC = pwc,playedEC = pec, reservedEC = resEC,resourceEC = rec, currentStep = self.currentStep,currentRound = self.currentRound, samplecounter = self.samplecounter, ECPlayedcollection = plyECColl,WCplyColl= WCpc)
         return self
     #---------------------
 

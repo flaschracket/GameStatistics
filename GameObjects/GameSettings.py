@@ -1,10 +1,9 @@
 from enum import Enum
 class GameSettings():
-    sampleDataNumber = 1
+    sampleDataNumber = 100
     winGoal = 100
     #it should be one more of last function number because the functions name are begining with number 0
-    NrofEC = 30
-    #35
+    NrofEC = 32
     NrOfWC = 10
     NrOfP = 2
     StoponThisRound = 40
@@ -12,8 +11,11 @@ class GameSettings():
 
     resourceECtypes = ['Restart','Bazar','Freelancer']
     PCstatus = ['shutdown', 'CPU1Captured', '']
-    ECCollections       = {0:1,1:3,2:5,3:4,4:1,5:1,6:1,7:1,8:1,9:1,10:1,11:1,12:1,13:1,14:1,15:1,16:1,17:1,18:1,19:1,20:1,21:1,22:1,23:1,24:1,25:1,26:1,27:1,28:1,29:2}
-    ECPlayedCollections = {0:0,1:0,2:0,3:0,4:0,5:0,6:0,7:0,8:0,9:0,10:0,11:0,12:0,13:0,14:0,15:0,16:0,17:0,18:0,19:0,20:0,21:0,22:0,23:0,24:0,25:0,26:0,27:0,28:0,29:0}
+    ECCollection       = {0:10,1:5,2:8,3:6,4:3,5:2,6:3,7:2,8:3,9:2,10:2,11:2,12:2,13:3,14:2,15:3,16:3,17:2,18:2,19:2,20:3,21:2,22:2,23:2,24:2,25:3,26:2,27:3,28:2,29:5,30:2,31:2}
+    ECPlayedCollection = {0:0,1:0,2:0,3:0,4:0,5:0,6:0,7:0,8:0,9:0,10:0,11:0,12:0,13:0,14:0,15:0,16:0,17:0,18:0,19:0,20:0,21:0,22:0,23:0,24:0,25:0,26:0,27:0,28:0,29:0,30:0,31:0}
+    WCCollection       = {0:1,1:1,2:1,3:1,4:1,5:1,6:1,7:1,8:1,9:1}
+    WCPlayedCollection = {0:0,1:10,2:0,3:0,4:0,5:0,6:0,7:0,8:0,9:0}
+
 
     def _init_(self):
         return self    

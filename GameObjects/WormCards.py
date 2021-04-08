@@ -2,20 +2,23 @@ from random import randrange
 import copy
 from GameObjects.GameSettings import *
 from GameObjects.MainRAMVars import *
-
+from collections import Counter
 
 
 class WormCards():
     """description of class"""
-    const = GameSettings()        
-    currentWC = 0
-    nOfWC = 0
 
-    def __init__(self,vars,pwc):
+    def __init__(self,vars,pwc,plyColl,resColl):
         self.PV = copy.deepcopy(vars)
         self.playedWC = pwc
         self.playedWCName = set()    
         self.damages = []
+        self.GS = GameSettings()        
+        self.currentWC = 0
+        self.nOfWC = 0
+        self.WCPlayedcollection = Counter(plyColl)
+        self.reservedWCcollection = Counter(resColl)
+        #print(str(self.WCPlayedcollection))
         return 
 
     def updateWC(self,vars,pwc):
@@ -35,6 +38,26 @@ class WormCards():
         self.PV.varsValue[var]=value
         return
     #------------------
+    def selectWCfromCollection(self):
+        self.resetCollection()
+        condition = True
+        while condition:  
+            myWC = randrange(self.GS.NrOfWC)
+            if (self.WCPlayedcollection[myWC] < self.GS.WCCollection[myWC]):
+                condition = False
+                self.currentWC = myWC
+                self.WCPlayedcollection[myWC] += 1
+                #reserved
+        return self
+   
+    def resetCollection(self):
+        diffWC = Counter(self.GS.WCCollection) - self.WCPlayedcollection
+        #print(str(diffWC))
+        if len(diffWC) == 0 :
+            self.WCPlayedcollection = Counter(self.GS.WCPlayedCollection)
+            self.WCPlayedcollection = self.WCPlayedcollection + Counter(self.reservedWCcollection)
+        return self
+
     def SelectNextWC(self):
         self.reset()
         if len(self.playedWC)==0:
@@ -53,7 +76,8 @@ class WormCards():
 
     def playFunc(self,s):
         self.updateWC(s.P.playerVars,s.playedWC)
-        self.SelectNextWC()
+        #self.SelectNextWC()
+        self.selectWCfromCollection()
         FuncName = 'WCFunc' + str(self.currentWC)
         getattr(self, FuncName)()
         s.P.updatePlayer(self.PV)
