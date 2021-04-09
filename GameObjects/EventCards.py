@@ -142,7 +142,7 @@ class EventCards():
         self.asignVar(i,n)
         self.nOfWC = 1
         return(self)
-
+    
     # 2 digit number less than 90       
     def ECFunc2(self):
         self.ECName = 'EC:Input:2 digit number<90'
@@ -159,7 +159,6 @@ class EventCards():
         self.asignVar(i,n)
         self.nOfWC = 0
         return(self)
-    
     # A =5    
     def ECFunc4(self):
         self.ECName = 'EC:Input:A =5'
@@ -185,6 +184,7 @@ class EventCards():
         self.nOfWC = 0
         return(self)
     # A =75    
+    
     def ECFunc8(self):
         self.ECName = 'EC:Input:A =75'
         self.asignVar(0,75)
@@ -202,6 +202,7 @@ class EventCards():
         self.nOfWC = 0
         return(self)
     # B = 10
+    
     def ECFunc10(self):
         self.ECName = 'EC:Input:B =10'
         self.asignVar(1,10)
@@ -261,6 +262,8 @@ class EventCards():
         self.asignVar(2,75)
         self.nOfWC = 1
         return(self)
+    
+
     #-------------------
     #Task cards functions
     #-------------------
@@ -272,17 +275,17 @@ class EventCards():
                 self.PV.varsValue[3] = np.sum(self.PV.varsValue[ind])
         self.nOfWC = 1   
         return(self)
-
     def ECFunc21(self):
         self.ECName = 'EC:Task: T = A(*)+B'
         ind = [0,1]
         if not self.checknull(ind,False):
-            self.PV.varsValue[3] = self.PV.varsValue[0] + self.PV.varsValue[1]
+            self.PV.varsValue[3] = self.PV.varsValue[0] * self.PV.varsValue[1]
         self.nOfWC = 1   
         return(self)
 
     def ECFunc22(self):
-        self.ECName = 'EC:Task: T += A+B+C'
+        self.ECName = 'EC:Task: T += A+B+C' 
+
         ind =[0,1,2,3]   
         if not self.checknull(ind,True):
             self.PV.varsValue[3] = sum(self.PV.varsValue)
@@ -291,6 +294,7 @@ class EventCards():
 
     def ECFunc23(self):
         self.ECName = 'EC:Task: T = xx9x'
+        
         ind =[3]
         if not self.checknull(ind,False):
             t = self.PV.varsValue[3]
@@ -310,7 +314,7 @@ class EventCards():
             self.PV.varsValue[3] = self.PV.varsValue[3]+np.sum(self.PV.varsValue[ind])/2
         self.nOfWC = 2  
         return(self)
-
+ 
     def ECFunc25(self):
         self.ECName = 'EC:Task: T += sum all'
         ind =[0,1,2,3]
@@ -324,7 +328,7 @@ class EventCards():
         ind = [3,1]
         indif =[3,1,2]
         if not self.checknull(indif,True):    
-            self.PV.varsValue[3]=np.sum(self.PV.varsValue[ind])+(self.PV.varsValue[0])
+            self.PV.varsValue[3]=np.sum(self.PV.varsValue[ind])+(2*self.PV.varsValue[0])
         self.nOfWC = 2
         return (self)
 
@@ -333,7 +337,7 @@ class EventCards():
         ind = [0,1,2]
         indif = [0,1,2,3]
         if not self.checknull(indif,True):
-             self.PV.varsValue[3]=np.sum(self.PV.varsValue[ind])+(self.PV.varsValue[3])
+             self.PV.varsValue[3]=2*(np.sum(self.PV.varsValue[ind]))+(self.PV.varsValue[3])
         self.nOfWC = 2
         return self
    

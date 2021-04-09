@@ -149,6 +149,32 @@ class WormCards():
         self.playedWCName.add(' WC Name: C=-20 ')
         self.assignVar(2,-20) 
         return(self)
+    def WCFunc10(self):
+        self.playedWCName.add(' WC Name: A=0 ')
+        self.assignVar(0,0) 
+        return(self)
+    def WCFunc11(self):
+        self.playedWCName.add(' WC Name: B=0 ')
+        self.assignVar(1,0) 
+        return(self)
+    def WCFunc12(self):
+        self.playedWCName.add(' WC12: B -=10 ')
+        ind= [1]
+        if self.ifPossibleToPlay(ind):
+            self.PV.varsValue[1] = self.PV.varsValue[1]-10      
+        return(self)
+    def WCFunc13(self):
+        self.playedWCName.add(' WC13: A -=10 ')
+        ind= [0]
+        if self.ifPossibleToPlay(ind):
+            self.PV.varsValue[0] = self.PV.varsValue[0]-10      
+        return(self)
+    def WCFunc14(self):
+        self.playedWCName.add(' WC14: C -=10 ')
+        ind= [2]
+        if self.ifPossibleToPlay(ind):
+            self.PV.varsValue[2] = self.PV.varsValue[2]-10      
+        return(self)
 
 
     #Bug: when all wcs are played once, and nOfWC is 2, then the game play one WC Card 2 Times instead of playing two WC Card
