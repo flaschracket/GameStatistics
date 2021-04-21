@@ -2,9 +2,11 @@
 from random import randrange
 from GameObjects.Player import *
 from GameObjects.Game import *
+from GameObjects.Cards import *
+#import GameObjects.Cards import *
+
 from copy import deepcopy
 import mssql
-
 
 tempply = Player('')
 GS = GameSettings()
@@ -29,5 +31,8 @@ while sampleCounter <= GS.sampleDataNumber:
     mssql.updateGame(mygame)
     print(mygame.winer +' is the winer!')
     sampleCounter = sampleCounter +1
+print("my cards are:")
+cds = Cards()
 
 
+print(cds.deck)

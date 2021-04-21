@@ -1,6 +1,6 @@
 from enum import Enum
 class GameSettings():
-    sampleDataNumber = 100
+    sampleDataNumber = 1
     winGoal = 100
     #it should be one more of last function number because the functions name are begining with number 0
     NrofEC = 32
@@ -41,8 +41,27 @@ class GameSettings():
 
 
     def _init_(self):
-        return self    
+      ECCollection2 =  dict()
+      self.initial_cards(1,10,3)
+      return self    
 #------------------
+
+    def initial_cards(self,ECChanceQ,ECNormalQ,ECWeekQ):
+    
+ #adding chance ec to the collection   
+        for e in self.ChanceEC:
+            for i in range(ECChanceQ):
+                self.ECCollection2.append(e)
+ #adding normal EC 
+        for e in self.NormalEC:
+            for i in range(ECNormalQ):
+                self.ECCollection2.append(e)
+# adding week EC
+        for e in self.WeekEC:
+            for i in range(ECweekQ):
+                self.ECCollection2.append(e)
+
+        return self
 #----------------
     def ifWined(self,total):
         wined= False

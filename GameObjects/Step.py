@@ -58,7 +58,7 @@ class Step():
             total = self.P.playerVars.varsValue[3]
         if (self.GS.ifWined(total)):
              self.winer = self.P.Name
-             self.addlinetoCSVF()
+             #self.addlinetoCSVF()
              return (self)
         if (self.playerDesicion):
             for i in range(self.EC.nOfWC):
