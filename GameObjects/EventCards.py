@@ -4,8 +4,9 @@ import numpy as np
 from collections import Counter
 from GameObjects.MainRAMVars import *
 from GameObjects.GameSettings import *
+from GameObjects.Cards import *
 
-class EventCards():
+class EventCards(Cards):
     """description of class"""    
 
     def __init__(self,vars,pec,resEC,rec,plyECcoll,resECcoll):
@@ -19,6 +20,13 @@ class EventCards():
         self.reservedECcollection = Counter(resECcoll)
         self.ECName = ''
         self.nOfWC = 0
+        
+        cards  = [self.GS.EC_Chance,self.GS.EC_Normal,self.GS.EC_Week]
+        q    = [1,10,5]
+        Cards.__init__(self, cardsVaraity = cards, quantities =  q )
+        self.shuffle()
+        print("ec shuffle")
+        print(self.deck)
         return
 
     def updateEC(self, vars,pc,rc,plyECcoll):

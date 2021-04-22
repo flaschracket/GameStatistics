@@ -11,7 +11,9 @@ import mssql
 tempply = Player('')
 GS = GameSettings()
 sampleCounter = 0
-previousStep = Step(0)
+#previousStep = Step(0)
+
+previousStep = Step()
 
 #initial
 
@@ -31,8 +33,3 @@ while sampleCounter <= GS.sampleDataNumber:
     mssql.updateGame(mygame)
     print(mygame.winer +' is the winer!')
     sampleCounter = sampleCounter +1
-print("my cards are:")
-cds = Cards()
-
-
-print(cds.deck)

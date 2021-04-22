@@ -23,7 +23,11 @@ class GameSettings():
                'EC30:Resource: Freelancer','EC29:Resource: Restart','EC28(2w):Task: x = 2x ! total', 'EC24(2w):Task: T += sum all/2' ,
                'EC23:Task: T = xx9x','EC22:Task: T += A+B+C'  , 'EC21:Task: T += A+B'}
 
-    ChanceECcoll = dict({27:0,20:0,25:0,26:0,21:1,22:1})
+    EC_Chance = [27,20,25,26,21,22,28,24]
+    EC_Normal = [0,1,2,7,8,13,14,19,23,29,30,31]
+    EC_Week = [3,4,5,6,9,10,11,12,15,16,17,18]
+
+    ChanceECcoll = dict({27:0,20:0,25:0,26:0,21:0,22:0})
     WeakECcoll   = dict({3:20,4:20,5:20,6:20,9:20,10:20,11:20,12:20,15:20,16:20,17:20,18:20})
     NormalECcoll = dict({0:30,1:30,2:30,7:30,8:30,13:30,14:30,19:30,23:30,29:0,30:0,31:0})
     Normal2WC    = dict({28:1,24:1})
