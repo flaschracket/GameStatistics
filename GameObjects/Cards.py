@@ -6,12 +6,19 @@ class Cards():
 
     def __init__(self,*args,**kwargs):
         
-            values = [1, 2, 3, 4,5, 6, 7, 8, 9, 10, 11, 12, 13]
-            quantites = 3
-            self.deck = []
+            values = np.array([1 , 2 ])
+            quantites = np.array([3 , 2])
+            self.deck = np.array([1])
+            
             self.mycards = kwargs.get('quantity',values)
-            self.suites = kwargs.get('cardsVaraity',quantites)
-            self.deck = np.repeat(self.mycards,quantites)
+            self.quantites = kwargs.get('cardsVaraity',quantites)
+            
+            for i in range(len(self.quantites)):
+                 cardsdeck = np.repeat(self.mycards[i],self.quantites[i])
+                 self.deck = np.append(self.deck,cardsdeck)
+                 #np.append(self.deck,cardsdeck)
+                 #print("initial")
+                 #print(self.deck)
             return
 
     def shuffle(self):
