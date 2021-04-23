@@ -2,22 +2,32 @@ from random import randrange
 import copy
 from GameObjects.GameSettings import *
 from GameObjects.MainRAMVars import *
+from GameObjects.Cards import *
 from collections import Counter
 
 
-class WormCards():
+class WormCards(Cards):
     """description of class"""
 
-    def __init__(self,vars,pwc,plyColl,resColl):
+    def __init__(self,vars,wcdeck):
         self.PV = copy.deepcopy(vars)
-        self.playedWC = pwc
+#        self.playedWC = pwc
         self.playedWCName = set()    
         self.damages = []
         self.GS = GameSettings()        
         self.currentWC = 0
-        self.nOfWC = 0
-        self.WCPlayedcollection = Counter(plyColl)
-        self.reservedWCcollection = Counter(resColl)
+        #self.nOfWC = 0
+        self.playingdeck =wcdeck
+        
+        if len(self.playingdeck)==0:
+            cards  = [self.GS.WC_BadLuck,self.GS.WC_Normal,self.GS.WC_Week]
+            q    = [1,10,5]
+            Cards.__init__(self, cardsVaraity = cards, quantities =  q )
+            self.shuffle()
+            self.playingdeck = self.deck
+
+        #self.WCPlayedcollection = Counter(plyColl)
+        #self.reservedWCcollection = Counter(resColl)
         #print(str(self.WCPlayedcollection))
         return 
 

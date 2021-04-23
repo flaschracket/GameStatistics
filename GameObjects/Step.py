@@ -32,9 +32,10 @@ class Step():
         pv = copy.deepcopy(self.P.playerVars)
         pd= kwargs.get('playingdeck',list())
         self.EC = EventCards(pv,self.reservedEC,pd)
-        self.WCplayedcollection= kwargs.get("WCplyColl", self.GS.WCPlayedCollection)
-        self.WCresCollection = kwargs.get("WCresColl",self.GS.WCPlayedCollection)
-        self.WC = WormCards(pv,self.playedWC,self.WCplayedcollection,self.WCresCollection)
+       # self.WCplayedcollection= kwargs.get("WCplyColl", self.GS.WCPlayedCollection)
+       # self.WCresCollection = kwargs.get("WCresColl",self.GS.WCPlayedCollection)
+        wcdeck = kwargs.get('wcdeck',list()) 
+        self.WC = WormCards(pv,wcdeck)
         self.playerDesicion = False
         self.stepNr = kwargs.get('currentStep',0)
         self.roundNr = kwargs.get('currentRound',0)

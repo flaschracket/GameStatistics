@@ -33,14 +33,15 @@ class Game():
 
         #pec = self.previousStep.EC.playedEC
         resEC = self.previousStep.EC.reservedEC
-        pwc = self.previousStep.WC.playedWC
+        #pwc = self.previousStep.WC.playedWC
         #rec = self.previousStep.EC.resourceEC    
-        WCpc = self.previousStep.WC.WCPlayedcollection
+        #WCpc = self.previousStep.WC.WCPlayedcollection
         playingdeck = self.previousStep.EC.playingdeck
+        wcdeck = self.previousStep.WC.playingdeck
         #plyECColl = self.previousStep.EC.ECPlayedcollection
-        self.thisStep = Step(p = self.listofPlayers[x], playedWC = pwc, reservedEC = resEC, 
+        self.thisStep = Step(p = self.listofPlayers[x], reservedEC = resEC, 
                              currentStep = self.currentStep,currentRound = self.currentRound, 
-                             samplecounter = self.samplecounter,WCplyColl= WCpc, playingdeck = playingdeck)
+                             samplecounter = self.samplecounter, playingdeck = playingdeck,wcdeck = wcdeck)
         return self
     #---------------------
 
@@ -50,7 +51,7 @@ class Game():
             self.initialStep(x)
             d = desicion()._init_(self.thisStep)
             self.thisStep = copy.deepcopy(d.playerdesicion())  
-            print(self.thisStep.EC.playingdeck)
+            #print(self.thisStep.EC.playingdeck)
             #play one Step
             self.thisStep.playOneStep()
             self.winer = self.thisStep.winer

@@ -23,7 +23,7 @@ class EventCards(Cards):
         self.playingdeck = playingdeck
         
         if len(self.playingdeck)==0:
-            cards  = [self.GS.EC_Chance,self.GS.EC_Normal,self.GS.EC_Week]
+            cards  = [self.GS.EC_Luck,self.GS.EC_Normal,self.GS.EC_Week]
             q    = [1,10,5]
             Cards.__init__(self, cardsVaraity = cards, quantities =  q )
             self.shuffle()
