@@ -21,7 +21,7 @@ print("Hello From Game Simulation! Data Generation is begining:")
 
 while sampleCounter <= GS.sampleDataNumber:
     mygame = Game(sampleCounter,previousStep)
-    mssql.insertGame(mygame)
+    mygame.gameID = mssql.insertGame(mygame)
     #play
     print("Game"+str(sampleCounter)+" begins")
     condition = True

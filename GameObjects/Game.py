@@ -27,6 +27,7 @@ class Game():
            self.listofPlayers.append(Player(name))
         self.winer = ''
         self.currentWormsSet = []
+        self.gameID = 0
         return   
     #---------------------
     def initialStep(self,x):
@@ -65,7 +66,7 @@ class Game():
     def Stepsnapshot(self,s):
         s.winer = self.winer
         self.previousStep = copy.deepcopy(s)
-        mssql.insertStep(s,self.samplecounter)
+        mssql.insertStep(s,self.gameID,self.samplecounter)
         return self
 
     def printgame(self,s):
