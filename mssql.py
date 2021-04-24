@@ -21,13 +21,22 @@ def listall():
     for row in cursor:
         print(row)
     return True
-
+    
+def insertGameSettings(gs):
+    myconn = connectdb()
+    cursor = myconn.cursor()
+    cursor.execute("INSERT INTO minibit.dbo.GameSettings VALUES (?,?,?,?,?,?,?,?,?,?,?)", ((gs.Testchangelog),gs.sampleQuantity,gs.winGoal,
+                                                                                           gs.NrOfP,gs.maxRound,gs.EC_Types,'NULL',0,gs.WC_Types,'NULL',0))
+    cursor.execute("SELECT @@IDENTITY")
+    for row in cursor:
+        settingsID = row[0]
+    myconn.commit()
+    return settingsID
 def insertGame(g):
     Total = '0'
     myconn = connectdb()
     cursor = myconn.cursor()
-    cursor.execute("INSERT INTO minibit.dbo.Game VALUES (?,?,?,?,?)", ((g.samplecounter),g.winer,Total,0,0))
-    #GameID = cursor.lastrowid
+    cursor.execute("INSERT INTO minibit.dbo.Game VALUES (?,?,?,?,?,?)", (g.samplecounter,g.winer,Total,0,0,g.gameSettingsID))
     cursor.execute("SELECT @@IDENTITY")
     for row in cursor:
         GameID = row[0]
@@ -47,7 +56,6 @@ def updateGame(g):
     return True
 
 def insertStep(step,gameID,samplenr):
-    #print(str(step.WC.WCPlayedcollection))
     PV = copy.deepcopy(step.P.playerVars)
     myconn = connectdb()
     cursor = myconn.cursor()
@@ -59,9 +67,11 @@ def insertStep(step,gameID,samplenr):
     cursor.execute(insertstr, (gameID,samplenr,str(step.roundNr),str(step.stepNr),step.P.Name, str(PV.varsValue[0]),
                               str(PV.varsValue[1]),str(PV.varsValue[2]),str(PV.varsValue[3]),str(step.EC.currentEC),
                               step.EC.nOfWC,str(step.playerDesicion),step.EC.ECName,str(PV.Nullindex), str(step.P.PCStatus),str(step.WC.playedWCName),
-                               str(len(step.EC.playingdeck)),'NULL'))
+                               str(len(step.EC.playingdeck)), 'NULL'))
     
     myconn.commit()
     return True
 
    #         str(np.arange(0,500,0.5).tolist() , ','.join(str(e) for e in list(step.EC.playingdeck))   ,' , '.join(str(el) for el in step.WC.WCPlayedcollection))
+
+

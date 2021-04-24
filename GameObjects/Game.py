@@ -28,18 +28,14 @@ class Game():
         self.winer = ''
         self.currentWormsSet = []
         self.gameID = 0
+        self.gameSettingsID = 0
         return   
     #---------------------
     def initialStep(self,x):
 
-        #pec = self.previousStep.EC.playedEC
         resEC = self.previousStep.EC.reservedEC
-        #pwc = self.previousStep.WC.playedWC
-        #rec = self.previousStep.EC.resourceEC    
-        #WCpc = self.previousStep.WC.WCPlayedcollection
         playingdeck = self.previousStep.EC.playingdeck
         wcdeck = self.previousStep.WC.playingdeck
-        #plyECColl = self.previousStep.EC.ECPlayedcollection
         self.thisStep = Step(p = self.listofPlayers[x], reservedEC = resEC, 
                              currentStep = self.currentStep,currentRound = self.currentRound, 
                              samplecounter = self.samplecounter, playingdeck = playingdeck,wcdeck = wcdeck)
@@ -52,7 +48,6 @@ class Game():
             self.initialStep(x)
             d = desicion()._init_(self.thisStep)
             self.thisStep = copy.deepcopy(d.playerdesicion())  
-            #print(self.thisStep.EC.playingdeck)
             #play one Step
             self.thisStep.playOneStep()
             self.winer = self.thisStep.winer

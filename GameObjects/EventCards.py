@@ -12,30 +12,26 @@ class EventCards(Cards):
     def __init__(self,vars,resEC,playingdeck):
         self.PV = copy.deepcopy(vars)
         self.currentEC = 0
-        #self.playedEC = pec
         self.reservedEC = resEC
-        #self.resourceEC = rec
         self.GS = GameSettings()
-        #self.ECPlayedcollection = Counter(plyECcoll)
-        #self.reservedECcollection = Counter(resECcoll)
         self.ECName = ''
         self.nOfWC = 0
         self.playingdeck = playingdeck
-        
         if len(self.playingdeck)==0:
             cards  = [self.GS.EC_Luck,self.GS.EC_Normal,self.GS.EC_Week]
-            q    = [1,10,5]
+            q    = self.GS.EC_Quantity
             Cards.__init__(self, cardsVaraity = cards, quantities =  q )
-            self.shuffle()
             self.playingdeck = self.deck
-        
+        self.shuffle()        
         return
+
+    def shuffle(self):
+        shuffle(self.playingdeck)
+        
 
     def updateEC(self, vars,pc,rc):
         self.PV = copy.deepcopy(vars)        
-        #self.playedEC = pc
         self.reservedEC = rc
-        #self.ECPlayedcollection = plyECcoll
         return self
 
     def update_Vars(self,vars):
@@ -54,8 +50,6 @@ class EventCards(Cards):
         ec = self.playingdeck[0]
         self.currentEC = ec
         self.playingdeck = np.delete(self.playingdeck,[0])
-       # print("after delete")
-        #print(self.playingdeck)
         return self
    
     def reset(self):
@@ -74,7 +68,6 @@ class EventCards(Cards):
         vars = copy.deepcopy(self.PV)
         #total should be removed from vars selection
         vars.varsValue = copy.deepcopy(self.PV.varsValue[:3])
-#        np.delete(vars.varsValue,3,0)
         if 3 in vars.Nullindex:
             vars.Nullindex.remove(3)
         if len(vars.Nullindex)>0:     
@@ -106,12 +99,8 @@ class EventCards(Cards):
     
     def playFunc(self,s):
         """calling a function with making its name as string"""  
-        #print("in playfunc:")
-        #print(s.EC.playingdeck)
         self.updateEC(s.P.playerVars,s.EC.playingdeck, s.reservedEC)
         self.selectNextEC()
-        #print(self.currentEC)
-        #print(s.EC.playingdeck)
         FuncName = 'ECFunc' + str(self.currentEC)
         getattr(self, FuncName)()
         s.P.updatePlayer(self.PV)
@@ -368,24 +357,18 @@ class EventCards(Cards):
     #-------------------
     def ECFunc29(self):
         self.ECName = 'EC:Resource: Restart'
-        #self.resourceEC.append(self.GS.ResourceECTypes.Restart)
-        #self.reservedECcollection[29] += 1 
         self.reservedEC.add(29)
         self.nOfWC = 0
         return(self)
 
     def ECFunc30(self):
         self.ECName = 'EC:Resource: Freelancer'
-        #self.resourceEC.append(self.GS.ResourceECTypes.Freelancer)
-        #self.reservedECcollection[30] += 1 
         self.reservedEC.add(30)
         self.nOfWC = 0
         return(self)
 
     def ECFunc31(self):
         self.ECName = 'EC:Resource: Bazar'
-        #self.resourceEC.append(self.GS.ResourceECTypes.Bazar)
-        #self.reservedECcollection[31] += 1
         self.reservedEC.add(31)
         self.nOfWC = 0
         return(self)

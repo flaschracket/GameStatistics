@@ -11,24 +11,19 @@ class WormCards(Cards):
 
     def __init__(self,vars,wcdeck):
         self.PV = copy.deepcopy(vars)
-#        self.playedWC = pwc
         self.playedWCName = set()    
         self.damages = []
         self.GS = GameSettings()        
         self.currentWC = 0
-        #self.nOfWC = 0
         self.playingdeck =wcdeck
         
         if len(self.playingdeck)==0:
             cards  = [self.GS.WC_BadLuck,self.GS.WC_Normal,self.GS.WC_Week]
-            q    = [1,10,5]
+            q    = self.GS.WC_Quantity
             Cards.__init__(self, cardsVaraity = cards, quantities =  q )
             self.shuffle()
             self.playingdeck = self.deck
 
-        #self.WCPlayedcollection = Counter(plyColl)
-        #self.reservedWCcollection = Counter(resColl)
-        #print(str(self.WCPlayedcollection))
         return 
 
     def updateWC(self,vars,pwc):
@@ -62,7 +57,6 @@ class WormCards(Cards):
    
     def resetCollection(self):
         diffWC = Counter(self.GS.WCCollection) - self.WCPlayedcollection
-        #print(str(diffWC))
         if len(diffWC) == 0 :
             self.WCPlayedcollection = Counter(self.GS.WCPlayedCollection)
             self.WCPlayedcollection = self.WCPlayedcollection + Counter(self.reservedWCcollection)
@@ -86,7 +80,6 @@ class WormCards(Cards):
 
     def playFunc(self,s):
         self.updateWC(s.P.playerVars,s.playedWC)
-        #self.SelectNextWC()
         self.selectWCfromCollection()
         FuncName = 'WCFunc' + str(self.currentWC)
         getattr(self, FuncName)()
