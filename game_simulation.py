@@ -22,8 +22,9 @@ while sampleCounter <= GS.sampleQuantity:
     mygame = Game(sampleCounter,previousStep)
     mygame.gameSettingsID = gsID
     mygame.gameID = mssql.insertGame(mygame)
+    firstdeck = mygame.thisStep.EC.playingdeck
     #play
-    print("Game"+str(sampleCounter)+" begins")
+    print("---Game : "+str(sampleCounter)+"---")
     condition = True
     while condition:        
         mygame.currentRound = mygame.currentRound + 1
@@ -31,5 +32,7 @@ while sampleCounter <= GS.sampleQuantity:
         if (mygame.winer != '') or (mygame.currentRound >= GS.maxRound): 
             condition = False              
     mssql.updateGame(mygame)
-    print(mygame.winer +' is the winer!')
+    print('winner : ' +mygame.winer )
+    print('------------------------------')
     sampleCounter = sampleCounter +1
+mssql.update_GameSettings(firstdeck, gsID)

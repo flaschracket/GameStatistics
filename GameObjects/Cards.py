@@ -5,12 +5,20 @@ class Cards():
 
 
     def __init__(self,*args,**kwargs):
-        mycards = np.array([1 , 2 ])
-        quantites = np.array([3 , 2])
-        self.deck = np.array([1])    
+        mycards = np.array([]).astype(int)
+        quantity = np.array([]).astype(int)
+        self.deck = np.array([]).astype(int)   
+        print(mycards)
+        
+        print(quantity)
+        self.quantites = np.array([]).astype(int)
+        self.mycards   = np.array([]).astype(int)        
         self.mycards = kwargs.get('cardsVaraity', mycards)
-        self.quantites = kwargs.get('quantities', quantites)
+        self.quantites = kwargs.get('quantities', quantity)
+        print(self.mycards)
+        print(self.quantites)
         self.makelistofcards()
+        print(self.deck)
         return
     
     def makelistofcards(self):

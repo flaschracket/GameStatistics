@@ -18,7 +18,7 @@ class EventCards(Cards):
         self.nOfWC = 0
         self.playingdeck = playingdeck
         if len(self.playingdeck)==0:
-            cards  = [self.GS.EC_Luck,self.GS.EC_Normal,self.GS.EC_Week]
+            cards  = [self.GS.EC_Luck,self.GS.EC_Normal,self.GS.EC_NormalTask,self.GS.EC_Week]
             q    = self.GS.EC_Quantity
             Cards.__init__(self, cardsVaraity = cards, quantities =  q )
             self.playingdeck = self.deck
@@ -165,10 +165,10 @@ class EventCards(Cards):
         self.asignVar(0,25)
         self.nOfWC = 0
         return(self)
-    # A =50    
+    # A =40  
     def ECFunc7(self):
-        self.ECName = 'EC:Input:A =50'
-        self.asignVar(0,50)
+        self.ECName = 'EC:Input:A =40'
+        self.asignVar(0,40)
         self.nOfWC = 0
         return(self)
     # A =75    
@@ -198,8 +198,8 @@ class EventCards(Cards):
         return(self)
     # B= 20
     def ECFunc11(self):
-        self.ECName = 'EC:Input:B =20'
-        self.asignVar(1,20)
+        self.ECName = 'EC:Input:B =25'
+        self.asignVar(1,25)
         self.nOfWC = 0
         return(self)
     # B=30
@@ -208,10 +208,10 @@ class EventCards(Cards):
         self.asignVar(1,30)
         self.nOfWC = 0
         return(self)
-    # B=50
+    # B=40
     def ECFunc13(self):
-        self.ECName = 'EC:Input:B =50'
-        self.asignVar(1,50)
+        self.ECName = 'EC:Input:B =40'
+        self.asignVar(1,40)
         self.nOfWC = 0
         return(self)
     # B=70
@@ -239,10 +239,10 @@ class EventCards(Cards):
         self.asignVar(2,25)
         self.nOfWC = 0
         return(self)
-    # C=45
+    # C=40
     def ECFunc18(self):
-        self.ECName = 'EC:Input:C =45'
-        self.asignVar(2,45)
+        self.ECName = 'EC:Input:C =40'
+        self.asignVar(2,40)
         self.nOfWC = 0
         return(self)
     # C=75
@@ -253,6 +253,28 @@ class EventCards(Cards):
         #self.nOfWC = 1
         return(self)
     
+    def ECFunc34(self):
+        self.ECName = 'EC34:Input:B =5'
+        self.asignVar(1,5)
+        self.nOfWC = 0
+        return(self)
+    def ECFunc35(self):
+        self.ECName = 'EC35:Input:C =10'
+        self.asignVar(2,10)
+        self.nOfWC = 0
+        return(self)
+
+    def ECFunc36(self):
+        self.ECName = 'EC34:Input:A =15'
+        self.asignVar(0,15)
+        self.nOfWC = 0
+        return(self)
+
+    def ECFunc37(self):
+        self.ECName = 'EC34:Input:B =15'
+        self.asignVar(1,15)
+        self.nOfWC = 0
+        return(self)
 
     #-------------------
     #Task cards functions
@@ -287,14 +309,13 @@ class EventCards(Cards):
         return(self)
 
     def ECFunc23(self):
-        self.ECName = 'EC:Task: T = xx9x'
-        
+        self.ECName = 'EC:Task: T = xx9x'        
         ind =[3]
         if not self.checknull(ind,False):
             t = self.PV.varsValue[3]
             strt = str(t)
             a= strt[0]
-            b= strt[2:3]
+            b= strt[3:2]
             strt =a+ '9'+ b
             self.PV.varsValue[3] = int(strt)
         self.nOfWC = 0
@@ -342,12 +363,12 @@ class EventCards(Cards):
         return self
    
     def ECFunc28(self):
-        self.ECName = 'EC:Task: x = 2x ! total'
+        self.ECName = 'EC:Task: x = +10 ! total'
         indif = [0,1,2]
         if not self.checknull(indif,True):
-            self.PV.varsValue[0]= (self.PV.varsValue[0]) * 2
-            self.PV.varsValue[1]= (self.PV.varsValue[1]) * 2
-            self.PV.varsValue[2]= (self.PV.varsValue[2]) * 2
+            self.PV.varsValue[0]= (self.PV.varsValue[0]) + 10
+            self.PV.varsValue[1]= (self.PV.varsValue[1]) + 10
+            self.PV.varsValue[2]= (self.PV.varsValue[2]) + 10
         self.nOfWC = 0
   #      self.nOfWC = 2
         return self
@@ -372,3 +393,46 @@ class EventCards(Cards):
         self.reservedEC.add(31)
         self.nOfWC = 0
         return(self)
+
+    #-------------------
+    #--Task funcitons begin with 100
+    #-------------------
+    def ECFunc100(self):
+        self.ECName = 'EC100:Task:T+=A'
+        ind = [0]
+        indif = [0,3]
+        if not self.checknull(indif,True):
+             self.PV.varsValue[3]=np.sum(self.PV.varsValue[ind])+(self.PV.varsValue[3])
+        self.nOfWC = 0
+             #self.nOfWC = 2
+        return self
+   
+    def ECFunc101(self):
+        self.ECName = 'EC101:Task:T+=B'
+        ind = [1]
+        indif = [1,3]
+        if not self.checknull(indif,True):
+             self.PV.varsValue[3]=np.sum(self.PV.varsValue[ind])+(self.PV.varsValue[3])
+        self.nOfWC = 0
+             #self.nOfWC = 2
+        return self
+    
+    def ECFunc102(self):
+        self.ECName = 'EC102:Task:T+=C'
+        ind = [2]
+        indif = [2,3]
+        if not self.checknull(indif,True):
+             self.PV.varsValue[3]=np.sum(self.PV.varsValue[ind])+(self.PV.varsValue[3])
+        self.nOfWC = 0
+             #self.nOfWC = 2
+        return self
+
+    def ECFunc103(self):
+        self.ECName = 'EC102:Task:T+=10'
+        
+        indif = [3]
+        if not self.checknull(indif,True):
+             self.PV.varsValue[3]= 10 +(self.PV.varsValue[3])
+        self.nOfWC = 0
+             #self.nOfWC = 2
+        return self
