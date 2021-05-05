@@ -15,11 +15,11 @@ class GameSettings():
     WC_Types = "No WC"
     WC_Quantity      = [1,10,20]
 
-    EC_Luck =   [28,24,7,18]
-    EC_Normal = [5,10,35,37,36,16,6,11,17,12]
-    EC_NormalTask =[100,101,102,103]
-    EC_Week =   [4,15,34]
-    EC_Resource = [29,30,31]
+    EC_Luck         =      [28,24,7,18]
+    EC_Normal       =   [5,10,35,37,36,16,6,11,17,12]
+    EC_NormalTask   =   [100,101,102,103]
+    EC_Week         =   [4,15,34]
+    EC_Resource     =   [29,30,31]
     #EC_BigLuck =[21,8,14,19,25,27,20,26,22]
 
     WC_BadLuck       =  [5]
