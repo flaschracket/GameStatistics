@@ -15,15 +15,20 @@ class WormCards(Cards):
         self.damages = []
         self.GS = GameSettings()        
         self.currentWC = 0
-        self.playingdeck =wcdeck
-        
+        self.playingdeck = wcdeck
+        self.firstdeck = list()
         if len(self.playingdeck)==0:
             #self.GS.WC_BadLuck,
             cards  = [self.GS.WC_Normal,self.GS.WC_Week]
             q    = self.GS.WC_Quantity
             Cards.__init__(self, cardsVaraity = cards, quantities =  q )
-            self.shuffle()
             self.playingdeck = self.deck
+       #     self.firstdeck = self.playingdeck
+     #   print(self.firstdeck)
+      #  print("****")
+        
+        self.shuffle()
+
         return 
 
     def updateWC(self,vars,pwc):
@@ -58,15 +63,21 @@ class WormCards(Cards):
     
     def reset(self):
         if (len(self.playingdeck) == 0):
-            self.shuffle()
+            
+            cards  = [self.GS.WC_Normal,self.GS.WC_Week]
+            q    = self.GS.WC_Quantity
+            Cards.__init__(self, cardsVaraity = cards, quantities =  q )
             self.playingdeck = self.deck
-            for i in range(len(self.reservedEC)):
-                self.playingdeck.pop(self.reservedEC[i])
+#            print(self.deck)
+            self.shuffle()
         return(self)
 
 
     def playFunc(self,s):
+        print("run func")
+        #print(self.deck)
         self.updateWC(s.P.playerVars,s.WC.playingdeck)
+        #print(self.deck)
         self.selectNextWC()
         FuncName = 'WCFunc' + str(self.currentWC)
         getattr(self, FuncName)()

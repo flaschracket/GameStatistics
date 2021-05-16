@@ -50,7 +50,8 @@ class Step():
         return self
     
     def playOneStep(self):
-        total=0
+        total = 0 
+        
         if self.playerDesicion:
             self.EC.playFunc(self)    
             total = self.P.playerVars.varsValue[3]
@@ -59,10 +60,11 @@ class Step():
              #self.addlinetoCSVF()
              return (self)
         if (self.playerDesicion):
+            
             for i in range(self.EC.nOfWC):
+                print(i)
                 self.WC.playFunc(self)
         #self.addlinetoCSVF()
-        #print(str(self.WC.WCPlayedcollection))
         return (self)
 
 

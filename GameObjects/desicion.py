@@ -31,7 +31,7 @@ class desicion(object):
         else:
             self.step.playerDesicion = True        
         return self.step
-#rule 1= cpu is captured  
+    #rule 1= cpu is captured  
     def rule1(self): 
             if (self.gs.ResourceECTypes.Restart in self.step.P.PlayerReservedEC):
                 self.step.P.PCStatus.remove('CPU1Captured')

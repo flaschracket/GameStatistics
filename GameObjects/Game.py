@@ -49,6 +49,8 @@ class Game():
             d = desicion()._init_(self.thisStep)
             self.thisStep = copy.deepcopy(d.playerdesicion())  
             #play one Step
+            print("----round----")
+            print(self.currentRound)
             self.thisStep.playOneStep()
             self.winer = self.thisStep.winer
             self.Stepsnapshot(self.thisStep)
@@ -56,6 +58,8 @@ class Game():
             self.listofPlayers[x] = copy.deepcopy(self.thisStep.P)
             if (self.winer != ''):
                 break            
+            print("--nextplayer----")
+        print("xxx") 
         return self
 
     def Stepsnapshot(self,s):
