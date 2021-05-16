@@ -22,20 +22,16 @@ class Step():
     def __init__(self,*args,**kwargs):     
         self.winer = ''
         self.GS = GameSettings()        
-        self.playedWC = kwargs.get('playedWC',set())
-        #self.playedEC= kwargs.get('playedEC',set())  
         self.reservedEC = kwargs.get('reservedEC',set())
-        #self.ECplayedcollection = kwargs.get('ECPlayedcollection', Counter())
-        #self.resECcollection = kwargs.get('PlyECcoll', Counter())
         self.P = kwargs.get('p',Player('N'))
-        #self.resourceEC = kwargs.get('resourceEC',[])
         pv = copy.deepcopy(self.P.playerVars)
+        #event card
         pd= kwargs.get('playingdeck',list())
         self.EC = EventCards(pv,self.reservedEC,pd)
-       # self.WCplayedcollection= kwargs.get("WCplyColl", self.GS.WCPlayedCollection)
-       # self.WCresCollection = kwargs.get("WCresColl",self.GS.WCPlayedCollection)
+        #worm card
         wcdeck = kwargs.get('wcdeck',list()) 
         self.WC = WormCards(pv,wcdeck)
+        #---
         self.playerDesicion = False
         self.stepNr = kwargs.get('currentStep',0)
         self.roundNr = kwargs.get('currentRound',0)

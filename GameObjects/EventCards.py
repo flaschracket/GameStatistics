@@ -99,11 +99,14 @@ class EventCards(Cards):
     
     def playFunc(self,s):
         """calling a function with making its name as string"""  
+        print("playEC")
+        s.P.playerVars.printinline()
         self.updateEC(s.P.playerVars,s.EC.playingdeck, s.reservedEC)
         self.selectNextEC()
         FuncName = 'ECFunc' + str(self.currentEC)
         getattr(self, FuncName)()
         s.P.updatePlayer(self.PV)
+        s.P.playerVars.printinline()
         return s
 
     # list of Cards
@@ -116,8 +119,8 @@ class EventCards(Cards):
         n = randrange(100)
         i = self.selectVar()
         self.asignVar(i,n)
-        self.nOfWC = 0
-        #self.nOfWC = 1
+    #    self.nOfWC = 0
+        self.nOfWC = 1
         return(self)
 
     # 2 digit number less than 50   
@@ -126,8 +129,8 @@ class EventCards(Cards):
         n = randrange(50)
         i = self.selectVar()
         self.asignVar(i,n)
-        self.nOfWC = 0
-        #self.nOfWC = 1
+     #   self.nOfWC = 0
+        self.nOfWC = 1
         return(self)
     
     # 2 digit number less than 90       
@@ -136,8 +139,8 @@ class EventCards(Cards):
         n = randrange(90)
         i = self.selectVar()
         self.asignVar(i,n)
-        self.nOfWC = 0
-        #self.nOfWC = 1
+      #  self.nOfWC = 0
+        self.nOfWC = 1
         return(self)
     # 2 digit number less than 30    
     def ECFunc3(self):
@@ -218,8 +221,8 @@ class EventCards(Cards):
     def ECFunc14(self):
         self.ECName = 'EC:Input:B =70'
         self.asignVar(1,70)
-        self.nOfWC = 0
-        #self.nOfWC = 1
+       # self.nOfWC = 0
+        self.nOfWC = 1
         return(self)
     # C=5
     def ECFunc15(self):
@@ -249,8 +252,8 @@ class EventCards(Cards):
     def ECFunc19(self):
         self.ECName = 'EC:Input:C =75'
         self.asignVar(2,75)
-        self.nOfWC = 0
-        #self.nOfWC = 1
+        #self.nOfWC = 0
+        self.nOfWC = 1
         return(self)
     
     def ECFunc34(self):
@@ -285,8 +288,8 @@ class EventCards(Cards):
         ind= [0,1,3]
         if not self.checknull(ind,True):
                 self.PV.varsValue[3] = np.sum(self.PV.varsValue[ind])
-        self.nOfWC = 0
-        #self.nOfWC = 1
+        #self.nOfWC = 0
+        self.nOfWC = 1
         return(self)
 
     def ECFunc21(self):
@@ -294,8 +297,8 @@ class EventCards(Cards):
         ind = [0,1]
         if not self.checknull(ind,False):
             self.PV.varsValue[3] = self.PV.varsValue[0] * self.PV.varsValue[1]
-        self.nOfWC = 0
-        #self.nOfWC = 1   
+        #self.nOfWC = 0
+        self.nOfWC = 1   
         return(self)
 
     def ECFunc22(self):
@@ -304,8 +307,8 @@ class EventCards(Cards):
         ind =[0,1,2,3]   
         if not self.checknull(ind,True):
             self.PV.varsValue[3] = sum(self.PV.varsValue)
-        self.nOfWC = 0
-        #self.nOfWC = 1   
+        #self.nOfWC = 0
+        self.nOfWC = 1   
         return(self)
 
     def ECFunc23(self):
@@ -318,8 +321,8 @@ class EventCards(Cards):
             b= strt[3:2]
             strt =a+ '9'+ b
             self.PV.varsValue[3] = int(strt)
-        self.nOfWC = 0
-        #self.nOfWC = 1   
+        #self.nOfWC = 0
+        self.nOfWC = 1   
         return(self)
    
     def ECFunc24(self):
@@ -328,8 +331,8 @@ class EventCards(Cards):
         
         if not self.checknull(ind,True):
             self.PV.varsValue[3] = self.PV.varsValue[3]+np.sum(self.PV.varsValue[ind])/2
-        self.nOfWC = 0
-        #self.nOfWC = 2
+        #self.nOfWC = 0
+        self.nOfWC = 2
   
         return(self)
  
@@ -338,8 +341,8 @@ class EventCards(Cards):
         ind =[0,1,2,3]
         if not self.checknull(ind,True):
             self.PV.varsValue[3] = sum(self.PV.varsValue)
-        self.nOfWC = 0
-        #self.nOfWC = 2
+        #self.nOfWC = 0
+        self.nOfWC = 2
         return(self)
 
     def ECFunc26(self):
@@ -348,8 +351,8 @@ class EventCards(Cards):
         indif =[3,1,2]
         if not self.checknull(indif,True):    
             self.PV.varsValue[3]=np.sum(self.PV.varsValue[ind])+(2*self.PV.varsValue[0])
-        self.nOfWC = 0
-        #self.nOfWC = 2
+        #self.nOfWC = 0
+        self.nOfWC = 2
         return (self)
 
     def ECFunc27(self):
@@ -369,8 +372,8 @@ class EventCards(Cards):
             self.PV.varsValue[0]= (self.PV.varsValue[0]) + 10
             self.PV.varsValue[1]= (self.PV.varsValue[1]) + 10
             self.PV.varsValue[2]= (self.PV.varsValue[2]) + 10
-        self.nOfWC = 0
-  #      self.nOfWC = 2
+        #self.nOfWC = 0
+        self.nOfWC = 2
         return self
     
     #-------------------
@@ -403,8 +406,7 @@ class EventCards(Cards):
         indif = [0,3]
         if not self.checknull(indif,True):
              self.PV.varsValue[3]=np.sum(self.PV.varsValue[ind])+(self.PV.varsValue[3])
-        self.nOfWC = 0
-             #self.nOfWC = 2
+        self.nOfWC = 2
         return self
    
     def ECFunc101(self):
@@ -413,8 +415,7 @@ class EventCards(Cards):
         indif = [1,3]
         if not self.checknull(indif,True):
              self.PV.varsValue[3]=np.sum(self.PV.varsValue[ind])+(self.PV.varsValue[3])
-        self.nOfWC = 0
-             #self.nOfWC = 2
+        self.nOfWC = 2
         return self
     
     def ECFunc102(self):
@@ -423,8 +424,7 @@ class EventCards(Cards):
         indif = [2,3]
         if not self.checknull(indif,True):
              self.PV.varsValue[3]=np.sum(self.PV.varsValue[ind])+(self.PV.varsValue[3])
-        self.nOfWC = 0
-             #self.nOfWC = 2
+        self.nOfWC = 2
         return self
 
     def ECFunc103(self):
@@ -433,6 +433,5 @@ class EventCards(Cards):
         indif = [3]
         if not self.checknull(indif,True):
              self.PV.varsValue[3]= 10 +(self.PV.varsValue[3])
-        self.nOfWC = 0
-             #self.nOfWC = 2
+        self.nOfWC = 2
         return self

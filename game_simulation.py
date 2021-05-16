@@ -16,9 +16,10 @@ previousStep = Step()
 
 #initial
 
-print("Hello From Game Simulation! Data Generation is begining:")
+print("Hello From Game Simulation! Data Generation is begining")
 gsID = mssql.insertGameSettings(GS)
 while sampleCounter <= GS.sampleQuantity:
+   # print(previousStep.WC.playingdeck)
     mygame = Game(sampleCounter,previousStep)
     mygame.gameSettingsID = gsID
     mygame.gameID = mssql.insertGame(mygame)

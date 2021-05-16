@@ -18,17 +18,18 @@ class WormCards(Cards):
         self.playingdeck =wcdeck
         
         if len(self.playingdeck)==0:
-            cards  = [self.GS.WC_BadLuck,self.GS.WC_Normal,self.GS.WC_Week]
+            #self.GS.WC_BadLuck,
+            cards  = [self.GS.WC_Normal,self.GS.WC_Week]
             q    = self.GS.WC_Quantity
             Cards.__init__(self, cardsVaraity = cards, quantities =  q )
             self.shuffle()
             self.playingdeck = self.deck
-
         return 
 
     def updateWC(self,vars,pwc):
+        
         self.PV = copy.deepcopy(vars)
-        playedWC =pwc
+        self.playingdeck = pwc
         return self
 
     def ifPossibleToPlay(self,ind):
@@ -42,45 +43,31 @@ class WormCards(Cards):
             self.PV.Nullindex.remove(var)
         self.PV.varsValue[var]=value
         return
-    #------------------
-    def selectWCfromCollection(self):
-        self.resetCollection()
-        condition = True
-        while condition:  
-            myWC = randrange(self.GS.NrOfWC)
-            if (self.WCPlayedcollection[myWC] < self.GS.WCCollection[myWC]):
-                condition = False
-                self.currentWC = myWC
-                self.WCPlayedcollection[myWC] += 1
-                #reserved
-        return self
-   
-    def resetCollection(self):
-        diffWC = Counter(self.GS.WCCollection) - self.WCPlayedcollection
-        if len(diffWC) == 0 :
-            self.WCPlayedcollection = Counter(self.GS.WCPlayedCollection)
-            self.WCPlayedcollection = self.WCPlayedcollection + Counter(self.reservedWCcollection)
-        return self
-
-    def SelectNextWC(self):
+    def shuffle(self):
+        shuffle(self.playingdeck)
+    
+    def selectNextWC(self):
         self.reset()
-        if len(self.playedWC)==0:
-            self.playedWC = {self.currentWC}
-        else:
-            while self.currentWC in self.playedWC:
-                self.currentWC = randrange(self.const.NrOfWC)        
-            self.playedWC.add(self.currentWC)        
+ #       print(self.playingdeck)
+        wc = self.playingdeck[0]
+        self.currentWC = wc
+    
+  #      print(self.currentWC)
+        self.playingdeck = np.delete(self.playingdeck,[0])
         return self.currentWC
     
     def reset(self):
-        if (len(self.playedWC) == self.const.NrOfWC):
-            self.playedWC.clear()
+        if (len(self.playingdeck) == 0):
+            self.shuffle()
+            self.playingdeck = self.deck
+            for i in range(len(self.reservedEC)):
+                self.playingdeck.pop(self.reservedEC[i])
         return(self)
 
 
     def playFunc(self,s):
-        self.updateWC(s.P.playerVars,s.playedWC)
-        self.selectWCfromCollection()
+        self.updateWC(s.P.playerVars,s.WC.playingdeck)
+        self.selectNextWC()
         FuncName = 'WCFunc' + str(self.currentWC)
         getattr(self, FuncName)()
         s.P.updatePlayer(self.PV)
@@ -115,10 +102,15 @@ class WormCards(Cards):
         return(self)
 
     def WCFunc4(self):
+        print("in wc4-before")
+        self.PV.printinline()
         self.playedWCName.add(' WC Name: T -=100 ')
         ind= [3]
         if self.ifPossibleToPlay(ind):
+            print("true")
             self.PV.varsValue[3] = self.PV.varsValue[3]-100 
+        print("in wc4-After")
+        self.PV.printinline()
      
         return(self)
 
@@ -128,7 +120,7 @@ class WormCards(Cards):
         return(self)
  
     def WCFunc6(self):
-        self.playedWCName.add(' WC Name: T =xx00 ')
+        self.playedWCName.add(' WC Name: T =xx00 ') 
         ind= [3]
         if self.ifPossibleToPlay(ind):
             mod = self.PV.varsValue[3] % 100
