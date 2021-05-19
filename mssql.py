@@ -77,10 +77,14 @@ def insertStep(step,gameID,samplenr):
 
     cursor.execute(insertstr, (gameID,samplenr,str(step.roundNr),str(step.stepNr),step.P.Name, str(PV.varsValue[0]),
                               str(PV.varsValue[1]),str(PV.varsValue[2]),str(PV.varsValue[3]),str(step.EC.currentEC),
-                              step.EC.nOfWC,str(step.playerDesicion),step.EC.ECName,str(PV.Nullindex), str(step.P.PCStatus),str(step.WC.playedWCName),
-                               str(len(step.EC.playingdeck)), 'NULL'))
-    
+                              step.EC.nOfWC,str(step.playerDesicion),step.EC.ECName,str(PV.Nullindex), 
+                              str(step.P.PCStatus),
+                              str(step.WC.playedWCName),str(len(step.EC.playingdeck)),str(step.WC.playedwc)))    
     myconn.commit()
+    print("mysql")
+    print(step.EC.nOfWC)
+    print(str(step.WC.playedWCName))
+
     return True
 
    #         str(np.arange(0,500,0.5).tolist() , ','.join(str(e) for e in list(step.EC.playingdeck))   ,' , '.join(str(el) for el in step.WC.WCPlayedcollection))

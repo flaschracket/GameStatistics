@@ -119,7 +119,6 @@ class EventCards(Cards):
         n = randrange(100)
         i = self.selectVar()
         self.asignVar(i,n)
-    #    self.nOfWC = 0
         self.nOfWC = 1
         return(self)
 
@@ -129,7 +128,6 @@ class EventCards(Cards):
         n = randrange(50)
         i = self.selectVar()
         self.asignVar(i,n)
-     #   self.nOfWC = 0
         self.nOfWC = 1
         return(self)
     
@@ -139,7 +137,6 @@ class EventCards(Cards):
         n = randrange(90)
         i = self.selectVar()
         self.asignVar(i,n)
-      #  self.nOfWC = 0
         self.nOfWC = 1
         return(self)
     # 2 digit number less than 30    

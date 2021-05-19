@@ -32,6 +32,9 @@ while sampleCounter <= GS.sampleQuantity:
         mygame = copy.deepcopy(mygame.playOneRound()) 
         if (mygame.winer != '') or (mygame.currentRound >= GS.maxRound): 
             condition = False              
+        print("---------------------------------------")
+        print("------------end of round---------------")
+        print("---------------------------------------")
     mssql.updateGame(mygame)
     print('winner : ' +mygame.winer )
     print('------------------------------')

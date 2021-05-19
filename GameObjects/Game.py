@@ -49,8 +49,6 @@ class Game():
             d = desicion()._init_(self.thisStep)
             self.thisStep = copy.deepcopy(d.playerdesicion())  
             #play one Step
-            print("----round----")
-            print(self.currentRound)
             self.thisStep.playOneStep()
             self.winer = self.thisStep.winer
             self.Stepsnapshot(self.thisStep)
@@ -58,19 +56,27 @@ class Game():
             self.listofPlayers[x] = copy.deepcopy(self.thisStep.P)
             if (self.winer != ''):
                 break            
-            print("--nextplayer----")
-        print("xxx") 
+        self.printgame("----End round----")
+             
         return self
 
     def Stepsnapshot(self,s):
         s.winer = self.winer
         self.previousStep = copy.deepcopy(s)
         mssql.insertStep(s,self.gameID,self.samplecounter)
+        self.printgame("end stepsnapshot")
         return self
 
     def printgame(self,s):
+        
         print("it is a game print in " +s)
-        for i in range(self.GS.NrOfP):
-            print(str(i)+ ": ", end="")
-            self.listofPlayers[i].printMainRAM()
-        print("end")
+        print(self.thisStep.EC.nOfWC)
+        print("playedwc")
+        print(self.thisStep.WC.playedwc)    
+        print("playedwcname")
+        print(self.thisStep.WC.playedWCName)    
+
+        #for i in range(self.GS.NrOfP):
+         #   print(str(i)+ ": ", end="")
+          #  self.listofPlayers[i].printMainRAM()
+        print("-----------------------------")
