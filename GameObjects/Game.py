@@ -55,16 +55,13 @@ class Game():
             self.currentStep = self.currentStep+1
             self.listofPlayers[x] = copy.deepcopy(self.thisStep.P)
             if (self.winer != ''):
-                break            
-        self.printgame("----End round----")
-             
+                break                    
         return self
 
     def Stepsnapshot(self,s):
         s.winer = self.winer
         self.previousStep = copy.deepcopy(s)
         mssql.insertStep(s,self.gameID,self.samplecounter)
-        self.printgame("end stepsnapshot")
         return self
 
     def printgame(self,s):

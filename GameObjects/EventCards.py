@@ -99,14 +99,11 @@ class EventCards(Cards):
     
     def playFunc(self,s):
         """calling a function with making its name as string"""  
-        #print("bb")
-        #s.P.playerVars.printinline()
         self.updateEC(s.P.playerVars,s.EC.playingdeck, s.reservedEC)
         self.selectNextEC()
         FuncName = 'ECFunc' + str(self.currentEC)
         getattr(self, FuncName)()
         s.P.updatePlayer(self.PV)
-        #s.P.playerVars.printinline()
         return s
 
     # list of Cards

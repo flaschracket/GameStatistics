@@ -55,15 +55,12 @@ class Step():
         if self.playerDesicion:
             self.EC.playFunc(self)    
             total = self.P.playerVars.varsValue[3]
-        if self.EC.nOfWC == 2:
-            print("2 Worms")
         if (self.GS.ifWined(total)):
              self.winer = self.P.Name
              #self.addlinetoCSVF()
              return (self)
         if (self.playerDesicion):
             for i in range(self.EC.nOfWC):
-                #print(i)
                 self.WC.playFunc(self)
                 
         #self.addlinetoCSVF()

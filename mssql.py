@@ -81,9 +81,6 @@ def insertStep(step,gameID,samplenr):
                               str(step.P.PCStatus),
                               str(step.WC.playedWCName),str(len(step.EC.playingdeck)),str(step.WC.playedwc)))    
     myconn.commit()
-    print("mysql")
-    print(step.EC.nOfWC)
-    print(str(step.WC.playedWCName))
 
     return True
 

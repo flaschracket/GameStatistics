@@ -19,7 +19,6 @@ previousStep = Step()
 print("Hello From Game Simulation! Data Generation is begining")
 gsID = mssql.insertGameSettings(GS)
 while sampleCounter <= GS.sampleQuantity:
-   # print(previousStep.WC.playingdeck)
     mygame = Game(sampleCounter,previousStep)
     mygame.gameSettingsID = gsID
     mygame.gameID = mssql.insertGame(mygame)
@@ -32,9 +31,6 @@ while sampleCounter <= GS.sampleQuantity:
         mygame = copy.deepcopy(mygame.playOneRound()) 
         if (mygame.winer != '') or (mygame.currentRound >= GS.maxRound): 
             condition = False              
-        print("---------------------------------------")
-        print("------------end of round---------------")
-        print("---------------------------------------")
     mssql.updateGame(mygame)
     print('winner : ' +mygame.winer )
     print('------------------------------')
