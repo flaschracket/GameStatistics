@@ -20,16 +20,11 @@ class WormCards(Cards):
         self.playingdeck = wcdeck
         self.firstdeck = list()
         if len(self.playingdeck)==0:
-            #self.GS.WC_BadLuck,
-            cards  = [self.GS.WC_Normal,self.GS.WC_Week]
+            cards  = self.GS.WC_Cards
             q    = self.GS.WC_Quantity
             Cards.__init__(self, cardsVaraity = cards, quantities =  q )
             self.playingdeck = self.deck
-       #     self.firstdeck = self.playingdeck
-     #   print(self.firstdeck)
-      #  print("****")
         self.shuffle()
-
         return 
 
     def updateWC(self,vars,pwc):
@@ -54,31 +49,24 @@ class WormCards(Cards):
     
     def selectNextWC(self):
         self.reset()
- #       print(self.playingdeck)
         wc = self.playingdeck[0]
         self.currentWC = wc
-    
-  #      print(self.currentWC)
         self.playingdeck = np.delete(self.playingdeck,[0])
         return self.currentWC
     
     def reset(self):
         if (len(self.playingdeck) == 0):
             
-            cards  = [self.GS.WC_Normal,self.GS.WC_Week]
-            q    = self.GS.WC_Quantity
+            cards  = self.GS.WC_Cards
+            q      = self.GS.WC_Quantity
             Cards.__init__(self, cardsVaraity = cards, quantities =  q )
             self.playingdeck = self.deck
-#            print(self.deck)
             self.shuffle()
         return(self)
 
 
     def playFunc(self,s):
-        #print("run func")
-        #print(self.deck)
         self.updateWC(s.P.playerVars,s.WC.playingdeck)
-        #print(self.deck)
         self.selectNextWC()
         FuncName = 'WCFunc' + str(self.currentWC)
         getattr(self, FuncName)()
@@ -115,16 +103,10 @@ class WormCards(Cards):
         return(self)
 
     def WCFunc4(self):
-        #print("in wc4-before")
-       # self.PV.printinline()
         self.playedWCName.append(' WC Name: T -=100 ')
         ind= [3]
         if self.ifPossibleToPlay(ind):
-            #print("true")
             self.PV.varsValue[3] = self.PV.varsValue[3]-100 
-        #print("in wc4-After")
-        #self.PV.printinline()
-     
         return(self)
 
     def WCFunc5(self):

@@ -1,6 +1,6 @@
 from enum import Enum
 class GameSettings():
-    sampleQuantity = 1
+    sampleQuantity = 100
     winGoal = 100
     #it should be one more of last function number because the functions name are begining with number 0
     #NrofEC = 32
@@ -11,21 +11,25 @@ class GameSettings():
     Testchangelog ="adding wormcards to game"
    #"only EC-q=[1,4,3,2]-adding new task[103]"
     EC_Types = "Luck,Normal,Week"
-    EC_Quantity     =   [1,5,3,2]
     EC_Luck         =   [28,24,7,18]
     EC_Normal       =   [5,10,35,37,36,16,6,11,17,12]
     EC_NormalTask   =   [100,101,102,103]
     EC_Week         =   [4,15,34]
     EC_Resource     =   [29,30,31]
     #EC_BigLuck =[21,8,14,19,25,27,20,26,22]
+    
+    EC_Cards        =   [EC_Luck,EC_Normal,EC_NormalTask,EC_Week]
+    EC_Quantity     =   [1,5,3,2]
+
 
     WC_Types = "Bad luck, normal, week"
-    WC_Quantity      = [3,3]
     WC_BigBadLuck    =  []
     WC_BadLuck       =  [5]
     WC_Week          =  [12,13,14]
-    WC_Normal        =  [4]
-    #[0,1,2,3,4,6,7,8,9,10,11]
+    WC_Normal        =  [0,1,2,3,4,6,7,8,9,10,11]
+    
+    WC_Cards         = [WC_Normal, WC_Week, WC_BadLuck]
+    WC_Quantity      = [1,1,1]
 
 
     resourceECtypes = ['Restart','Bazar','Freelancer']

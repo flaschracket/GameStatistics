@@ -32,7 +32,6 @@ class Game():
         return   
     #---------------------
     def initialStep(self,x):
-
         resEC = self.previousStep.EC.reservedEC
         playingdeck = self.previousStep.EC.playingdeck
         wcdeck = self.previousStep.WC.playingdeck

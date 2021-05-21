@@ -8,15 +8,14 @@ class Cards():
         mycards = np.array([]).astype(int)
         quantity = np.array([]).astype(int)
         self.deck = np.array([]).astype(int)   
-        self.quantites = np.array([]).astype(int)
-        self.mycards   = np.array([]).astype(int)        
+        #self.quantites = np.array([]).astype(int)
+        #self.mycards   = np.array([]).astype(int)        
         self.mycards = kwargs.get('cardsVaraity', mycards)
         self.quantites = kwargs.get('quantities', quantity)
-        self.makelistofcards()
-      
+        self.makelistofcards()      
         return
     
-    def makelistofcards(self):
+    def makelistofcards(self):        
         for i in range(len(self.quantites)):
             cardsdeck = np.repeat(self.mycards[i],self.quantites[i])
             self.deck = np.append(self.deck,cardsdeck)

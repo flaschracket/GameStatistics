@@ -18,7 +18,7 @@ class EventCards(Cards):
         self.nOfWC = 0
         self.playingdeck = playingdeck
         if len(self.playingdeck)==0:
-            cards  = [self.GS.EC_Luck,self.GS.EC_Normal,self.GS.EC_NormalTask,self.GS.EC_Week]
+            cards  = self.GS.EC_Cards
             q    = self.GS.EC_Quantity
             Cards.__init__(self, cardsVaraity = cards, quantities =  q )
             self.playingdeck = self.deck
