@@ -62,8 +62,12 @@ class Step():
         if (self.playerDesicion):
             for i in range(self.EC.nOfWC):
                 self.WC.playFunc(self)
+#                print("step-for play func")
+ #               print(self.WC.playedwc)
                 
         #self.addlinetoCSVF()
+  #      print("end of step")
+   #     print(self.WC.playedwc)
         return (self)
 
 

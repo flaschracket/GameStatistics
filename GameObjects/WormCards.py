@@ -1,5 +1,6 @@
 from random import randrange
 import copy
+import numpy as np
 from GameObjects.GameSettings import *
 from GameObjects.MainRAMVars import *
 from GameObjects.Cards import *
@@ -70,6 +71,11 @@ class WormCards(Cards):
         self.selectNextWC()
         FuncName = 'WCFunc' + str(self.currentWC)
         getattr(self, FuncName)()
+       # print("playfunc")
+        #print(self.playedwc)
+        #print(self.currentWC)
+        self.playedwc = np.append(self.playedwc,self.currentWC)
+        #print(self.playedwc)
         s.P.updatePlayer(self.PV)
         if (len(self.damages) > 0) and (self.damages[0] not in s.P.PCStatus):
             s.P.PCStatus = s.P.PCStatus+self.damages
@@ -79,7 +85,7 @@ class WormCards(Cards):
     #A=Null
     def WCFunc0(self):
         self.playedWCName.append(' WC Name: A=NULL; ')
-        np.append(self.playedwc,self.currentWC)
+        
         #A = 0
         if 0 not in self.PV.Nullindex:
             self.PV.Nullindex.append(0) 
