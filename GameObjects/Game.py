@@ -35,9 +35,10 @@ class Game():
         resEC = self.previousStep.EC.reservedEC
         playingdeck = self.previousStep.EC.playingdeck
         wcdeck = self.previousStep.WC.playingdeck
+#        nofrounds = self.previousStep.P.nofRoundPausing
         self.thisStep = Step(p = self.listofPlayers[x], reservedEC = resEC, 
                              currentStep = self.currentStep,currentRound = self.currentRound, 
-                             samplecounter = self.samplecounter, playingdeck = playingdeck,wcdeck = wcdeck)
+                             samplecounter = self.samplecounter, playingdeck = playingdeck,wcdeck = wcdeck,nofpr = 0)
         return self
     #---------------------
 

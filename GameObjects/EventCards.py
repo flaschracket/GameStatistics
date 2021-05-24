@@ -103,7 +103,7 @@ class EventCards(Cards):
         self.selectNextEC()
         FuncName = 'ECFunc' + str(self.currentEC)
         getattr(self, FuncName)()
-        s.P.updatePlayer(self.PV)
+        s.P.updatePlayer(self.PV,0)
         return s
 
     # list of Cards

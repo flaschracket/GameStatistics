@@ -24,9 +24,16 @@ class Player():
         self.Name = name 
         self.playerVars = MainRAMVars()
         self.PCStatus = []
+        self.nofRoundPausing = 0
         return 
-    def updatePlayer(self,var):
-        self.playerVars = copy.deepcopy(var)    
+
+   # def updatePlayer(self,var):
+    #    self.playerVars = copy.deepcopy(var)    
+    
+    def updatePlayer(self,var,pause):
+        self.playerVars = copy.deepcopy(var)
+        self.nofRoundPausing = pause
+    
     #----------------------
     #----------------------
     def printstatus(self):

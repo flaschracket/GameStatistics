@@ -39,9 +39,10 @@ class desicion(object):
                 self.step.playerDesicion = True
                 self.step.P.roundCounter = 0
             else: 
-                if (self.step.P.roundCounter == self.gs.maxRound):
+                if (self.step.P.roundCounter == self.step.P.nofRoundPausing):
                     self.step.P.PCStatus.remove('CPU1Captured')
                     self.step.P.roundCounter = 0
+                    self.step.P.nofRoundPausing = 0
                     self.step.playerDesicion = True
                 else:
                     self.step.playerDesicion = False      

@@ -7,6 +7,7 @@ from GameObjects.Game import *
 from GameObjects.EventCards import *
 from GameObjects.WormCards import *
 from GameObjects.Player import *
+from GameObjects.desicion import *
 import copy
 import csv
 from csv import writer
@@ -25,6 +26,7 @@ class Step():
         self.reservedEC = kwargs.get('reservedEC',set())
         self.P = kwargs.get('p',Player('N'))
         pv = copy.deepcopy(self.P.playerVars)
+#        self.P.nofRoundPausing = kwargs.get('nofpr',0)
         #event card
         pd= kwargs.get('playingdeck',list())
         self.EC = EventCards(pv,self.reservedEC,pd)
@@ -33,6 +35,7 @@ class Step():
         self.WC = WormCards(pv,wcdeck)
         #---
         self.playerDesicion = False
+        self.myDesicion = desicion()
         self.stepNr = kwargs.get('currentStep',0)
         self.roundNr = kwargs.get('currentRound',0)
         self.sampleNr = kwargs.get('samplecounter',0)
@@ -41,6 +44,7 @@ class Step():
     def updatePlayer(self):
         self.P.playerVars = copy.deepcopy(self.WC.PV) 
         self.P.PCStatus = self.WC.damages
+        self.P.nofRoundPausing = self.WC.nofRoundspausing
         return self
     #-------------------------
     #-------------------------
@@ -51,7 +55,8 @@ class Step():
     
     def playOneStep(self):
         total = 0 
-        
+        d = desicion()._init_(self)
+        d.playerdesicion()
         if self.playerDesicion:
             self.EC.playFunc(self)    
             total = self.P.playerVars.varsValue[3]
@@ -59,15 +64,22 @@ class Step():
              self.winer = self.P.Name
              #self.addlinetoCSVF()
              return (self)
-        if (self.playerDesicion):
-            for i in range(self.EC.nOfWC):
-                self.WC.playFunc(self)
-#                print("step-for play func")
- #               print(self.WC.playedwc)
+        #print(self.GS.PCstatus[1])
+#        if self.P.PCStatus.count('CPU1Captured')>0:
+ #            print(self.stepNr)
+        
+        for i in range(self.EC.nOfWC):
+             d.playerdesicion()
+  #           if self.P.PCStatus.count('CPU1Captured')>0:
+   #              print(self.stepNr)
+             if (self.playerDesicion):
+                 self.WC.playFunc(self)
+    #    if self.P.PCStatus.count('CPU1Captured')>0:
+     #        print(self.stepNr)
+      #       print("count")
+       #      print(self.P.PCStatus.count('CPU1Captured'))
                 
         #self.addlinetoCSVF()
-  #      print("end of step")
-   #     print(self.WC.playedwc)
         return (self)
 
 

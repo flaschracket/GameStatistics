@@ -1,13 +1,12 @@
 from enum import Enum
 class GameSettings():
-    sampleQuantity = 100
+    sampleQuantity = 1
     winGoal = 100
     #it should be one more of last function number because the functions name are begining with number 0
     #NrofEC = 32
     #NrOfWC = 15
     NrOfP = 2
     maxRound = 40
-
     Testchangelog ="adding wormcards to game"
    #"only EC-q=[1,4,3,2]-adding new task[103]"
     EC_Types = "Luck,Normal,Week"
