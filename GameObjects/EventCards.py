@@ -385,7 +385,7 @@ class EventCards(Cards):
         self.nOfWC = 0
         return(self)
 
-    def ECFunc301(self):
+    def ECFunc31(self):
         self.ECName = 'EC:Resource: Bazar'
         self.reservedEC.add(31)
         self.nOfWC = 0
