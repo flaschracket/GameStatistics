@@ -129,6 +129,14 @@ class Step():
         f.close()
         return True
 
+    def printStep(self):
+        print("step information")
+        print(self.stepNr)
+        #print("reserved cards" + str(self.reservedEC))
+        self.P.printMainRAM()                 
+        #print(self.playerDesicion)
+         
+        return
 
 def uniquify(path, sep = ''):
     def name_sequence():
@@ -145,3 +153,5 @@ def uniquify(path, sep = ''):
         fd, filename = tempfile.mkstemp(dir = dirname, prefix = filename, suffix = ext)
         tempfile._name_sequence = orig
     return filename
+
+ 

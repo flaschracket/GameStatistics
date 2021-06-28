@@ -70,6 +70,7 @@ def insertStep(step,gameID,samplenr):
     PV = copy.deepcopy(step.P.playerVars)
     myconn = connectdb()
     cursor = myconn.cursor()
+    #step.printStep()
     insertstr = "INSERT INTO minibit.dbo.Step VALUES (?, ?, ?,?,?, "
     insertstr = insertstr + "?, ?, ?, ?, ?, "
     insertstr = insertstr + "?, ?, ?, ?, ?, "
@@ -81,7 +82,6 @@ def insertStep(step,gameID,samplenr):
                               str(step.P.PCStatus),
                               str(step.WC.playedWCName),str(len(step.EC.playingdeck)),str(step.WC.playedwc)))    
     myconn.commit()
-
     return True
 
    #         str(np.arange(0,500,0.5).tolist() , ','.join(str(e) for e in list(step.EC.playingdeck))   ,' , '.join(str(el) for el in step.WC.WCPlayedcollection))

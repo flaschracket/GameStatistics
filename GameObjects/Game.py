@@ -25,10 +25,12 @@ class Game():
         for x in range(self.GS.NrOfP):
            name = 'Player '+ str(x)
            self.listofPlayers.append(Player(name))
+           print(self.listofPlayers[x])
         self.winer = ''
         self.currentWormsSet = []
         self.gameID = 0
         self.gameSettingsID = 0
+        
         return   
     #---------------------
     def initialStep(self,x):
@@ -48,14 +50,16 @@ class Game():
             self.initialStep(x)
             d = desicion()._init_(self.thisStep)
             self.thisStep = copy.deepcopy(d.playerdesicion())  
+           # self.printgame("after copy this step")
             #play one Step
             self.thisStep.playOneStep()
+           # self.printgame("after play step")
             self.winer = self.thisStep.winer
             self.Stepsnapshot(self.thisStep)
-            self.currentStep = self.currentStep+1
+            self.currentStep = self.currentStep + 1
             self.listofPlayers[x] = copy.deepcopy(self.thisStep.P)
             if (self.winer != ''):
-                break                    
+                break             
         return self
 
     def Stepsnapshot(self,s):
@@ -67,13 +71,15 @@ class Game():
     def printgame(self,s):
         
         print("it is a game print in " +s)
+        print("step:" + str(self.currentStep))
+        print("player: "+ self.thisStep.P.Name)
         print(self.thisStep.EC.nOfWC)
         print("playedwc")
         print(self.thisStep.WC.playedwc)    
         print("playedwcname")
         print(self.thisStep.WC.playedWCName)    
-
-        #for i in range(self.GS.NrOfP):
-         #   print(str(i)+ ": ", end="")
-          #  self.listofPlayers[i].printMainRAM()
+        print("played EC")
+        print(self.thisStep.EC.ECName)
+        print(" RAM ")
+        self.thisStep.P.printMainRAM()
         print("-----------------------------")

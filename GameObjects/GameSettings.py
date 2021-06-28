@@ -7,7 +7,7 @@ class GameSettings():
     #NrOfWC = 15
     NrOfP = 2
     maxRound = 40
-    Testchangelog ="Test the cards with lego-add resources to EC- WC4 to [3,5,1]"
+    Testchangelog ="lego:      EC =  [1,15,15,10,2] "
    #"only EC-q=[1,4,3,2]-adding new task[103]"
     EC_Types = "Luck,Normal,Week"
     EC_Luck         =   [28,24,7,18]
@@ -23,9 +23,13 @@ class GameSettings():
     WC_BigBadLuck    =  [6]
     WC_BadLuck       =  [5,4]
     WC_Week          =  [12,13,14]
-    WC_Normal        =  [0,1,2,3,7,8,9,10,11]    
-    WC_Cards         =  [WC_Normal, WC_Week, WC_BadLuck]
-    WC_Quantity      =  [3,5,1]
+    WC_Normal        =  [0,1,2]
+                         #,3,7,8,9,10,11    
+    WC_Cards         =  [WC_Week,WC_Normal]
+    #[WC_Normal, WC_Week, WC_BadLuck]
+    # sum quantity should reach Steps number (40 max round * 2 player=80), it is still less because some cards have 2 worms
+    WC_Quantity      =  [20,1]
+    #[5,5,1]
 #---------------------
 #lego
 #------------------------
@@ -37,7 +41,7 @@ class GameSettings():
 #--------------------------------------------------------------
     #EC_Cards        =   [EC_Luck,EC_Normal,EC_NormalTask,EC_Week]
     EC_Cards        =   [EC_lego_Luck,EC_lego_Normal,EC_lego_NormalTask,EC_lego_Week,EC_lego_Resource]
-    EC_Quantity     =   [1,3,3,2,1]    
+    EC_Quantity     =   [1,15,15,10,2]    
 #----------------------------
     resourceECtypes = ['Restart','Bazar','Freelancer']
     PCstatus = ['shutdown', 'CPU1Captured', '']

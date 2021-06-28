@@ -26,6 +26,7 @@ while sampleCounter <= GS.sampleQuantity:
     #play
     print("---Game : "+str(sampleCounter)+"---")
     condition = True
+    
     while condition:        
         mygame.currentRound = mygame.currentRound + 1
         mygame = copy.deepcopy(mygame.playOneRound()) 
