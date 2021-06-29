@@ -7,12 +7,13 @@ class GameSettings():
     #NrOfWC = 15
     NrOfP = 2
     maxRound = 40
-    Testchangelog ="lego:EC =  [3,30,30,10,2] "
+    Testchangelog ="lego: wc chalange 1 to 5"
    #"only EC-q=[1,4,3,2]-adding new task[103]"
+
     EC_Types = "Luck,Normal,Week"
     EC_Luck         =   [28,24,7,18]
     EC_Normal       =   [5,10,35,37,36,16,6,11,17,12]
-    EC_NormalTask   =   [100,101,102,103]
+    EC_NormalTask   =   [100,101,102,103,514,515,516]
     EC_Week         =   [4,15,34]
     EC_Resource     =   [200,201,202]
     #EC_BigLuck =[21,8,14,19,25,27,20,26,22]
@@ -23,25 +24,26 @@ class GameSettings():
     WC_BigBadLuck    =  [6]
     WC_BadLuck       =  [5,4]
     WC_Week          =  [12,13,14]
-    WC_Normal        =  [0,1,2]
-                         #,3,7,8,9,10,11    
-    WC_Cards         =  [WC_Week,WC_Normal]
-    #[WC_Normal, WC_Week, WC_BadLuck]
+    WC_Challange     =  [0,1,2,3,7,10,11]
+    WC_Normal        =  [8,9,15]
+    WC_Cards         =  [WC_Week, WC_Normal, WC_Challange, WC_BadLuck]
+   
     # sum quantity should reach Steps number (40 max round * 2 player=80), it is still less because some cards have 2 worms
-    WC_Quantity      =  [20,1]
-    #[5,5,1]
+    WC_Quantity      = [5,5,5,2] 
+    #[20,10,1,1]
+    #[5,5,1] without lego
 #---------------------
 #lego
 #------------------------
-    EC_lego_Luck         =   [24, 512]
+    EC_lego_Luck         =   [25,517]
     EC_lego_Normal       =   [502,503,506,507,510,511]
-    EC_lego_NormalTask   =   [100,101,102,103]
-    EC_lego_Week         =   [500,501,504,505,508,509]
+    EC_lego_NormalTask   =   [20,21,22,100,101,102,103]
+    EC_lego_Week         =   [500,501,504,505,508,509, 512]
     EC_lego_Resource     =   [29,30,31]
 #--------------------------------------------------------------
     #EC_Cards        =   [EC_Luck,EC_Normal,EC_NormalTask,EC_Week]
     EC_Cards        =   [EC_lego_Luck,EC_lego_Normal,EC_lego_NormalTask,EC_lego_Week,EC_lego_Resource]
-    EC_Quantity     =   [3,30,30,10,2]    
+    EC_Quantity     =   [2,5,5,5,4] #[3,30,30,5,2]    
 #----------------------------
     resourceECtypes = ['Restart','Bazar','Freelancer']
     PCstatus = ['shutdown', 'CPU1Captured', '']
