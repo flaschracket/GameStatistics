@@ -7,7 +7,7 @@ class GameSettings():
     #NrOfWC = 15
     NrOfP = 2
     maxRound = 40
-    Testchangelog ="lego:      EC =  [1,15,15,10,2] "
+    Testchangelog ="lego:EC =  [3,30,30,10,2] "
    #"only EC-q=[1,4,3,2]-adding new task[103]"
     EC_Types = "Luck,Normal,Week"
     EC_Luck         =   [28,24,7,18]
@@ -41,7 +41,7 @@ class GameSettings():
 #--------------------------------------------------------------
     #EC_Cards        =   [EC_Luck,EC_Normal,EC_NormalTask,EC_Week]
     EC_Cards        =   [EC_lego_Luck,EC_lego_Normal,EC_lego_NormalTask,EC_lego_Week,EC_lego_Resource]
-    EC_Quantity     =   [1,15,15,10,2]    
+    EC_Quantity     =   [3,30,30,10,2]    
 #----------------------------
     resourceECtypes = ['Restart','Bazar','Freelancer']
     PCstatus = ['shutdown', 'CPU1Captured', '']
