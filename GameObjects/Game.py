@@ -25,7 +25,7 @@ class Game():
         for x in range(self.GS.NrOfP):
            name = 'Player '+ str(x)
            self.listofPlayers.append(Player(name))
-           print(self.listofPlayers[x])
+           #print(self.listofPlayers[x])
         self.winer = ''
         self.currentWormsSet = []
         self.gameID = 0

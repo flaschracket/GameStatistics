@@ -108,10 +108,10 @@ class WormCards(Cards):
         return(self)
 
     def WCFunc4(self):
-        self.playedWCName.append(' WC Name: T -=60 ')
+        self.playedWCName.append(' WC Name: T -=64 ')
         ind= [3]
         if self.ifPossibleToPlay(ind):
-            self.PV.varsValue[3] = self.PV.varsValue[3]-60 
+            self.PV.varsValue[3] = self.PV.varsValue[3]-64 
         return(self)
 
     def WCFunc5(self):

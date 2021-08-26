@@ -41,8 +41,11 @@ class EventCards(Cards):
   
     def asignVar(self,var,value):
         if var in self.PV.Nullindex:
+            #print("before" +self.PV.Nullindex)
             self.PV.Nullindex.remove(var)
+            #print("after" +self.PV.Nullindex)
         self.PV.varsValue[var]=value
+        
         return
             
     def selectNextEC(self):
@@ -110,287 +113,133 @@ class EventCards(Cards):
     #-------------------
     #A: input Cards
     #-------------------
-    # 2 digit number
     def ECFunc0(self):
-        self.ECName = 'EC:Input:2 digit number'
-        n = randrange(100)
-        i = self.selectVar()
-        self.asignVar(i,n)
+        self.ECName = 'EC:Input:A =3'
+        self.asignVar(0,3)
+        self.nOfWC = 0
+        return(self)
+
+    def ECFunc1(self):
+        self.ECName = 'EC:Input:A =7'
+        self.asignVar(0,7)
+        self.nOfWC = 0
+        return(self)
+        
+    def ECFunc2(self):
+        self.ECName = 'EC:Input:A =15'
+        self.asignVar(0,15)
+        self.nOfWC = 0
+        return(self)
+      
+    def ECFunc3(self):
+        self.ECName = 'EC:Input:A =32'
+        self.asignVar(0,32)
+        self.nOfWC = 0
+        return(self)
+    
+    
+    def ECFunc4(self):
+        self.ECName = 'EC:Input:A =64'
+        self.asignVar(0,64)
         self.nOfWC = 1
         return(self)
 
-    # 2 digit number less than 50   
-    def ECFunc1(self):
-        self.ECName = 'EC:Input:2 digit number<50'
-        n = randrange(50)
-        i = self.selectVar()
-        self.asignVar(i,n)
-        self.nOfWC = 1
-        return(self)
+    # B input
     
-    # 2 digit number less than 90       
-    def ECFunc2(self):
-        self.ECName = 'EC:Input:2 digit number<90'
-        n = randrange(90)
-        i = self.selectVar()
-        self.asignVar(i,n)
-        self.nOfWC = 1
-        return(self)
-    # 2 digit number less than 30    
-    def ECFunc3(self):
-        self.ECName = 'EC:Input:2 digit number<30'
-        n = randrange(30)
-        i = self.selectVar()
-        self.asignVar(i,n)
-        self.nOfWC = 1
-        return(self)
-    # A =5    
-    def ECFunc4(self):
-        self.ECName = 'EC:Input:A =5'
-        self.asignVar(0,5)
-        self.nOfWC = 1
-        return(self)
-    # A =10    
-    def ECFunc5(self):
-        self.ECName = 'EC:Input:A =10'
-        self.asignVar(0,10)
-        self.nOfWC = 1
-        return(self)
-      # A =25    
-    def ECFunc6(self):
-        self.ECName = 'EC:Input:A =25'
-        self.asignVar(0,25)
-        self.nOfWC = 0
-        return(self)
-    # A =40  
-    def ECFunc7(self):
-        self.ECName = 'EC:Input:A =40'
-        self.asignVar(0,40)
-        self.nOfWC = 0
-        return(self)
-    # A =75    
-    
-    def ECFunc8(self):
-        self.ECName = 'EC:Input:A =75'
-        self.asignVar(0,75)
-        self.nOfWC = 0
-        return(self)
-  
-    # sum of the dice of all players
-    def ECFunc9(self):
-        self.ECName = 'EC:Input: sum dice of all players'
-        a = 1
-        for i in range(self.GS.NrOfP):
-            a = a + randrange(6)
-        var = self.selectVar()
-        self.PV.varsValue[var] = a
-        self.nOfWC = 0
-        return(self)
-    # B = 10
-    
-    def ECFunc10(self):
-        self.ECName = 'EC:Input:B =10'
-        self.asignVar(1,10)
-        self.nOfWC = 0
-        return(self)
-    # B= 20
     def ECFunc11(self):
-        self.ECName = 'EC:Input:B =25'
-        self.asignVar(1,25)
+        self.ECName = 'EC:Input:B =8'
+        self.asignVar(1,8)
         self.nOfWC = 0
         return(self)
-    # B=30
+
     def ECFunc12(self):
-        self.ECName = 'EC:Input:B =30'
-        self.asignVar(1,30)
+        self.ECName = 'EC:Input:B =16'
+        self.asignVar(1,16)
         self.nOfWC = 0
         return(self)
-    # B=40
+
     def ECFunc13(self):
-        self.ECName = 'EC:Input:B =40'
-        self.asignVar(1,40)
+        self.ECName = 'EC:Input:B =20'
+        self.asignVar(1,20)
         self.nOfWC = 0
         return(self)
-    # B=70
+
     def ECFunc14(self):
-        self.ECName = 'EC:Input:B =70'
-        self.asignVar(1,70)
-       # self.nOfWC = 0
+        self.ECName = 'EC:Input:B =32'
+        self.asignVar(1,32)
+        self.nOfWC = 0
+        return(self)
+
+    def ECFunc15(self):
+        self.ECName = 'EC:Input:B =64'
+        self.asignVar(1,64)
         self.nOfWC = 1
         return(self)
-    # C=5
-    def ECFunc15(self):
-        self.ECName = 'EC:Input:C =5'
-        self.asignVar(2,5)
+    # C Input
+    def ECFunc21(self):
+        self.ECName = 'EC:Input:C =4'
+        self.asignVar(2,4)
         self.nOfWC = 0
         return(self)
     # C=15
-    def ECFunc16(self):
+    def ECFunc22(self):
+        self.ECName = 'EC:Input:C = 7'
+        self.asignVar(2,7)
+        self.nOfWC = 0
+        return(self)
+    # C=25
+    def ECFunc23(self):
         self.ECName = 'EC:Input:C =15'
         self.asignVar(2,15)
         self.nOfWC = 0
         return(self)
-    # C=25
-    def ECFunc17(self):
-        self.ECName = 'EC:Input:C =25'
-        self.asignVar(2,25)
-        self.nOfWC = 0
-        return(self)
     # C=40
-    def ECFunc18(self):
+    def ECFunc24(self):
         self.ECName = 'EC:Input:C =40'
         self.asignVar(2,40)
         self.nOfWC = 0
         return(self)
     # C=75
-    def ECFunc19(self):
-        self.ECName = 'EC:Input:C =75'
-        self.asignVar(2,75)
-        #self.nOfWC = 0
-        self.nOfWC = 1
-        return(self)
-    
-    def ECFunc34(self):
-        self.ECName = 'EC34:Input:B =5'
-        self.asignVar(1,5)
-        self.nOfWC = 0
-        return(self)
-    def ECFunc35(self):
-        self.ECName = 'EC35:Input:C =10'
-        self.asignVar(2,10)
-        self.nOfWC = 0
-        return(self)
-
-    def ECFunc36(self):
-        self.ECName = 'EC34:Input:A =15'
-        self.asignVar(0,15)
-        self.nOfWC = 0
-        return(self)
-
-    def ECFunc37(self):
-        self.ECName = 'EC34:Input:B =15'
-        self.asignVar(1,15)
-        self.nOfWC = 0
-        return(self)
-
-    #-------------------
-    #Task cards functions
-    #-------------------
-
-    def ECFunc20(self):
-        self.ECName = 'aEC:Task: T += A+B'
-        ind= [0,1,3]
-        if not self.checknull(ind,True):
-                self.PV.varsValue[3] = np.sum(self.PV.varsValue[ind])
-        #self.nOfWC = 0
-        self.nOfWC = 1
-        return(self)
-
-    def ECFunc21(self):
-        self.ECName = 'EC:Task: T = A(*)+B'
-        ind = [0,1]
-        if not self.checknull(ind,False):
-            self.PV.varsValue[3] = self.PV.varsValue[0] * self.PV.varsValue[1]
-        #self.nOfWC = 0
-        self.nOfWC = 1   
-        return(self)
-
-    def ECFunc22(self):
-        self.ECName = 'EC:Task: T += A+B+C' 
-
-        ind =[0,1,2,3]   
-        if not self.checknull(ind,True):
-            self.PV.varsValue[3] = sum(self.PV.varsValue)
-        #self.nOfWC = 0
-        self.nOfWC = 1   
-        return(self)
-
-    def ECFunc23(self):
-        self.ECName = 'EC:Task: T = xx9x'        
-        ind =[3]
-        if not self.checknull(ind,False):
-            t = self.PV.varsValue[3]
-            strt = str(t)
-            a= strt[0]
-            b= strt[3:2]
-            strt =a+ '9'+ b
-            self.PV.varsValue[3] = int(strt)
-        #self.nOfWC = 0
-        self.nOfWC = 1   
-        return(self)
-   
-    def ECFunc24(self):
-        self.ECName = 'EC:Task: T += sum all/2'
-        ind = [0,1,2]
-        
-        if not self.checknull(ind,True):
-            self.PV.varsValue[3] = self.PV.varsValue[3]+np.sum(self.PV.varsValue[ind])/2
-        #self.nOfWC = 0
-        self.nOfWC = 2
-  
-        return(self)
- 
     def ECFunc25(self):
-        self.ECName = 'EC:Task: T += sum all'
-        ind =[0,1,2,3]
-        if not self.checknull(ind,True):
-            self.PV.varsValue[3] = sum(self.PV.varsValue)
-        #self.nOfWC = 0
-        self.nOfWC = 2
-        return(self)
-
-    def ECFunc26(self):
-        self.ECName = 'EC:Task: T += B+((2*)A)'
-        ind = [3,1]
-        indif =[3,1,2]
-        if not self.checknull(indif,True):    
-            self.PV.varsValue[3]=np.sum(self.PV.varsValue[ind])+(2*self.PV.varsValue[0])
-        #self.nOfWC = 0
-        self.nOfWC = 2
-        return (self)
-
-    def ECFunc27(self):
-        self.ECName = 'EC:Task: T += (2*)(A+B+C)'
-        ind = [0,1,2]
-        indif = [0,1,2,3]
-        if not self.checknull(indif,True):
-             self.PV.varsValue[3]=2*(np.sum(self.PV.varsValue[ind]))+(self.PV.varsValue[3])
-        self.nOfWC = 0
-             #self.nOfWC = 2
-        return self
-   
-    def ECFunc28(self):
-        self.ECName = 'EC:Task: x = +10 ! total'
-        indif = [0,1,2]
-        if not self.checknull(indif,True):
-            self.PV.varsValue[0]= (self.PV.varsValue[0]) + 10
-            self.PV.varsValue[1]= (self.PV.varsValue[1]) + 10
-            self.PV.varsValue[2]= (self.PV.varsValue[2]) + 10
-        #self.nOfWC = 0
-        self.nOfWC = 2
-        return self
-
-    #-------------------
-    #resource functions
-    #-------------------
-    def ECFunc29(self):
-        self.ECName = 'EC:Resource: Restart'
-        self.reservedEC.add(29)
-        self.nOfWC = 0
-        return(self)
-
-    def ECFunc30(self):
-        self.ECName = 'EC:Resource: Freelancer'
-        self.reservedEC.add(30)
-        self.nOfWC = 0
+        self.ECName = 'EC:Input:C =70'
+        self.asignVar(2,70)
+        self.nOfWC = 1
         return(self)
 
     def ECFunc31(self):
-        self.ECName = 'EC:Resource: Bazar'
-        self.reservedEC.add(31)
+        self.ECName = 'EC31:Input:T=A'
+        indif = [0]
+        if not self.checknull(indif,True):
+                        self.asignVar(3,self.PV.varsValue[0])
         self.nOfWC = 0
-        return(self)
+        return self
+   
+    def ECFunc32(self):
+        self.ECName = 'EC32:T=B'
+        
+        indif = [1]
+        if not self.checknull(indif,True):
+             self.asignVar(3,self.PV.varsValue[1])
+        self.nOfWC = 0
+        return self
+    
+    def ECFunc33(self):
+        self.ECName = 'EC33:T=C'
+        
+        indif = [2]
+        if not self.checknull(indif,True):
+             self.asignVar(3,self.PV.varsValue[2])
+        self.nOfWC = 0
+        return self
 
+    def ECFunc34(self):
+        self.ECName = 'EC34 :T=8'
+        self.asignVar(3,8) 
+        self.nOfWC = 0
+        return self
+    #-------------------
+    #Task cards functions
+    #-------------------
     #-------------------
     #--Task funcitons begin with 100
     #-------------------
@@ -422,147 +271,80 @@ class EventCards(Cards):
         return self
 
     def ECFunc103(self):
-        self.ECName = 'EC102:Task:T+=9'
+        self.ECName = 'EC102:Task:T+=8'
         indif = [3]
         if not self.checknull(indif,True):
-             self.PV.varsValue[3]= 9 +(self.PV.varsValue[3])
+             self.PV.varsValue[3]= 8 +(self.PV.varsValue[3])
         self.nOfWC = 0
         return self
-#-----------------------------
-# lego
-#-----------------------------
-#input
-#--------------------------------
-    def ECFunc500(self):
-        self.ECName = 'EC:Input:A =3'
-        self.asignVar(0,3)
-        self.nOfWC = 0
-        return(self)
-    
-    
-    # A =6    
-    def ECFunc501(self):
-        self.ECName = 'EC:Input:A =6'
-        self.asignVar(0,6)
-        self.nOfWC = 0
-        return(self)
 
-          # A =14    
-    def ECFunc502(self):
-        self.ECName = 'EC:Input:A = 14'
-        self.asignVar(0,14)
-        self.nOfWC = 0
-        return(self)
-    
-    # A =14  
-    def ECFunc503(self):
-        self.ECName = 'EC:Input:A = 30'
-        self.asignVar(0,30)
-        self.nOfWC = 0
-        return(self)
-    # B =3    
-    def ECFunc504(self):
-        self.ECName = 'EC:Input:B =3'
-        self.asignVar(1,3)
-        self.nOfWC = 0
-        return(self)
-    
-    # B =6    
-    def ECFunc505(self):
-        self.ECName = 'EC:Input:B =6'
-        self.asignVar(1,6)
-        self.nOfWC = 0
-        return(self)
-
-          # B =14    
-    def ECFunc506(self):
-        self.ECName = 'EC:Input:B = 14'
-        self.asignVar(1,14)
-        self.nOfWC = 0
-        return(self)
-    
-    # B = 30  
-    def ECFunc507(self):
-        self.ECName = 'EC:Input:B = 30'
-        self.asignVar(1,30)
-        self.nOfWC = 0
-        return(self)
-
-    # C =3    
-    def ECFunc508(self):
-        self.ECName = 'EC:Input:C =3'
-        self.asignVar(2,3)
-        self.nOfWC = 0
-        return(self)
-    
-    # C =6    
-    def ECFunc509(self):
-        self.ECName = 'EC:Input:C =6'
-        self.asignVar(2,6)
-        self.nOfWC = 0
-        return(self)
-
-    # C =14    
-    def ECFunc510(self):
-        self.ECName = 'EC:Input:C = 14'
-        self.asignVar(2,14)
-        self.nOfWC = 0
-        return(self)
-    
-    # C = 30  
-    def ECFunc511(self):
-        self.ECName = 'EC:Input:C = 30'
-        self.asignVar(2,30)
-        self.nOfWC = 0
-        return(self)
-    
-    def ECFunc517(self):
-        self.ECName = 'EC:Input:C = 60'
-        self.asignVar(2,60)
-        self.nOfWC = 2
-        return (self)
-    #---------------
-    #task
-    #-------------
-    def ECFunc512(self):
-        self.ECName = 'EC:Task: x = 9 + ! total'
-        indif = [0,1,2]
-        if not self.checknull(indif,True):
-            self.PV.varsValue[0]= (self.PV.varsValue[0]) + 9
-            self.PV.varsValue[1]= (self.PV.varsValue[1]) + 9
-            self.PV.varsValue[2]= (self.PV.varsValue[2]) + 9
-        self.nOfWC = 1
-        
-        return self
-
-    def ECFunc513(self):
-        self.ECName = 'EC:Task: T += A+B'
+    def ECFunc104(self):
+        self.ECName = 'aEC:Task: T += A+B'
         ind= [0,1,3]
         if not self.checknull(ind,True):
                 self.PV.varsValue[3] = np.sum(self.PV.varsValue[ind])
         self.nOfWC = 1
         return(self)
 
-    def ECFunc514(self):
-        self.ECName = 'EC:Task: A += B'
-        ind= [0,1]
-        if not self.checknull(ind,True):
-                self.PV.varsValue[0] = np.sum(self.PV.varsValue[ind])
-        self.nOfWC = 0
-        return(self)
 
-    def ECFunc515(self):
-        self.ECName = 'EC:Task: B += A+C'
-        ind= [0,1,2]
+    def ECFunc105(self):
+        self.ECName = 'EC:Task: T += A+B+C' 
+        ind =[0,1,2,3]   
         if not self.checknull(ind,True):
-                self.PV.varsValue[1] = np.sum(self.PV.varsValue[ind])
+            self.PV.varsValue[3] = sum(self.PV.varsValue)
+        self.nOfWC = 2   
+        return(self)
+ 
+    def ECFunc106(self):
+        self.ECName = 'EC:Task: T += sum all'
+        ind =[0,1,2,3]
+        if not self.checknull(ind,True):
+            self.PV.varsValue[3] = sum(self.PV.varsValue)
+        #self.nOfWC = 0
+        self.nOfWC = 2
+        return(self)
+   
+    def ECFunc107(self):
+        self.ECName = 'EC:Task: x = +8 ! total'
+        indif = [0,1,2]
+        if not self.checknull(indif,True):
+            self.PV.varsValue[0]= (self.PV.varsValue[0]) + 8
+            self.PV.varsValue[1]= (self.PV.varsValue[1]) + 8
+            self.PV.varsValue[2]= (self.PV.varsValue[2]) + 8
+        #self.nOfWC = 0
+        self.nOfWC = 1
+        return self
+
+
+
+    def ECFunc112(self):
+        self.ECName = 'aEC:Task: T = A+B'
+        ind = [1,0]
+        indif= [0,1,3]
+        if not self.checknull(indif,True):
+                self.PV.varsValue[3] = np.sum(self.PV.varsValue[ind])
         self.nOfWC = 1
         return(self)
-    def ECFunc516(self):
-        self.ECName = 'EC:Task: C += A'
-        ind= [0,2]
-        if not self.checknull(ind,True):
-                self.PV.varsValue[2] = np.sum(self.PV.varsValue[ind])
+
+
+
+    #-------------------
+    #resource functions
+    #-------------------
+    def ECFunc200(self):
+        self.ECName = 'EC:Resource: Restart'
+        self.reservedEC.add(29)
         self.nOfWC = 0
         return(self)
 
+    def ECFunc201(self):
+        self.ECName = 'EC:Resource: Freelancer'
+        self.reservedEC.add(30)
+        self.nOfWC = 0
+        return(self)
+
+    def ECFunc202(self):
+        self.ECName = 'EC:Resource: Bazar'
+        self.reservedEC.add(31)
+        self.nOfWC = 0
+        return(self)
