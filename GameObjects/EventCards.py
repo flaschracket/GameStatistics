@@ -565,3 +565,4 @@ class EventCards(Cards):
                 self.PV.varsValue[2] = np.sum(self.PV.varsValue[ind])
         self.nOfWC = 0
         return(self)
+
