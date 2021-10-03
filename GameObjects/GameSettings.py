@@ -1,6 +1,6 @@
 from enum import Enum
 class GameSettings():
-    sampleQuantity = 100
+    sampleQuantity = 3
     winGoal = 100
     #it should be one more of last function number because the functions name are begining with number 0
     #NrofEC = 32

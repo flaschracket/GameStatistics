@@ -319,7 +319,7 @@ class EventCards(Cards):
 
     def ECFunc112(self):
         self.ECName = 'aEC:Task: T = A+B'
-        ind = [1,0]
+        ind = [0,1]
         indif= [0,1,3]
         if not self.checknull(indif,True):
                 self.PV.varsValue[3] = np.sum(self.PV.varsValue[ind])
