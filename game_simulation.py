@@ -3,6 +3,7 @@ from random import randrange
 from GameObjects.Player import *
 from GameObjects.Game import *
 from GameObjects.Cards import *
+
 #import GameObjects.Cards import *
 
 from copy import deepcopy
@@ -23,6 +24,8 @@ while sampleCounter <= GS.sampleQuantity:
     mygame.gameSettingsID = gsID
     mygame.gameID = mssql.insertGame(mygame)
     firstdeck = mygame.thisStep.EC.playingdeck
+ 
+ 
     #play
     print("---Game : "+str(sampleCounter)+"---")
     condition = True

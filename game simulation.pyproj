@@ -22,6 +22,12 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="DB\dbCards.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DB\database.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="GameObjects\Cards.py">
       <SubType>Code</SubType>
     </Compile>
@@ -56,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="GameObjects\" />
+    <Folder Include="DB\" />
   </ItemGroup>
   <ItemGroup>
     <Interpreter Include="env\">
