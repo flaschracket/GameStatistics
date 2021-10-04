@@ -39,14 +39,20 @@ class EventCards(Cards):
         return self
 
   
-    def asignVar(self,var,value):
+    def asignValuetovar(self,var,value):
         if var in self.PV.Nullindex:
-            #print("before" +self.PV.Nullindex)
             self.PV.Nullindex.remove(var)
-            #print("after" +self.PV.Nullindex)
-        self.PV.varsValue[var]=value
-        
+        self.PV.varsValue[var]=value        
         return
+
+    def asignVartoVar(self,goalvar,var):
+        if goalvar in self.PV.Nullindex:
+            self.PV.Nullindex.remove(goalvar)
+        if var in self.PV.Nullindex:
+            self.PV.Nullindex.append(goalvar)
+        else:
+            self.PV.varsValue[goalvar] = self.PV.varsValue[var]
+        return self
             
     def selectNextEC(self):
         self.reset()
@@ -115,32 +121,32 @@ class EventCards(Cards):
     #-------------------
     def ECFunc0(self):
         self.ECName = 'EC:Input:A =3'
-        self.asignVar(0,3)
+        self.asignValuetovar(0,3)
         self.nOfWC = 0
         return(self)
 
     def ECFunc1(self):
         self.ECName = 'EC:Input:A =7'
-        self.asignVar(0,7)
+        self.asignValuetovar(0,7)
         self.nOfWC = 0
         return(self)
         
     def ECFunc2(self):
         self.ECName = 'EC:Input:A =15'
-        self.asignVar(0,15)
+        self.asignValuetovar(0,15)
         self.nOfWC = 0
         return(self)
       
     def ECFunc3(self):
         self.ECName = 'EC:Input:A =32'
-        self.asignVar(0,32)
+        self.asignValuetovar(0,32)
         self.nOfWC = 0
         return(self)
     
     
     def ECFunc4(self):
         self.ECName = 'EC:Input:A =64'
-        self.asignVar(0,64)
+        self.asignValuetovar(0,64)
         self.nOfWC = 1
         return(self)
 
@@ -148,93 +154,85 @@ class EventCards(Cards):
     
     def ECFunc11(self):
         self.ECName = 'EC:Input:B =8'
-        self.asignVar(1,8)
+        self.asignValuetovar(1,8)
         self.nOfWC = 0
         return(self)
 
     def ECFunc12(self):
         self.ECName = 'EC:Input:B =16'
-        self.asignVar(1,16)
+        self.asignValuetovar(1,16)
         self.nOfWC = 0
         return(self)
 
     def ECFunc13(self):
         self.ECName = 'EC:Input:B =20'
-        self.asignVar(1,20)
+        self.asignValuetovar(1,20)
         self.nOfWC = 0
         return(self)
 
     def ECFunc14(self):
         self.ECName = 'EC:Input:B =32'
-        self.asignVar(1,32)
+        self.asignValuetovar(1,32)
         self.nOfWC = 0
         return(self)
 
     def ECFunc15(self):
         self.ECName = 'EC:Input:B =64'
-        self.asignVar(1,64)
+        self.asignValuetovar(1,64)
         self.nOfWC = 1
         return(self)
     # C Input
     def ECFunc21(self):
         self.ECName = 'EC:Input:C =4'
-        self.asignVar(2,4)
+        self.asignValuetovar(2,4)
         self.nOfWC = 0
         return(self)
     # C=15
     def ECFunc22(self):
         self.ECName = 'EC:Input:C = 7'
-        self.asignVar(2,7)
+        self.asignValuetovar(2,7)
         self.nOfWC = 0
         return(self)
     # C=25
     def ECFunc23(self):
         self.ECName = 'EC:Input:C =15'
-        self.asignVar(2,15)
+        self.asignValuetovar(2,15)
         self.nOfWC = 0
         return(self)
     # C=40
     def ECFunc24(self):
         self.ECName = 'EC:Input:C =40'
-        self.asignVar(2,40)
+        self.asignValuetovar(2,40)
         self.nOfWC = 0
         return(self)
     # C=75
     def ECFunc25(self):
         self.ECName = 'EC:Input:C =70'
-        self.asignVar(2,70)
+        self.asignValuetovar(2,70)
         self.nOfWC = 1
         return(self)
 
     def ECFunc31(self):
         self.ECName = 'EC31:Input:T=A'
-        indif = [0]
-        if not self.checknull(indif,True):
-                        self.asignVar(3,self.PV.varsValue[0])
+        self.asignVartoVar(3,0)
         self.nOfWC = 0
         return self
    
     def ECFunc32(self):
-        self.ECName = 'EC32:T=B'
-        
-        indif = [1]
-        if not self.checknull(indif,True):
-             self.asignVar(3,self.PV.varsValue[1])
+        self.ECName = 'EC32:T=B'       
+        self.asignVartoVar(3,1)
         self.nOfWC = 0
         return self
     
     def ECFunc33(self):
         self.ECName = 'EC33:T=C'
-        
-        indif = [2]
-        if not self.checknull(indif,True):
-             self.asignVar(3,self.PV.varsValue[2])
+        self.asignVartoVar(3,2)
         self.nOfWC = 0
         return self
 
     def ECFunc34(self):
         self.ECName = 'EC34 :T=8'
-        self.asignVar(3,8) 
+        self.asignValuetovar(3,8) 
         self.nOfWC = 0
         return self
     #-------------------
