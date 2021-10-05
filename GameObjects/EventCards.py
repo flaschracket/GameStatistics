@@ -92,21 +92,26 @@ class EventCards(Cards):
                 r=0
         return r
 
-   #name should change because it choose variable
-    def checknull(self,ind,add):
+   #name should change because it check and manage null
+    def checknull(self,ind,status,resultvar):
         check = False
-        if 3  in self.PV.Nullindex:                
-                check = True
-        else:
-            a= any(item in ind for item in self.PV.Nullindex)
-            if   a==True:
-                check= True
-                if add== True:
-                    self.PV.Nullindex.append(3)
-            
-       # return check        
-             
-                 
+        a = any(item in ind for item in self.PV.Nullindex)
+        if a == True:
+            check = True
+        #1. status ==0: only check null A+=8- no special change
+        #2. check null to change result but not null of destination(remove null of destination) T= A+B        
+        if status == 1:
+            if a== True: 
+                if not resultvar in self.PV.Nullindex:
+                    self.PV.Nullindex.append(resultvar)
+            else:#a= false
+                if resultvar in self.PV.Nullindex:
+                    self.PV.Nullindex.remove(resultvar)
+       
+        #3. check null for effect of destination T+=A
+        if status == 2:
+            if check == True and not resultvar  in self.PV.Nullindex:                
+                self.PV.Nullindex.append(resultvar)
         return (check)
     
     def playFunc(self,s):
@@ -248,8 +253,8 @@ class EventCards(Cards):
     def ECFunc100(self):
         self.ECName = 'EC100:Task:T+=A'
         ind = [0]
-        indif = [0,3]
-        if not self.checknull(indif,True):
+        indif = [0]
+        if not self.checknull(indif,2,3):
              self.PV.varsValue[3]=np.sum(self.PV.varsValue[ind])+(self.PV.varsValue[3])
         #self.nOfWC = 0
         return self
@@ -257,8 +262,8 @@ class EventCards(Cards):
     def ECFunc101(self):
         self.ECName = 'EC101:Task:T+=B'
         ind = [1]
-        indif = [1,3]
-        if not self.checknull(indif,True):
+        indif = [1]
+        if not self.checknull(indif,2,3):
              self.PV.varsValue[3]=np.sum(self.PV.varsValue[ind])+(self.PV.varsValue[3])
         #self.nOfWC = 0
         return self
@@ -266,8 +271,8 @@ class EventCards(Cards):
     def ECFunc102(self):
         self.ECName = 'EC102:Task:T+=C'
         ind = [2]
-        indif = [2,3]
-        if not self.checknull(indif,True):
+        indif = [2]
+        if not self.checknull(indif,2,3):
              self.PV.varsValue[3]=np.sum(self.PV.varsValue[ind])+(self.PV.varsValue[3])
         #self.nOfWC = 0
         return self
@@ -275,15 +280,15 @@ class EventCards(Cards):
     def ECFunc103(self):
         self.ECName = 'EC102:Task:T+=8'
         indif = [3]
-        if not self.checknull(indif,True):
+        if not self.checknull(indif,0,3):
              self.PV.varsValue[3]= 8 +(self.PV.varsValue[3])
         #self.nOfWC = 0
         return self
 
     def ECFunc104(self):
         self.ECName = 'aEC:Task: T += A+B'
-        ind= [0,1,3]
-        if not self.checknull(ind,True):
+        ind= [0,1]
+        if not self.checknull(ind,2,3):
                 self.PV.varsValue[3] = np.sum(self.PV.varsValue[ind])
         #self.nOfWC = 1
         return(self)
@@ -291,31 +296,30 @@ class EventCards(Cards):
 
     def ECFunc105(self):
         self.ECName = 'EC:Task: T += A+B+C' 
-        ind =[0,1,2,3]   
-        if not self.checknull(ind,True):
+        ind =[0,1,2]   
+        if not self.checknull(ind,2,3):
             self.PV.varsValue[3] = sum(self.PV.varsValue)
         #self.nOfWC = 2   
         return(self)
  
     def ECFunc106(self):
         self.ECName = 'EC:Task: T += sum all'
-        ind =[0,1,2,3]
-        if not self.checknull(ind,True):
+        ind =[0,1,2]
+        if not self.checknull(ind,2,3):
             self.PV.varsValue[3] = sum(self.PV.varsValue)
         #self.nOfWC = 2
         return(self)
    
     def ECFunc107(self):
-        self.ECName = 'EC:Task: x += 8 ! total'
+        self.ECName = 'EC:Task: x += 8 ! total'        
+        if not self.checknull([0],0,-1):
+            self.PV.varsValue[0] = (self.PV.varsValue[0]) + 8
         
-        if not self.checknull([0],True):
-            self.PV.varsValue[0]= (self.PV.varsValue[0]) + 8
+        if not self.checknull([1],0,-1):
+            self.PV.varsValue[1] = (self.PV.varsValue[1]) + 8
         
-        if not self.checknull([1],True):
-            self.PV.varsValue[1]= (self.PV.varsValue[1]) + 8
-        
-        if not self.checknull([2],True):
-            self.PV.varsValue[2]= (self.PV.varsValue[2]) + 8
+        if not self.checknull([2],0,-1):
+            self.PV.varsValue[2] = (self.PV.varsValue[2]) + 8
         #self.nOfWC = 1
         return self
 
@@ -325,7 +329,7 @@ class EventCards(Cards):
         self.ECName = 'aEC:Task: T = A+B'
         ind = [0,1]
         indif= [0,1]
-        if not self.checknull(indif,True):
+        if not self.checknull(indif,1,3):
                 self.PV.varsValue[3] = np.sum(self.PV.varsValue[ind])
         #self.nOfWC = 1
         return(self)

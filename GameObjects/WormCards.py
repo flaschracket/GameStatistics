@@ -152,15 +152,15 @@ class WormCards(Cards):
         return(self)
 
     def WCFunc9(self):
-        self.playedWCName.append(' WC Name: A -= 6 ')
+        self.playedWCName.append(' WC Name: A = -6 ')
         self.assignVar(0,-6) 
         return(self)
     def WCFunc15(self):
-        self.playedWCName.append(' WC Name: C=-6 ')
+        self.playedWCName.append(' WC Name: C= -6 ')
         self.assignVar(2,-6) 
         return(self)
     def WCFunc8(self):
-        self.playedWCName.append(' WC Name: B=-6 ')
+        self.playedWCName.append(' WC Name: B= -6 ')
         self.assignVar(1,-6)
         return(self)
     def WCFunc12(self):
