@@ -1,38 +1,21 @@
 from enum import Enum
+
 class GameSettings():
-    sampleQuantity = 3
-    winGoal = 100
+    sampleQuantity = 100
+    winGoal = 128
     #it should be one more of last function number because the functions name are begining with number 0
-    #NrofEC = 32
-    #NrOfWC = 15
     NrOfP = 2
     maxRound = 40
-    Testchangelog =" back"
-   #"only EC-q=[1,4,3,2]-adding new task[103]"
-
-    EC_Types = "Luck,Normal,Week"
-    EC_Luck         =   [28,24,7,18]
-    EC_Normal       =   [5,10,35,37,36,16,6,11,17,12]
-    EC_NormalTask   =   [100,101,102,103]
-    EC_Week         =   [4,15,34]
-    EC_Resource     =   [200,201,202]
-    #EC_BigLuck =[21,8,14,19,25,27,20,26,22]
-    
-
-
-    WC_Types = "Bad luck, normal, week"
-    #WC_BigBadLuck    =  [6]
+    Testchangelog =" no resource-no worm- week 3 to 4"
     WC_BadLuck       =  [6,5,4]
     WC_Week          =  [12,13,14]
     WC_Challange     =  [0,1,2,3,7,10,11]
     WC_Normal        =  [8,9,15]
-    WC_Cards         =  [WC_Week, WC_Normal, WC_Challange, WC_BadLuck]
-   
-    # sum quantity should reach Steps number (40 max round * 2 player=80), it is still less because some cards have 2 worms
-    WC_Quantity      = [8,4,4,1] 
-    #[20,10,1,1]
-    #[5,5,1] without lego
-#---------------------
+    WC_Cards         =  [WC_Week, WC_Normal, WC_Challange, WC_BadLuck]   
+    WC_Quantity      = [10,1,1,1] 
+
+# sum quantity should reach Steps number (40 max round * 2 player=80), it is still less because some cards have 2 worms
+#------------------------
 #lego
 #------------------------
     EC_lego_Luck         =   [4,15,25,104,105,106]
@@ -42,10 +25,8 @@ class GameSettings():
     EC_lego_Week         =   [0,1,11,21,22]
     EC_lego_Resource     =   [200,201,202]
 #--------------------------------------------------------------
-    #EC_Cards        =   [EC_Luck,EC_Normal,EC_NormalTask,EC_Week]
     EC_Cards        =   [EC_lego_Luck,EC_lego_Normal,EC_lego_NormalTask,EC_ChalangeInput,EC_lego_Week,EC_lego_Resource]
-    EC_Quantity     =   [3,6,6,6,3,3] #[3,30,30,5,2]    
-    #12+40+50+10+6
+    EC_Quantity     =   [1,2,2,6,4,0] 
 #----------------------------
     resourceECtypes = ['Restart','Bazar','Freelancer']
     PCstatus = ['shutdown', 'CPU1Captured', '']
@@ -54,10 +35,10 @@ class GameSettings():
 
     
 
-    def _init_(self):
-       ECCollection2 =  dict()
-       self.initial_cards(1,10,3)
-       return self    
+  #  def _init_(self):
+   #    ECCollection2 =  dict()
+    #   self.initial_cards(1,10,3)
+     #  return self    
 #------------------
 #----------------
     def ifWined(self,total):
@@ -77,8 +58,8 @@ class GameSettings():
     def primary_PC(self):
          return self.MainRAM, self.CPU1
     
-    class ResourceECTypes(Enum): 
-        Restart = 0
-        Bazar = 1
-        Freelancer = 2
+#    class ResourceECTypes(Enum): 
+#        Restart = 0
+#        Bazar = 1
+#        Freelancer = 2
         

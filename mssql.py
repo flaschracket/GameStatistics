@@ -23,11 +23,13 @@ def listall():
     return True
     
 def insertGameSettings(gs):
+    ECtype = str(gs.EC_Cards)
+    WCtype = str(gs.WC_Cards)
     myconn = connectdb()
     cursor = myconn.cursor()
     cursor.execute("INSERT INTO minibit.dbo.GameSettings VALUES (?,?,?,?,?,?,?,?,?,?,?,?)", 
                    ((gs.Testchangelog),gs.sampleQuantity,gs.winGoal,
-                     gs.NrOfP,gs.maxRound,gs.EC_Types,'NULL',0,gs.WC_Types,'NULL',0,'NULL'))
+                     gs.NrOfP,gs.maxRound,ECtype,'NULL',0,WCtype,'NULL',0,'NULL'))
     cursor.execute("SELECT @@IDENTITY")
     for row in cursor:
         settingsID = row[0]
