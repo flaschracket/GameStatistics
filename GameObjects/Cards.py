@@ -11,7 +11,7 @@ class Cards():
         #self.quantites = np.array([]).astype(int)
         #self.mycards   = np.array([]).astype(int)        
         self.mycards = kwargs.get('cardsVaraity', mycards)
-        self.quantites = kwargs.get('quantities', quantity)
+        self.quantites = kwargs.get('quantities', quantity)        
         self.makelistofcards()      
         return
     

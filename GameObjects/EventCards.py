@@ -18,9 +18,12 @@ class EventCards(Cards):
         self.nOfWC = 0
         self.playingdeck = playingdeck
         if len(self.playingdeck)==0:
-            cards  = self.GS.EC_Cards
-            q    = self.GS.EC_Quantity
-            Cards.__init__(self, cardsVaraity = cards, quantities =  q )
+            mycards = dbCards()
+            #cards  = self.GS.EC_Cards
+            #q    = self.GS.EC_Quantity
+            cats = mycards.selectAllCategoryID()
+            q = mycards.selectAllCategoryQuantity()
+            Cards.__init__(self, cardsVaraity = cats, quantities =  q )
             self.playingdeck = self.deck
         self.shuffle()        
         return
@@ -32,6 +35,7 @@ class EventCards(Cards):
         mycards = dbCards()
         q = mycards.selectWCQuantity(functionN)
         return q
+
     def updateEC(self, vars,pc,rc):
         self.PV = copy.deepcopy(vars)        
         self.reservedEC = rc

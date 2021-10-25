@@ -25,4 +25,25 @@ class dbCards(object):
             
         return q
 
+    def selectAllCategoryID(self):
+        myconn = self.connectdb()
+        cursor = myconn.cursor()
+        cursor.execute('SELECT ID FROM [minibit].[dbo].[Category]')
+        cats = cursor.fetchall()
+        return cats
+
+    def selectAllCategoryQuantity(self):
+        myconn = self.connectdb()
+        cursor = myconn.cursor()
+        cursor.execute('SELECT Quantity FROM [minibit].[dbo].[Category]')
+        cats = cursor.fetchall()
+        return cats
+
+    def selectCardsofCategory(self, categoryID):
+        myconn = self.connectdb()
+        cursor = myconn.cursor()
+        cursor.execute('SELECT FunctionNumber FROM [minibit].[dbo].[CardCategory] join [minibit].[dbo].[Cards] on [minibit].[dbo].[CardCategory].CardID = [minibit].[dbo].[Cards].ID where categoryID =' + str(categoryID))
+        cards = cursor.fetchall()
+        return cards
+
 
