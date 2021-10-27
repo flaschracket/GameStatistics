@@ -17,13 +17,10 @@ class EventCards(Cards):
         self.ECName = ''
         self.nOfWC = 0
         self.playingdeck = playingdeck
-        if len(self.playingdeck)==0:
-            mycards = dbCards()
-            #cards  = self.GS.EC_Cards
-            #q    = self.GS.EC_Quantity
-            cats = mycards.selectAllCategoryID()
-            q = mycards.selectAllCategoryQuantity()
-            Cards.__init__(self, cardsVaraity = cats, quantities =  q )
+        if len(self.playingdeck)==0:            
+            cards  = self.GS.EC_Cards
+            q    = self.GS.EC_Quantity
+            Cards.__init__(self, cardsVaraity = cards, quantities =  q )
             self.playingdeck = self.deck
         self.shuffle()        
         return
