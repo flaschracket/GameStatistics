@@ -9,23 +9,25 @@ from GameObjects.Cards import *
 from copy import deepcopy
 import mssql
 
-tempply = Player('')
+# initial gamesettings
 GS = GameSettings()
+
+#tempply = Player('')
 sampleCounter = 0
 
-previousStep = Step()
+#previousStep = Step()
 
-#initial
+#connect to DB
+#atabase.connectdb()
 
 print("Hello From Game Simulation! Data Generation is begining")
-gsID = mssql.insertGameSettings(GS)
+GS.gsID = mssql.insertGameSettings(GS)
+firstdeck = GS.currentECdeck
+#GS.printall()
 while sampleCounter <= GS.sampleQuantity:
-    mygame = Game(sampleCounter,previousStep)
-    mygame.gameSettingsID = gsID
-    mygame.gameID = mssql.insertGame(mygame)
-    firstdeck = mygame.thisStep.EC.playingdeck
- 
- 
+    mygame = Game(sampleCounter,GS)
+    firstdeck = GS.currentECdeck    
+#    firstdeck = mygame.thisStep.EC.playingdeck
     #play
     print("---Game : "+str(sampleCounter)+"---")
     condition = True
@@ -39,4 +41,4 @@ while sampleCounter <= GS.sampleQuantity:
     print('winner : ' +mygame.winer )
     print('------------------------------')
     sampleCounter = sampleCounter +1
-mssql.update_GameSettings(firstdeck, gsID)
+#mssql.update_GameSettings(firstdeck, GS.gsID)

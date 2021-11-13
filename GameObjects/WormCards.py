@@ -10,22 +10,26 @@ from collections import Counter
 class WormCards(Cards):
     """description of class"""
 
-    def __init__(self,vars,wcdeck):
+    def __init__(self,vars,gamesettings):
         self.PV = copy.deepcopy(vars)
         self.playedWCName = []    
         self.playedwc = np.array([]).astype(int)
         self.nofRoundspausing = 0
         self.damages = []
-        self.GS = GameSettings()        
+        self.GS = copy.deepcopy(gamesettings)
         self.currentWC = 0
-        self.playingdeck = wcdeck
-        self.firstdeck = list()
-        if len(self.playingdeck)==0:
-            cards  = self.GS.WC_Cards
-            q    = self.GS.WC_Quantity
-            Cards.__init__(self, cardsVaraity = cards, quantities =  q )
-            self.playingdeck = self.deck
-        self.shuffle()
+        self.playingdeck = self.GS.currentWCdeck
+
+#        self.GS = GameSettings()        
+
+#        self.playingdeck = wcdeck
+        #self.firstdeck = list()
+        #if len(self.playingdeck)==0:
+         #   cards  = self.GS.WC_Cards
+          #  q    = self.GS.WC_Quantity
+           # Cards.__init__(self, cardsVaraity = cards, quantities =  q )
+            #self.playingdeck = self.deck
+        #self.shuffle()
         return 
 
     def updateWC(self,vars,pwc):
@@ -57,11 +61,7 @@ class WormCards(Cards):
     
     def reset(self):
         if (len(self.playingdeck) == 0):
-            
-            cards  = self.GS.WC_Cards
-            q      = self.GS.WC_Quantity
-            Cards.__init__(self, cardsVaraity = cards, quantities =  q )
-            self.playingdeck = self.deck
+            self.playingdeck = self.GS.initialWC.deck
             self.shuffle()
         return(self)
 
@@ -71,15 +71,10 @@ class WormCards(Cards):
         self.selectNextWC()
         FuncName = 'WCFunc' + str(self.currentWC)
         getattr(self, FuncName)()
-       # print("playfunc")
-        #print(self.playedwc)
-        #print(self.currentWC)
         self.playedwc = np.append(self.playedwc,self.currentWC)
-        #print(self.playedwc)
-        s.P.updatePlayer(self.PV,self.nofRoundspausing)
-        if (len(self.damages) > 0) and (self.damages[0] not in s.P.PCStatus):
-            s.P.PCStatus = s.P.PCStatus+self.damages
-        return self
+        s.P.updatePlayer(self.PV,self.nofRoundspausing,[],self.damages)
+        s.GS.currentWCdeck = self.playingdeck
+        return s
 
     # list of Cards
     #A=Null
@@ -115,7 +110,6 @@ class WormCards(Cards):
         return(self)
 
     def WCFunc5(self):
-        #print(self)
         self.playedWCName.append(' WC Name: Capture CPU ')
         self.damages.append('CPU1Captured') 
         self.nofRoundspausing = 2
@@ -131,9 +125,8 @@ class WormCards(Cards):
         return(self)
 
     def WCFunc7(self):
-        self.playedWCName.append(' WC Name: A=0(,B=-1),C=N ')
+        self.playedWCName.append(' WC Name: A=0,C=N ')
         self.assignVar(0,0)
-#        self.assignVar(1,-1)
         self.assignVar(1,0)
         if 2 not in self.PV.Nullindex:
             self.PV.Nullindex.append(2)

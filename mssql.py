@@ -29,7 +29,7 @@ def insertGameSettings(gs):
     cursor = myconn.cursor()
     cursor.execute("INSERT INTO minibit.dbo.GameSettings VALUES (?,?,?,?,?,?,?,?,?,?,?,?)", 
                    ((gs.Testchangelog),gs.sampleQuantity,gs.winGoal,
-                     gs.NrOfP,gs.maxRound,ECtype,str(gs.EC_Quantity),0,WCtype,str(gs.WC_Quantity),0,'NULL'))
+                     gs.NrOfP,gs.maxRound,ECtype,str(gs.EC_Quantity),0,WCtype,str(gs.WC_Quantity),0,str(gs.currentECdeck)))
     cursor.execute("SELECT @@IDENTITY")
     for row in cursor:
         settingsID = row[0]
@@ -49,7 +49,7 @@ def insertGame(g):
     Total = '0'
     myconn = connectdb()
     cursor = myconn.cursor()
-    cursor.execute("INSERT INTO minibit.dbo.Game VALUES (?,?,?,?,?,?)", (g.samplecounter,g.winer,Total,0,0,g.gameSettingsID))
+    cursor.execute("INSERT INTO minibit.dbo.Game VALUES (?,?,?,?,?,?)", (g.samplecounter,g.winer,Total,0,0,g.GS.gsID))
     cursor.execute("SELECT @@IDENTITY")
     for row in cursor:
         GameID = row[0]
@@ -65,7 +65,7 @@ def updateGame(g):
     cursor.execute("UPDATE minibit.dbo.Game SET winner= ?, Total = ?, lastStep =?, lastRound =? where samplenumber =? and ID =?", 
                    (g.winer,Total,laststep,lastrounds, (g.samplecounter),g.gameID))
     myconn.commit()
-    print("Win Score = "+ str(Total))
+    #print("Win Score = "+ str(Total))
     return True
 
 def insertStep(step,gameID,samplenr):

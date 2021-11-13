@@ -6,23 +6,18 @@ from GameObjects.MainRAMVars import *
 from GameObjects.GameSettings import *
 from GameObjects.Cards import *
 from DB.dbCards import *
+
 class EventCards(Cards):
     """description of class"""    
 
-    def __init__(self,vars,resEC,playingdeck):
+    def __init__(self,vars,resEC,gamesettings):
         self.PV = copy.deepcopy(vars)
         self.currentEC = 0
         self.reservedEC = resEC
-        self.GS = GameSettings()
+        self.GS = copy.deepcopy(gamesettings)
         self.ECName = ''
         self.nOfWC = 0
-        self.playingdeck = playingdeck
-        if len(self.playingdeck)==0:            
-            cards  = self.GS.EC_Cards
-            q    = self.GS.EC_Quantity
-            Cards.__init__(self, cardsVaraity = cards, quantities =  q )
-            self.playingdeck = self.deck
-        self.shuffle()        
+        self.playingdeck = self.GS.currentECdeck
         return
 
     def shuffle(self):
@@ -35,6 +30,7 @@ class EventCards(Cards):
 
     def updateEC(self, vars,pc,rc):
         self.PV = copy.deepcopy(vars)        
+        self.playingdeck = pc
         self.reservedEC = rc
         return self
 
@@ -66,11 +62,9 @@ class EventCards(Cards):
         return self
    
     def reset(self):
-        if (len(self.playingdeck) == 0):
+        if (len(self.playingdeck) == 0):           
+            self.playingdeck = self.GS.initialEC.deck
             self.shuffle()
-            self.playingdeck = self.deck
-            for i in range(len(self.reservedEC)):
-                self.playingdeck.pop(self.reservedEC[i])
         return(self)
 
     def unreserve(self,ec):
@@ -117,12 +111,13 @@ class EventCards(Cards):
     
     def playFunc(self,s):
         """calling a function with making its name as string"""  
-        self.updateEC(s.P.playerVars,s.EC.playingdeck, s.reservedEC)
+        self.updateEC(s.P.playerVars, s.EC.playingdeck, s.P.PlayerReservedEC)
         self.selectNextEC()
         FuncName = 'ECFunc' + str(self.currentEC)
         getattr(self, FuncName)()
         self.nOfWC = self.WCQuantity(self.currentEC)
-        s.P.updatePlayer(self.PV,0)
+        s.P.updatePlayer(self.PV,0,self.reservedEC,[])        
+        s.GS.currentECdeck = self.playingdeck
         return s
 
     # list of Cards
@@ -312,7 +307,7 @@ class EventCards(Cards):
     #-------------------
     def ECFunc200(self):
         self.ECName = 'EC:Resource: Restart'
-        self.reservedEC.add(29)
+        self.reservedEC.append(200)
         return(self)
 
     def ECFunc201(self):

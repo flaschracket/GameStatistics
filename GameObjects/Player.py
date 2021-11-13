@@ -7,16 +7,10 @@ import copy
 
 class Player():
     """description of class"""
-    #Name = ' '
-
-    #PlayerVars = MainRAMVars()
-    GS = GameSettings()
-    PlayerPC = [GS.GameHardware.CPU1, GS.GameHardware.MainRAM]
-
-    PlayerReservedEC = []
+   # GS = GameSettings()
+   # PlayerPC = [GS.GameHardware.CPU1, GS.GameHardware.MainRAM]    
     
-    PCStatus = []
-    roundCounter = 0
+#    roundCounter = 0
     
                 
 
@@ -25,23 +19,23 @@ class Player():
         self.playerVars = MainRAMVars()
         self.PCStatus = []
         self.nofRoundPausing = 0
+        self.PlayerReservedEC = []
         return 
-
-   # def updatePlayer(self,var):
-    #    self.playerVars = copy.deepcopy(var)    
-    
-    def updatePlayer(self,var,pause):
+   
+    def updatePlayer(self,var,pause,reservedEC,damage):
         self.playerVars = copy.deepcopy(var)
         self.nofRoundPausing = pause
-    
+        if (len(reservedEC)>0):
+            self.PlayerReservedEC = self.PlayerReservedEC + reservedEC
+        if (len(damage) > 0) and (damage[0] not in self.PCStatus):
+            self.PCStatus = self.PCStatus + damage
+
+        return
+        
     #----------------------
     #----------------------
     def printstatus(self):
         print('The status of player is:')
-        #print('PlayerName : '+self.Name)        
-        #print('List of Hardwares : ')
-        #print(list(Player.PlayerPC))
-        #print('The Variables-Values of Main RAM are:')
         self.playerVars.print()
 
     def printVarsValue(self):
