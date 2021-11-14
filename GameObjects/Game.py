@@ -23,7 +23,7 @@ class Game():
         self.winer = ''
         
         # steps
-        self.thisStep = Step(self.currentStep)
+        self.thisStep = Step(currentStep = self.currentStep, gamesettings = self.GS)
         #self.previousStep = Step(self.currentStep-1)
         #players-----------------
         self.listofPlayers = []
@@ -31,8 +31,7 @@ class Game():
            name = 'Player '+ str(x)
            self.listofPlayers.append(Player(name))
         # insert game in DB
-        self.gameID = mssql.insertGame(self)
-        
+        self.gameID = mssql.insertGame(self)        
         return   
     #---------------------
     def initialStep(self,x):
@@ -48,7 +47,8 @@ class Game():
             self.initialStep(x)
             d = desicion()._init_(self.thisStep)
             self.thisStep = copy.deepcopy(d.playerdesicion())  
-            self.thisStep = copy.deepcopy((self.thisStep.playOneStep()))
+            self.thisStep.playOneStep
+            #self.thisStep = copy.deepcopy((self.thisStep.playOneStep()))
             #the objects are not updated automatically,
             #update GS for new currentdeck
             self.GS.currentECdeck= self.thisStep.GS.currentECdeck

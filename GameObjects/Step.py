@@ -22,8 +22,8 @@ class Step():
 
     def __init__(self,*args,**kwargs):     
         self.winer = ''
-        self.GS = kwargs.get('gamesettings',GameSettings())        
-
+       # self.GS = kwargs.get('gamesettings',GameSettings())        
+        self.GS = kwargs.get('gamesettings',0)        
         self.P = kwargs.get('p',Player('N'))
         pv = copy.deepcopy(self.P.playerVars)
 
