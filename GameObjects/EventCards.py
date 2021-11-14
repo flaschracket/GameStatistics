@@ -263,6 +263,8 @@ class EventCards(Cards):
         self.ECName = 'aEC:Task: T += A+B'
         ind= [0,1]
         if not self.checknull(ind,2,3):
+                #all are not null and possible to add
+                ind = [0,1,3]
                 self.PV.varsValue[3] = np.sum(self.PV.varsValue[ind])
         return(self)
 
