@@ -80,7 +80,7 @@ def insertStep(step,gameID,samplenr):
 
     cursor.execute(insertstr, (gameID,samplenr,str(step.roundNr),str(step.stepNr),step.P.Name, str(PV.varsValue[0]),
                               str(PV.varsValue[1]),str(PV.varsValue[2]),str(PV.varsValue[3]),str(step.EC.currentEC),
-                              step.EC.nOfWC,str(step.playerDesicion),step.EC.ECName,str(PV.Nullindex), 
+                              step.EC.nOfWC,str(step.P.playerDesicion),step.EC.ECName,str(PV.Nullindex), 
                               str(step.P.PCStatus),
                               str(step.WC.playedWCName),str(len(step.EC.playingdeck)),str(step.WC.playedwc)))    
     myconn.commit()

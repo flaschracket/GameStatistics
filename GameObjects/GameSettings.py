@@ -6,20 +6,18 @@ class GameSettings():
 #-----------------
     sampleQuantity = 100
     winGoal = 128
-#it should be one more of last function number because the functions name are begining with number 0
     NrOfP = 2
     maxRound = 40
-    Testchangelog = " WC:normal, week, EC:without chalange assign 2"
-# sum quantity should reach Steps number (40 max round * 2 player=80), it is still less because some cards have 2 worms
-
-    PCstatus = ['shutdown', 'CPU1Captured', '']
-    ResourceEC         =   {'EC31:Resource: Bazar','EC30:Resource: Freelancer','EC29:Resource: Restart' }
-       # self.resourceECtypes =  ['Restart','Bazar','Freelancer']
+    Testchangelog = " WC:normal, week, EC: with chalange assign"
+#    PCstatus = ['shutdown', 'CPU1Captured', '']
+#    ResourceEC         =   {'EC31:Resource: Bazar','EC30:Resource: Freelancer','EC29:Resource: Restart' }
+# self.resourceECtypes =  ['Restart','Bazar','Freelancer']
 
 #---------------------------
     def __init__(self):
         #---------------EC-------------
         #gathering EC card info from DB
+        # sum quantity should reach Steps number (40 max round * 2 player=80), it is still less because some cards have 2 worms
         mycards = dbCards()
         dbcon = database().connectdb()
         self.EC_Cards = []
@@ -49,7 +47,6 @@ class GameSettings():
         self.initialWC = Cards(cardsVaraity = self.WC_Cards, quantities =  self.WC_Quantity )
         self.initialWC.shuffle()
         self.currentWCdeck = self.initialWC.deck
-
         #-others
         gsID = 0
         self.restart = 200

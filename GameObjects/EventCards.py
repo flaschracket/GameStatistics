@@ -260,7 +260,7 @@ class EventCards(Cards):
         return self
 
     def ECFunc104(self):
-        self.ECName = 'aEC:Task: T += A+B'
+        self.ECName = 'EC:Task: T += A+B'
         ind= [0,1]
         if not self.checknull(ind,2,3):
                 #all are not null and possible to add
@@ -280,7 +280,7 @@ class EventCards(Cards):
         self.ECName = 'EC:Task: T += sum all'
         ind =[0,1,2]
         if not self.checknull(ind,2,3):
-            self.PV.varsValue[3] = sum(self.PV.varsValue)
+            self.PV.varsValue[3] = np.sum(self.PV.varsValue)
         return(self)
    
     def ECFunc107(self):

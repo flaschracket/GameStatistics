@@ -26,10 +26,9 @@ class Step():
         self.GS = kwargs.get('gamesettings',0)        
         self.P = kwargs.get('p',Player('N'))
         pv = copy.deepcopy(self.P.playerVars)
-
         self.WC = WormCards(pv,self.GS)
         self.EC = EventCards(pv,self.P.PlayerReservedEC,self.GS)
-        self.playerDesicion = False
+        #self.playerDesicion = False
         self.myDesicion = desicion()
         self.stepNr = kwargs.get('currentStep',0)
         #only to write in DB/file, etc.
@@ -52,19 +51,18 @@ class Step():
     def playOneStep(self):
         total = 0 
 #        should change: sel 
-        d = desicion()._init_(self)
-        d.playerdesicion()
-        if self.playerDesicion:
+        d = desicion()._init_(self.P)
+        self.P = copy.deepcopy(d.playerdesicion().player)
+        if self.P.playerDesicion:
             self= copy.deepcopy(self.EC.playFunc(self))    
             total = self.P.playerVars.varsValue[3]
-
         if (self.GS.ifWined(total)):
              self.winer = self.P.Name
              return (self)        
         for i in range(self.EC.nOfWC):
             #self = copy.deepcopy(d.playerdesicion())
             d.playerdesicion()
-            if (self.playerDesicion):
+            if (self.P.playerDesicion):
                  self.WC.playFunc(self)
         return (self)
 

@@ -20,6 +20,7 @@ class Player():
         self.PCStatus = []
         self.nofRoundPausing = 0
         self.PlayerReservedEC = []
+        self.mydesicion = True
         return 
    
     def updatePlayer(self,var,pause,reservedEC,damage):
