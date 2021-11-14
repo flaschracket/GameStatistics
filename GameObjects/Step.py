@@ -32,6 +32,7 @@ class Step():
         self.playerDesicion = False
         self.myDesicion = desicion()
         self.stepNr = kwargs.get('currentStep',0)
+        #only to write in DB/file, etc.
         self.roundNr = kwargs.get('currentRound',0)
 
         return
@@ -71,7 +72,7 @@ class Step():
 
  
     def writeCSVHeader(self, file):
-        rowlist =['roundnr','stepnr','player','A:0','B:1','C:2','Total:3','NULL vars',	'ec']
+       # rowlist =['roundnr','stepnr','player','A:0','B:1','C:2','Total:3','NULL vars',	'ec']
         rowlist = rowlist + ['nofworms','my decision',	'PC Status', 'count down paus',	'EC Name']
         rowlist = rowlist + ['WC Name',	'Winner	ecset',	'wormset']
         csvwriter = writer(file,delimiter=';')
@@ -99,9 +100,9 @@ class Step():
             playedWCName = self.WC.playedWCName
 
         #writing in file
-        rowlist = [self.roundNr,self.stepNr,self.P.Name, PV.varsValue[0], PV.varsValue[1], PV.varsValue[2]]
+        #rowlist = [self.roundNr,self.stepNr,self.P.Name, PV.varsValue[0], PV.varsValue[1], PV.varsValue[2]]
         rowlist = rowlist + [PV.varsValue[3], nullList , self.EC.currentEC,self.EC.nOfWC]
-        rowlist = rowlist+ [self.playerDesicion ,playerPCStatus, self.P.roundCounter]
+        #rowlist = rowlist+ [self.playerDesicion ,playerPCStatus, self.P.roundCounter]
         rowlist = rowlist + [self.EC.ECName, playedWCName,self.winer,self.EC.playedEC, self.WC.playedWC]
         now = datetime.now() # current date and time
         fName = 'generated data/sample-'+str(self.sampleNr)+'-'+ str(self.GS.NrOfP) +'player'+now.strftime("%Y")

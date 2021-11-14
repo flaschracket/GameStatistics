@@ -37,8 +37,7 @@ class Game():
     def initialStep(self,x):
      #  playingdeck = self.GS.currentECdeck
      #  wcdeck = self.GS.currentWCdeck
-        self.thisStep = Step(p = self.listofPlayers[x], gamesettings = self.GS , 
-                             currentStep = self.currentStep,currentRound = self.currentRound)
+        self.thisStep = Step(p = self.listofPlayers[x], gamesettings = self.GS , currentStep = self.currentStep, currentRound = self.currentRound)
         return self
     #---------------------
 
@@ -47,8 +46,8 @@ class Game():
             self.initialStep(x)
             d = desicion()._init_(self.thisStep)
             self.thisStep = copy.deepcopy(d.playerdesicion())  
-            self.thisStep.playOneStep
-            #self.thisStep = copy.deepcopy((self.thisStep.playOneStep()))
+            #self.thisStep.playOneStep()
+            self.thisStep = copy.deepcopy((self.thisStep.playOneStep()))
             #the objects are not updated automatically,
             #update GS for new currentdeck
             self.GS.currentECdeck= self.thisStep.GS.currentECdeck
