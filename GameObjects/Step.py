@@ -29,7 +29,7 @@ class Step():
         self.WC = WormCards(self.P.playerVars,self.GS)
         self.EC = EventCards(self.P.playerVars,self.P.PlayerReservedEC,self.GS)
         #self.playerDesicion = False
-        self.myDesicion = desicion()
+        #self.myDesicion = desicion()
 #        self.stepNr = kwargs.get('currentStep',0)
         #only to write in DB/file, etc.
         self.roundNr = kwargs.get('currentRound',0)

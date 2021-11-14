@@ -4,14 +4,15 @@ from random import randrange
 import copy
 
 class desicion(object):
-    gs = GameSettings()
+#    gs = GameSettings()
 
 #----------------------------
     """description of class"""
-    def _init_(self,ply):
+    def _init_(self,ply,GS):
      #   self.step = copy.deepcopy(s)
         self.player = copy.deepcopy(ply)
-        return self
+        gs = copy.deepcopy(Gs)
+    return self
 #-------------------------------
 
     def makeRandomDecision(self):
