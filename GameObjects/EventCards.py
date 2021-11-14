@@ -9,7 +9,6 @@ from DB.dbCards import *
 
 class EventCards(Cards):
     """description of class"""    
-
     def __init__(self,vars,resEC,gamesettings):
         self.PV = copy.deepcopy(vars)
         self.currentEC = 0

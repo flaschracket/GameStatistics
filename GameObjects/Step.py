@@ -25,15 +25,14 @@ class Step():
        # self.GS = kwargs.get('gamesettings',GameSettings())        
         self.GS = kwargs.get('gamesettings',0)        
         self.P = kwargs.get('p',Player('N'))
-        pv = copy.deepcopy(self.P.playerVars)
-        self.WC = WormCards(pv,self.GS)
-        self.EC = EventCards(pv,self.P.PlayerReservedEC,self.GS)
+        #pv = copy.deepcopy(self.P.playerVars)
+        self.WC = WormCards(self.P.playerVars,self.GS)
+        self.EC = EventCards(self.P.playerVars,self.P.PlayerReservedEC,self.GS)
         #self.playerDesicion = False
         self.myDesicion = desicion()
-        self.stepNr = kwargs.get('currentStep',0)
+#        self.stepNr = kwargs.get('currentStep',0)
         #only to write in DB/file, etc.
         self.roundNr = kwargs.get('currentRound',0)
-
         return
 
     def updatePlayer(self):
@@ -118,8 +117,7 @@ class Step():
         print(self.stepNr)
         #print("reserved cards" + str(self.reservedEC))
         self.P.printMainRAM()                 
-        #print(self.playerDesicion)
-         
+        #print(self.playerDesicion)         
         return
 
 def uniquify(path, sep = ''):
