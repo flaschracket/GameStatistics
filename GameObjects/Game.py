@@ -44,8 +44,8 @@ class Game():
     def playOneRound(self):    
         for x in range(self.GS.NrOfP):
             self.initialStep(x)
-            d = desicion()._init_(self.thisStep.P,self.GS)
-            self.thisStep.P = copy.deepcopy(d.playerdesicion().player)  
+            #d = desicion()._init_(self.thisStep.P,self.GS)
+            #self.thisStep.P = copy.deepcopy(d.playerdesicion().player)  
             #self.thisStep.playOneStep()
             self.thisStep = copy.deepcopy((self.thisStep.playOneStep()))
             #the objects are not updated automatically,

@@ -8,7 +8,7 @@ class GameSettings():
     winGoal = 128
     NrOfP = 2
     maxRound = 40
-    Testchangelog = " WC:Week 3 to 2, EC: "
+    Testchangelog = " all WC quantity=1"
 #    PCstatus = ['shutdown', 'CPU1Captured', '']
 #    ResourceEC         =   {'EC31:Resource: Bazar','EC30:Resource: Freelancer','EC29:Resource: Restart' }
 # self.resourceECtypes =  ['Restart','Bazar','Freelancer']
@@ -61,12 +61,12 @@ class GameSettings():
          return wined
     
     
-    class GameHardware(Enum): 
-        MainRAM = 0
-        ExtraRAM = 1
-        CPU1 = 2
-        CPU2 = 3
-        SSD = 4
+    #class GameHardware(Enum): 
+    #    MainRAM = 0
+   #     ExtraRAM = 1
+  #      CPU1 = 2
+ #       CPU2 = 3
+#        SSD = 4
 
 #    @property
 #    def primary_PC(self):

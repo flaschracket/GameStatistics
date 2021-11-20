@@ -1,5 +1,6 @@
 from GameObjects.MainRAMVars import *
 from GameObjects.GameSettings import *
+from GameObjects.desicion import *
 from enum import Enum
 import copy
 
@@ -33,7 +34,15 @@ class Player():
 
         return
         
+    def update_afterdecision(self,plydecision):
+        #plydecision = desicion()
+        self.mydesicion = plydecision.desicion
+        self.nofRoundPausing = plydecision.nofRoundPausing
+        self.PCStatus = plydecision.tempPCstatus
+        self.PlayerReservedEC = plydecision.tempReservedEc
+        return 
     #----------------------
+
     #----------------------
     def printstatus(self):
         print('The status of player is:')

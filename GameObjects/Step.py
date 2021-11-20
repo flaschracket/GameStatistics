@@ -23,6 +23,7 @@ class Step():
     def __init__(self,*args,**kwargs):     
         self.winer = ''
        # self.GS = kwargs.get('gamesettings',GameSettings())        
+        # it is 0 to produce error instead of initializing empty  gamesettings obj.
         self.GS = kwargs.get('gamesettings',0)        
         self.P = kwargs.get('p',Player('N'))
         #pv = copy.deepcopy(self.P.playerVars)
@@ -30,9 +31,10 @@ class Step():
         self.EC = EventCards(self.P.playerVars,self.P.PlayerReservedEC,self.GS)
         #self.playerDesicion = False
         #self.myDesicion = desicion()
-#        self.stepNr = kwargs.get('currentStep',0)
+        #
         #only to write in DB/file, etc.
         self.roundNr = kwargs.get('currentRound',0)
+        self.stepNr = kwargs.get('currentStep',0)
         return
 
     def updatePlayer(self):
@@ -49,19 +51,22 @@ class Step():
     
     def playOneStep(self):
         total = 0 
-#        should change: sel 
-        d = desicion()._init_(self.P)
-        self.P = copy.deepcopy(d.playerdesicion().player)
-        if self.P.playerDesicion:
+        #should change: sel 
+        d = desicion()._init_(self.P,self.GS)
+        self.P.update_afterdecision(d)
+        #self.P = copy.deepcopy(d.playerdesicion().player)
+        if self.P.mydesicion:
             self= copy.deepcopy(self.EC.playFunc(self))    
             total = self.P.playerVars.varsValue[3]
         if (self.GS.ifWined(total)):
-             self.winer = self.P.Name
-             return (self)        
+            self.winer = self.P.Name
+            return (self)        
         for i in range(self.EC.nOfWC):
             #self = copy.deepcopy(d.playerdesicion())
+            d = desicion()._init_(self.P,self.GS)
             d.playerdesicion()
-            if (self.P.playerDesicion):
+            self.P.update_afterdecision(d)
+            if (self.P.mydesicion):
                  self.WC.playFunc(self)
         return (self)
 

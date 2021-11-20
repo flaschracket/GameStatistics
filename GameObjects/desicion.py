@@ -9,10 +9,18 @@ class desicion(object):
 #----------------------------
     """description of class"""
     def _init_(self,ply,GS):
+     #deepcopy is extremly slow
      #   self.step = copy.deepcopy(s)
-        self.player = copy.deepcopy(ply)
-        gs = copy.deepcopy(Gs)
-    return self
+     #    self.player = copy.deepcopy(ply)
+     #        self.GS = copy.deepcopy(GS)
+        self.restart = GS.restart
+
+        self.tempPCstatus = ply.PCStatus
+        self.desicion = ply.mydesicion
+        self.tempReservedEc = ply.PlayerReservedEC
+        self.nofRoundPausing = ply.nofRoundPausing
+
+        return self
 #-------------------------------
 
     def makeRandomDecision(self):
@@ -28,25 +36,25 @@ class desicion(object):
     #              self.step.P.PlayerReservedEC.remove(self.DE.ResourceECTypes.Restart)
 
     def playerdesicion(self):
-        if 'CPU1Captured'  in (self.player.PCStatus):
+        if 'CPU1Captured'  in (self.tempPCstatus):
             FuncName = 'rule1'
             funcresult = getattr(self, FuncName)()
         else:
-            self.player.playerDesicion = True        
+            self.desicion = True        
         return self
     #rule 1= cpu is captured  
     def rule1(self): 
-            if (self.gs.restart in self.player.PlayerReservedEC):
-                self.player.PCStatus.remove('CPU1Captured')
-                self.player.PlayerReservedEC.remove(self.gs.restart)
-                self.player.playerDesicion = True
-                self.playerfRoundPausing = 0
+            if (self.restart in self.tempReservedEc):
+                self.tempPCstatus.remove('CPU1Captured')
+                self.tempReservedEc.remove(self.restart)
+                self.desicion = True
+                self.nofRoundPausing = 0
             else: 
-                if (self.player.nofRoundPausing == 0):
-                    self.player.PCStatus.remove('CPU1Captured')
-                    self.player.nofRoundPausing = 0
-                    self.player.playerDesicion = True
+                if (self.nofRoundPausing == 0):
+                    self.tempPCstatus.remove('CPU1Captured')
+                    #self.player.nofRoundPausing = 0
+                    self.desicion = True
                 else:
-                    self.player.playerDesicion = False      
-                    self.player.nofRoundPausing = self.player.nofRoundPausing-1
+                    self.desicion = False      
+                    self.nofRoundPausing = self.nofRoundPausing-1
             return self
