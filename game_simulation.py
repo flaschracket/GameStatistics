@@ -26,7 +26,8 @@ while sampleCounter <= GS.sampleQuantity:
     
     while condition:        
         mygame.currentRound = mygame.currentRound + 1
-        mygame = copy.deepcopy(mygame.playOneRound()) 
+        #mygame = copy.deepcopy(mygame.playOneRound())
+        mygame.playOneRound() 
         if (mygame.winer != '') or (mygame.currentRound >= GS.maxRound): 
             condition = False              
     mssql.updateGame(mygame)

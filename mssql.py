@@ -80,17 +80,11 @@ def insertStep(step,gameID,samplenr):
     insertstr = insertstr + "?, ?, ?, ?)"
     cursor.execute(insertstr, (gameID,samplenr,str(step.roundNr),str(step.stepNr),step.P.Name,
                                str(PV.varsValue[0]),str(PV.varsValue[1]),str(PV.varsValue[2]),str(PV.varsValue[3])
-                               ,'NULL'
-                               #,'NULL','NULL','NULL','NULL'
-                               ,'NULL','NULL','NULL','NULL','NULL'
-                               ,'NULL','NULL','NULL','NULL'
-                               #,str(step.EC.currentEC),
-                              #step.EC.nOfWC,str(step.P.mydesicion),step.EC.ECName,str(PV.Nullindex),str(step.P.PCStatus),
-                              #str(step.WC.playedWCName),str(len(step.EC.playingdeck)),str(step.WC.currentWC), str(step.P.PlayerReservedEC)
-                              ))    
+                               ,str(step.EC.currentEC),step.EC.nOfWC,str(step.P.mydesicion),
+                               step.EC.ECName,str(PV.Nullindex),str(step.P.PCStatus),
+                               #'NULL','NULL','NULL','NULL'
+                               str(step.WC.playedWCName),str(len(step.EC.playingdeck)),str(step.WC.currentWC), str(step.P.PlayerReservedEC)
+                               ))    
     myconn.commit()
     return True
-
-   #         str(np.arange(0,500,0.5).tolist() , ','.join(str(e) for e in list(step.EC.playingdeck))   ,' , '.join(str(el) for el in step.WC.WCPlayedcollection))
-
 

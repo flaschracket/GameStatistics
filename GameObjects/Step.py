@@ -58,7 +58,8 @@ class Step():
         self.P.update_afterdecision(d)
         #self.P = copy.deepcopy(d.playerdesicion().player)
         if self.P.mydesicion:
-            self= copy.deepcopy(self.EC.playFunc(self))    
+            self.EC.playFunc(self)
+            #self= copy.deepcopy(self.EC.playFunc(self))    
             total = self.P.playerVars.varsValue[3]
         if (GS.ifWined(total)):
             self.winer = self.P.Name
@@ -71,9 +72,6 @@ class Step():
             if (self.P.mydesicion):
                  self.WC.playFunc(self)
         return (self)
-
-
-
  
     def writeCSVHeader(self, file):
        # rowlist =['roundnr','stepnr','player','A:0','B:1','C:2','Total:3','NULL vars',	'ec']

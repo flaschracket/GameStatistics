@@ -50,8 +50,9 @@ class Game():
             self.initialStep(x)
             #d = desicion()._init_(self.thisStep.P,self.GS)
             #self.thisStep.P = copy.deepcopy(d.playerdesicion().player)  
-            #self.thisStep.playOneStep()
-            self.thisStep = copy.deepcopy((self.thisStep.playOneStep()))
+            self.thisStep.playOneStep()
+            #Step_updateafterplayone
+            #self.thisStep = copy.deepcopy((self.thisStep.playOneStep()))
             #the objects are not updated automatically,
             #update GS for new currentdeck
             self.GD.currentECdeck= self.thisStep.EC.playingdeck
@@ -59,7 +60,12 @@ class Game():
             self.winer = self.thisStep.winer
             self.Stepsnapshot(self.thisStep)
             self.currentStep = self.currentStep + 1
-            self.listofPlayers[x] = copy.deepcopy(self.thisStep.P)
+            #self.listofPlayers[x] = copy.deepcopy(self.thisStep.P)
+            #update player
+            self.listofPlayers[x].playerVars = self.thisStep.P.playerVars
+            self.listofPlayers[x].PCStatus = self.thisStep.P.PCStatus
+            self.listofPlayers[x].mydesicion = self.thisStep.P.mydesicion
+            #self.update()
             if (self.winer != ''):
                 break             
         return self

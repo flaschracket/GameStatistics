@@ -28,7 +28,8 @@ class Player():
         self.playerVars = copy.deepcopy(var)
         self.nofRoundPausing = pause
         if (len(reservedEC)>0):
-            self.PlayerReservedEC = self.PlayerReservedEC + reservedEC
+            #self.PlayerReservedEC = self.PlayerReservedEC + reservedEC
+            self.PlayerReservedEC = reservedEC
         if (len(damage) > 0) and (damage[0] not in self.PCStatus):
             self.PCStatus = self.PCStatus + damage
 

@@ -16,6 +16,7 @@ class EventCards(Cards):
         self.GS = GameSettings()
         self.ECName = ''
         self.nOfWC = 0
+        self.initialEC = currentgamedeck.initialEC
         self.playingdeck = currentgamedeck.currentECdeck
         return
 
@@ -62,7 +63,7 @@ class EventCards(Cards):
    
     def reset(self):
         if (len(self.playingdeck) == 0):           
-            self.playingdeck = self.GS.initialEC.deck
+            self.playingdeck = self.initialEC.deck
             self.shuffle()
         return(self)
 

@@ -45,16 +45,13 @@ class GameSettings():
         #-others
         self.gsID = 0
         self.restart = 200
-        self.sampleQuantity = 100
+        self.sampleQuantity = 5
         self.winGoal = 128
         self.NrOfP = 2
         self.maxRound = 40
-        self.Testchangelog = "test"
-
+        self.Testchangelog = "test logic of program after changings"
         return
 
-
-    #----------------
     def ifWined(self,total):
          wined= False
          if (total >= self.winGoal):
@@ -75,6 +72,6 @@ class GameSettings():
 
 #use in rules
     class ResourceECTypes(Enum): 
-            Restart = 0
-            Bazar = 1
-            Freelancer = 2
+           Restart = 0
+           Bazar = 1
+           Freelancer = 2

@@ -18,6 +18,7 @@ class WormCards(Cards):
         self.damages = []
         self.GS = GameSettings()
         self.currentWC = 0
+        self.GD = currentgamedeck
         self.playingdeck = currentgamedeck.currentWCdeck
         return 
 
@@ -50,7 +51,7 @@ class WormCards(Cards):
     
     def reset(self):
         if (len(self.playingdeck) == 0):
-            self.playingdeck = self.GS.initialWC.deck
+            self.playingdeck = self.GD.initialWC.deck
             self.shuffle()
         return(self)
 
