@@ -24,11 +24,12 @@ class Step():
         self.winer = ''
        # self.GS = kwargs.get('gamesettings',GameSettings())        
         # it is 0 to produce error instead of initializing empty  gamesettings obj.
-        self.GS = kwargs.get('gamesettings',0)        
+        GD = kwargs.get('currentgamedeck',0)        
+        
         self.P = kwargs.get('p',Player('N'))
         #pv = copy.deepcopy(self.P.playerVars)
-        self.WC = WormCards(self.P.playerVars,self.GS)
-        self.EC = EventCards(self.P.playerVars,self.P.PlayerReservedEC,self.GS)
+        self.WC = WormCards(self.P.playerVars,GD)
+        self.EC = EventCards(self.P.playerVars,self.P.PlayerReservedEC,GD)
         #self.playerDesicion = False
         #self.myDesicion = desicion()
         #
@@ -51,19 +52,20 @@ class Step():
     
     def playOneStep(self):
         total = 0 
+        GS = GameSettings()
         #should change: sel 
-        d = desicion()._init_(self.P,self.GS)
+        d = desicion()._init_(self.P)
         self.P.update_afterdecision(d)
         #self.P = copy.deepcopy(d.playerdesicion().player)
         if self.P.mydesicion:
             self= copy.deepcopy(self.EC.playFunc(self))    
             total = self.P.playerVars.varsValue[3]
-        if (self.GS.ifWined(total)):
+        if (GS.ifWined(total)):
             self.winer = self.P.Name
             return (self)        
         for i in range(self.EC.nOfWC):
             #self = copy.deepcopy(d.playerdesicion())
-            d = desicion()._init_(self.P,self.GS)
+            d = desicion()._init_(self.P)
             d.playerdesicion()
             self.P.update_afterdecision(d)
             if (self.P.mydesicion):

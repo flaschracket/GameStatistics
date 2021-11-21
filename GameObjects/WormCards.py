@@ -10,26 +10,15 @@ from collections import Counter
 class WormCards(Cards):
     """description of class"""
 
-    def __init__(self,vars,gamesettings):
+    def __init__(self,vars,currentgamedeck):
         self.PV = copy.deepcopy(vars)
         self.playedWCName = []    
         self.playedwc = np.array([]).astype(int)
         self.nofRoundspausing = 0
         self.damages = []
-        self.GS = copy.deepcopy(gamesettings)
+        self.GS = GameSettings()
         self.currentWC = 0
-        self.playingdeck = self.GS.currentWCdeck
-
-#        self.GS = GameSettings()        
-
-#        self.playingdeck = wcdeck
-        #self.firstdeck = list()
-        #if len(self.playingdeck)==0:
-         #   cards  = self.GS.WC_Cards
-          #  q    = self.GS.WC_Quantity
-           # Cards.__init__(self, cardsVaraity = cards, quantities =  q )
-            #self.playingdeck = self.deck
-        #self.shuffle()
+        self.playingdeck = currentgamedeck.currentWCdeck
         return 
 
     def updateWC(self,vars,pwc):
@@ -73,7 +62,7 @@ class WormCards(Cards):
         getattr(self, FuncName)()
         self.playedwc = np.append(self.playedwc,self.currentWC)
         s.P.updatePlayer(self.PV,self.nofRoundspausing,[],self.damages)
-        s.GS.currentWCdeck = self.playingdeck
+        #s.GS.currentWCdeck = self.playingdeck
         return s
 
     # list of Cards

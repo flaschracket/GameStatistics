@@ -22,19 +22,19 @@ def listall():
         print(row)
     return True
     
-def insertGameSettings(gs):
-    ECtype = str(gs.EC_Cards)
-    WCtype = str(gs.WC_Cards)
-    myconn = connectdb()
-    cursor = myconn.cursor()
-    cursor.execute("INSERT INTO minibit.dbo.GameSettings VALUES (?,?,?,?,?,?,?,?,?,?,?,?)", 
-                   ((gs.Testchangelog),gs.sampleQuantity,gs.winGoal,
-                     gs.NrOfP,gs.maxRound,ECtype,str(gs.EC_Quantity),0,WCtype,str(gs.WC_Quantity),0,str(gs.currentECdeck)))
-    cursor.execute("SELECT @@IDENTITY")
-    for row in cursor:
-        settingsID = row[0]
-    myconn.commit()
-    return settingsID
+#def insertGameSettings(gs):
+ #   ECtype = str(gs.EC_Cards)
+  #  WCtype = str(gs.WC_Cards)
+   # myconn = connectdb()
+ #   cursor = myconn.cursor()
+  #  cursor.execute("INSERT INTO minibit.dbo.GameSettings VALUES (?,?,?,?,?,?,?,?,?,?,?,?)", 
+   #                ((gs.Testchangelog),gs.sampleQuantity,gs.winGoal,
+    #                 gs.NrOfP,gs.maxRound,ECtype,str(gs.EC_Quantity),0,WCtype,str(gs.WC_Quantity),0,str(gs.currentECdeck)))
+   # cursor.execute("SELECT @@IDENTITY")
+    #for row in cursor:
+     #   settingsID = row[0]
+    #myconn.commit()
+    #return settingsID
 
 def update_GameSettings(firstdeck,ID):
     myconn = connectdb()
@@ -49,7 +49,8 @@ def insertGame(g):
     Total = '0'
     myconn = connectdb()
     cursor = myconn.cursor()
-    cursor.execute("INSERT INTO minibit.dbo.Game VALUES (?,?,?,?,?,?)", (g.samplecounter,g.winer,Total,0,0,g.GS.gsID))
+    cursor.execute("INSERT INTO minibit.dbo.Game VALUES (?,?,?,?,?,?)", 
+                   (g.samplecounter,g.winer,Total,0,0,g.gamesettingsID))
     cursor.execute("SELECT @@IDENTITY")
     for row in cursor:
         GameID = row[0]
@@ -73,16 +74,20 @@ def insertStep(step,gameID,samplenr):
     myconn = connectdb()
     cursor = myconn.cursor()
     #step.printStep()
-    insertstr = "INSERT INTO minibit.dbo.Step VALUES (?, ?, ?,?,?, "
+    insertstr = "INSERT INTO minibit.dbo.Step VALUES (?, ?, ?,?,?"
+    insertstr = insertstr + ",?, ?, ?, ?, ?, "
     insertstr = insertstr + "?, ?, ?, ?, ?, "
-    insertstr = insertstr + "?, ?, ?, ?, ?, "
-    insertstr = insertstr+ "?, ?, ?, ?)"
-
-    cursor.execute(insertstr, (gameID,samplenr,str(step.roundNr),str(step.stepNr),step.P.Name, str(PV.varsValue[0]),
-                              str(PV.varsValue[1]),str(PV.varsValue[2]),str(PV.varsValue[3]),str(step.EC.currentEC),
-                              step.EC.nOfWC,str(step.P.mydesicion),step.EC.ECName,str(PV.Nullindex), 
-                              str(step.P.PCStatus),
-                              str(step.WC.playedWCName),str(len(step.EC.playingdeck)),str(step.WC.playedwc), str(step.P.PlayerReservedEC)))    
+    insertstr = insertstr + "?, ?, ?, ?)"
+    cursor.execute(insertstr, (gameID,samplenr,str(step.roundNr),str(step.stepNr),step.P.Name,
+                               str(PV.varsValue[0]),str(PV.varsValue[1]),str(PV.varsValue[2]),str(PV.varsValue[3])
+                               ,'NULL'
+                               #,'NULL','NULL','NULL','NULL'
+                               ,'NULL','NULL','NULL','NULL','NULL'
+                               ,'NULL','NULL','NULL','NULL'
+                               #,str(step.EC.currentEC),
+                              #step.EC.nOfWC,str(step.P.mydesicion),step.EC.ECName,str(PV.Nullindex),str(step.P.PCStatus),
+                              #str(step.WC.playedWCName),str(len(step.EC.playingdeck)),str(step.WC.currentWC), str(step.P.PlayerReservedEC)
+                              ))    
     myconn.commit()
     return True
 

@@ -28,6 +28,12 @@
     <Compile Include="DB\database.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DB\dbGameSettings.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GameObjects\GameDeck.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="GameObjects\Cards.py">
       <SubType>Code</SubType>
     </Compile>

@@ -9,14 +9,14 @@ from DB.dbCards import *
 
 class EventCards(Cards):
     """description of class"""    
-    def __init__(self,vars,resEC,gamesettings):
+    def __init__(self,vars,resEC,currentgamedeck):
         self.PV = copy.deepcopy(vars)
         self.currentEC = 0
         self.reservedEC = resEC
-        self.GS = copy.deepcopy(gamesettings)
+        self.GS = GameSettings()
         self.ECName = ''
         self.nOfWC = 0
-        self.playingdeck = self.GS.currentECdeck
+        self.playingdeck = currentgamedeck.currentECdeck
         return
 
     def shuffle(self):
@@ -115,8 +115,9 @@ class EventCards(Cards):
         FuncName = 'ECFunc' + str(self.currentEC)
         getattr(self, FuncName)()
         self.nOfWC = self.WCQuantity(self.currentEC)
-        s.P.updatePlayer(self.PV,0,self.reservedEC,[])        
-        s.GS.currentECdeck = self.playingdeck
+        s.P.updatePlayer(self.PV,0,self.reservedEC,[])    
+        #??? deck will update after playing the step?
+        #s.GS.currentECdeck = self.playingdeck
         return s
 
     # list of Cards

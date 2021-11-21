@@ -14,16 +14,18 @@ import mssql
 class Game():
     """description of class"""
 
-    def __init__(self,samplecounter,gamesettings):
-        self.GS = copy.deepcopy(gamesettings)
+    def __init__(self,samplecounter,currentgamedeck,gsID):
+        self.GD = currentgamedeck
+        self.GS = GameSettings()
+        # make the cards list a new random combination
+        #self.GS.
         #game vars
         self.currentRound = 0
         self.currentStep = 0
         self.samplecounter = samplecounter
         self.winer = ''
-        
         # steps
-        self.thisStep = Step(currentStep = self.currentStep, gamesettings = self.GS)
+        self.thisStep = Step(currentStep = self.currentStep, currentgamedeck = self.GD)
         #self.previousStep = Step(self.currentStep-1)
         #players-----------------
         self.listofPlayers = []
@@ -31,13 +33,15 @@ class Game():
            name = 'Player '+ str(x)
            self.listofPlayers.append(Player(name))
         # insert game in DB
+        self.gamesettingsID = gsID
         self.gameID = mssql.insertGame(self)        
         return   
     #---------------------
     def initialStep(self,x):
      #  playingdeck = self.GS.currentECdeck
      #  wcdeck = self.GS.currentWCdeck
-        self.thisStep = Step(p = self.listofPlayers[x], gamesettings = self.GS , currentStep = self.currentStep, currentRound = self.currentRound)
+        self.thisStep = Step(p = self.listofPlayers[x], currentStep = self.currentStep, 
+                             currentRound = self.currentRound, currentgamedeck = self.GD)
         return self
     #---------------------
 
@@ -50,8 +54,8 @@ class Game():
             self.thisStep = copy.deepcopy((self.thisStep.playOneStep()))
             #the objects are not updated automatically,
             #update GS for new currentdeck
-            self.GS.currentECdeck= self.thisStep.GS.currentECdeck
-            self.GS.currentWCdeck = self.thisStep.GS.currentWCdeck
+            self.GD.currentECdeck= self.thisStep.EC.playingdeck
+            self.GD.currentWCdeck = self.thisStep.WC.playingdeck
             self.winer = self.thisStep.winer
             self.Stepsnapshot(self.thisStep)
             self.currentStep = self.currentStep + 1

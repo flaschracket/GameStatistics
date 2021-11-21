@@ -8,18 +8,16 @@ class desicion(object):
 
 #----------------------------
     """description of class"""
-    def _init_(self,ply,GS):
+    def _init_(self,ply):
      #deepcopy is extremly slow
      #   self.step = copy.deepcopy(s)
      #    self.player = copy.deepcopy(ply)
-     #        self.GS = copy.deepcopy(GS)
+        GS = GameSettings()        
         self.restart = GS.restart
-
         self.tempPCstatus = ply.PCStatus
         self.desicion = ply.mydesicion
         self.tempReservedEc = ply.PlayerReservedEC
         self.nofRoundPausing = ply.nofRoundPausing
-
         return self
 #-------------------------------
 

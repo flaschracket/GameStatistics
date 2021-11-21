@@ -3,19 +3,23 @@ from random import randrange
 from GameObjects.Player import *
 from GameObjects.Game import *
 from GameObjects.Cards import *
+from DB.dbGameSettings import *
 from copy import deepcopy
+
 import mssql
 
 # initial gamesettings
 GS = GameSettings()
-
+GD = GameDeck()
 sampleCounter = 0
-
+dbgs = dbGameSettings()
 print("Hello From Game Simulation! Data Generation is begining")
-GS.gsID = mssql.insertGameSettings(GS)
+gsID = dbgs.insert_GameSettings(GD)
 
 while sampleCounter <= GS.sampleQuantity:
-    mygame = Game(sampleCounter,GS)
+    GD.currentECdeck = GD.initialEC.shuffle()
+    GD.currentWCdeck = GD.initialWC.shuffle()
+    mygame = Game(sampleCounter,GD,gsID)
     #play
     print("---Game : "+str(sampleCounter)+"---")
     condition = True
@@ -26,6 +30,6 @@ while sampleCounter <= GS.sampleQuantity:
         if (mygame.winer != '') or (mygame.currentRound >= GS.maxRound): 
             condition = False              
     mssql.updateGame(mygame)
-    print('winner : ' +mygame.winer )
+    print('winner :'+mygame.winer )
     print('------------------------------')
     sampleCounter = sampleCounter +1
