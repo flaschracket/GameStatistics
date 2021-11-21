@@ -65,6 +65,7 @@ class Game():
             self.listofPlayers[x].playerVars = self.thisStep.P.playerVars
             self.listofPlayers[x].PCStatus = self.thisStep.P.PCStatus
             self.listofPlayers[x].mydesicion = self.thisStep.P.mydesicion
+            self.listofPlayers[x].PlayerReservedEC = self.thisStep.P.PlayerReservedEC
             #self.update()
             if (self.winer != ''):
                 break             

@@ -55,6 +55,7 @@ class Step():
         GS = GameSettings()
         #should change: sel 
         d = desicion()._init_(self.P)
+        d.playerdesicion()
         self.P.update_afterdecision(d)
         #self.P = copy.deepcopy(d.playerdesicion().player)
         if self.P.mydesicion:
