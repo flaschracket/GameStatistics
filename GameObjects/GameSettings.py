@@ -45,11 +45,11 @@ class GameSettings():
         #-others
         self.gsID = 0
         self.restart = 200
-        self.sampleQuantity = 5
+        self.sampleQuantity = 100
         self.winGoal = 128
-        self.NrOfP = 2
+        self.NrOfP = 5
         self.maxRound = 40
-        self.Testchangelog = "test logic of program after changings"
+        self.Testchangelog = "double the quantity of each card"
         return
 
     def ifWined(self,total):
@@ -71,7 +71,7 @@ class GameSettings():
 #         return self.MainRAM, self.CPU1
 
 #use in rules
-    class ResourceECTypes(Enum): 
-           Restart = 0
-           Bazar = 1
-           Freelancer = 2
+#    class ResourceECTypes(Enum): 
+ #          Restart = 0
+  #         Bazar = 1
+   #        Freelancer = 2
