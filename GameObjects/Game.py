@@ -48,15 +48,14 @@ class Game():
     def playOneRound(self):    
         for x in range(self.GS.NrOfP):
             self.initialStep(x)
-            #d = desicion()._init_(self.thisStep.P,self.GS)
-            #self.thisStep.P = copy.deepcopy(d.playerdesicion().player)  
             self.thisStep.playOneStep()
             #Step_updateafterplayone
             #self.thisStep = copy.deepcopy((self.thisStep.playOneStep()))
             #the objects are not updated automatically,
             #update GS for new currentdeck
-            self.GD.currentECdeck= self.thisStep.EC.playingdeck
-            self.GD.currentWCdeck = self.thisStep.WC.playingdeck
+            #self.GD.currentECdeck= self.thisStep.EC.playingdeck
+            #self.GD.currentWCdeck = self.thisStep.WC.playingdeck
+            self.GD.currentMixedCards = self.thisStep.currentMixedCards
             self.winer = self.thisStep.winer
             self.Stepsnapshot(self.thisStep)
             self.currentStep = self.currentStep + 1

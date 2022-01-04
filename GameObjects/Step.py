@@ -22,14 +22,15 @@ class Step():
 
     def __init__(self,*args,**kwargs):     
         self.winer = ''
-       # self.GS = kwargs.get('gamesettings',GameSettings())        
+        # self.GS = kwargs.get('gamesettings',GameSettings())        
         # it is 0 to produce error instead of initializing empty  gamesettings obj.
         GD = kwargs.get('currentgamedeck',0)        
-        
         self.P = kwargs.get('p',Player('N'))
         #pv = copy.deepcopy(self.P.playerVars)
         self.WC = WormCards(self.P.playerVars,GD)
         self.EC = EventCards(self.P.playerVars,self.P.PlayerReservedEC,GD)
+        self.currentMixedCards = GD.currentMixedCards
+        self.initialMixedCards = GD.initialMixedCards
         #self.playerDesicion = False
         #self.myDesicion = desicion()
         #
@@ -58,20 +59,31 @@ class Step():
         d.playerdesicion()
         self.P.update_afterdecision(d)
         #self.P = copy.deepcopy(d.playerdesicion().player)
+        if (len(self.currentMixedCards) == 0):
+            self.currentMixedCards = self.initialMixedCards.deck
+            self.currentMixedCards.shuffle()
+            
+        currentCard = self.currentMixedCards[0]
+        self.currentMixedCards = np.delete(self.currentMixedCards,[0])
+
         if self.P.mydesicion:
-            self.EC.playFunc(self)
-            #self= copy.deepcopy(self.EC.playFunc(self))    
-            total = self.P.playerVars.varsValue[3]
-        if (GS.ifWined(total)):
-            self.winer = self.P.Name
-            return (self)        
-        for i in range(self.EC.nOfWC):
+            if currentCard<5000:
+                self.EC.currentEC = currentCard
+                self.EC.playFunc(self)
+                #self= copy.deepcopy(self.EC.playFunc(self))    
+                total = self.P.playerVars.varsValue[3]
+                if (GS.ifWined(total)):
+                    self.winer = self.P.Name
+                    return (self)
+            else:
+       # for i in range(self.EC.nOfWC):
             #self = copy.deepcopy(d.playerdesicion())
-            d = desicion()._init_(self.P)
-            d.playerdesicion()
-            self.P.update_afterdecision(d)
-            if (self.P.mydesicion):
-                 self.WC.playFunc(self)
+                d = desicion()._init_(self.P)
+                d.playerdesicion()
+                self.P.update_afterdecision(d)
+                if (self.P.mydesicion):
+                    self.WC.currentWC = currentCard-5000
+                    self.WC.playFunc(self)
         return (self)
  
     def writeCSVHeader(self, file):

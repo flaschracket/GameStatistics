@@ -111,8 +111,9 @@ class EventCards(Cards):
     
     def playFunc(self,s):
         """calling a function with making its name as string"""  
-        self.updateEC(s.P.playerVars, s.EC.playingdeck, s.P.PlayerReservedEC)
-        self.selectNextEC()
+        #self.updateEC(s.P.playerVars, s.EC.playingdeck, s.P.PlayerReservedEC)
+        #self.updateEC(s.P.playerVars, s.currentMixedCards, s.P.PlayerReservedEC)
+        #self.selectNextEC()
         FuncName = 'ECFunc' + str(self.currentEC)
         getattr(self, FuncName)()
         self.nOfWC = self.WCQuantity(self.currentEC)
@@ -315,10 +316,10 @@ class EventCards(Cards):
 
     def ECFunc201(self):
         self.ECName = 'EC:Resource: Freelancer'
-        self.reservedEC.add(30)
+        self.reservedEC.append(201)
         return(self)
 
     def ECFunc202(self):
         self.ECName = 'EC:Resource: Bazar'
-        self.reservedEC.add(31)
+        self.reservedEC.append(202)
         return(self)

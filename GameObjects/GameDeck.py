@@ -37,7 +37,24 @@ class GameDeck(object):
         self.initialWC = Cards(cardsVaraity = WC_Cards, quantities =  self.WC_Quantity )
         self.initialWC.shuffle()
         self.currentWCdeck = self.initialWC.deck
-        #-others
+
+        #--------------mixed Deck-----------------
+        
+        MixedCardsQuantities = self.EC_Quantity
+        for i in self.WC_Quantity:
+            MixedCardsQuantities.append(i)
+
+        MixedCardsVaraity = self.EC_Cards
+        for j in WC_Cards:
+            newlist = []
+            for i in j:
+                k = 5000+i
+                newlist.append(k)
+            MixedCardsVaraity.append(newlist)
+
+        self.initialMixedCards = Cards(cardsVaraity = MixedCardsVaraity, quantities = MixedCardsQuantities)    
+        self.initialMixedCards.shuffle()
+        self.currentMixedCards = self.initialMixedCards.deck
         return
 
 

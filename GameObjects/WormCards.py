@@ -58,7 +58,7 @@ class WormCards(Cards):
 
     def playFunc(self,s):
         self.updateWC(s.P.playerVars,s.WC.playingdeck)
-        self.selectNextWC()
+        #self.selectNextWC()
         FuncName = 'WCFunc' + str(self.currentWC)
         getattr(self, FuncName)()
         self.playedwc = np.append(self.playedwc,self.currentWC)

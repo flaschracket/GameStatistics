@@ -17,8 +17,10 @@ print("Hello From Game Simulation! Data Generation is begining")
 gsID = dbgs.insert_GameSettings(GD)
 
 while sampleCounter <= GS.sampleQuantity:
-    GD.currentECdeck = GD.initialEC.shuffle()
-    GD.currentWCdeck = GD.initialWC.shuffle()
+# it should have if the deck is devided else mixed
+#    GD.currentECdeck = GD.initialEC.shuffle()
+#    GD.currentWCdeck = GD.initialWC.shuffle()
+    GD.currentMixedCards = GD.initialMixedCards.shuffle()
     mygame = Game(sampleCounter,GD,gsID)
     #play
     print("---Game : "+str(sampleCounter)+"---")

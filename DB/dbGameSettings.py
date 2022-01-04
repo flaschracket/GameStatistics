@@ -21,7 +21,8 @@ class dbGameSettings(object):
                        ((gs.Testchangelog),gs.sampleQuantity,gs.winGoal,
                          gs.NrOfP,gs.maxRound,str(CurrentGameDeck.cardsCategory),
                          str(CurrentGameDeck.EC_Quantity),0,str(CurrentGameDeck.WCcardsCategory),
-                         str(CurrentGameDeck.WC_Quantity),0,str(CurrentGameDeck.currentECdeck)))
+                         str(CurrentGameDeck.WC_Quantity),0,str(CurrentGameDeck.currentMixedCards)))
+                         #str(CurrentGameDeck.WC_Quantity),0,str(CurrentGameDeck.currentECdeck)))
         cursor.execute("SELECT @@IDENTITY")
         for row in cursor:
             settingsID = row[0]
