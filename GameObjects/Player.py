@@ -22,9 +22,10 @@ class Player():
         self.nofRoundPausing = 0
         self.PlayerReservedEC = []
         self.mydesicion = True
+        self.playerfuncs = []
         return 
    
-    def updatePlayer(self,var,pause,reservedEC,damage):
+    def updatePlayer(self,var,pause,reservedEC,damage,playerfuncs):
         self.playerVars = copy.deepcopy(var)
         self.nofRoundPausing = pause
         if (len(reservedEC)>0):
@@ -32,7 +33,7 @@ class Player():
             self.PlayerReservedEC = reservedEC
         if (len(damage) > 0) and (damage[0] not in self.PCStatus):
             self.PCStatus = self.PCStatus + damage
-
+        self.playerfuncs = playerfuncs
         return
         
     def update_afterdecision(self,plydecision):

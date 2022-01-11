@@ -9,7 +9,7 @@ class GameSettings():
         self.winGoal = 128
         self.NrOfP = 5
         self.maxRound = 40
-        self.Testchangelog = "wc normal 2 to 1-goal 128- Freelancer 0 to 2"
+        self.Testchangelog = "add function to "
         #the Id in DB
         self.restart = 200
         self.freelancer = 201

@@ -17,7 +17,7 @@ class desicion(object):
         self.tempPCstatus = ply.PCStatus
         self.desicion = ply.mydesicion
         self.tempReservedEc = ply.PlayerReservedEC
-        self.nofRoundPausing = ply.nofRoundPausing
+        self.nofRoundPausing = ply.nofRoundPausing 
         return self
 #-------------------------------
 
@@ -40,6 +40,7 @@ class desicion(object):
         else:
             self.desicion = True        
         return self
+
     #rule 1= cpu is captured  
     def rule1(self): 
             if (self.restart in self.tempReservedEc):
@@ -56,3 +57,7 @@ class desicion(object):
                     self.desicion = False      
                     self.nofRoundPausing = self.nofRoundPausing-1
             return self
+
+    def rule100(self):
+
+        return self

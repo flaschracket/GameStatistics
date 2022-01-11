@@ -27,8 +27,8 @@ class Step():
         GD = kwargs.get('currentgamedeck',0)        
         self.P = kwargs.get('p',Player('N'))
         #pv = copy.deepcopy(self.P.playerVars)
-        self.WC = WormCards(self.P.playerVars,GD)
-        self.EC = EventCards(self.P.playerVars,self.P.PlayerReservedEC,GD)
+        self.WC = WormCards(self.P.playerVars,GD,self.P.playerfuncs)
+        self.EC = EventCards(self.P.playerVars,self.P.PlayerReservedEC,GD,self.P.playerfuncs)
         self.currentMixedCards = GD.currentMixedCards
         self.initialMixedCards = GD.initialMixedCards
         #self.playerDesicion = False
@@ -72,6 +72,7 @@ class Step():
                 self.EC.playFunc(self)
                 #self= copy.deepcopy(self.EC.playFunc(self))    
                 total = self.P.playerVars.varsValue[3]
+                self.P.playerfuncs = self.EC.playerfuncs
                 if (GS.ifWined(total)):
                     self.winer = self.P.Name
                     return (self)

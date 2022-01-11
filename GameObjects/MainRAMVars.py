@@ -7,6 +7,7 @@ class MainRAMVars():
     def __init__(self):
         self.varsValue =np.array([0,0,0,0])
         self.Nullindex = []
+        
         return 
     
     def print(self):

@@ -10,7 +10,7 @@ from collections import Counter
 class WormCards(Cards):
     """description of class"""
 
-    def __init__(self,vars,currentgamedeck):
+    def __init__(self,vars,currentgamedeck,playerfuncs):
         self.PV = copy.deepcopy(vars)
         self.playedWCName = []    
         self.playedwc = np.array([]).astype(int)
@@ -20,6 +20,7 @@ class WormCards(Cards):
         self.currentWC = 0
         self.GD = currentgamedeck
         self.playingdeck = currentgamedeck.currentWCdeck
+        self.playerfuncs = playerfuncs
         return 
 
     def updateWC(self,vars,pwc):
@@ -54,15 +55,17 @@ class WormCards(Cards):
             self.playingdeck = self.GD.initialWC.deck
             self.shuffle()
         return(self)
-
-
+    def checkfuncs(self):
+        if 1 in self.playerfuncs:
+           self.PV.Nullindex.clear
+        return 0
     def playFunc(self,s):
         self.updateWC(s.P.playerVars,s.WC.playingdeck)
         #self.selectNextWC()
         FuncName = 'WCFunc' + str(self.currentWC)
         getattr(self, FuncName)()
         self.playedwc = np.append(self.playedwc,self.currentWC)
-        s.P.updatePlayer(self.PV,self.nofRoundspausing,[],self.damages)
+        s.P.updatePlayer(self.PV,self.nofRoundspausing,[],self.damages,self.playerfuncs)
         #s.GS.currentWCdeck = self.playingdeck
         return s
 
@@ -72,18 +75,21 @@ class WormCards(Cards):
         self.playedWCName.append(' WC Name: A=NULL; ')        
         if 0 not in self.PV.Nullindex:
             self.PV.Nullindex.append(0) 
+        self.checkfuncs()
         return(self)
     
     def WCFunc1(self):
         self.playedWCName.append(' WC Name: B=NULL; ')
         if 1 not in self.PV.Nullindex:
             self.PV.Nullindex.append(1) 
+        self.checkfuncs()
         return(self)
     
     def WCFunc2(self):
         self.playedWCName.append(' WC Name: C=NULL; ')
         if 2 not in self.PV.Nullindex:    
             self.PV.Nullindex.append(2) 
+        self.checkfuncs()
         return(self)
 
     def WCFunc3(self):
@@ -96,7 +102,11 @@ class WormCards(Cards):
         self.playedWCName.append(' WC Name: T -=64 ')
         ind= [3]
         if self.ifPossibleToPlay(ind):
-            self.PV.varsValue[3] = self.PV.varsValue[3]-64 
+            if 2 in self.playerfuncs:
+                self.PV.varsValue[3] = self.PV.varsValue[3]+64 
+            else:
+                self.PV.varsValue[3] = self.PV.varsValue[3]-64
+             
         return(self)
 
     def WCFunc5(self):
@@ -120,6 +130,7 @@ class WormCards(Cards):
         self.assignVar(1,0)
         if 2 not in self.PV.Nullindex:
             self.PV.Nullindex.append(2)
+        self.checkfuncs()
         return(self)
 
     
@@ -136,39 +147,56 @@ class WormCards(Cards):
 
     def WCFunc9(self):
         self.playedWCName.append(' WC Name: A = -6 ')
-        self.assignVar(0,-6) 
+        if 1 in self.playerfuncs:
+            self.assignVar(0,6) 
+        else:
+            self.assignVar(0,-6)
         return(self)
     def WCFunc15(self):
         self.playedWCName.append(' WC Name: C= -6 ')
-        self.assignVar(2,-6) 
+        if 1 in self.playerfuncs:
+            self.assignVar(2,6) 
+        else:
+            self.assignVar(2,-6) 
         return(self)
+
     def WCFunc8(self):
         self.playedWCName.append(' WC Name: B= -6 ')
-        self.assignVar(1,-6)
+        if 1 in self.playerfuncs:
+            self.assignVar(1,6) 
+        else:
+            self.assignVar(1,-6)
         return(self)
+
     def WCFunc12(self):
         self.playedWCName.append(' WC12: B -=3 ')
         ind= [1]
         if self.ifPossibleToPlay(ind):
-#            self.PV.varsValue[1] = self.PV.varsValue[1]-10      
-            self.PV.varsValue[1] = self.PV.varsValue[1]-3      
+            if 2 in self.playerfuncs:
+                self.PV.varsValue[1] = self.PV.varsValue[1]+3      
+            else:
+                self.PV.varsValue[1] = self.PV.varsValue[1]-3     
+             
         return(self)
     
     def WCFunc13(self):
         self.playedWCName.append(' WC13: A -=3 ')
         ind= [0]
         if self.ifPossibleToPlay(ind):
-#            self.PV.varsValue[0] = self.PV.varsValue[0]-10      
-            self.PV.varsValue[0] = self.PV.varsValue[0]-3      
-
+            if 2 in self.playerfuncs:
+                self.PV.varsValue[0] = self.PV.varsValue[0]+3      
+            else:
+                self.PV.varsValue[0] = self.PV.varsValue[0]-3          
         return(self)
 
     def WCFunc14(self):
         self.playedWCName.append(' WC14: C -=3 ')
         ind= [2]
         if self.ifPossibleToPlay(ind):
-#            self.PV.varsValue[2] = self.PV.varsValue[2]-10      
-            self.PV.varsValue[2] = self.PV.varsValue[2]-3      
+            if 2 in self.playerfuncs:
+                self.PV.varsValue[2] = self.PV.varsValue[2]+3      
+            else:
+                self.PV.varsValue[2] = self.PV.varsValue[2]-3     
         return(self)
 
 
