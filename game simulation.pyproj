@@ -34,6 +34,9 @@
     <Compile Include="DB\dbGameSettings.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="GameObjects\Funcs.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="GameObjects\GameDeck.py">
       <SubType>Code</SubType>
     </Compile>

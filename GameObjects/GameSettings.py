@@ -9,7 +9,7 @@ class GameSettings():
         self.winGoal = 128
         self.NrOfP = 5
         self.maxRound = 40
-        self.Testchangelog = "add function to "
+        self.Testchangelog = "test-buying a function"
         #the Id in DB
         self.restart = 200
         self.freelancer = 201

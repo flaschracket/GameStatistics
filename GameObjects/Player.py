@@ -34,8 +34,9 @@ class Player():
         if (len(damage) > 0) and (damage[0] not in self.PCStatus):
             self.PCStatus = self.PCStatus + damage
         self.playerfuncs = playerfuncs
+        self.playerVars.sumvars = self.playerVars.calculatesumvars()
         return
-        
+
     def update_afterdecision(self,plydecision):
         #plydecision = desicion()
         self.mydesicion = plydecision.desicion
