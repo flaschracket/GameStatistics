@@ -74,6 +74,7 @@ class WormCards(Cards):
     def WCFunc0(self):
         self.playedWCName.append(' WC Name: A=NULL; ')        
         if 0 not in self.PV.Nullindex:
+            self.PV.varsValue[0] = 0
             self.PV.Nullindex.append(0) 
         self.checkfuncs()
         return(self)
@@ -81,13 +82,15 @@ class WormCards(Cards):
     def WCFunc1(self):
         self.playedWCName.append(' WC Name: B=NULL; ')
         if 1 not in self.PV.Nullindex:
+            self.PV.varsValue[1] = 0
             self.PV.Nullindex.append(1) 
         self.checkfuncs()
         return(self)
     
     def WCFunc2(self):
         self.playedWCName.append(' WC Name: C=NULL; ')
-        if 2 not in self.PV.Nullindex:    
+        if 2 not in self.PV.Nullindex:
+            self.PV.varsValue[2] = 0
             self.PV.Nullindex.append(2) 
         self.checkfuncs()
         return(self)
@@ -129,6 +132,7 @@ class WormCards(Cards):
         self.assignVar(0,0)
         self.assignVar(1,0)
         if 2 not in self.PV.Nullindex:
+            self.PV.varsValue[2] = 0
             self.PV.Nullindex.append(2)
         self.checkfuncs()
         return(self)

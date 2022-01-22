@@ -23,7 +23,6 @@ class EventCards(Cards):
         self.playingdeck = currentgamedeck.currentECdeck
         self.playerfuncs = playerfuncs
 #        self.tempfuncs = Funcs(self.PV,self.playerfuncs, 0,0)
-
         return
 
     def shuffle(self):
@@ -56,6 +55,7 @@ class EventCards(Cards):
             self.PV.Nullindex.remove(goalvar)
         if var in self.PV.Nullindex:
             self.PV.Nullindex.append(goalvar)
+            self.PV.varsValue[goalvar] = 0
         else:
             self.PV.varsValue[goalvar] = self.PV.varsValue[var]
         return self
@@ -105,6 +105,7 @@ class EventCards(Cards):
             if a== True: 
                 if not resultvar in self.PV.Nullindex:
                     self.PV.Nullindex.append(resultvar)
+                    self.PV.varsValue[resultvar] = 0
             else:#a= false
                 if resultvar in self.PV.Nullindex:
                     self.PV.Nullindex.remove(resultvar)
@@ -113,6 +114,7 @@ class EventCards(Cards):
         if status == 2:
             if check == True and not resultvar  in self.PV.Nullindex:                
                 self.PV.Nullindex.append(resultvar)
+                self.PV.varsValue[resultvar] = 0
         return (check)
     
     def playFunc(self,s):
@@ -178,7 +180,7 @@ class EventCards(Cards):
                     else:
                         self.PV.varsValue[0] = 0
                         price = (-1*price)
-                if self.PV.varsValue[1]>0 and [1] not in self.PV.Nullindex:        
+                if self.PV.varsValue[1]>0 and (1 not in self.PV.Nullindex):        
                         price = self.PV.varsValue[1]-price
                         if price == 0:
                             self.PV.varsValue[1]=0
@@ -193,7 +195,7 @@ class EventCards(Cards):
                         else:
                             self.PV.varsValue[1] = 0
                             price = (-1*price)
-                if self.PV.varsValue[2]>0 and [2] not in self.PV.Nullindex:        
+                if self.PV.varsValue[2]>0 and (2 not in self.PV.Nullindex):        
                         price = self.PV.varsValue[2]-price
                         if price == 0:
                             self.PV.varsValue[2]=0

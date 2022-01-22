@@ -18,8 +18,6 @@ from collections import Counter
 
 class Step():
     """Status of each step of game, it is like a copy of variable to save the result  at one place"""
-      
-
     def __init__(self,*args,**kwargs):     
         self.winer = ''
         # self.GS = kwargs.get('gamesettings',GameSettings())        
@@ -39,11 +37,19 @@ class Step():
         self.stepNr = kwargs.get('currentStep',0)
         return
 
-    def updatePlayer(self):
-        self.P.playerVars = copy.deepcopy(self.WC.PV) 
-        self.P.PCStatus = self.WC.damages
-        self.P.nofRoundPausing = self.WC.nofRoundspausing
+    def updatePlayer(self, afterstr):
+        if afterstr == 'WC':
+            self.P.playerVars = copy.deepcopy(self.WC.PV) 
+            self.P.PCStatus = self.WC.damages
+            self.P.nofRoundPausing = self.WC.nofRoundspausing
+            self.P.playerVars.calculatesumvars()
+
+        if afterstr == 'EC':
+            self.P.playerfuncs = self.EC.playerfuncs
+            self.P.playerVars = self.EC.PV
+            self.P.playerVars.calculatesumvars()
         return self
+
     #-------------------------
     #-------------------------
     def playWC(self):
@@ -71,9 +77,8 @@ class Step():
                 self.EC.currentEC = currentCard
                 self.EC.playFunc(self)
                 #self= copy.deepcopy(self.EC.playFunc(self))    
-                total = self.P.playerVars.varsValue[3]
-                self.P.playerfuncs = self.EC.playerfuncs
-                if (GS.ifWined(total)):
+                self.updatePlayer('EC')
+                if (GS.ifWined(self.P.playerVars.varsValue[3])):
                     self.winer = self.P.Name
                     return (self)
             else:

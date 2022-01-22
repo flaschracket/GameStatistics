@@ -41,7 +41,7 @@ class Game():
      #  playingdeck = self.GS.currentECdeck
      #  wcdeck = self.GS.currentWCdeck
         self.thisStep = Step(p = self.listofPlayers[x], currentStep = self.currentStep, 
-                             currentRound = self.currentRound, currentgamedeck = self.GD)
+                             currentRound = self.currentRound, currentgamedeck = self.GD, )
         return self
     #---------------------
 
