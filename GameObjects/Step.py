@@ -42,12 +42,14 @@ class Step():
             self.P.playerVars = copy.deepcopy(self.WC.PV) 
             self.P.PCStatus = self.WC.damages
             self.P.nofRoundPausing = self.WC.nofRoundspausing
-            self.P.playerVars.calculatesumvars()
 
         if afterstr == 'EC':
             self.P.playerfuncs = self.EC.playerfuncs
             self.P.playerVars = self.EC.PV
-            self.P.playerVars.calculatesumvars()
+
+        #general
+        self.P.playerVars.sumvars = self.P.playerVars.calculatesumvars()
+
         return self
 
     #-------------------------
@@ -90,6 +92,8 @@ class Step():
                 if (self.P.mydesicion):
                     self.WC.currentWC = currentCard-5000
                     self.WC.playFunc(self)
+                    self.updatePlayer('WC')
+                    a = self.P.playerVars
         return (self)
  
     def writeCSVHeader(self, file):
