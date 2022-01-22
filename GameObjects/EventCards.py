@@ -139,7 +139,7 @@ class EventCards(Cards):
     
     def updateRAMwithFunc(self,funcnumber):
         if funcnumber == 0:
-            self.PV.Nullindex.clear
+            self.PV.Nullindex.clear()
         if funcnumber == 1:
             if(self.PV.varsValue[0]<0):
                 self.PV.varsValue[0] = self.PV.varsValue[0] * (-1)
