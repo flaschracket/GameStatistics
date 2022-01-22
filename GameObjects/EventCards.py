@@ -156,7 +156,7 @@ class EventCards(Cards):
         x=4
         if (self.PV.varsValue[3]>=16) or (self.PV.sumvars>=16):
             fnumber = randrange(3)
-            while x in self.playerfuncs:
+            while fnumber in self.playerfuncs:
                 fnumber = randrange(3)
             if self.PV.varsValue[3] >= 16:
                 self.PV.varsValue[3] = self.PV.varsValue[3]-16
