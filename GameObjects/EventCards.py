@@ -155,9 +155,11 @@ class EventCards(Cards):
         fnumber = -1
         x=4
         if (self.PV.varsValue[3]>=16) or (self.PV.sumvars>=16):
-            fnumber = randrange(3)
+            funclist = [0,1,2,3]
+            fnumber = random.choice(funclist)
             while fnumber in self.playerfuncs:
-                fnumber = randrange(3)
+                funclist.remove(fnumber)
+                fnumber = randrange(funclist)
             if self.PV.varsValue[3] >= 16:
                 self.PV.varsValue[3] = self.PV.varsValue[3]-16
                 self.playerfuncs.append(fnumber)

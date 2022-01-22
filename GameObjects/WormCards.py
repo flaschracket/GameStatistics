@@ -55,10 +55,12 @@ class WormCards(Cards):
             self.playingdeck = self.GD.initialWC.deck
             self.shuffle()
         return(self)
+
     def checkfuncs(self):
         if 1 in self.playerfuncs:
            self.PV.Nullindex.clear
         return 0
+
     def playFunc(self,s):
         self.updateWC(s.P.playerVars,s.WC.playingdeck)
         #self.selectNextWC()
