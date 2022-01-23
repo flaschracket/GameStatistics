@@ -9,7 +9,7 @@ class GameSettings():
         self.winGoal = 128
         self.NrOfP = 2
         self.maxRound = 40
-        self.Testchangelog = "test the balance- freelancer = 4"
+        self.Testchangelog = "test the balance- adding buy a function at first of step"
         #the Id in DB
         self.restart = 200
         self.freelancer = 201

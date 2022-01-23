@@ -31,10 +31,12 @@ class Step():
         self.initialMixedCards = GD.initialMixedCards
         #self.playerDesicion = False
         #self.myDesicion = desicion()
-        #
+        
         #only to write in DB/file, etc.
         self.roundNr = kwargs.get('currentRound',0)
         self.stepNr = kwargs.get('currentStep',0)
+        self.F = Funcs(self.P.playerVars,self.P.playerfuncs,0,0)
+
         return
 
     def updatePlayer(self, afterstr):
@@ -46,7 +48,9 @@ class Step():
         if afterstr == 'EC':
             self.P.playerfuncs = self.EC.playerfuncs
             self.P.playerVars = self.EC.PV
-
+        if afterstr == 'Func':
+            self.P.playerfuncs = self.F.playingfuncs
+            self.P.playerVars = self.F.PV
         #general
         self.P.playerVars.sumvars = self.P.playerVars.calculatesumvars()
 
@@ -78,8 +82,10 @@ class Step():
             #if player want to buy?
             d.rule5()
             if d.buy == 'Func':
-                self.EC.buyFunc()
+                self.F.buyFunc()
+                self.updatePlayer('Func')
             #------------------------- 
+
             if currentCard<5000:
                 self.EC.currentEC = currentCard
                 self.EC.playFunc(self)

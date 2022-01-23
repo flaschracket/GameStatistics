@@ -1,5 +1,5 @@
 from random import randrange
-import random
+
 import copy
 import numpy as np
 from collections import Counter
@@ -130,90 +130,9 @@ class EventCards(Cards):
         #??? deck will update after playing the step?
         #s.GS.currentECdeck = self.playingdeck
         return s
-    #-------------------
-    #player functions
-    #0: zero instead of null
-    #1: absolute value
-    #2: add instead of reduce
-    #3: add instead of assign
-    #-------------------
+
+
     
-    def updateRAMwithFunc(self,funcnumber):
-        if funcnumber == 0:
-            self.PV.Nullindex.clear()
-        if funcnumber == 1:
-            if(self.PV.varsValue[0]<0):
-                self.PV.varsValue[0] = self.PV.varsValue[0] * (-1)
-            if(self.PV.varsValue[1]<0):
-                self.PV.varsValue[1] = self.PV.varsValue[1] * (-1)
-            if(self.PV.varsValue[2]<0):
-                self.PV.varsValue[2] = self.PV.varsValue[2] * (-1)
-            if(self.PV.varsValue[3]<0):
-                self.PV.varsValue[3] = self.PV.varsValue[3] * (-1)
-        return
-
-    def buyFunc(self):
-        fnumber = -1
-        x=4
-        if (self.PV.varsValue[3]>=16) or (self.PV.sumvars>=16):
-            funclist = [0,1,2,3]
-            fnumber = random.choice(funclist)
-            while fnumber in self.playerfuncs:
-                funclist.remove(fnumber)
-                fnumber = random.choice(funclist)
-            if self.PV.varsValue[3] >= 16:
-                self.PV.varsValue[3] = self.PV.varsValue[3]-16
-                self.playerfuncs.append(fnumber)
-                self.updateRAMwithFunc(fnumber)
-            else:
-                price = 16
-                #temp = 0
-                if self.PV.varsValue[0]>0 and 0 not in self.PV.Nullindex:
-                    price = self.PV.varsValue[0]-price
-                    if price == 0:
-                        self.PV.varsValue[0]=0
-                        self.playerfuncs.append(fnumber)
-                        self.updateRAMwithFunc(fnumber)
-                        return True
-                    elif price>0:
-                        self.playerfuncs.append(fnumber)
-                        self.PV.varsValue[0]= price
-                        self.updateRAMwithFunc(fnumber)
-                        return True
-                    else:
-                        self.PV.varsValue[0] = 0
-                        price = (-1*price)
-                if self.PV.varsValue[1]>0 and (1 not in self.PV.Nullindex):        
-                        price = self.PV.varsValue[1]-price
-                        if price == 0:
-                            self.PV.varsValue[1]=0
-                            self.playerfuncs.append(fnumber)
-                            self.updateRAMwithFunc(fnumber)
-                            return True
-                        elif price>0:
-                            self.playerfuncs.append(fnumber)
-                            self.PV.varsValue[1]= price
-                            self.updateRAMwithFunc(fnumber)
-                            return True
-                        else:
-                            self.PV.varsValue[1] = 0
-                            price = (-1*price)
-                if self.PV.varsValue[2]>0 and (2 not in self.PV.Nullindex):        
-                        price = self.PV.varsValue[2]-price
-                        if price == 0:
-                            self.PV.varsValue[2]=0
-                            self.playerfuncs.append(fnumber)
-                            self.updateRAMwithFunc(fnumber)
-
-                            return True
-                        elif price>0:
-                            self.playerfuncs.append(fnumber)
-                            self.PV.varsValue[2]= price
-                            self.updateRAMwithFunc(fnumber)
-                            return True
-        else:
-            return False
-        return True
     # list of Cards
     #-------------------
     #A: input Cards
@@ -498,7 +417,8 @@ class EventCards(Cards):
     #-------------------
     def ECFunc201(self):
         self.ECName = 'EC:Resource: Freelancer'
-        x = self.buyFunc()
+        tempfunc = Funcs(self.PV,self.playerfuncs,0,0)
+        x = tempfunc.buyFunc()
         if x == False:
             self.reservedEC.append(201)                        
         return(self)
