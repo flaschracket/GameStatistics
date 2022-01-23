@@ -1,4 +1,5 @@
 from random import randrange
+import random
 import copy
 import numpy as np
 from collections import Counter
@@ -159,7 +160,7 @@ class EventCards(Cards):
             fnumber = random.choice(funclist)
             while fnumber in self.playerfuncs:
                 funclist.remove(fnumber)
-                fnumber = randrange(funclist)
+                fnumber = random.choice(funclist)
             if self.PV.varsValue[3] >= 16:
                 self.PV.varsValue[3] = self.PV.varsValue[3]-16
                 self.playerfuncs.append(fnumber)
