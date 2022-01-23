@@ -75,6 +75,11 @@ class Step():
         self.currentMixedCards = np.delete(self.currentMixedCards,[0])
 
         if self.P.mydesicion:
+            #if player want to buy?
+            d.rule5()
+            if d.buy == 'Func':
+                self.EC.buyFunc()
+            #------------------------- 
             if currentCard<5000:
                 self.EC.currentEC = currentCard
                 self.EC.playFunc(self)

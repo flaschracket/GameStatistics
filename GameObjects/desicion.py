@@ -12,12 +12,14 @@ class desicion(object):
      #deepcopy is extremly slow
      #   self.step = copy.deepcopy(s)
      #    self.player = copy.deepcopy(ply)
-        GS = GameSettings()        
+        GS = GameSettings()
         self.restart = GS.restart
+        self.PV = ply.playerVars
         self.tempPCstatus = ply.PCStatus
         self.desicion = ply.mydesicion
         self.tempReservedEc = ply.PlayerReservedEC
-        self.nofRoundPausing = ply.nofRoundPausing 
+        self.nofRoundPausing = ply.nofRoundPausing
+        self.buy = 'No'
         return self
 #-------------------------------
 
@@ -57,7 +59,25 @@ class desicion(object):
                     self.desicion = False      
                     self.nofRoundPausing = self.nofRoundPausing-1
             return self
-
-    def rule100(self):
-
+    #player can buy function from freelancer?
+    def rule2(self):
+        GS = GameSettings()
+        if GS.freelancer in self.tempReservedEc:
+            if self.PV.sumvars> 16 or self.PV.varsValue[3]>16 :
+                return True
+        return False
+    #player can buy CPU?
+    def rule3(self):
+        GS = GameSettings()
+#        if GS.bazar in self.tempReservedEc:
+#            return True
+        return False
+    #rule 2 = player decide buy something at first step of its turn    
+    def rule5(self):
+        buy = False
+        if self.rule2() or self.rule3():
+            #do I want to buy?
+            buy = self.makeRandomDecision
+        if buy:
+            self.buy='Func'
         return self
