@@ -25,6 +25,9 @@
     <Compile Include="Abbas\DynamicFunc.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DB\dbBazar.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DB\dbCards.py">
       <SubType>Code</SubType>
     </Compile>

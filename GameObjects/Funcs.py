@@ -1,23 +1,39 @@
 import copy
 import random
 from GameObjects.MainRAMVars import *
-
+from DB.dbBazar import *
 
 class Funcs(object):
     """description of class"""
     def __init__(self,vars,funcslist,varnumber, value):
         self.PV = copy.deepcopy(vars)
-        self.playingfuncs = funcslist
+        self.playerFuncs = funcslist
         self.varnumber = varnumber
         self.value = value
-        self.funclist = [0,1,2,3]
+        dbb = dbBazar()
+        self.funcList = []
+        self.funcName = []
+        self.funcMainPrice = []
+        self.funcSharedPrice = []
+        bazarlist = dbb.selectAll()
+        
+       # for x in range (len(bazarlist)):
+       #     print(bazarlist[x])
+        self.funcList.append(bazarlist[0])
+        self.funcList = self.funcList[0]
+        self.funcName.append(bazarlist[1])
+        self.funcName = self.funcName[0]
+        self.funcMainPrice.append(bazarlist[2])
+        self.funcMainPrice = self.funcMainPrice[0]
+        self.funcSharedPrice.append(bazarlist[3])
+        self.funcSharedPrice = self.funcSharedPrice[0]
         return
     #-------------------
     #player functions
-    #0: zero instead of null
-    #1: absolute value
-    #2: add instead of reduce
-    #3: add instead of assign
+    #1: zero instead of null
+    #2: absolute value
+    #3: add instead of reduce
+    #4: add instead of assign
     #-------------------
     
     def updateRAMwithFunc(self,funcnumber):
@@ -33,64 +49,84 @@ class Funcs(object):
             if(self.PV.varsValue[3]<0):
                 self.PV.varsValue[3] = self.PV.varsValue[3] * (-1)
         return
+
     def buyFunc(self):
         fnumber = -1
         x=4
-        funclist = self.funclist
-        if ((self.PV.varsValue[3]>=16) or (self.PV.sumvars>=16))and(len(self.playingfuncs) < len(self.funclist)):
+        tempFuncList = []
+        tempFuncMainPrice = []
+        tempFuncSharedPrice = []
+        # make list of functions which player can buy
+        for f in range(len(self.funcList)):
+            # f begins from 0 and id from 1
+            f=f+1
+            #1. player do not have it
+            if (f not in self.playerFuncs):
+                #player has money to buy
+                ind = self.funcList.index(f)
+                if self.PV.varsValue[3] >= self.funcMainPrice[ind]:
+                    tempFuncMainPrice.append(self.funcMainPrice[ind])
+                    tempFuncSharedPrice.append(-1)
+                    tempFuncList.append(f)
+                elif self.PV.sumvars >= self.funcSharedPrice[ind]:
+                    tempFuncMainPrice.append(-1)
+                    tempFuncSharedPrice.append(self.funcSharedPrice[ind])
+                    tempFuncList.append(f)
+        #end of for: list of functions player can buy
+        #select to buy        
+        if (len(tempFuncList)>0):
+            fnumber = random.choice(tempFuncList)
+            ind = tempFuncList.index(fnumber)
+            tempPrice = tempFuncMainPrice[ind]
+            tempSharedPrice = tempFuncSharedPrice[ind]
             
-            fnumber = random.choice(funclist)
-            while (fnumber in self.playingfuncs) and (len(funclist)>0):
-                funclist.remove(fnumber)
-                fnumber = random.choice(funclist)
-            if self.PV.varsValue[3] >= 16:
-                self.PV.varsValue[3] = self.PV.varsValue[3]-16
-                self.playingfuncs.append(fnumber)
+            #pay the price of function from total
+            if tempPrice >0:
+                self.PV.varsValue[3] = self.PV.varsValue[3]-tempPrice
+                self.playerFuncs.append(fnumber)
                 self.updateRAMwithFunc(fnumber)
             else:
-                price = 16
-                #temp = 0
+                #pay from shared values
                 if self.PV.varsValue[0]>0 and 0 not in self.PV.Nullindex:
-                    price = self.PV.varsValue[0]-price
-                    if price == 0:
+                    tempSharedPrice = self.PV.varsValue[0]-tempSharedPrice
+                    if tempSharedPrice == 0:
                         self.PV.varsValue[0]=0
-                        self.playingfuncs.append(fnumber)
+                        self.playerFuncs.append(fnumber)
                         self.updateRAMwithFunc(fnumber)
                         return True
-                    elif price>0:
-                        self.playingfuncs.append(fnumber)
-                        self.PV.varsValue[0]= price
+                    elif tempSharedPrice>0:
+                        self.playerFuncs.append(fnumber)
+                        self.PV.varsValue[0]= tempSharedPrice
                         self.updateRAMwithFunc(fnumber)
                         return True
                     else:
                         self.PV.varsValue[0] = 0
-                        price = (-1*price)
+                        tempSharedPrice = (-1 * tempSharedPrice)
                 if self.PV.varsValue[1]>0 and (1 not in self.PV.Nullindex):        
-                        price = self.PV.varsValue[1]-price
-                        if price == 0:
+                        tempSharedPrice = self.PV.varsValue[1]-tempSharedPrice
+                        if tempSharedPrice == 0:
                             self.PV.varsValue[1]=0
-                            self.playingfuncs.append(fnumber)
+                            self.playerFuncs.append(fnumber)
                             self.updateRAMwithFunc(fnumber)
                             return True
-                        elif price>0:
-                            self.playingfuncs.append(fnumber)
-                            self.PV.varsValue[1]= price
+                        elif tempSharedPrice>0:
+                            self.playerFuncs.append(fnumber)
+                            self.PV.varsValue[1]= tempSharedPrice
                             self.updateRAMwithFunc(fnumber)
                             return True
                         else:
                             self.PV.varsValue[1] = 0
-                            price = (-1*price)
+                            tempSharedPrice = (-1 * tempSharedPrice)
                 if self.PV.varsValue[2]>0 and (2 not in self.PV.Nullindex):        
-                        price = self.PV.varsValue[2]-price
-                        if price == 0:
+                        tempSharedPrice = self.PV.varsValue[2]-tempSharedPrice
+                        if tempSharedPrice == 0:
                             self.PV.varsValue[2]=0
-                            self.playingfuncs.append(fnumber)
+                            self.playerFuncs.append(fnumber)
                             self.updateRAMwithFunc(fnumber)
-
                             return True
-                        elif price>0:
-                            self.playingfuncs.append(fnumber)
-                            self.PV.varsValue[2]= price
+                        elif tempSharedPrice>0:
+                            self.playerFuncs.append(fnumber)
+                            self.PV.varsValue[2]= tempSharedPrice
                             self.updateRAMwithFunc(fnumber)
                             return True
         else:
@@ -103,27 +139,28 @@ class Funcs(object):
             FuncName = 'ECFunc' + str(pf.pop())
             getattr(self, FuncName)()
         return self
-
-    def func0(self):
-        #zero instead of null
+   
+    #zero instead of null
+    def func1(self):
         if self.varnumber in self.PV.Nullindex:
             Nullindex.remove(varnumber)
         return 
-
-    def func1(self):
-        #Absolut value
+   
+    #Absolut value
+    def func2(self):
         if self.value <0:
            self.value = -1 * self.value
         return 
-    
-    def func2(self):
-        #Add isntead of asign
+
+    #Add isntead of asign
+    def func3(self):    
         if self.varnumber not in self.PV.nullindex:
             self.PV.varsValue[self.varnumber] = self.PV.varsValue[self.varnumber] + self.value
         return 
 
+    #add instead of reduce
     def func3(self):
-        #add instead of reduce
         if self.value <0:
            self.value = -1 * self.value
         return 
+    

@@ -49,11 +49,10 @@ class Step():
             self.P.playerfuncs = self.EC.playerfuncs
             self.P.playerVars = self.EC.PV
         if afterstr == 'Func':
-            self.P.playerfuncs = self.F.playingfuncs
+            self.P.playerfuncs = self.F.playerFuncs
             self.P.playerVars = self.F.PV
         #general
         self.P.playerVars.sumvars = self.P.playerVars.calculatesumvars()
-
         return self
 
     #-------------------------
@@ -73,8 +72,7 @@ class Step():
         #self.P = copy.deepcopy(d.playerdesicion().player)
         if (len(self.currentMixedCards) == 0):
             self.currentMixedCards = self.initialMixedCards.deck
-            self.currentMixedCards.shuffle()
-            
+            self.currentMixedCards.shuffle()            
         currentCard = self.currentMixedCards[0]
         self.currentMixedCards = np.delete(self.currentMixedCards,[0])
 
@@ -85,7 +83,8 @@ class Step():
                 self.F.buyFunc()
                 self.updatePlayer('Func')
             #------------------------- 
-
+            # else buy hardware 
+                
             if currentCard<5000:
                 self.EC.currentEC = currentCard
                 self.EC.playFunc(self)

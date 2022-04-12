@@ -63,21 +63,33 @@ class desicion(object):
     def rule2(self):
         GS = GameSettings()
         if GS.freelancer in self.tempReservedEc:
-            if self.PV.sumvars> 16 or self.PV.varsValue[3]>16 :
                 return True
+            #for decision it is not need to check the price. 
+            #if self.PV.sumvars> 16 or self.PV.varsValue[3]>16 :
         return False
     #player can buy CPU?
     def rule3(self):
         GS = GameSettings()
-#        if GS.bazar in self.tempReservedEc:
-#            return True
+        if GS.bazar in self.tempReservedEc:
+            return True
         return False
-    #rule 2 = player decide buy something at first step of its turn    
+
+    #rule 5 = player decide buy something at first step of its turn    
     def rule5(self):
         buy = False
-        if self.rule2() or self.rule3():
-            #do I want to buy?
-            buy = self.makeRandomDecision
-        if buy:
-            self.buy='Func'
+        buyFunc= self.rule2()
+        buyHardware = self.rule3()
+        #do I want to buy ?
+        buy = self.makeRandomDecision
+
+        if buyFunc and buyHardware:
+            funcorhardware = self.makeRandomDecision
+            if funcorhardware:self.buy='Func'
+            else: self.buy='Hardware'
+            return self
+        #do I want to buy ?
+        buy = self.makeRandomDecision
+        if (buy and buyFunc): self.buy = 'Func'
+        if (buy and buyHardware): self.buy = 'Hardware'
+
         return self
