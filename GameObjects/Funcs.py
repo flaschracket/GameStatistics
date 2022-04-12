@@ -9,6 +9,7 @@ class Funcs(object):
         self.PV = copy.deepcopy(vars)
         self.playerFuncs = funcslist
         self.varnumber = varnumber
+        self.buyed = 0
         self.value = value
         dbb = dbBazar()
         self.funcList = []
@@ -68,10 +69,12 @@ class Funcs(object):
                     tempFuncMainPrice.append(self.funcMainPrice[ind])
                     tempFuncSharedPrice.append(-1)
                     tempFuncList.append(f)
+                    self.buyed = 1
                 elif self.PV.sumvars >= self.funcSharedPrice[ind]:
                     tempFuncMainPrice.append(-1)
                     tempFuncSharedPrice.append(self.funcSharedPrice[ind])
                     tempFuncList.append(f)
+                    self.buyed = 1
         #end of for: list of functions player can buy
         #select to buy        
         if (len(tempFuncList)>0):

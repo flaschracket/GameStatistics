@@ -140,8 +140,9 @@ class EventCards(Cards):
     def ECFunc0(self):
         self.ECName = 'EC:Input:A =3'
         #add insead of asign function
-        if 2 in self.playerfuncs:
-            tempfuncs = Funcs(self.PV,[2], 0,3)
+        if 3 in self.playerfuncs:
+            tempfuncs = Funcs(self.PV,[3], 0,3)
+            tempfuncs.func3()
             self.PV = tempfuncs.PV
         else:
             self.asignValuetovar(0,3)        
@@ -150,8 +151,9 @@ class EventCards(Cards):
     def ECFunc1(self):
         self.ECName = 'EC:Input:A =7'
         #add insead of asign function
-        if 2 in self.playerfuncs:
-            tempfuncs = Funcs(self.PV,[2], 0,7)
+        if 3 in self.playerfuncs:
+            tempfuncs = Funcs(self.PV,[3], 0,7)
+            tempfuncs.func3()
             self.PV = tempfuncs.PV
         else:
             self.asignValuetovar(0,7)
@@ -159,9 +161,10 @@ class EventCards(Cards):
         
     def ECFunc2(self):
         self.ECName = 'EC:Input:A =15'
-                #add insead of asign function
-        if 2 in self.playerfuncs:
-            tempfuncs = Funcs(self.PV,[2], 0,15)
+        #add insead of asign function
+        if 3 in self.playerfuncs:
+            tempfuncs = Funcs(self.PV,[3], 0,15)
+            tempfuncs.func3()
             self.PV = tempfuncs.PV
         else:
             self.asignValuetovar(0,15)
@@ -170,8 +173,9 @@ class EventCards(Cards):
     def ECFunc3(self):
         self.ECName = 'EC:Input:A =32'
         #add insead of asign function
-        if 2 in self.playerfuncs:
-            tempfuncs = Funcs(self.PV,[2], 0,32)
+        if 3 in self.playerfuncs:
+            tempfuncs = Funcs(self.PV,[3], 0,32)
+            tempfuncs.func3()
             self.PV = tempfuncs.PV
         else:
             self.asignValuetovar(0,32)
@@ -181,8 +185,9 @@ class EventCards(Cards):
     def ECFunc4(self):
         self.ECName = 'EC:Input:A =64'
         #add insead of asign function
-        if 2 in self.playerfuncs:
-            tempfuncs = Funcs(self.PV,[2], 0,64)
+        if 3 in self.playerfuncs:
+            tempfuncs = Funcs(self.PV,[3], 0,64)
+            tempfuncs.func3()
             self.PV = tempfuncs.PV
         else:
             self.asignValuetovar(0,64)
@@ -193,8 +198,9 @@ class EventCards(Cards):
     def ECFunc11(self):
         self.ECName = 'EC:Input:B =8'
         #add insead of asign function
-        if 2 in self.playerfuncs:
-            tempfuncs = Funcs(self.PV,[2], 1,8)
+        if 3 in self.playerfuncs:
+            tempfuncs = Funcs(self.PV,[3], 1,8)
+            tempfuncs.func3()
             self.PV = tempfuncs.PV
         else:
             self.asignValuetovar(1,8)
@@ -202,8 +208,10 @@ class EventCards(Cards):
 
     def ECFunc12(self):
         self.ECName = 'EC:Input:B =16'
-        if 2 in self.playerfuncs:
-            tempfuncs = Funcs(self.PV,[2], 1,8)
+
+        if 3 in self.playerfuncs:
+            tempfuncs = Funcs(self.PV,[3], 1,8)
+            tempfuncs.func3()
             self.PV = tempfuncs.PV
         else:
             self.asignValuetovar(1,16)
@@ -211,8 +219,9 @@ class EventCards(Cards):
 
     def ECFunc13(self):
         self.ECName = 'EC:Input:B =20'
-        if 2 in self.playerfuncs:
-            tempfuncs = Funcs(self.PV,[2], 1,20)
+        if 3 in self.playerfuncs:
+            tempfuncs = Funcs(self.PV,[3], 1,20)
+            tempfuncs.func3()
             self.PV = tempfuncs.PV
         else:
             self.asignValuetovar(1,20)
@@ -220,8 +229,9 @@ class EventCards(Cards):
 
     def ECFunc14(self):
         self.ECName = 'EC:Input:B =32'
-        if 2 in self.playerfuncs:
-            tempfuncs = Funcs(self.PV,[2], 1,32)
+        if 3 in self.playerfuncs:
+            tempfuncs = Funcs(self.PV,[3], 1,32)
+            tempfuncs.func3()
             self.PV = tempfuncs.PV
         else:
             self.asignValuetovar(1,32)
@@ -229,8 +239,9 @@ class EventCards(Cards):
 
     def ECFunc15(self):
         self.ECName = 'EC:Input:B =64'
-        if 2 in self.playerfuncs:
-            tempfuncs = Funcs(self.PV,[2], 1,64)
+        if 3 in self.playerfuncs:
+            tempfuncs = Funcs(self.PV,[3], 1,64)
+            tempfuncs.func3()
             self.PV = tempfuncs.PV
         else:
             self.asignValuetovar(1,64)
@@ -238,8 +249,9 @@ class EventCards(Cards):
     # C Input
     def ECFunc21(self):
         self.ECName = 'EC:Input:C =4'
-        if 2 in self.playerfuncs:
-            tempfuncs = Funcs(self.PV,[2], 2,4)
+        if 3 in self.playerfuncs:
+            tempfuncs = Funcs(self.PV,[3], 2,4)
+            tempfuncs.func3()
             self.PV = tempfuncs.PV
         else:
             self.asignValuetovar(2,4)
@@ -247,8 +259,9 @@ class EventCards(Cards):
     # C=15
     def ECFunc22(self):
         self.ECName = 'EC:Input:C = 7'
-        if 2 in self.playerfuncs:
-            tempfuncs = Funcs(self.PV,[2], 2,7)
+        if 3 in self.playerfuncs:
+            tempfuncs = Funcs(self.PV,[3], 2,7)
+            tempfuncs.func3()
             self.PV = tempfuncs.PV
         else:
             self.asignValuetovar(2,7)
@@ -256,8 +269,9 @@ class EventCards(Cards):
     # C=25
     def ECFunc23(self):
         self.ECName = 'EC:Input:C =15'
-        if 2 in self.playerfuncs:
-            tempfuncs = Funcs(self.PV,[2], 2,15)
+        if 3 in self.playerfuncs:
+            tempfuncs = Funcs(self.PV,[3], 2,15)
+            tempfuncs.func3()
             self.PV = tempfuncs.PV
         else:
             self.asignValuetovar(2,15)
@@ -265,8 +279,9 @@ class EventCards(Cards):
     # C=40
     def ECFunc24(self):
         self.ECName = 'EC:Input:C =40'
-        if 2 in self.playerfuncs:
-            tempfuncs = Funcs(self.PV,[2], 2,40)
+        if 3 in self.playerfuncs:
+            tempfuncs = Funcs(self.PV,[3], 2,40)
+            tempfuncs.func3()
             self.PV = tempfuncs.PV
         else:
             self.asignValuetovar(2,40)
@@ -274,8 +289,9 @@ class EventCards(Cards):
     # C=75
     def ECFunc25(self):
         self.ECName = 'EC:Input:C =70'
-        if 2 in self.playerfuncs:
-            tempfuncs = Funcs(self.PV,[2], 2,70)
+        if 3 in self.playerfuncs:
+            tempfuncs = Funcs(self.PV,[3], 2,70)
+            tempfuncs.func3()
             self.PV = tempfuncs.PV
         else:
             self.asignValuetovar(2,70)
@@ -283,9 +299,10 @@ class EventCards(Cards):
 
     def ECFunc31(self):
         self.ECName = 'EC31:Input:T=A'
-        if 2 in self.playerfuncs:
+        if 3 in self.playerfuncs:
             if 0 not in self.PV.Nullindex:
-                tempfuncs = Funcs(self.PV,[2], 3,self.PV.varsValue[0])
+                tempfuncs = Funcs(self.PV,[3], 3,self.PV.varsValue[0])
+                tempfuncs.func3()
                 self.PV = tempfuncs.PV
         else:
             self.asignVartoVar(3,0)
@@ -293,9 +310,10 @@ class EventCards(Cards):
    
     def ECFunc32(self):
         self.ECName = 'EC32:T=B' 
-        if 2 in self.playerfuncs:
+        if 3 in self.playerfuncs:
             if 1 not in self.PV.Nullindex:
-                tempfuncs = Funcs(self.PV,[2], 3, self.PV.varsValue[1])
+                tempfuncs = Funcs(self.PV,[3], 3, self.PV.varsValue[1])
+                tempfuncs.func3()
                 self.PV = tempfuncs.PV
         else:
             self.asignVartoVar(3,1)
@@ -303,9 +321,10 @@ class EventCards(Cards):
     
     def ECFunc33(self):
         self.ECName = 'EC33:T=C'
-        if 2 in self.playerfuncs:
+        if 3 in self.playerfuncs:
             if 2 not in self.PV.Nullindex:
-                tempfuncs = Funcs(self.PV,[2], 3,self.PV.varsValue[2])
+                tempfuncs = Funcs(self.PV,[3], 3,self.PV.varsValue[2])
+                tempfuncs.func3()
                 self.PV = tempfuncs.PV
         else:
             self.asignVartoVar(3,2)
@@ -313,8 +332,9 @@ class EventCards(Cards):
 
     def ECFunc34(self):
         self.ECName = 'EC34 :T=8'
-        if 2 in self.playerfuncs:
-            tempfuncs = Funcs(self.PV,[2], 3,8)
+        if 3 in self.playerfuncs:
+            tempfuncs = Funcs(self.PV,[3], 3,8)
+            tempfuncs.func3()
             self.PV = tempfuncs.PV
         else:
             self.asignValuetovar(3,8) 

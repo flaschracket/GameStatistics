@@ -51,6 +51,9 @@ class Step():
         if afterstr == 'Func':
             self.P.playerfuncs = self.F.playerFuncs
             self.P.playerVars = self.F.PV
+            if self.F.buyed == 1:
+                gs =  GameSettings()
+                self.P.PlayerReservedEC.remove(gs.freelancer)
         #general
         self.P.playerVars.sumvars = self.P.playerVars.calculatesumvars()
         return self

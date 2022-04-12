@@ -80,16 +80,17 @@ class desicion(object):
         buyFunc= self.rule2()
         buyHardware = self.rule3()
         #do I want to buy ?
-        buy = self.makeRandomDecision
+        buy = self.makeRandomDecision()
 
-        if buyFunc and buyHardware:
-            funcorhardware = self.makeRandomDecision
+        if buyFunc and buyHardware and buy:
+            funcorhardware = self.makeRandomDecision()
             if funcorhardware:self.buy='Func'
             else: self.buy='Hardware'
             return self
         #do I want to buy ?
-        buy = self.makeRandomDecision
+        #buy = self.makeRandomDecision()
         if (buy and buyFunc): self.buy = 'Func'
-        if (buy and buyHardware): self.buy = 'Hardware'
+        if (buy and buyHardware):
+           self.buy = 'Hardware'
 
         return self
