@@ -84,7 +84,8 @@ class desicion(object):
 
         if buyFunc and buyHardware and buy:
             funcorhardware = self.makeRandomDecision()
-            if funcorhardware:self.buy='Func'
+            if funcorhardware:
+                self.buy='Func'
             else: self.buy='Hardware'
             return self
         #do I want to buy ?

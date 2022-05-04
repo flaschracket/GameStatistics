@@ -84,7 +84,7 @@ def insertStep(step,gameID,samplenr):
                                step.EC.ECName,str(PV.Nullindex),str(step.P.PCStatus),
                                #'NULL','NULL','NULL','NULL'
                                str(step.WC.playedWCName),str(len(step.EC.playingdeck)),str(step.WC.currentWC), 
-                               str(step.P.PlayerReservedEC), str(step.P.playerfuncs)
+                               str(step.P.PlayerReservedEC), str(step.P.playerFuncs)
                                ))    
     myconn.commit()
     return True

@@ -25,8 +25,8 @@ class Step():
         GD = kwargs.get('currentgamedeck',0)        
         self.P = kwargs.get('p',Player('N'))
         #pv = copy.deepcopy(self.P.playerVars)
-        self.WC = WormCards(self.P.playerVars,GD,self.P.playerfuncs)
-        self.EC = EventCards(self.P.playerVars,self.P.PlayerReservedEC,GD,self.P.playerfuncs)
+        self.WC = WormCards(self.P.playerVars,GD,self.P.playerFuncs)
+        self.EC = EventCards(self.P.playerVars,self.P.PlayerReservedEC,GD,self.P.playerFuncs)
         self.currentMixedCards = GD.currentMixedCards
         self.initialMixedCards = GD.initialMixedCards
         #self.playerDesicion = False
@@ -35,7 +35,8 @@ class Step():
         #only to write in DB/file, etc.
         self.roundNr = kwargs.get('currentRound',0)
         self.stepNr = kwargs.get('currentStep',0)
-        self.F = Funcs(self.P.playerVars,self.P.playerfuncs,0,0)
+        # initial it with 0 because it should not have data from past steps or rounds
+        self.F = Funcs([],[],0,0)
 
         return
 
@@ -46,23 +47,24 @@ class Step():
             self.P.nofRoundPausing = self.WC.nofRoundspausing
 
         if afterstr == 'EC':
-            self.P.playerfuncs = self.EC.playerfuncs
+            self.P.playerFuncs = self.EC.playerFuncs
             self.P.playerVars = copy.deepcopy(self.EC.PV)
 
         if afterstr == 'Func':
-            self.P.playerfuncs = self.F.playerFuncs
+            self.P.playerFuncs = self.F.playerFuncs
             self.P.playerVars = copy.deepcopy(self.F.PV)
             if self.F.buyed == 1:
                 gs =  GameSettings()
                 self.P.PlayerReservedEC.remove(gs.freelancer)
+                
                 # there is no reserved ec for WC and EC objects
         #general
         self.F.PV = copy.deepcopy(self.P.playerVars)
         self.EC.PV = copy.deepcopy(self.P.playerVars)
         self.WC.PV = copy.deepcopy(self.P.playerVars)
-        self.F.playerFuncs = copy.deepcopy(self.P.playerfuncs)
-        self.EC.playerFuncs = copy.deepcopy(self.P.playerfuncs)
-        self.WC.playerFuncs = copy.deepcopy(self.P.playerfuncs)
+        self.F.playerFuncs = copy.deepcopy(self.P.playerFuncs)
+        self.EC.playerFuncs = copy.deepcopy(self.P.playerFuncs)
+        self.WC.playerFuncs = copy.deepcopy(self.P.playerFuncs)
         tmp = self.P.playerVars.calculatesumvars()
         self.P.playerVars.sumvars = tmp
         self.EC.PV.sumvars = tmp
@@ -94,6 +96,7 @@ class Step():
             #if player want to buy?
             d.rule5()
             if d.buy == 'Func':
+                self.F = copy.deepcopy(Funcs(self.P.playerVars,self.P.playerFuncs,0,0))
                 self.F.buyFunc()
                 self.updatePlayer('Func')
             #------------------------- 

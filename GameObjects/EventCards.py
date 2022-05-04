@@ -13,7 +13,7 @@ from Abbas.DynamicFunc import *
 
 class EventCards(Cards):
     """description of class"""    
-    def __init__(self,vars,resEC,currentgamedeck,playerfuncs):
+    def __init__(self,vars,resEC,currentgamedeck,playerFuncs):
         self.PV = copy.deepcopy(vars)
         self.currentEC = 0
         self.reservedEC = resEC
@@ -22,8 +22,8 @@ class EventCards(Cards):
         self.nOfWC = 0
         self.initialEC = currentgamedeck.initialEC
         self.playingdeck = currentgamedeck.currentECdeck
-        self.playerfuncs = playerfuncs
-        self.tempfuncs = Funcs(self.PV,self.playerfuncs, 0,0)
+        self.playerFuncs = playerFuncs
+        self.tempfuncs = Funcs(self.PV,self.playerFuncs, 0,0)
         return
 
     def shuffle(self):
@@ -128,7 +128,7 @@ class EventCards(Cards):
         FuncName = 'ECFunc' + str(self.currentEC)
         getattr(self, FuncName)()
         self.nOfWC = self.WCQuantity(self.currentEC)
-        s.P.updatePlayer(self.PV,0,self.reservedEC,[],self.playerfuncs)    
+        s.P.updatePlayer(self.PV,0,self.reservedEC,[],self.playerFuncs)    
         #??? deck will update after playing the step?
         #s.GS.currentECdeck = self.playingdeck
         return s
@@ -145,7 +145,7 @@ class EventCards(Cards):
         self.ECName = 'EC:Input:A =3'
         #add insead of asign function
         
-        if 3 in self.playerfuncs:
+        if 3 in self.playerFuncs:
             self.updateFunc(0,3)
             self.tempfuncs.func3()
             self.PV = self.tempfuncs.PV
@@ -156,7 +156,7 @@ class EventCards(Cards):
     def ECFunc1(self):
         self.ECName = 'EC:Input:A =7'
         #add insead of asign function
-        if 3 in self.playerfuncs:
+        if 3 in self.playerFuncs:
             self.updateFunc(0,7)
             self.tempfuncs.func3()
             self.PV = self.tempfuncs.PV
@@ -167,7 +167,7 @@ class EventCards(Cards):
     def ECFunc2(self):
         self.ECName = 'EC:Input:A =15'
         #add insead of asign function
-        if 3 in self.playerfuncs:
+        if 3 in self.playerFuncs:
             self.updateFunc(0,15)
             self.tempfuncs.func3()
             self.PV = self.tempfuncs.PV
@@ -178,7 +178,7 @@ class EventCards(Cards):
     def ECFunc3(self):
         self.ECName = 'EC:Input:A =32'
         #add insead of asign function
-        if 3 in self.playerfuncs:
+        if 3 in self.playerFuncs:
             self.updateFunc(0,32)
             self.tempfuncs.func3()
             self.PV = self.tempfuncs.PV
@@ -190,7 +190,7 @@ class EventCards(Cards):
     def ECFunc4(self):
         self.ECName = 'EC:Input:A =64'
         #add insead of asign function
-        if 3 in self.playerfuncs:
+        if 3 in self.playerFuncs:
             self.updateFunc(0,64)
             self.tempfuncs.func3()
             self.PV = self.tempfuncs.PV
@@ -203,7 +203,7 @@ class EventCards(Cards):
     def ECFunc11(self):
         self.ECName = 'EC:Input:B =8'
         #add insead of asign function
-        if 3 in self.playerfuncs:
+        if 3 in self.playerFuncs:
             self.updateFunc(1,8)
             self.tempfuncs.func3()
             self.PV = self.tempfuncs.PV
@@ -214,7 +214,7 @@ class EventCards(Cards):
     def ECFunc12(self):
         self.ECName = 'EC:Input:B =16'
 
-        if 3 in self.playerfuncs:
+        if 3 in self.playerFuncs:
             self.updateFunc(1,16)
             self.tempfuncs.func3()
             self.PV = self.tempfuncs.PV
@@ -224,7 +224,7 @@ class EventCards(Cards):
 
     def ECFunc13(self):
         self.ECName = 'EC:Input:B =20'
-        if 3 in self.playerfuncs:
+        if 3 in self.playerFuncs:
             self.updateFunc(1,20)
             self.tempfuncs.func3()
             self.PV = self.tempfuncs.PV
@@ -234,7 +234,7 @@ class EventCards(Cards):
 
     def ECFunc14(self):
         self.ECName = 'EC:Input:B =32'
-        if 3 in self.playerfuncs:
+        if 3 in self.playerFuncs:
             self.updateFunc(1,32)
             self.tempfuncs.func3()
             self.PV = self.tempfuncs.PV
@@ -244,7 +244,7 @@ class EventCards(Cards):
 
     def ECFunc15(self):
         self.ECName = 'EC:Input:B =64'
-        if 3 in self.playerfuncs:
+        if 3 in self.playerFuncs:
             self.updateFunc(1,64)
             self.tempfuncs.func3()
             self.PV = self.tempfuncs.PV
@@ -254,7 +254,7 @@ class EventCards(Cards):
     # C Input
     def ECFunc21(self):
         self.ECName = 'EC:Input:C =4'
-        if 3 in self.playerfuncs:
+        if 3 in self.playerFuncs:
             self.updateFunc(2,4)
             self.tempfuncs.func3()
             self.PV = self.tempfuncs.PV
@@ -264,7 +264,7 @@ class EventCards(Cards):
     # C=15
     def ECFunc22(self):
         self.ECName = 'EC:Input:C = 7'
-        if 3 in self.playerfuncs:
+        if 3 in self.playerFuncs:
             self.updateFunc(2,7)
             self.tempfuncs.func3()
             self.PV = self.tempfuncs.PV
@@ -274,7 +274,7 @@ class EventCards(Cards):
     # C=25
     def ECFunc23(self):
         self.ECName = 'EC:Input:C =15'
-        if 3 in self.playerfuncs:
+        if 3 in self.playerFuncs:
             self.updateFunc(2,15)
             self.tempfuncs.func3()
             self.PV = self.tempfuncs.PV
@@ -284,7 +284,7 @@ class EventCards(Cards):
     # C=40
     def ECFunc24(self):
         self.ECName = 'EC:Input:C =40'
-        if 3 in self.playerfuncs:
+        if 3 in self.playerFuncs:
             self.updateFunc(2,40)
             self.tempfuncs.func3()
             self.PV = self.tempfuncs.PV
@@ -294,7 +294,7 @@ class EventCards(Cards):
     # C=75
     def ECFunc25(self):
         self.ECName = 'EC:Input:C =70'
-        if 3 in self.playerfuncs:
+        if 3 in self.playerFuncs:
             self.updateFunc(2,70)
             self.tempfuncs.func3()
             self.PV = self.tempfuncs.PV
@@ -304,7 +304,7 @@ class EventCards(Cards):
 
     def ECFunc31(self):
         self.ECName = 'EC31:Input:T=A'
-        if 3 in self.playerfuncs:
+        if 3 in self.playerFuncs:
             if 0 not in self.PV.Nullindex:
                 self.updateFunc(3,self.PV.varsValue[0])
                 self.tempfuncs.func3()
@@ -315,7 +315,7 @@ class EventCards(Cards):
    
     def ECFunc32(self):
         self.ECName = 'EC32:T=B' 
-        if 3 in self.playerfuncs:
+        if 3 in self.playerFuncs:
             if 1 not in self.PV.Nullindex:
                 self.updateFunc(3,self.PV.varsValue[1])
                 self.tempfuncs.func3()
@@ -326,7 +326,7 @@ class EventCards(Cards):
     
     def ECFunc33(self):
         self.ECName = 'EC33:T=C'
-        if 3 in self.playerfuncs:
+        if 3 in self.playerFuncs:
             if 2 not in self.PV.Nullindex:
                 self.updateFunc(3,self.PV.varsValue[2])
                 self.tempfuncs.func3()
@@ -337,7 +337,7 @@ class EventCards(Cards):
 
     def ECFunc34(self):
         self.ECName = 'EC34 :T=8'
-        if 3 in self.playerfuncs:
+        if 3 in self.playerFuncs:
             self.updateFunc(3,8)
             self.tempfuncs.func3()
             self.PV = self.tempfuncs.PV

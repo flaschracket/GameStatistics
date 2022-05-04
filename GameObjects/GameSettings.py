@@ -9,7 +9,7 @@ class GameSettings():
         self.winGoal = 128
         self.NrOfP = 2
         self.maxRound = 40
-        self.Testchangelog = "test fucns: reduce func price?"
+        self.Testchangelog = "test fucns: test2: copydeepcopy function obj instead of new object"
         #the Id in DB
         self.restart = 200
         self.freelancer = 201

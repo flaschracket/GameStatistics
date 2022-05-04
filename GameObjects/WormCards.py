@@ -10,7 +10,7 @@ from collections import Counter
 class WormCards(Cards):
     """description of class"""
 
-    def __init__(self,vars,currentgamedeck,playerfuncs):
+    def __init__(self,vars,currentgamedeck,playerFuncs):
         self.PV = copy.deepcopy(vars)
         self.playedWCName = []    
         self.playedwc = np.array([]).astype(int)
@@ -20,7 +20,7 @@ class WormCards(Cards):
         self.currentWC = 0
         self.GD = currentgamedeck
         self.playingdeck = currentgamedeck.currentWCdeck
-        self.playerfuncs = playerfuncs
+        self.playerFuncs = playerFuncs
         return 
 
     def updateWC(self,vars,pwc):
@@ -57,7 +57,7 @@ class WormCards(Cards):
         return(self)
 
     def checkfuncs(self):
-        if 1 in self.playerfuncs:
+        if 1 in self.playerFuncs:
            self.PV.Nullindex.clear
         return 0
 
@@ -67,7 +67,7 @@ class WormCards(Cards):
         FuncName = 'WCFunc' + str(self.currentWC)
         getattr(self, FuncName)()
         self.playedwc = np.append(self.playedwc,self.currentWC)
-        s.P.updatePlayer(self.PV,self.nofRoundspausing,[],self.damages,self.playerfuncs)
+        s.P.updatePlayer(self.PV,self.nofRoundspausing,[],self.damages,self.playerFuncs)
         #s.GS.currentWCdeck = self.playingdeck
         return s
 
@@ -107,7 +107,7 @@ class WormCards(Cards):
         self.playedWCName.append(' WC Name: T -=64 ')
         ind= [3]
         if self.ifPossibleToPlay(ind):
-            if 2 in self.playerfuncs:
+            if 2 in self.playerFuncs:
                 self.PV.varsValue[3] = self.PV.varsValue[3]+64 
             else:
                 self.PV.varsValue[3] = self.PV.varsValue[3]-64
@@ -153,14 +153,14 @@ class WormCards(Cards):
 
     def WCFunc9(self):
         self.playedWCName.append(' WC Name: A = -6 ')
-        if 1 in self.playerfuncs:
+        if 1 in self.playerFuncs:
             self.assignVar(0,6) 
         else:
             self.assignVar(0,-6)
         return(self)
     def WCFunc15(self):
         self.playedWCName.append(' WC Name: C= -6 ')
-        if 1 in self.playerfuncs:
+        if 1 in self.playerFuncs:
             self.assignVar(2,6) 
         else:
             self.assignVar(2,-6) 
@@ -168,7 +168,7 @@ class WormCards(Cards):
 
     def WCFunc8(self):
         self.playedWCName.append(' WC Name: B= -6 ')
-        if 1 in self.playerfuncs:
+        if 1 in self.playerFuncs:
             self.assignVar(1,6) 
         else:
             self.assignVar(1,-6)
@@ -178,7 +178,7 @@ class WormCards(Cards):
         self.playedWCName.append(' WC12: B -=3 ')
         ind= [1]
         if self.ifPossibleToPlay(ind):
-            if 2 in self.playerfuncs:
+            if 2 in self.playerFuncs:
                 self.PV.varsValue[1] = self.PV.varsValue[1]+3      
             else:
                 self.PV.varsValue[1] = self.PV.varsValue[1]-3     
@@ -189,7 +189,7 @@ class WormCards(Cards):
         self.playedWCName.append(' WC13: A -=3 ')
         ind= [0]
         if self.ifPossibleToPlay(ind):
-            if 2 in self.playerfuncs:
+            if 2 in self.playerFuncs:
                 self.PV.varsValue[0] = self.PV.varsValue[0]+3      
             else:
                 self.PV.varsValue[0] = self.PV.varsValue[0]-3          
@@ -199,7 +199,7 @@ class WormCards(Cards):
         self.playedWCName.append(' WC14: C -=3 ')
         ind= [2]
         if self.ifPossibleToPlay(ind):
-            if 2 in self.playerfuncs:
+            if 2 in self.playerFuncs:
                 self.PV.varsValue[2] = self.PV.varsValue[2]+3      
             else:
                 self.PV.varsValue[2] = self.PV.varsValue[2]-3     
