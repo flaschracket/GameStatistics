@@ -18,75 +18,109 @@ from collections import Counter
 
 class Step():
     """Status of each step of game, it is like a copy of variable to save the result  at one place"""
-      
-
     def __init__(self,*args,**kwargs):     
         self.winer = ''
-        self.GS = GameSettings()        
-        self.reservedEC = kwargs.get('reservedEC',set())
+        # self.GS = kwargs.get('gamesettings',GameSettings())        
+        # it is 0 to produce error instead of initializing empty  gamesettings obj.
+        GD = kwargs.get('currentgamedeck',0)        
         self.P = kwargs.get('p',Player('N'))
-        pv = copy.deepcopy(self.P.playerVars)
-#        self.P.nofRoundPausing = kwargs.get('nofpr',0)
-        #event card
-        pd= kwargs.get('playingdeck',list())
-        self.EC = EventCards(pv,self.reservedEC,pd)
-        #worm card
-        wcdeck = kwargs.get('wcdeck',list()) 
-        self.WC = WormCards(pv,wcdeck)
-        #---
-        self.playerDesicion = False
-        self.myDesicion = desicion()
-        self.stepNr = kwargs.get('currentStep',0)
+        #pv = copy.deepcopy(self.P.playerVars)
+        self.WC = WormCards(self.P.playerVars,GD,self.P.playerfuncs)
+        self.EC = EventCards(self.P.playerVars,self.P.PlayerReservedEC,GD,self.P.playerfuncs)
+        self.currentMixedCards = GD.currentMixedCards
+        self.initialMixedCards = GD.initialMixedCards
+        #self.playerDesicion = False
+        #self.myDesicion = desicion()
+        
+        #only to write in DB/file, etc.
         self.roundNr = kwargs.get('currentRound',0)
-        self.sampleNr = kwargs.get('samplecounter',0)
+        self.stepNr = kwargs.get('currentStep',0)
+        self.F = Funcs(self.P.playerVars,self.P.playerfuncs,0,0)
+
         return
 
-    def updatePlayer(self):
-        self.P.playerVars = copy.deepcopy(self.WC.PV) 
-        self.P.PCStatus = self.WC.damages
-        self.P.nofRoundPausing = self.WC.nofRoundspausing
+    def updatePlayer(self, afterstr):
+        if afterstr == 'WC':
+            self.P.playerVars = copy.deepcopy(self.WC.PV) 
+            self.P.PCStatus = self.WC.damages
+            self.P.nofRoundPausing = self.WC.nofRoundspausing
+
+        if afterstr == 'EC':
+            self.P.playerfuncs = self.EC.playerfuncs
+            self.P.playerVars = copy.deepcopy(self.EC.PV)
+
+        if afterstr == 'Func':
+            self.P.playerfuncs = self.F.playerFuncs
+            self.P.playerVars = copy.deepcopy(self.F.PV)
+            if self.F.buyed == 1:
+                gs =  GameSettings()
+                self.P.PlayerReservedEC.remove(gs.freelancer)
+                # there is no reserved ec for WC and EC objects
+        #general
+        self.F.PV = copy.deepcopy(self.P.playerVars)
+        self.EC.PV = copy.deepcopy(self.P.playerVars)
+        self.WC.PV = copy.deepcopy(self.P.playerVars)
+        self.F.playerFuncs = copy.deepcopy(self.P.playerfuncs)
+        self.EC.playerFuncs = copy.deepcopy(self.P.playerfuncs)
+        self.WC.playerFuncs = copy.deepcopy(self.P.playerfuncs)
+        tmp = self.P.playerVars.calculatesumvars()
+        self.P.playerVars.sumvars = tmp
+        self.EC.PV.sumvars = tmp
+        self.WC.PV.sumvars = tmp
         return self
+
     #-------------------------
     #-------------------------
     def playWC(self):
         self.WC.playFunc(self)
-        self.updatePlayer()
+        self.updatePlayer('WC')
         return self
     
     def playOneStep(self):
         total = 0 
-        d = desicion()._init_(self)
+        GS = GameSettings()
+        #should change: sel 
+        d = desicion()._init_(self.P)
         d.playerdesicion()
-        if self.playerDesicion:
-            self.EC.playFunc(self)    
-            total = self.P.playerVars.varsValue[3]
-        if (self.GS.ifWined(total)):
-             self.winer = self.P.Name
-             #self.addlinetoCSVF()
-             return (self)
-        #print(self.GS.PCstatus[1])
-#        if self.P.PCStatus.count('CPU1Captured')>0:
- #            print(self.stepNr)
-        
-        for i in range(self.EC.nOfWC):
-             d.playerdesicion()
-  #           if self.P.PCStatus.count('CPU1Captured')>0:
-   #              print(self.stepNr)
-             if (self.playerDesicion):
-                 self.WC.playFunc(self)
-    #    if self.P.PCStatus.count('CPU1Captured')>0:
-     #        print(self.stepNr)
-      #       print("count")
-       #      print(self.P.PCStatus.count('CPU1Captured'))
-                
-        #self.addlinetoCSVF()
+        self.P.update_afterdecision(d)
+        #self.P = copy.deepcopy(d.playerdesicion().player)
+        if (len(self.currentMixedCards) == 0):
+            self.currentMixedCards = self.initialMixedCards.deck
+            self.currentMixedCards.shuffle()            
+        currentCard = self.currentMixedCards[0]
+        self.currentMixedCards = np.delete(self.currentMixedCards,[0])
+        #region buy
+        if self.P.mydesicion:
+            #if player want to buy?
+            d.rule5()
+            if d.buy == 'Func':
+                self.F.buyFunc()
+                self.updatePlayer('Func')
+            #------------------------- 
+            #else buy hardware 
+        #endregion buy
+        #region play card        
+        if currentCard<5000:
+            self.EC.currentEC = currentCard
+            self.EC.playFunc(self)
+            self.updatePlayer('EC')
+            if (GS.ifWined(self.P.playerVars.varsValue[3])):
+                self.winer = self.P.Name
+            return (self)
+        else:
+            d = desicion()._init_(self.P)
+            d.playerdesicion()
+            self.P.update_afterdecision(d)
+            if (self.P.mydesicion):
+                self.WC.currentWC = currentCard-5000
+                self.WC.playFunc(self)
+                self.updatePlayer('WC')
+                a = self.P.playerVars
+        #end region
         return (self)
-
-
-
  
     def writeCSVHeader(self, file):
-        rowlist =['roundnr','stepnr','player','A:0','B:1','C:2','Total:3','NULL vars',	'ec']
+       # rowlist =['roundnr','stepnr','player','A:0','B:1','C:2','Total:3','NULL vars',	'ec']
         rowlist = rowlist + ['nofworms','my decision',	'PC Status', 'count down paus',	'EC Name']
         rowlist = rowlist + ['WC Name',	'Winner	ecset',	'wormset']
         csvwriter = writer(file,delimiter=';')
@@ -114,9 +148,9 @@ class Step():
             playedWCName = self.WC.playedWCName
 
         #writing in file
-        rowlist = [self.roundNr,self.stepNr,self.P.Name, PV.varsValue[0], PV.varsValue[1], PV.varsValue[2]]
+        #rowlist = [self.roundNr,self.stepNr,self.P.Name, PV.varsValue[0], PV.varsValue[1], PV.varsValue[2]]
         rowlist = rowlist + [PV.varsValue[3], nullList , self.EC.currentEC,self.EC.nOfWC]
-        rowlist = rowlist+ [self.playerDesicion ,playerPCStatus, self.P.roundCounter]
+        #rowlist = rowlist+ [self.playerDesicion ,playerPCStatus, self.P.roundCounter]
         rowlist = rowlist + [self.EC.ECName, playedWCName,self.winer,self.EC.playedEC, self.WC.playedWC]
         now = datetime.now() # current date and time
         fName = 'generated data/sample-'+str(self.sampleNr)+'-'+ str(self.GS.NrOfP) +'player'+now.strftime("%Y")
@@ -134,8 +168,7 @@ class Step():
         print(self.stepNr)
         #print("reserved cards" + str(self.reservedEC))
         self.P.printMainRAM()                 
-        #print(self.playerDesicion)
-         
+        #print(self.playerDesicion)         
         return
 
 def uniquify(path, sep = ''):

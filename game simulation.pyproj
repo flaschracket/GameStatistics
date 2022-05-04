@@ -22,6 +22,27 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Abbas\DynamicFunc.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DB\dbBazar.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DB\dbCards.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DB\database.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DB\dbGameSettings.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GameObjects\Funcs.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GameObjects\GameDeck.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="GameObjects\Cards.py">
       <SubType>Code</SubType>
     </Compile>
@@ -56,6 +77,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="GameObjects\" />
+    <Folder Include="DB\" />
+    <Folder Include="Abbas\" />
   </ItemGroup>
   <ItemGroup>
     <Interpreter Include="env\">

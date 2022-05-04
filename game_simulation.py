@@ -3,37 +3,36 @@ from random import randrange
 from GameObjects.Player import *
 from GameObjects.Game import *
 from GameObjects.Cards import *
-#import GameObjects.Cards import *
-
+from DB.dbGameSettings import *
 from copy import deepcopy
+
 import mssql
 
-tempply = Player('')
+# initial gamesettings
 GS = GameSettings()
+GD = GameDeck()
 sampleCounter = 0
-
-previousStep = Step()
-
-#initial
-
+dbgs = dbGameSettings()
 print("Hello From Game Simulation! Data Generation is begining")
-gsID = mssql.insertGameSettings(GS)
+gsID = dbgs.insert_GameSettings(GD)
+
 while sampleCounter <= GS.sampleQuantity:
-    mygame = Game(sampleCounter,previousStep)
-    mygame.gameSettingsID = gsID
-    mygame.gameID = mssql.insertGame(mygame)
-    firstdeck = mygame.thisStep.EC.playingdeck
+# it should have if the deck is devided else mixed
+#    GD.currentECdeck = GD.initialEC.shuffle()
+#    GD.currentWCdeck = GD.initialWC.shuffle()
+    GD.currentMixedCards = GD.initialMixedCards.shuffle()
+    mygame = Game(sampleCounter,GD,gsID)
     #play
     print("---Game : "+str(sampleCounter)+"---")
     condition = True
     
     while condition:        
         mygame.currentRound = mygame.currentRound + 1
-        mygame = copy.deepcopy(mygame.playOneRound()) 
+        #mygame = copy.deepcopy(mygame.playOneRound())
+        mygame.playOneRound() 
         if (mygame.winer != '') or (mygame.currentRound >= GS.maxRound): 
             condition = False              
     mssql.updateGame(mygame)
-    print('winner : ' +mygame.winer )
+    print('winner :'+mygame.winer )
     print('------------------------------')
     sampleCounter = sampleCounter +1
-mssql.update_GameSettings(firstdeck, gsID)

@@ -4,13 +4,22 @@ from random import randrange
 import copy
 
 class desicion(object):
-    gs = GameSettings()
+#    gs = GameSettings()
 
 #----------------------------
     """description of class"""
-    def _init_(self,s):
-        self.step = copy.deepcopy(s)
-
+    def _init_(self,ply):
+     #deepcopy is extremly slow
+     #   self.step = copy.deepcopy(s)
+     #    self.player = copy.deepcopy(ply)
+        GS = GameSettings()
+        self.restart = GS.restart
+        self.PV = ply.playerVars
+        self.tempPCstatus = ply.PCStatus
+        self.desicion = ply.mydesicion
+        self.tempReservedEc = ply.PlayerReservedEC
+        self.nofRoundPausing = ply.nofRoundPausing
+        self.buy = 'No'
         return self
 #-------------------------------
 
@@ -19,32 +28,69 @@ class desicion(object):
         if a == 0:
            return True
         return False
-    def makeDecision(self):
-            if self.GS.makeRandomDecision(): 
-                if (self.GS.ResourceECTypes.Restart in (self.step.PlayerReservedEC)):
-            
-                  self.step.P.PlayerReservedEC.remove(self.DE.ResourceECTypes.Restart)
+
+#    def makeDecision(self):
+ #           if self.GS.makeRandomDecision(): 
+  #              if (self.GS.ResourceECTypes.Restart in (self.step.PlayerReservedEC)):
+   #         
+    #              self.step.P.PlayerReservedEC.remove(self.DE.ResourceECTypes.Restart)
+
     def playerdesicion(self):
-        if 'CPU1Captured'  in (self.step.P.PCStatus):
+        if 'CPU1Captured'  in (self.tempPCstatus):
             FuncName = 'rule1'
             funcresult = getattr(self, FuncName)()
         else:
-            self.step.playerDesicion = True        
-        return self.step
+            self.desicion = True        
+        return self
+
     #rule 1= cpu is captured  
     def rule1(self): 
-            if (self.gs.ResourceECTypes.Restart in self.step.P.PlayerReservedEC):
-                self.step.P.PCStatus.remove('CPU1Captured')
-                self.step.P.PlayerReservedEC.extend('Restart')
-                self.step.playerDesicion = True
-                self.step.P.roundCounter = 0
+            if (self.restart in self.tempReservedEc):
+                self.tempPCstatus.remove('CPU1Captured')
+                self.tempReservedEc.remove(self.restart)
+                self.desicion = True
+                self.nofRoundPausing = 0
             else: 
-                if (self.step.P.roundCounter == self.step.P.nofRoundPausing):
-                    self.step.P.PCStatus.remove('CPU1Captured')
-                    self.step.P.roundCounter = 0
-                    self.step.P.nofRoundPausing = 0
-                    self.step.playerDesicion = True
+                if (self.nofRoundPausing == 0):
+                    self.tempPCstatus.remove('CPU1Captured')
+                    #self.player.nofRoundPausing = 0
+                    self.desicion = True
                 else:
-                    self.step.playerDesicion = False      
-                    self.step.P.roundCounter = self.step.P.roundCounter+1
-            return self.step
+                    self.desicion = False      
+                    self.nofRoundPausing = self.nofRoundPausing-1
+            return self
+    #player can buy function from freelancer?
+    def rule2(self):
+        GS = GameSettings()
+        if GS.freelancer in self.tempReservedEc:
+                return True
+            #for decision it is not need to check the price. 
+            #if self.PV.sumvars> 16 or self.PV.varsValue[3]>16 :
+        return False
+    #player can buy CPU?
+    def rule3(self):
+        GS = GameSettings()
+        if GS.bazar in self.tempReservedEc:
+            return True
+        return False
+
+    #rule 5 = player decide buy something at first step of its turn    
+    def rule5(self):
+        buy = False
+        buyFunc= self.rule2()
+        buyHardware = self.rule3()
+        #do I want to buy ?
+        buy = self.makeRandomDecision()
+
+        if buyFunc and buyHardware and buy:
+            funcorhardware = self.makeRandomDecision()
+            if funcorhardware:self.buy='Func'
+            else: self.buy='Hardware'
+            return self
+        #do I want to buy ?
+        #buy = self.makeRandomDecision()
+        if (buy and buyFunc): self.buy = 'Func'
+        if (buy and buyHardware):
+           self.buy = 'Hardware'
+
+        return self

@@ -14,57 +14,65 @@ import mssql
 class Game():
     """description of class"""
 
-    def __init__(self,sc,s):
-        self.listofPlayers = []
-        self.thisStep = Step(sc)
-        self.previousStep = copy.deepcopy(s)
+    def __init__(self,samplecounter,currentgamedeck,gsID):
+        self.GD = currentgamedeck
+        self.GS = GameSettings()
+        # make the cards list a new random combination
+        #self.GS.
+        #game vars
         self.currentRound = 0
         self.currentStep = 0
-        self.samplecounter = sc
-        self.GS = GameSettings()
+        self.samplecounter = samplecounter
+        self.winer = ''
+        # steps
+        self.thisStep = Step(currentStep = self.currentStep, currentgamedeck = self.GD)
+        #self.previousStep = Step(self.currentStep-1)
+        #players-----------------
+        self.listofPlayers = []
         for x in range(self.GS.NrOfP):
            name = 'Player '+ str(x)
            self.listofPlayers.append(Player(name))
-           print(self.listofPlayers[x])
-        self.winer = ''
-        self.currentWormsSet = []
-        self.gameID = 0
-        self.gameSettingsID = 0
-        
+        # insert game in DB
+        self.gamesettingsID = gsID
+        self.gameID = mssql.insertGame(self)        
         return   
     #---------------------
     def initialStep(self,x):
-        resEC = self.previousStep.EC.reservedEC
-        playingdeck = self.previousStep.EC.playingdeck
-        wcdeck = self.previousStep.WC.playingdeck
-#        nofrounds = self.previousStep.P.nofRoundPausing
-        self.thisStep = Step(p = self.listofPlayers[x], reservedEC = resEC, 
-                             currentStep = self.currentStep,currentRound = self.currentRound, 
-                             samplecounter = self.samplecounter, playingdeck = playingdeck,wcdeck = wcdeck,nofpr = 0)
+     #  playingdeck = self.GS.currentECdeck
+     #  wcdeck = self.GS.currentWCdeck
+        self.thisStep = Step(p = self.listofPlayers[x], currentStep = self.currentStep, 
+                             currentRound = self.currentRound, currentgamedeck = self.GD, )
         return self
     #---------------------
 
     def playOneRound(self):    
-        
         for x in range(self.GS.NrOfP):
             self.initialStep(x)
-            d = desicion()._init_(self.thisStep)
-            self.thisStep = copy.deepcopy(d.playerdesicion())  
-           # self.printgame("after copy this step")
-            #play one Step
             self.thisStep.playOneStep()
-           # self.printgame("after play step")
+            #Step_updateafterplayone
+            #self.thisStep = copy.deepcopy((self.thisStep.playOneStep()))
+            #the objects are not updated automatically,
+            #update GS for new currentdeck
+            #self.GD.currentECdeck= self.thisStep.EC.playingdeck
+            #self.GD.currentWCdeck = self.thisStep.WC.playingdeck
+            self.GD.currentMixedCards = self.thisStep.currentMixedCards
             self.winer = self.thisStep.winer
             self.Stepsnapshot(self.thisStep)
             self.currentStep = self.currentStep + 1
-            self.listofPlayers[x] = copy.deepcopy(self.thisStep.P)
+            #self.listofPlayers[x] = copy.deepcopy(self.thisStep.P)
+            #update player
+            self.listofPlayers[x].playerVars = self.thisStep.P.playerVars
+            self.listofPlayers[x].PCStatus = self.thisStep.P.PCStatus
+            self.listofPlayers[x].mydesicion = self.thisStep.P.mydesicion
+            self.listofPlayers[x].PlayerReservedEC = self.thisStep.P.PlayerReservedEC
+            #self.update()
             if (self.winer != ''):
                 break             
         return self
 
     def Stepsnapshot(self,s):
         s.winer = self.winer
-        self.previousStep = copy.deepcopy(s)
+        #self.previousStep = copy.deepcopy(s)
         mssql.insertStep(s,self.gameID,self.samplecounter)
         return self
 
