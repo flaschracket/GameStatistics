@@ -47,22 +47,33 @@ class Step():
 
         if afterstr == 'EC':
             self.P.playerfuncs = self.EC.playerfuncs
-            self.P.playerVars = self.EC.PV
+            self.P.playerVars = copy.deepcopy(self.EC.PV)
+
         if afterstr == 'Func':
             self.P.playerfuncs = self.F.playerFuncs
-            self.P.playerVars = self.F.PV
+            self.P.playerVars = copy.deepcopy(self.F.PV)
             if self.F.buyed == 1:
                 gs =  GameSettings()
                 self.P.PlayerReservedEC.remove(gs.freelancer)
+                # there is no reserved ec for WC and EC objects
         #general
-        self.P.playerVars.sumvars = self.P.playerVars.calculatesumvars()
+        self.F.PV = copy.deepcopy(self.P.playerVars)
+        self.EC.PV = copy.deepcopy(self.P.playerVars)
+        self.WC.PV = copy.deepcopy(self.P.playerVars)
+        self.F.playerFuncs = copy.deepcopy(self.P.playerfuncs)
+        self.EC.playerFuncs = copy.deepcopy(self.P.playerfuncs)
+        self.WC.playerFuncs = copy.deepcopy(self.P.playerfuncs)
+        tmp = self.P.playerVars.calculatesumvars()
+        self.P.playerVars.sumvars = tmp
+        self.EC.PV.sumvars = tmp
+        self.WC.PV.sumvars = tmp
         return self
 
     #-------------------------
     #-------------------------
     def playWC(self):
         self.WC.playFunc(self)
-        self.updatePlayer()
+        self.updatePlayer('WC')
         return self
     
     def playOneStep(self):
@@ -78,7 +89,7 @@ class Step():
             self.currentMixedCards.shuffle()            
         currentCard = self.currentMixedCards[0]
         self.currentMixedCards = np.delete(self.currentMixedCards,[0])
-
+        #region buy
         if self.P.mydesicion:
             #if player want to buy?
             d.rule5()
@@ -86,27 +97,26 @@ class Step():
                 self.F.buyFunc()
                 self.updatePlayer('Func')
             #------------------------- 
-            # else buy hardware 
-                
-            if currentCard<5000:
-                self.EC.currentEC = currentCard
-                self.EC.playFunc(self)
-                #self= copy.deepcopy(self.EC.playFunc(self))    
-                self.updatePlayer('EC')
-                if (GS.ifWined(self.P.playerVars.varsValue[3])):
-                    self.winer = self.P.Name
-                    return (self)
-            else:
-       # for i in range(self.EC.nOfWC):
-            #self = copy.deepcopy(d.playerdesicion())
-                d = desicion()._init_(self.P)
-                d.playerdesicion()
-                self.P.update_afterdecision(d)
-                if (self.P.mydesicion):
-                    self.WC.currentWC = currentCard-5000
-                    self.WC.playFunc(self)
-                    self.updatePlayer('WC')
-                    a = self.P.playerVars
+            #else buy hardware 
+        #endregion buy
+        #region play card        
+        if currentCard<5000:
+            self.EC.currentEC = currentCard
+            self.EC.playFunc(self)
+            self.updatePlayer('EC')
+            if (GS.ifWined(self.P.playerVars.varsValue[3])):
+                self.winer = self.P.Name
+            return (self)
+        else:
+            d = desicion()._init_(self.P)
+            d.playerdesicion()
+            self.P.update_afterdecision(d)
+            if (self.P.mydesicion):
+                self.WC.currentWC = currentCard-5000
+                self.WC.playFunc(self)
+                self.updatePlayer('WC')
+                a = self.P.playerVars
+        #end region
         return (self)
  
     def writeCSVHeader(self, file):

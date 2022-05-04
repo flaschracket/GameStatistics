@@ -5,21 +5,20 @@ from DB.dbBazar import *
 
 class Funcs(object):
     """description of class"""
-    def __init__(self,vars,funcslist,varnumber, value):
+    def __init__(self,vars,playerfuncslist,varnumber, value):
         self.PV = copy.deepcopy(vars)
-        self.playerFuncs = funcslist
+        self.playerFuncs = playerfuncslist
         self.varnumber = varnumber
         self.buyed = 0
-        self.value = value
+        #self.value = value
         dbb = dbBazar()
         self.funcList = []
         self.funcName = []
         self.funcMainPrice = []
         self.funcSharedPrice = []
-        bazarlist = dbb.selectAll()
-        
-       # for x in range (len(bazarlist)):
-       #     print(bazarlist[x])
+
+        #make an array of each field of table
+        bazarlist = dbb.selectAll()     
         self.funcList.append(bazarlist[0])
         self.funcList = self.funcList[0]
         self.funcName.append(bazarlist[1])
@@ -69,12 +68,10 @@ class Funcs(object):
                     tempFuncMainPrice.append(self.funcMainPrice[ind])
                     tempFuncSharedPrice.append(-1)
                     tempFuncList.append(f)
-                    self.buyed = 1
                 elif self.PV.sumvars >= self.funcSharedPrice[ind]:
                     tempFuncMainPrice.append(-1)
                     tempFuncSharedPrice.append(self.funcSharedPrice[ind])
                     tempFuncList.append(f)
-                    self.buyed = 1
         #end of for: list of functions player can buy
         #select to buy        
         if (len(tempFuncList)>0):
@@ -82,6 +79,7 @@ class Funcs(object):
             ind = tempFuncList.index(fnumber)
             tempPrice = tempFuncMainPrice[ind]
             tempSharedPrice = tempFuncSharedPrice[ind]
+            self.buyed = 1
             
             #pay the price of function from total
             if tempPrice >0:
@@ -157,12 +155,12 @@ class Funcs(object):
 
     #Add isntead of asign
     def func3(self):    
-        if self.varnumber not in self.PV.nullindex:
+        if self.varnumber not in self.PV.Nullindex:
             self.PV.varsValue[self.varnumber] = self.PV.varsValue[self.varnumber] + self.value
         return 
 
     #add instead of reduce
-    def func3(self):
+    def func4(self):
         if self.value <0:
            self.value = -1 * self.value
         return 
