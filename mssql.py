@@ -1,7 +1,9 @@
 
 import pyodbc
 import copy
-import GameObjects.Game
+
+#import GameObjects.Game
+from GameObjects.Funcs import *
 class mssql(object):
     """description of class"""
 
@@ -72,19 +74,28 @@ def updateGame(g):
 def insertStep(step,gameID,samplenr):
     PV = copy.deepcopy(step.P.playerVars)
     myconn = connectdb()
+    
+    #make list of  names from player functions
+    funcObj = Funcs(PV, [],0,2)
+    funcsname = ""
+
+    for item in step.P.playerFuncs:
+        ind = funcObj.funcList.index(item)
+        funcsname = funcsname+ " ** " + funcObj.funcName[ind] 
     cursor = myconn.cursor()
+
     #step.printStep()
     insertstr = "INSERT INTO minibit.dbo.Step VALUES (?, ?, ?,?,?"
     insertstr = insertstr + ",?, ?, ?, ?, ?, "
     insertstr = insertstr + "?, ?, ?, ?, ?, "
-    insertstr = insertstr + "?, ?, ?, ?, ?)"
+    insertstr = insertstr + "?, ?, ?, ?, ?,?)"
     cursor.execute(insertstr, (gameID,samplenr,str(step.roundNr),str(step.stepNr),step.P.Name,
                                str(PV.varsValue[0]),str(PV.varsValue[1]),str(PV.varsValue[2]),str(PV.varsValue[3])
                                ,str(step.EC.currentEC),step.EC.nOfWC,str(step.P.mydesicion),
                                step.EC.ECName,str(PV.Nullindex),str(step.P.PCStatus),
                                #'NULL','NULL','NULL','NULL'
                                str(step.WC.playedWCName),str(len(step.EC.playingdeck)),str(step.WC.currentWC), 
-                               str(step.P.PlayerReservedEC), str(step.P.playerFuncs)
+                               str(step.P.PlayerReservedEC), str(step.P.playerFuncs), funcsname
                                ))    
     myconn.commit()
     return True

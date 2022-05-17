@@ -9,6 +9,7 @@ from copy import deepcopy
 import mssql
 
 # initial gamesettings
+
 GS = GameSettings()
 GD = GameDeck()
 sampleCounter = 0

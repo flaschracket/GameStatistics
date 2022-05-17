@@ -37,7 +37,7 @@ class Step():
         self.stepNr = kwargs.get('currentStep',0)
         # initial it with 0 because it should not have data from past steps or rounds
         self.F = Funcs([],[],0,0)
-
+        
         return
 
     def updatePlayer(self, afterstr):

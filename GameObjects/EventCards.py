@@ -445,7 +445,9 @@ class EventCards(Cards):
         #tempfunc = Funcs(self.PV,self.playerfuncs,0,0)
         x = self.tempfuncs.buyFunc()
         if x == False:
-            self.reservedEC.append(201)                        
+            self.reservedEC.append(201)  
+        else:
+            self.PV = self.tempfuncs.PV
         return(self)
 
     def ECFunc202(self):

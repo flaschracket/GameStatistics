@@ -7,13 +7,7 @@ import copy
 
 
 class Player():
-    """description of class"""
-   # GS = GameSettings()
-   # PlayerPC = [GS.GameHardware.CPU1, GS.GameHardware.MainRAM]    
-    
-#    roundCounter = 0
-    
-                
+    """description of class"""                
 
     def __init__(self,name):
         self.Name = name 
@@ -33,6 +27,7 @@ class Player():
             self.PlayerReservedEC = reservedEC
         if (len(damage) > 0) and (damage[0] not in self.PCStatus):
             self.PCStatus = self.PCStatus + damage
+        
         self.playerFuncs = playerFuncs
         self.playerVars.sumvars = self.playerVars.calculatesumvars()
         return
