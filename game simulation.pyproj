@@ -11,7 +11,7 @@
     <OutputPath>.</OutputPath>
     <Name>game simulation</Name>
     <RootNamespace>game simulation</RootNamespace>
-    <InterpreterId>MSBuild|env|$(MSBuildProjectFullPath)</InterpreterId>
+    <InterpreterId>CondaEnv|CondaEnv|env2</InterpreterId>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -37,6 +37,7 @@
     <Compile Include="DB\dbGameSettings.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DB\__init__.py" />
     <Compile Include="GameObjects\Funcs.py">
       <SubType>Code</SubType>
     </Compile>
@@ -53,6 +54,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="GameObjects\Step.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GameObjects\__init__.py" />
+    <Compile Include="Test\test_EC.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="GameObjects\WormCards.py">
@@ -74,22 +79,21 @@
     <Compile Include="mssql.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Test\test_Func.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="GameObjects\" />
     <Folder Include="DB\" />
     <Folder Include="Abbas\" />
+    <Folder Include="Test\" />
   </ItemGroup>
   <ItemGroup>
-    <Interpreter Include="env\">
-      <Id>env</Id>
-      <Version>3.8</Version>
-      <Description>env (Python 3.8 (32-bit))</Description>
-      <InterpreterPath>Scripts\python.exe</InterpreterPath>
-      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
-      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
-      <Architecture>X86</Architecture>
-    </Interpreter>
+    <InterpreterReference Include="CondaEnv|CondaEnv|env2" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

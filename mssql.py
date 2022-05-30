@@ -2,8 +2,8 @@
 import pyodbc
 import copy
 
-#import GameObjects.Game
 from GameObjects.Funcs import *
+
 class mssql(object):
     """description of class"""
 

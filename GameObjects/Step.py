@@ -53,10 +53,10 @@ class Step():
         if afterstr == 'Func':
             self.P.playerFuncs = self.F.playerFuncs
             self.P.playerVars = copy.deepcopy(self.F.PV)
-            if self.F.buyed == 1:
-                gs =  GameSettings()
-                self.P.PlayerReservedEC.remove(gs.freelancer)
-                
+            self.P.PlayerReservedEC = self.F.reservedEC
+          #  if self.F.buyed == 1:
+           #     gs =  GameSettings()
+            #    self.P.PlayerReservedEC.remove(gs.freelancer)                
                 # there is no reserved ec for WC and EC objects
         #general
         self.F.PV = copy.deepcopy(self.P.playerVars)
