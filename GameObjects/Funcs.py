@@ -110,8 +110,7 @@ class Funcs(object):
         return self
 
     def reducePriceFromVars(self, tempSharedPrice):
-        #reduce from A
-        
+        #reduce from A      
         temp = self.PV.varsValue[0]-tempSharedPrice
         if temp > 0 :
             self.PV.varsValue[0]= temp
@@ -136,8 +135,6 @@ class Funcs(object):
             return 
         self.PV.varsValue[2]=0
         return 
-
-
         return self
 
     def playallFuncs(self):
