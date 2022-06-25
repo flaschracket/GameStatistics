@@ -59,12 +59,19 @@ class Step():
             #    self.P.playerReservedEC.remove(gs.freelancer)                
                 # there is no reserved ec for WC and EC objects
         #general
+        #vars
         self.F.PV = copy.deepcopy(self.P.playerVars)
         self.EC.PV = copy.deepcopy(self.P.playerVars)
         self.WC.PV = copy.deepcopy(self.P.playerVars)
+        #funcs
         self.F.playerFuncs = copy.deepcopy(self.P.playerFuncs)
         self.EC.playerFuncs = copy.deepcopy(self.P.playerFuncs)
         self.WC.playerFuncs = copy.deepcopy(self.P.playerFuncs)
+        #reserved ec
+        self.F.reservedEC = self.P.playerReservedEC
+        self.EC.reservedEC = self.P.playerReservedEC
+        self.WC.reservedEC = self.P.playerReservedEC
+
         tmp = self.P.playerVars.calculatesumvars()
         self.P.playerVars.sumvars = tmp
         self.EC.PV.sumvars = tmp
