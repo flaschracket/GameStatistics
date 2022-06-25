@@ -64,7 +64,7 @@ class Game():
             self.listofPlayers[x].playerVars = copy.deepcopy(self.thisStep.P.playerVars)
             self.listofPlayers[x].PCStatus = self.thisStep.P.PCStatus
             self.listofPlayers[x].mydesicion = self.thisStep.P.mydesicion
-            self.listofPlayers[x].PlayerReservedEC = self.thisStep.P.PlayerReservedEC
+            self.listofPlayers[x].playerReservedEC = self.thisStep.P.playerReservedEC
             self.listofPlayers[x].playerFuncs = self.thisStep.P.playerFuncs
             #self.update()
             self.Stepsnapshot(self.thisStep)

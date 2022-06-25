@@ -14,7 +14,9 @@ from Abbas.DynamicFunc import *
 class EventCards(Cards):
     """description of class"""    
     def __init__(self,vars,resEC,currentgamedeck,playerFuncs):
+       # in order to test if it works with object vars as refrence var and it does save objects as pointer
         self.PV = copy.deepcopy(vars)
+        self.PV = vars
         self.currentEC = 0
         self.reservedEC = resEC
         self.GS = GameSettings()
@@ -23,7 +25,7 @@ class EventCards(Cards):
         self.initialEC = currentgamedeck.initialEC
         self.playingdeck = currentgamedeck.currentECdeck
         self.playerFuncs = playerFuncs
-        self.tempfuncs = Funcs(self.PV,self.playerFuncs, 0,0,self.reservedEC)
+        self.tempfuncs = Funcs(self.PV,self.playerFuncs,self.reservedEC)
         return
 
     def shuffle(self):
@@ -120,14 +122,14 @@ class EventCards(Cards):
     
     def playFunc(self,s):
         """calling a function with making its name as string"""  
-        #self.updateEC(s.P.playerVars, s.EC.playingdeck, s.P.PlayerReservedEC)
-        #self.updateEC(s.P.playerVars, s.currentMixedCards, s.P.PlayerReservedEC)
+        #self.updateEC(s.P.playerVars, s.EC.playingdeck, s.P.playerReservedEC)
+        #self.updateEC(s.P.playerVars, s.currentMixedCards, s.P.playerReservedEC)
         #self.selectNextEC()
         
         
         FuncName = 'ECFunc' + str(self.currentEC)
         getattr(self, FuncName)()
-        self.nOfWC = self.WCQuantity(self.currentEC)
+        #self.nOfWC = self.WCQuantity(self.currentEC)
         s.P.updatePlayer(self.PV,0,self.reservedEC,[],self.playerFuncs)    
         #??? deck will update after playing the step?
         #s.GS.currentECdeck = self.playingdeck
@@ -412,13 +414,12 @@ class EventCards(Cards):
     #-------------------
     def ECFunc201(self):
         self.ECName = 'EC:Resource: Freelancer'
+        if len(self.reservedEC)>0:
+            print("it is more than one EC")
+
         #tempfunc = Funcs(self.PV,self.playerfuncs,0,0)
         self.reservedEC.append(201)
-        x = self.tempfuncs.buyFunc()
-#        if x == False:
- #           self.reservedEC.append(201)  
-  #      else:
-   #         self.PV = self.tempfuncs.PV
+        #x = self.tempfuncs.buyFunc()
         return(self)
 
     def ECFunc202(self):

@@ -9,7 +9,7 @@ class GameSettings():
         self.winGoal = 128
         self.NrOfP = 2
         self.maxRound = 40
-        self.Testchangelog = "test fucns: write name of funcs in DB"
+        self.Testchangelog = "test freelancer: fixed error: delete reserved cards randomly"
         #the Id in DB
         self.restart = 200
         self.freelancer = 201

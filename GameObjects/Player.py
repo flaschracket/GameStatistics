@@ -14,7 +14,7 @@ class Player():
         self.playerVars = MainRAMVars()
         self.PCStatus = []
         self.nofRoundPausing = 0
-        self.PlayerReservedEC = []
+        self.playerReservedEC = []
         self.mydesicion = True
         self.playerFuncs = []
         return 
@@ -23,8 +23,7 @@ class Player():
         self.playerVars = copy.deepcopy(var)
         self.nofRoundPausing = pause
         if (len(reservedEC)>0):
-            #self.PlayerReservedEC = self.PlayerReservedEC + reservedEC
-            self.PlayerReservedEC = reservedEC
+            self.playerReservedEC = reservedEC
         if (len(damage) > 0) and (damage[0] not in self.PCStatus):
             self.PCStatus = self.PCStatus + damage
         
@@ -37,7 +36,7 @@ class Player():
         self.mydesicion = plydecision.desicion
         self.nofRoundPausing = plydecision.nofRoundPausing
         self.PCStatus = plydecision.tempPCstatus
-        self.PlayerReservedEC = plydecision.tempReservedEc
+        self.playerReservedEC = plydecision.tempReservedEc
         return 
     #----------------------
 

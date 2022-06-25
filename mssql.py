@@ -64,7 +64,7 @@ def insertStep(step,gameID,samplenr):
     myconn = connectdb()
     
     #make list of  names from player functions
-    funcObj = Funcs(PV, [],0,2)
+    funcObj = Funcs(PV, [],step.P.playerReservedEC)
     funcsname = ""
 
     for item in step.P.playerFuncs:
@@ -83,7 +83,7 @@ def insertStep(step,gameID,samplenr):
                                step.EC.ECName,str(PV.Nullindex),str(step.P.PCStatus),
                                #'NULL','NULL','NULL','NULL'
                                str(step.WC.playedWCName),str(len(step.EC.playingdeck)),str(step.WC.currentWC), 
-                               str(step.P.PlayerReservedEC), str(step.P.playerFuncs), funcsname
+                               str(step.P.playerReservedEC), str(step.P.playerFuncs), funcsname
                                ))    
     myconn.commit()
     return True

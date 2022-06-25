@@ -26,7 +26,7 @@ class Step():
         self.P = kwargs.get('p',Player('N'))
         #pv = copy.deepcopy(self.P.playerVars)
         self.WC = WormCards(self.P.playerVars,GD,self.P.playerFuncs)
-        self.EC = EventCards(self.P.playerVars,self.P.PlayerReservedEC,GD,self.P.playerFuncs)
+        self.EC = EventCards(self.P.playerVars,self.P.playerReservedEC,GD,self.P.playerFuncs)
         self.currentMixedCards = GD.currentMixedCards
         self.initialMixedCards = GD.initialMixedCards
         #self.playerDesicion = False
@@ -36,7 +36,7 @@ class Step():
         self.roundNr = kwargs.get('currentRound',0)
         self.stepNr = kwargs.get('currentStep',0)
         # initial it with 0 because it should not have data from past steps or rounds
-        self.F = Funcs([],[],0,0)
+        self.F = Funcs([],[],self.P.playerReservedEC)
         
         return
 
@@ -53,10 +53,10 @@ class Step():
         if afterstr == 'Func':
             self.P.playerFuncs = self.F.playerFuncs
             self.P.playerVars = copy.deepcopy(self.F.PV)
-            self.P.PlayerReservedEC = self.F.reservedEC
+            self.P.playerReservedEC = self.F.reservedEC
           #  if self.F.buyed == 1:
            #     gs =  GameSettings()
-            #    self.P.PlayerReservedEC.remove(gs.freelancer)                
+            #    self.P.playerReservedEC.remove(gs.freelancer)                
                 # there is no reserved ec for WC and EC objects
         #general
         self.F.PV = copy.deepcopy(self.P.playerVars)
@@ -73,6 +73,15 @@ class Step():
 
     #-------------------------
     #-------------------------
+    def buyFunciton(self,d):
+        #if player want to buy?
+        d.rule5()
+        if d.buy == 'Func':
+            self.F = copy.deepcopy(Funcs(self.P.playerVars,self.P.playerFuncs,self.P.playerReservedEC))
+            self.F.buyFunc()
+            self.updatePlayer('Func')
+        return
+
     def playWC(self):
         self.WC.playFunc(self)
         self.updatePlayer('WC')
@@ -93,12 +102,7 @@ class Step():
         self.currentMixedCards = np.delete(self.currentMixedCards,[0])
         #region buy
         if self.P.mydesicion:
-            #if player want to buy?
-            d.rule5()
-            if d.buy == 'Func':
-                self.F = copy.deepcopy(Funcs(self.P.playerVars,self.P.playerFuncs,0,0))
-                self.F.buyFunc()
-                self.updatePlayer('Func')
+            self.buyFunciton(d)
             #------------------------- 
             #else buy hardware 
         #endregion buy
@@ -110,6 +114,9 @@ class Step():
             if (GS.ifWined(self.P.playerVars.varsValue[3])):
                 self.winer = self.P.Name
             return (self)
+            #if player has a freelancer and want to buy a function
+            if ((self.P.mydesicion) and (currentCard == 201)):
+                self.buyFunciton(d)
         else:
             d = desicion()._init_(self.P)
             d.playerdesicion()

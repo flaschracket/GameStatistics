@@ -11,7 +11,9 @@
     <OutputPath>.</OutputPath>
     <Name>game simulation</Name>
     <RootNamespace>game simulation</RootNamespace>
-    <InterpreterId>CondaEnv|CondaEnv|env2</InterpreterId>
+    <InterpreterId>CondaEnv|CondaEnv|env</InterpreterId>
+    <TestFramework>unittest</TestFramework>
+    <SuppressEnvironmentCreationPrompt>True</SuppressEnvironmentCreationPrompt>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -93,7 +95,7 @@
     <Folder Include="Test\" />
   </ItemGroup>
   <ItemGroup>
-    <InterpreterReference Include="CondaEnv|CondaEnv|env2" />
+    <InterpreterReference Include="CondaEnv|CondaEnv|env" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

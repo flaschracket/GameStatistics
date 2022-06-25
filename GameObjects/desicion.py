@@ -17,7 +17,7 @@ class desicion(object):
         self.PV = ply.playerVars
         self.tempPCstatus = ply.PCStatus
         self.desicion = ply.mydesicion
-        self.tempReservedEc = ply.PlayerReservedEC
+        self.tempReservedEc = ply.playerReservedEC
         self.nofRoundPausing = ply.nofRoundPausing
         self.buy = 'No'
         return self
@@ -31,9 +31,9 @@ class desicion(object):
 
 #    def makeDecision(self):
  #           if self.GS.makeRandomDecision(): 
-  #              if (self.GS.ResourceECTypes.Restart in (self.step.PlayerReservedEC)):
+  #              if (self.GS.ResourceECTypes.Restart in (self.step.playerReservedEC)):
    #         
-    #              self.step.P.PlayerReservedEC.remove(self.DE.ResourceECTypes.Restart)
+    #              self.step.P.playerReservedEC.remove(self.DE.ResourceECTypes.Restart)
 
     def playerdesicion(self):
         if 'CPU1Captured'  in (self.tempPCstatus):
