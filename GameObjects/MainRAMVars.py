@@ -14,10 +14,6 @@ class MainRAMVars():
         sumvars=0 
         ind = [0,1,2]
         sumvars = self.varsValue[0]+self.varsValue[1]+self.varsValue[2]
-       # for i in ind:
-        #    if i not in self.Nullindex:
-         #       if self.varsValue[i]>0:
-          #          sumvars = sumvars+self.varsValue[i]
         return sumvars
 
 #    def print(self):

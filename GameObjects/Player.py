@@ -17,6 +17,7 @@ class Player():
         self.playerReservedEC = []
         self.mydesicion = True
         self.playerFuncs = []
+        self.playerHardware = []
         return 
    
     def updatePlayer(self,var,pause,reservedEC,damage,playerFuncs):

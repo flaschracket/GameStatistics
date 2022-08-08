@@ -10,8 +10,6 @@ class desicion(object):
     """description of class"""
     def _init_(self,ply):
      #deepcopy is extremly slow
-     #   self.step = copy.deepcopy(s)
-     #    self.player = copy.deepcopy(ply)
         GS = GameSettings()
         self.restart = GS.restart
         self.PV = ply.playerVars
@@ -28,12 +26,6 @@ class desicion(object):
         if a == 0:
            return True
         return False
-
-#    def makeDecision(self):
- #           if self.GS.makeRandomDecision(): 
-  #              if (self.GS.ResourceECTypes.Restart in (self.step.playerReservedEC)):
-   #         
-    #              self.step.P.playerReservedEC.remove(self.DE.ResourceECTypes.Restart)
 
     def playerdesicion(self):
         if 'CPU1Captured'  in (self.tempPCstatus):
@@ -53,7 +45,6 @@ class desicion(object):
             else: 
                 if (self.nofRoundPausing == 0):
                     self.tempPCstatus.remove('CPU1Captured')
-                    #self.player.nofRoundPausing = 0
                     self.desicion = True
                 else:
                     self.desicion = False      
@@ -65,7 +56,6 @@ class desicion(object):
         if GS.freelancer in self.tempReservedEc:
                 return True
             #for decision it is not need to check the price. 
-            #if self.PV.sumvars> 16 or self.PV.varsValue[3]>16 :
         return False
     #player can buy CPU?
     def rule3(self):
@@ -86,11 +76,13 @@ class desicion(object):
             funcorhardware = self.makeRandomDecision()
             if funcorhardware:
                 self.buy='Func'
-            else: self.buy='Hardware'
+            else: 
+                self.buy='Hardware'
             return self
         #do I want to buy ?
         #buy = self.makeRandomDecision()
-        if (buy and buyFunc): self.buy = 'Func'
+        if (buy and buyFunc): 
+            self.buy = 'Func'
         if (buy and buyHardware):
            self.buy = 'Hardware'
 

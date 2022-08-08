@@ -27,6 +27,9 @@
     <Compile Include="Abbas\DynamicFunc.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="GameObjects\Bazar.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DB\dbBazar.py">
       <SubType>Code</SubType>
     </Compile>
@@ -59,6 +62,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="GameObjects\__init__.py" />
+    <Compile Include="Test\test_Bazar.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Test\test_EC.py">
       <SubType>Code</SubType>
     </Compile>
@@ -82,6 +88,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Test\test_Func.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Test\test_Step.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="__init__.py">

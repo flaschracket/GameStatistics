@@ -8,6 +8,7 @@ from GameObjects.EventCards import *
 from GameObjects.WormCards import *
 from GameObjects.Player import *
 from GameObjects.desicion import *
+from GameObjects.Bazar import *
 import copy
 import csv
 from csv import writer
@@ -25,13 +26,13 @@ class Step():
         GD = kwargs.get('currentgamedeck',0)        
         self.P = kwargs.get('p',Player('N'))
         #pv = copy.deepcopy(self.P.playerVars)
-        self.WC = WormCards(self.P.playerVars,GD,self.P.playerFuncs)
+        self.WC = WormCards(self.P)
         self.EC = EventCards(self.P.playerVars,self.P.playerReservedEC,GD,self.P.playerFuncs)
         self.currentMixedCards = GD.currentMixedCards
         self.initialMixedCards = GD.initialMixedCards
         #self.playerDesicion = False
         #self.myDesicion = desicion()
-        
+        self.buyDesicions = []
         #only to write in DB/file, etc.
         self.roundNr = kwargs.get('currentRound',0)
         self.stepNr = kwargs.get('currentStep',0)
@@ -54,10 +55,7 @@ class Step():
             self.P.playerFuncs = self.F.playerFuncs
             self.P.playerVars = copy.deepcopy(self.F.PV)
             self.P.playerReservedEC = self.F.reservedEC
-          #  if self.F.buyed == 1:
-           #     gs =  GameSettings()
-            #    self.P.playerReservedEC.remove(gs.freelancer)                
-                # there is no reserved ec for WC and EC objects
+        
         #general
         #vars
         self.F.PV = copy.deepcopy(self.P.playerVars)
@@ -80,40 +78,27 @@ class Step():
 
     #-------------------------
     #-------------------------
-    def buyFunciton(self,d):
+    def buyFunction(self,d):
         #if player want to buy?
-        d.rule5()
-        if d.buy == 'Func':
-            self.F = copy.deepcopy(Funcs(self.P.playerVars,self.P.playerFuncs,self.P.playerReservedEC))
-            self.F.buyFunc()
-            self.updatePlayer('Func')
+        #d.rule5()
+        #if d.buy == 'Func':
+        self.F = copy.deepcopy(Funcs(self.P.playerVars,self.P.playerFuncs,self.P.playerReservedEC))
+        self.F.buyFunc()
+        self.updatePlayer('Func')
+        return
+
+    def buyHardware(self):
+        bazar = Bazar()
+        bazar.buyCPU(self.P)        
         return
 
     def playWC(self):
         self.WC.playFunc(self)
         self.updatePlayer('WC')
         return self
-    
-    def playOneStep(self):
-        total = 0 
+
+    def playCard(self,currentCard):
         GS = GameSettings()
-        #should change: sel 
-        d = desicion()._init_(self.P)
-        d.playerdesicion()
-        self.P.update_afterdecision(d)
-        #self.P = copy.deepcopy(d.playerdesicion().player)
-        if (len(self.currentMixedCards) == 0):
-            self.currentMixedCards = self.initialMixedCards.deck
-            self.currentMixedCards.shuffle()            
-        currentCard = self.currentMixedCards[0]
-        self.currentMixedCards = np.delete(self.currentMixedCards,[0])
-        #region buy
-        if self.P.mydesicion:
-            self.buyFunciton(d)
-            #------------------------- 
-            #else buy hardware 
-        #endregion buy
-        #region play card        
         if currentCard<5000:
             self.EC.currentEC = currentCard
             self.EC.playFunc(self)
@@ -121,19 +106,58 @@ class Step():
             if (GS.ifWined(self.P.playerVars.varsValue[3])):
                 self.winer = self.P.Name
             return (self)
-            #if player has a freelancer and want to buy a function
-            if ((self.P.mydesicion) and (currentCard == 201)):
-                self.buyFunciton(d)
         else:
             d = desicion()._init_(self.P)
             d.playerdesicion()
             self.P.update_afterdecision(d)
             if (self.P.mydesicion):
                 self.WC.currentWC = currentCard-5000
-                self.WC.playFunc(self)
+                #self.WC.playFunc(self)
+                self.WC.playFunc(self.P)
                 self.updatePlayer('WC')
                 a = self.P.playerVars
-        #end region
+        return
+
+    def manageBuying(self, doAction):
+        #doAction 0: buy both, 1=buy Function, 2.BuyHardware 
+        d = desicion()._init_(self.P)
+        d.rule5()
+        self.buyDesicions.append(d.buy)
+        if (d.buy == 'Func' and (doAction != 2)):
+            self.buyFunction(d)
+        elif (d.buy == 'Hardware' and (doAction !=1)):
+            self.buyHardware()
+        return
+
+    def playOneStep(self):
+        
+        total = 0 
+        #should change: sel 
+        d = desicion()._init_(self.P)
+        d.playerdesicion()
+        self.P.update_afterdecision(d)
+        #region play step
+        #check if player can play this step or should pauseex. because of capture cpu
+        if self.P.mydesicion:
+            if (len(self.currentMixedCards) == 0):
+                self.currentMixedCards = self.initialMixedCards.deck
+                self.currentMixedCards.shuffle()            
+            currentCard = self.currentMixedCards[0]
+            self.currentMixedCards = np.delete(self.currentMixedCards,[0])
+            #0= decide to buy between hardware and function
+            self.manageBuying(0)        
+            #region play card        
+            #quantity of CPU 
+            quantity = self.P.playerHardware.count(1)+1
+            for i in range(quantity): 
+                self.playCard(currentCard)
+                #if current card is freelancer or bazar
+                if (currentCard == 201):
+                    self.manageBuying(1)
+                elif (currentCard == 202):
+                   self.manageBuying(2)
+        #endregion play Card
+        #endregion play step
         return (self)
  
     def writeCSVHeader(self, file):

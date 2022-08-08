@@ -10,23 +10,23 @@ from collections import Counter
 class WormCards(Cards):
     """description of class"""
 
-    def __init__(self,vars,currentgamedeck,playerFuncs):
-        self.PV = copy.deepcopy(vars)
+    #def __init__(self,vars,currentgamedeck,playerFuncs):
+    def __init__(self,player):
+        self.PV = copy.deepcopy(player.playerVars)
         self.playedWCName = []    
         self.playedwc = np.array([]).astype(int)
         self.nofRoundspausing = 0
         self.damages = []
         self.GS = GameSettings()
         self.currentWC = 0
-        self.GD = currentgamedeck
-        self.playingdeck = currentgamedeck.currentWCdeck
-        self.playerFuncs = playerFuncs
+#        self.GD = currentgamedeck
+        #self.playingdeck = currentgamedeck.currentWCdeck
+        self.playerFuncs = player.playerFuncs
         return 
 
-    def updateWC(self,vars,pwc):
-        
+    def updateWC(self,vars,pwc):      
         self.PV = copy.deepcopy(vars)
-        self.playingdeck = pwc
+        #self.playingdeck = pwc
         return self
 
     def ifPossibleToPlay(self,ind):
@@ -67,15 +67,16 @@ class WormCards(Cards):
 
 
 
-    def playFunc(self,s):
-        self.updateWC(s.P.playerVars,s.WC.playingdeck)
+    def playFunc(self,player):
+        #self.updateWC(s.P.playerVars,s.WC.playingdeck)
+        self.updateWC(player.playerVars, player.playerFuncs)
         #self.selectNextWC()
         FuncName = 'WCFunc' + str(self.currentWC)
         getattr(self, FuncName)()
         self.playedwc = np.append(self.playedwc,self.currentWC)
-        s.P.updatePlayer(self.PV,self.nofRoundspausing,[],self.damages,self.playerFuncs)
+#        s.P.updatePlayer(self.PV,self.nofRoundspausing,[],self.damages,self.playerFuncs)
         #s.GS.currentWCdeck = self.playingdeck
-        return s
+        return 
 
     # list of Cards
     #A=Null

@@ -25,8 +25,7 @@ class dbCards(object):
         cursor = myconn.cursor()
         cursor.execute('SELECT WCQuantity FROM [minibit].[dbo].[Cards] where FunctionNumber =' + str(functionN) + 'and Type = 1')
         for row in cursor.fetchone():
-            q = row
-            
+            q = row       
         return q
 
     def selectAllCategoryID(self, type,myconn):

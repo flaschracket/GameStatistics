@@ -116,7 +116,7 @@ class Funcs(object):
             self.PV.varsValue[0]= temp
             return True
         self.PV.varsValue[0]=0
-        if ( tempSharedPrice == 0):
+        if ( temp == 0):
             return True
         temp = ((-1) * temp)
         #reduce from B

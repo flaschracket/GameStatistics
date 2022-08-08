@@ -22,8 +22,8 @@ class EventCards(Cards):
         self.GS = GameSettings()
         self.ECName = ''
         self.nOfWC = 0
-        self.initialEC = currentgamedeck.initialEC
-        self.playingdeck = currentgamedeck.currentECdeck
+       # self.initialEC = currentgamedeck.initialEC
+        #self.playingdeck = currentgamedeck.currentECdeck
         self.playerFuncs = playerFuncs
         self.tempfuncs = Funcs(self.PV,self.playerFuncs,self.reservedEC)
         return
@@ -414,12 +414,7 @@ class EventCards(Cards):
     #-------------------
     def ECFunc201(self):
         self.ECName = 'EC:Resource: Freelancer'
-        if len(self.reservedEC)>0:
-            print("it is more than one EC")
-
-        #tempfunc = Funcs(self.PV,self.playerfuncs,0,0)
         self.reservedEC.append(201)
-        #x = self.tempfuncs.buyFunc()
         return(self)
 
     def ECFunc202(self):

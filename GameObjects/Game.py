@@ -66,6 +66,7 @@ class Game():
             self.listofPlayers[x].mydesicion = self.thisStep.P.mydesicion
             self.listofPlayers[x].playerReservedEC = self.thisStep.P.playerReservedEC
             self.listofPlayers[x].playerFuncs = self.thisStep.P.playerFuncs
+            self.listofPlayers[x].playerHardware = self.thisStep.P.playerHardware
             #self.update()
             self.Stepsnapshot(self.thisStep)
             if (self.winer != ''):
