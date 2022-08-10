@@ -1,5 +1,4 @@
 from random import randrange
-
 import copy
 import numpy as np
 from collections import Counter
@@ -8,8 +7,7 @@ from GameObjects.Funcs import *
 from GameObjects.GameSettings import *
 from GameObjects.Cards import *
 from DB.dbCards import *
-from GameObjects.desicion import *
-from Abbas.DynamicFunc import *
+from GameObjects.Decision import *
 
 class EventCards(Cards):
     """description of class"""    

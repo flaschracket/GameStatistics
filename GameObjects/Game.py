@@ -4,7 +4,7 @@ from GameObjects.MainRAMVars import *
 from GameObjects.Player import *
 from GameObjects.EventCards import *
 from GameObjects.WormCards import *
-from GameObjects.desicion import *
+from GameObjects.Decision import *
 from random import randrange
 import copy
 import csv
@@ -63,7 +63,7 @@ class Game():
             #update player
             self.listofPlayers[x].playerVars = copy.deepcopy(self.thisStep.P.playerVars)
             self.listofPlayers[x].PCStatus = self.thisStep.P.PCStatus
-            self.listofPlayers[x].mydesicion = self.thisStep.P.mydesicion
+            self.listofPlayers[x].mydecision = self.thisStep.P.mydecision
             self.listofPlayers[x].playerReservedEC = self.thisStep.P.playerReservedEC
             self.listofPlayers[x].playerFuncs = self.thisStep.P.playerFuncs
             self.listofPlayers[x].playerHardware = self.thisStep.P.playerHardware

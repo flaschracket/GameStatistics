@@ -7,7 +7,7 @@ from GameObjects.Game import *
 from GameObjects.EventCards import *
 from GameObjects.WormCards import *
 from GameObjects.Player import *
-from GameObjects.desicion import *
+from GameObjects.Decision import *
 from GameObjects.Bazar import *
 import copy
 import csv
@@ -31,7 +31,7 @@ class Step():
         self.currentMixedCards = GD.currentMixedCards
         self.initialMixedCards = GD.initialMixedCards
         #self.playerDesicion = False
-        #self.myDesicion = desicion()
+        #self.myDesicion = decision()
         self.buyDesicions = []
         #only to write in DB/file, etc.
         self.roundNr = kwargs.get('currentRound',0)
@@ -107,10 +107,10 @@ class Step():
                 self.winer = self.P.Name
             return (self)
         else:
-            d = desicion()._init_(self.P)
-            d.playerdesicion()
+            d = decision()._init_(self.P)
+            d.playerDecision()
             self.P.update_afterdecision(d)
-            if (self.P.mydesicion):
+            if (self.P.mydecision):
                 self.WC.currentWC = currentCard-5000
                 #self.WC.playFunc(self)
                 self.WC.playFunc(self.P)
@@ -120,7 +120,7 @@ class Step():
 
     def manageBuying(self, doAction):
         #doAction 0: buy both, 1=buy Function, 2.BuyHardware 
-        d = desicion()._init_(self.P)
+        d = decision()._init_(self.P)
         d.rule5()
         self.buyDesicions.append(d.buy)
         if (d.buy == 'Func' and (doAction != 2)):
@@ -133,12 +133,12 @@ class Step():
         
         total = 0 
         #should change: sel 
-        d = desicion()._init_(self.P)
-        d.playerdesicion()
+        d = decision()._init_(self.P)
+        d.playerDecision()
         self.P.update_afterdecision(d)
         #region play step
         #check if player can play this step or should pauseex. because of capture cpu
-        if self.P.mydesicion:
+        if self.P.mydecision:
             if (len(self.currentMixedCards) == 0):
                 self.currentMixedCards = self.initialMixedCards.deck
                 self.currentMixedCards.shuffle()            

@@ -3,9 +3,7 @@ from GameObjects.GameSettings import *
 from random import randrange
 import copy
 
-class desicion(object):
-#    gs = GameSettings()
-
+class decision(object):
 #----------------------------
     """description of class"""
     def _init_(self,ply):
@@ -14,7 +12,7 @@ class desicion(object):
         self.restart = GS.restart
         self.PV = ply.playerVars
         self.tempPCstatus = ply.PCStatus
-        self.desicion = ply.mydesicion
+        self.decision = ply.myDecision
         self.tempReservedEc = ply.playerReservedEC
         self.nofRoundPausing = ply.nofRoundPausing
         self.buy = 'No'
@@ -27,12 +25,12 @@ class desicion(object):
            return True
         return False
 
-    def playerdesicion(self):
+    def playerDecision(self):
         if 'CPU1Captured'  in (self.tempPCstatus):
             FuncName = 'rule1'
             funcresult = getattr(self, FuncName)()
         else:
-            self.desicion = True        
+            self.decision = True        
         return self
 
     #rule 1= cpu is captured  
@@ -40,14 +38,14 @@ class desicion(object):
             if (self.restart in self.tempReservedEc):
                 self.tempPCstatus.remove('CPU1Captured')
                 self.tempReservedEc.remove(self.restart)
-                self.desicion = True
+                self.decision = True
                 self.nofRoundPausing = 0
             else: 
                 if (self.nofRoundPausing == 0):
                     self.tempPCstatus.remove('CPU1Captured')
-                    self.desicion = True
+                    self.decision = True
                 else:
-                    self.desicion = False      
+                    self.decision = False      
                     self.nofRoundPausing = self.nofRoundPausing-1
             return self
     #player can buy function from freelancer?

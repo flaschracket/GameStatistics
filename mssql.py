@@ -95,7 +95,7 @@ def insertStep(step,gameID,samplenr):
 
     cursor.execute(insertstr, (gameID,samplenr,str(step.roundNr),str(step.stepNr),step.P.Name,
                                varA,varB,varC,Total,currentEC,
-                               step.EC.nOfWC,str(step.P.mydesicion),
+                               step.EC.nOfWC,str(step.P.mydecision),
                                step.EC.ECName,nullList,str(step.P.PCStatus),
                                strWCName,quantityRemainedCards,strWCNr,
                                strPlayerReservedEC
