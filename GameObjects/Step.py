@@ -130,11 +130,10 @@ class Step():
         return
 
     def playOneStep(self):
-        
         total = 0 
         #should change: sel 
         d = decision()._init_(self.P)
-        d.playerDecision()
+        d.playerAllowedToPlay()
         self.P.update_afterdecision(d)
         #region play step
         #check if player can play this step or should pauseex. because of capture cpu

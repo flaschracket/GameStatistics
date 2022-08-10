@@ -8,14 +8,13 @@ import copy
 
 class Player():
     """description of class"""                
-
     def __init__(self,name):
         self.Name = name 
         self.playerVars = MainRAMVars()
         self.PCStatus = []
         self.nofRoundPausing = 0
         self.playerReservedEC = []
-        self.myDecision = True
+        self.allowedToPlay = True
         self.playerFuncs = []
         self.playerHardware = []
         return 
@@ -33,7 +32,6 @@ class Player():
         return
 
     def update_afterdecision(self,plydecision):
-        #plydecision = decision()
         self.mydecision = plydecision.decision
         self.nofRoundPausing = plydecision.nofRoundPausing
         self.PCStatus = plydecision.tempPCstatus
