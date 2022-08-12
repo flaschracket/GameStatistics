@@ -29,7 +29,6 @@ class dbCards(object):
         return q
 
     def selectAllCategoryID(self, type,myconn):
-#        myconn = self.connectdb()
         cursor = myconn.cursor()
         cursor.execute('SELECT ID FROM [minibit].[dbo].[Category] where typenumber ='+ str(type))
         cats = self.listofresult(cursor.fetchall())

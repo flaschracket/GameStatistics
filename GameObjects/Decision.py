@@ -25,7 +25,7 @@ class decision(object):
            return True
         return False
 
-    def playerDecision(self):
+    def playerAllowedToPlay(self):
         if 'CPU1Captured'  in (self.tempPCstatus):
             FuncName = 'rule1'
             funcresult = getattr(self, FuncName)()
