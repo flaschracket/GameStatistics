@@ -13,20 +13,15 @@ class MainRAMVars():
     def calculatesumvars(self):
         sumvars=0 
         ind = [0,1,2]
-        
-        for i in ind:
-            if i not in self.Nullindex:
-                if self.varsValue[i]>0:
-                    sumvars = sumvars+self.varsValue[i]
-        
+        sumvars = self.varsValue[0]+self.varsValue[1]+self.varsValue[2]
         return sumvars
 
-    def print(self):
-        print(' Vars Value = ' + str(*self.varsValue))
-        return 
-    
-    def printinline(self):
-        valuesare = ' VarA = ' + str(self.varsValue[0]) + ' VarB = ' + str(self.varsValue[1]) + ' VarC = ' + str(self.varsValue[2]) + ' Total = ' + str(self.varsValue[3])
-        print(valuesare)
-        print('NUlls vars:')
-        print(self.Nullindex)
+#    def print(self):
+ #       print(' Vars Value = ' + str(self.varsValue))
+  #      return 
+   # 
+   # def printinline(self):
+    #    valuesare = ' VarA = ' + str(self.varsValue[0]) + ' VarB = ' + str(self.varsValue[1]) + ' VarC = ' + str(self.varsValue[2]) + ' Total = ' + str(self.varsValue[3])
+     #   print(valuesare)
+      #  print('NUlls vars:')
+       # print(self.Nullindex)

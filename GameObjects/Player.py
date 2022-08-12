@@ -1,48 +1,43 @@
 from GameObjects.MainRAMVars import *
 from GameObjects.GameSettings import *
-from GameObjects.desicion import *
+from GameObjects.Decision import *
 from enum import Enum
 import copy
 
 
 
 class Player():
-    """description of class"""
-   # GS = GameSettings()
-   # PlayerPC = [GS.GameHardware.CPU1, GS.GameHardware.MainRAM]    
-    
-#    roundCounter = 0
-    
-                
+    """description of class"""                
 
     def __init__(self,name):
         self.Name = name 
         self.playerVars = MainRAMVars()
         self.PCStatus = []
         self.nofRoundPausing = 0
-        self.PlayerReservedEC = []
-        self.mydesicion = True
-        self.playerfuncs = []
+        self.playerReservedEC = []
+        self.myDecision = True
+        self.playerFuncs = []
+        self.playerHardware = []
         return 
    
-    def updatePlayer(self,var,pause,reservedEC,damage,playerfuncs):
+    def updatePlayer(self,var,pause,reservedEC,damage,playerFuncs):
         self.playerVars = copy.deepcopy(var)
         self.nofRoundPausing = pause
         if (len(reservedEC)>0):
-            #self.PlayerReservedEC = self.PlayerReservedEC + reservedEC
-            self.PlayerReservedEC = reservedEC
+            self.playerReservedEC = reservedEC
         if (len(damage) > 0) and (damage[0] not in self.PCStatus):
             self.PCStatus = self.PCStatus + damage
-        self.playerfuncs = playerfuncs
+        
+        self.playerFuncs = playerFuncs
         self.playerVars.sumvars = self.playerVars.calculatesumvars()
         return
 
     def update_afterdecision(self,plydecision):
-        #plydecision = desicion()
-        self.mydesicion = plydecision.desicion
+        #plydecision = decision()
+        self.mydecision = plydecision.decision
         self.nofRoundPausing = plydecision.nofRoundPausing
         self.PCStatus = plydecision.tempPCstatus
-        self.PlayerReservedEC = plydecision.tempReservedEc
+        self.playerReservedEC = plydecision.tempReservedEc
         return 
     #----------------------
 

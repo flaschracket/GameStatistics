@@ -1,16 +1,17 @@
 import copy
 import random
-from GameObjects.MainRAMVars import *
-from DB.dbBazar import *
+from GameObjects.GameSettings import GameSettings
+from GameObjects.MainRAMVars import MainRAMVars
+from DB.dbBazar import dbBazar
 
 class Funcs(object):
     """description of class"""
-    def __init__(self,vars,playerfuncslist,varnumber, value):
+    def __init__(self,vars,playerfuncslist,ReservedEC):
         self.PV = copy.deepcopy(vars)
         self.playerFuncs = playerfuncslist
-        self.varnumber = varnumber
+        self.reservedEC = ReservedEC
         self.buyed = 0
-        #self.value = value
+        #define static?
         dbb = dbBazar()
         self.funcList = []
         self.funcName = []
@@ -28,6 +29,10 @@ class Funcs(object):
         self.funcSharedPrice.append(bazarlist[3])
         self.funcSharedPrice = self.funcSharedPrice[0]
         return
+    #def __init__(self, playerRef):
+     #   self.player = playerRef;
+      #  Funcs(self.player.playerVars, self.player.playerFuncs, self.player.playerReservedEC)
+       # return
     #-------------------
     #player functions
     #1: zero instead of null
@@ -36,10 +41,12 @@ class Funcs(object):
     #4: add instead of assign
     #-------------------
     
-    def updateRAMwithFunc(self,funcnumber):
-        if funcnumber == 0:
-            self.PV.Nullindex.clear()
+    def updateRAMwithFunc(self,funcnumber):       
         if funcnumber == 1:
+            for i in self.PV.Nullindex:
+                self.PV.varsValue[i]=0
+            self.PV.Nullindex.clear()
+        if funcnumber == 2:
             if(self.PV.varsValue[0]<0):
                 self.PV.varsValue[0] = self.PV.varsValue[0] * (-1)
             if(self.PV.varsValue[1]<0):
@@ -47,10 +54,10 @@ class Funcs(object):
             if(self.PV.varsValue[2]<0):
                 self.PV.varsValue[2] = self.PV.varsValue[2] * (-1)
             if(self.PV.varsValue[3]<0):
-                self.PV.varsValue[3] = self.PV.varsValue[3] * (-1)
+                self.PV.varsValue[3] = self.PV.varsValue[3] * (-1)        
         return
-
-    def buyFunc(self):
+    
+    def buyFunc(self):        
         fnumber = -1
         x=4
         tempFuncList = []
@@ -60,7 +67,7 @@ class Funcs(object):
         for f in range(len(self.funcList)):
             # f begins from 0 and id from 1
             f=f+1
-            #1. player do not have it
+            #1. player does not have it
             if (f not in self.playerFuncs):
                 #player has money to buy
                 ind = self.funcList.index(f)
@@ -80,60 +87,56 @@ class Funcs(object):
             tempPrice = tempFuncMainPrice[ind]
             tempSharedPrice = tempFuncSharedPrice[ind]
             self.buyed = 1
-            
+            isbought = True          
+            # null vars are 0- no need to check here
             #pay the price of function from total
-            if tempPrice >0:
-                self.PV.varsValue[3] = self.PV.varsValue[3]-tempPrice
-                self.playerFuncs.append(fnumber)
-                self.updateRAMwithFunc(fnumber)
+            if ( tempPrice > 0):
+                self.reducePriceFromTotal(tempPrice)
             else:
                 #pay from shared values
-                if self.PV.varsValue[0]>0 and 0 not in self.PV.Nullindex:
-                    tempSharedPrice = self.PV.varsValue[0]-tempSharedPrice
-                    if tempSharedPrice == 0:
-                        self.PV.varsValue[0]=0
-                        self.playerFuncs.append(fnumber)
-                        self.updateRAMwithFunc(fnumber)
-                        return True
-                    elif tempSharedPrice>0:
-                        self.playerFuncs.append(fnumber)
-                        self.PV.varsValue[0]= tempSharedPrice
-                        self.updateRAMwithFunc(fnumber)
-                        return True
-                    else:
-                        self.PV.varsValue[0] = 0
-                        tempSharedPrice = (-1 * tempSharedPrice)
-                if self.PV.varsValue[1]>0 and (1 not in self.PV.Nullindex):        
-                        tempSharedPrice = self.PV.varsValue[1]-tempSharedPrice
-                        if tempSharedPrice == 0:
-                            self.PV.varsValue[1]=0
-                            self.playerFuncs.append(fnumber)
-                            self.updateRAMwithFunc(fnumber)
-                            return True
-                        elif tempSharedPrice>0:
-                            self.playerFuncs.append(fnumber)
-                            self.PV.varsValue[1]= tempSharedPrice
-                            self.updateRAMwithFunc(fnumber)
-                            return True
-                        else:
-                            self.PV.varsValue[1] = 0
-                            tempSharedPrice = (-1 * tempSharedPrice)
-                if self.PV.varsValue[2]>0 and (2 not in self.PV.Nullindex):        
-                        tempSharedPrice = self.PV.varsValue[2]-tempSharedPrice
-                        if tempSharedPrice == 0:
-                            self.PV.varsValue[2]=0
-                            self.playerFuncs.append(fnumber)
-                            self.updateRAMwithFunc(fnumber)
-                            return True
-                        elif tempSharedPrice>0:
-                            self.playerFuncs.append(fnumber)
-                            self.PV.varsValue[2]= tempSharedPrice
-                            self.updateRAMwithFunc(fnumber)
-                            return True
+                self.reducePriceFromVars(tempSharedPrice)
         else:
-            return False
-        return True
-    
+            isbought = False
+
+        if isbought == True:
+            self.updateRAMwithFunc(fnumber)
+            self.playerFuncs.append(fnumber)
+            gs =  GameSettings()
+            self.reservedEC.remove(gs.freelancer)
+        return isbought
+   
+    def reducePriceFromTotal(self, tempPrice):
+        self.PV.varsValue[3] = self.PV.varsValue[3]-tempPrice
+        return self
+
+    def reducePriceFromVars(self, tempSharedPrice):
+        #reduce from A      
+        temp = self.PV.varsValue[0]-tempSharedPrice
+        if temp > 0 :
+            self.PV.varsValue[0]= temp
+            return True
+        self.PV.varsValue[0]=0
+        if ( temp == 0):
+            return True
+        temp = ((-1) * temp)
+        #reduce from B
+        temp = self.PV.varsValue[1]-temp
+        if temp > 0 :
+            self.PV.varsValue[1]= temp
+            return 
+        self.PV.varsValue[1]=0
+        if temp == 0:
+            return 
+        temp = ((-1) * temp)
+        #reduce from C
+        temp = self.PV.varsValue[2]-temp
+        if temp > 0 :
+            self.PV.varsValue[2]= temp
+            return 
+        self.PV.varsValue[2]=0
+        return 
+        return self
+
     def playallFuncs(self):
         pf = self.playallFuncs
         while len(pf)>0:
@@ -153,15 +156,17 @@ class Funcs(object):
            self.value = -1 * self.value
         return 
 
-    #Add isntead of asign
-    def func3(self):    
-        if self.varnumber not in self.PV.Nullindex:
-            self.PV.varsValue[self.varnumber] = self.PV.varsValue[self.varnumber] + self.value
-        return 
-
     #add instead of reduce
-    def func4(self):
+    def func3(self):
         if self.value <0:
            self.value = -1 * self.value
         return 
+
+    #Add isntead of asign
+    def func4(self,PV,goalVarIndex, addingValue):    
+        #should check before
+        if goalVarIndex not in self.PV.Nullindex:
+            self.PV.varsValue[goalVarIndex] = self.PV.varsValue[goalVarIndex] + self.value
+        return 
+
     

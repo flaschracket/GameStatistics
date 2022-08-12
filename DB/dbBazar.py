@@ -20,9 +20,9 @@ class dbBazar(object):
         resultlist.append(Name)
         resultlist.append(Price)
         resultlist.append(SharedPrice)
-        print("list of result")
-        print(resultlist)
-        print("******")
+    #    print("list of result")
+    #    print(resultlist)
+    #    print("******")
         return resultlist
 
     def connectdb(self):
@@ -35,8 +35,8 @@ class dbBazar(object):
         cursor = myconn.cursor()
         cursor.execute('SELECT * FROM [minibit].[dbo].[Bazar] where Type = 1')
         q = self.listofresult(cursor.fetchall())
-        print("select All result:")
-        print(cursor.fetchall())
+       # print("select All result:")
+       # print(cursor.fetchall())
         return q
 
 

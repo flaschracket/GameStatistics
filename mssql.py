@@ -1,7 +1,9 @@
 
 import pyodbc
 import copy
-import GameObjects.Game
+
+from GameObjects.Funcs import *
+
 class mssql(object):
     """description of class"""
 
@@ -22,19 +24,7 @@ def listall():
         print(row)
     return True
     
-#def insertGameSettings(gs):
- #   ECtype = str(gs.EC_Cards)
-  #  WCtype = str(gs.WC_Cards)
-   # myconn = connectdb()
- #   cursor = myconn.cursor()
-  #  cursor.execute("INSERT INTO minibit.dbo.GameSettings VALUES (?,?,?,?,?,?,?,?,?,?,?,?)", 
-   #                ((gs.Testchangelog),gs.sampleQuantity,gs.winGoal,
-    #                 gs.NrOfP,gs.maxRound,ECtype,str(gs.EC_Quantity),0,WCtype,str(gs.WC_Quantity),0,str(gs.currentECdeck)))
-   # cursor.execute("SELECT @@IDENTITY")
-    #for row in cursor:
-     #   settingsID = row[0]
-    #myconn.commit()
-    #return settingsID
+
 
 def update_GameSettings(firstdeck,ID):
     myconn = connectdb()
@@ -70,22 +60,51 @@ def updateGame(g):
     return True
 
 def insertStep(step,gameID,samplenr):
-    PV = copy.deepcopy(step.P.playerVars)
+    #prepare data
+
+    varA = str(step.P.playerVars.varsValue[0])
+    varB = str(step.P.playerVars.varsValue[1])
+    varC = str(step.P.playerVars.varsValue[2])
+    Total = str(step.P.playerVars.varsValue[3])
+    nullList = str(step.P.playerVars.Nullindex)
+    quantityRemainedCards = str(len(step.currentMixedCards))
+    currentEC = str(step.EC.currentEC)
+    #make list of  names from player functions
+    funcObj = Funcs(step.P.playerVars, [],step.P.playerReservedEC)
+    funcsname = ""
+    listofFuncs = str(step.P.playerFuncs)
+    strWCName= str(step.WC.playedWCName)
+    strWCNr = str(step.WC.currentWC)
+    strPlayerReservedEC = str(step.P.playerReservedEC)
+    hardware = str(step.P.playerHardware)
+    buyDesicions = str(step.buyDesicions)
+    for item in step.P.playerFuncs:
+        ind = funcObj.funcList.index(item)
+        funcsname = funcsname+ " ** " + funcObj.funcName[ind] 
+    
+
+    #insert data
     myconn = connectdb()
     cursor = myconn.cursor()
     #step.printStep()
     insertstr = "INSERT INTO minibit.dbo.Step VALUES (?, ?, ?,?,?"
     insertstr = insertstr + ",?, ?, ?, ?, ?, "
     insertstr = insertstr + "?, ?, ?, ?, ?, "
-    insertstr = insertstr + "?, ?, ?, ?, ?)"
+    insertstr = insertstr + "?, ?, ?, ?, ?,"
+    insertstr = insertstr + "?, ?,?)"
+
     cursor.execute(insertstr, (gameID,samplenr,str(step.roundNr),str(step.stepNr),step.P.Name,
-                               str(PV.varsValue[0]),str(PV.varsValue[1]),str(PV.varsValue[2]),str(PV.varsValue[3])
-                               ,str(step.EC.currentEC),step.EC.nOfWC,str(step.P.mydesicion),
-                               step.EC.ECName,str(PV.Nullindex),str(step.P.PCStatus),
-                               #'NULL','NULL','NULL','NULL'
-                               str(step.WC.playedWCName),str(len(step.EC.playingdeck)),str(step.WC.currentWC), 
-                               str(step.P.PlayerReservedEC), str(step.P.playerfuncs)
-                               ))    
+                               varA,varB,varC,Total,currentEC,
+                               step.EC.nOfWC,str(step.P.mydecision),
+                               step.EC.ECName,nullList,str(step.P.PCStatus),
+                               strWCName,quantityRemainedCards,strWCNr,
+                               strPlayerReservedEC
+                               , listofFuncs
+                               , funcsname,buyDesicions,hardware
+                               )) 
+     #,'NULL'
+    #test if the playing deck in EC and WC are needed
+    # str(step.WC.playedWCName),str(len(step.EC.playingdeck)),str(step.WC.currentWC),
     myconn.commit()
     return True
 

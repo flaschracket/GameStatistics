@@ -4,7 +4,7 @@ from GameObjects.MainRAMVars import *
 from GameObjects.Player import *
 from GameObjects.EventCards import *
 from GameObjects.WormCards import *
-from GameObjects.desicion import *
+from GameObjects.Decision import *
 from random import randrange
 import copy
 import csv
@@ -57,15 +57,18 @@ class Game():
             #self.GD.currentWCdeck = self.thisStep.WC.playingdeck
             self.GD.currentMixedCards = self.thisStep.currentMixedCards
             self.winer = self.thisStep.winer
-            self.Stepsnapshot(self.thisStep)
+            
             self.currentStep = self.currentStep + 1
             #self.listofPlayers[x] = copy.deepcopy(self.thisStep.P)
             #update player
-            self.listofPlayers[x].playerVars = self.thisStep.P.playerVars
+            self.listofPlayers[x].playerVars = copy.deepcopy(self.thisStep.P.playerVars)
             self.listofPlayers[x].PCStatus = self.thisStep.P.PCStatus
-            self.listofPlayers[x].mydesicion = self.thisStep.P.mydesicion
-            self.listofPlayers[x].PlayerReservedEC = self.thisStep.P.PlayerReservedEC
+            self.listofPlayers[x].mydecision = self.thisStep.P.mydecision
+            self.listofPlayers[x].playerReservedEC = self.thisStep.P.playerReservedEC
+            self.listofPlayers[x].playerFuncs = self.thisStep.P.playerFuncs
+            self.listofPlayers[x].playerHardware = self.thisStep.P.playerHardware
             #self.update()
+            self.Stepsnapshot(self.thisStep)
             if (self.winer != ''):
                 break             
         return self
