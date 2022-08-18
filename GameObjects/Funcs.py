@@ -17,7 +17,6 @@ class Funcs(object):
         self.funcName = []
         self.funcMainPrice = []
         self.funcSharedPrice = []
-
         #make an array of each field of table
         bazarlist = dbb.selectAll()     
         self.funcList.append(bazarlist[0])
@@ -29,10 +28,7 @@ class Funcs(object):
         self.funcSharedPrice.append(bazarlist[3])
         self.funcSharedPrice = self.funcSharedPrice[0]
         return
-    #def __init__(self, playerRef):
-     #   self.player = playerRef;
-      #  Funcs(self.player.playerVars, self.player.playerFuncs, self.player.playerReservedEC)
-       # return
+
     #-------------------
     #player functions
     #1: zero instead of null

@@ -12,7 +12,7 @@ class decision(object):
         self.restart = GS.restart
         self.PV = ply.playerVars
         self.tempPCstatus = ply.PCStatus
-        self.decision = ply.myDecision
+        self.decision = ply.allowedToPlay
         self.tempReservedEc = ply.playerReservedEC
         self.nofRoundPausing = ply.nofRoundPausing
         self.buy = 'No'

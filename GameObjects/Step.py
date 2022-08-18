@@ -108,7 +108,7 @@ class Step():
             return (self)
         else:
             d = decision()._init_(self.P)
-            d.playerDecision()
+            d.playerAllowedToPlay()
             self.P.update_afterdecision(d)
             if (self.P.mydecision):
                 self.WC.currentWC = currentCard-5000
