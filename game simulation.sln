@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.29519.181
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "game simulation", "game simulation.pyproj", "{561C023F-8390-48E7-BE24-0476ABD02990}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameResources", "..\GameResources\GameResources.csproj", "{A8FD95C4-E43F-43A1-9DDF-35425C743F98}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameResources", "..\GameResources\GameResources.csproj", "{A8FD95C4-E43F-43A1-9DDF-35425C743F98}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Game Simulator", "..\Game Simulator\Game Simulator.csproj", "{7C605407-E282-49AF-A308-9EB339975ADE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,6 +21,10 @@ Global
 		{A8FD95C4-E43F-43A1-9DDF-35425C743F98}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A8FD95C4-E43F-43A1-9DDF-35425C743F98}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A8FD95C4-E43F-43A1-9DDF-35425C743F98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C605407-E282-49AF-A308-9EB339975ADE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C605407-E282-49AF-A308-9EB339975ADE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C605407-E282-49AF-A308-9EB339975ADE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C605407-E282-49AF-A308-9EB339975ADE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
