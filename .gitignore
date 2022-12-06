@@ -356,3 +356,5 @@ env/Scripts/f2py.exe, env/Scripts/pip.exe
  env/Scripts/pip3.8.exe, env/Scripts/pip3.exe
 env/Scripts/python.exe
 env/Scripts/pythonw.exe
+/env/Lib/site-packages
+/env/Scripts

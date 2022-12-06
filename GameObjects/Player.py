@@ -22,6 +22,7 @@ class Player():
     def updatePlayer(self,var,pause,reservedEC,damage,playerFuncs):
         self.playerVars = copy.deepcopy(var)
         self.nofRoundPausing = pause
+        print("test git")
         if (len(reservedEC)>0):
             self.playerReservedEC = reservedEC
         if (len(damage) > 0) and (damage[0] not in self.PCStatus):
