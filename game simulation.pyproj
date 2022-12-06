@@ -81,7 +81,7 @@
     <Compile Include="GameObjects\MainRAMVars.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="mssql.py">
+    <Compile Include="py Game Simulator\mssql.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Test\test_Func.py">
@@ -92,9 +92,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="GameObjects\" />
     <Folder Include="DB\" />
+    <Folder Include="GameObjects\" />
+    <Folder Include="py Game Simulator\GameObjects\" />
+    <Folder Include="py Game Simulator\DB\" />
     <Folder Include="DBScripts\" />
+    <Folder Include="py Game Simulator\" />
     <Folder Include="Test\" />
   </ItemGroup>
   <ItemGroup>

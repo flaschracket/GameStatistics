@@ -1,6 +1,6 @@
 
 from random import randrange
-from GameObjects.Player import *
+from pyGameSimulator.GameObjects.Player import *
 from GameObjects.Game import *
 from GameObjects.Cards import *
 from DB.dbGameSettings import *
