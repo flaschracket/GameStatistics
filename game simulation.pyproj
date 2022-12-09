@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>561c023f-8390-48e7-be24-0476abd02990</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>game_simulation.py</StartupFile>
+    <StartupFile>py Game Simulator\game_simulation.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -24,61 +24,61 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="GameObjects\Bazar.py">
+    <Compile Include="py Game Simulator\GameObjects\Bazar.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DB\dbBazar.py">
+    <Compile Include="py Game Simulator\DB\dbBazar.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DB\dbCards.py">
+    <Compile Include="py Game Simulator\DB\dbCards.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DB\database.py">
+    <Compile Include="py Game Simulator\DB\database.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DB\dbGameSettings.py">
+    <Compile Include="py Game Simulator\DB\dbGameSettings.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DB\__init__.py" />
-    <Compile Include="GameObjects\Funcs.py">
+    <Compile Include="py Game Simulator\DB\__init__.py" />
+    <Compile Include="py Game Simulator\GameObjects\Funcs.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="GameObjects\GameDeck.py">
+    <Compile Include="py Game Simulator\GameObjects\GameDeck.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="GameObjects\Cards.py">
+    <Compile Include="py Game Simulator\GameObjects\Cards.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="GameObjects\Decision.py">
+    <Compile Include="py Game Simulator\GameObjects\Decision.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="GameObjects\Game.py">
+    <Compile Include="py Game Simulator\GameObjects\Game.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="GameObjects\Step.py">
+    <Compile Include="py Game Simulator\GameObjects\Step.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="GameObjects\__init__.py" />
+    <Compile Include="py Game Simulator\GameObjects\__init__.py" />
     <Compile Include="Test\test_Bazar.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Test\test_EC.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="GameObjects\WormCards.py">
+    <Compile Include="py Game Simulator\GameObjects\WormCards.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="game_simulation.py" />
-    <Compile Include="GameObjects\EventCards.py">
+    <Compile Include="py Game Simulator\game_simulation.py" />
+    <Compile Include="py Game Simulator\GameObjects\EventCards.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="GameObjects\GameSettings.py">
+    <Compile Include="py Game Simulator\GameObjects\GameSettings.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="GameObjects\Player.py">
+    <Compile Include="py Game Simulator\GameObjects\Player.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="GameObjects\MainRAMVars.py">
+    <Compile Include="py Game Simulator\GameObjects\MainRAMVars.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="py Game Simulator\mssql.py">
@@ -92,8 +92,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="DB\" />
-    <Folder Include="GameObjects\" />
+    <Folder Include="py Game Simulator\DB\" />
+    <Folder Include="py Game Simulator\GameObjects\" />
     <Folder Include="py Game Simulator\GameObjects\" />
     <Folder Include="py Game Simulator\DB\" />
     <Folder Include="DBScripts\" />
