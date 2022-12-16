@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameResources
+namespace GameResources.Game.Resource
 {
-    class Board
+    class Board: Resource
     {
         public int Id { get; set; } = 0;
         public RAM boardRAM =  new();
         public int CPU { get; set; } = 1;
-        public List<Function> BoughtFunctions { get; set; }
+        public List<IFunction> BoughtFunctions { get; set; }
 
 
     }

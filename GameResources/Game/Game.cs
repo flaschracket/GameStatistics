@@ -8,6 +8,21 @@ namespace GameResources.Game
 {
     public class Game : IGame
     {
+        string Name = "";
+        List<Player> players;
+
+        internal Player Player
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        
+
+        //? rules
+
         //self.currentRound = 0
         //self.currentStep = 0
         //self.samplecounter = samplecounter
@@ -23,7 +38,7 @@ namespace GameResources.Game
         //# insert game in DB
         //self.gamesettingsID = gsID
         //self.gameID = mssql.insertGame(self)
-        public void InitializeGame()
+        public void GetSnapshotStepData()
         {
             throw new NotImplementedException();
         }
@@ -34,10 +49,23 @@ namespace GameResources.Game
             Console.WriteLine("not implemented!");
         }
 
-        public void GetSnapshotStepData()
+
+
+        public void PlayAGame()
         {
             throw new NotImplementedException();
         }
 
+        public void PlayAStep()
+        {
+            throw new NotImplementedException();
+        }
+
+
+
+        public void InitializeGame(List<Player> players, List<Resource> resources, string configFile)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -7,6 +7,8 @@ namespace Game_Simulator
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
+            Game heartsGame = new Game();
+            
         }
     }
 }

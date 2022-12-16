@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace GameResources
+namespace GameResources.Game.Resource
 {
-    public class Card
+    public class Card : Resource
     {
         private enum CardType
         {
