@@ -6,10 +6,7 @@ using System.Threading.Tasks;
 
 namespace GameResources.Game.Resource
 {
-    public interface IResource
+    class Deck
     {
-        bool IsPublic();
-        Enum GetVariation();
-        Enum GetStatus();
     }
 }

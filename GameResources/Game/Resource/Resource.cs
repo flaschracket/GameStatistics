@@ -9,10 +9,13 @@ namespace GameResources.Game.Resource
 {
     public class Resource: IResource
     {
-        //bazar, 
-        public string Name;
-
+        public object resourceOwner;
         public Enum GetStatus()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Enum GetVariation()
         {
             throw new NotImplementedException();
         }
@@ -22,20 +25,21 @@ namespace GameResources.Game.Resource
             throw new NotImplementedException();
         }
 
-        ICollection<string> IResource.GetType()
-        {
-            throw new NotImplementedException();
-        }
-
         //?resourcetype should be out of object. each resource is one of them
-        enum ResourceType
+        public enum ResourceVariation
         {
             Board,
-            ReservedCard,
+            Card,
             Hardware,
             Function,
+            Bazar,
         }
-        enum Hardware
+        public enum ResourceType
+        {
+            Public,
+            Private,
+        }
+        public enum Hardware
         {
             CPU
         }

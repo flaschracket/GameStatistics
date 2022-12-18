@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GameResources.Game.Resource
 {
-    class RAM : Resource
+    class RAM : IResource
     {
         public int VarA { get; set;}
         public int VarB { get; set;}
@@ -27,5 +23,19 @@ namespace GameResources.Game.Resource
         public int GetSumAllNotTotal()
         { return SumAllNotTotal; }
 
+        public bool IsPublic()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Enum GetStatus()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Enum GetVariation()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

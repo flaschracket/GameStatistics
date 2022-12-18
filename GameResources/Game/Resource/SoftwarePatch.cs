@@ -6,7 +6,22 @@ using System.Threading.Tasks;
 
 namespace GameResources.Game.Resource
 {
-    class SoftwarePatch: Resource
+    public class SoftwarePatch : IResource
     {
+        public Enum GetStatus()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Enum GetVariation()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool IsPublic()
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

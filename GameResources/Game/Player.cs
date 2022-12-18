@@ -1,44 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using GameResources.Game.Logic;
 using GameResources.Game.Resource;
 
 namespace GameResources.Game
 {
-    class Player: IPlayer, IDecision, IResource
+    public class Player : IPlayer, IDecision
     {
-        string playerName = "player x";
-        // player turn number, when is the time for him to play
-        private int OrderOfPlayer = -1;
-        private PlayerStatus playerStatus;
-        
+        public string playerName;
+
         #region resources
-        List<IResource> PlayerResources;
-        //or seprate??
+        //polymorphy????
 
-        //PCStatus;
-        RAM myRAM;
-        List<SoftwarePatch> mySoftware;
-        List<Card> myCards;
-        #endregion
-
-        public Resource.Resource Resource
+        public List<GameResources.Game.Resource.Resource> playerResource
         {
             get => default;
             set
             {
             }
         }
+        //or seprate??
 
-        internal PlayerStatus PlayerStatus
+        //PCStatus;
+        RAM myRAM;
+        List<SoftwarePatch> mySoftware;
+        List<Card> myCards;
+
+
+
+        public Player(string playerName)
         {
-            get => default;
-            set
-            {
-            }
+            this.playerName = playerName;
         }
 
         public void AllocateResources()
@@ -51,25 +43,12 @@ namespace GameResources.Game
             throw new NotImplementedException();
         }
 
-        public bool IsPublic()
-        {
-            throw new NotImplementedException();
-        }
-
         public void PlayTheTurn()
         {
             throw new NotImplementedException();
         }
+        #endregion
 
-        Enum IResource.GetStatus()
-        {
-            throw new NotImplementedException();
-        }
-
-        ICollection<string> IResource.GetType()
-        {
-            throw new NotImplementedException();
-        }
     }
 }
 

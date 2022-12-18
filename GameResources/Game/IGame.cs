@@ -1,25 +1,19 @@
 ﻿using GameResources.Game;
+using GameResources.Game.Resource;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameResources
+namespace GameResources.Game
 {
     interface IGame
     {
-        /// <summary>
-        /// initilise or set game for the first time
-        /// </summary>
-        /// <param name="players"></param>
-        /// <param name="resources"></param>
-        /// <param name="configFile"></param>
-        void InitializeGame(List<Player> players,List<Resource> resources, string configFile);
+        void InitializeGame(string configFile);
         void PlayARound();
         void PlayAGame();
-        void PlayAStep();
-        void GetSnapshotStepData();
-        
+        void PlayAStep(Player player);
+        void GetSnapshotStepData();        
     }
 }

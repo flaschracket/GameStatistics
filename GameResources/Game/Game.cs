@@ -1,71 +1,94 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Configuration;
 
 namespace GameResources.Game
 {
     public class Game : IGame
     {
-        string Name = "";
-        List<Player> players;
-
-        internal Player Player
+        #region properties
+        public string Name { get; set; }
+        private List<Player> Players;
+        //??
+        public List<Player> players
         {
-            get => default;
-            set
+            get { return Players; }
+            set { Players = value; }
+        }
+
+        private Field Field;
+
+        public Field field
+        {
+            get { return Field; }
+            set { Field = value; }
+        }
+
+        public int currentRound { get; set; }
+        public int currentStep { get; set; }
+        public Player wonedPlayer { get; set; }
+        #endregion
+
+        public Game(string name, string configFilePath)
+        {
+            Name = name;
+            //?? config file?
+            InitializeGame(configFilePath);
+            int playersQuantity = 4;            
+            this.field = new Field();
+            this.players = new List<Player>();
+            for (int i = 0; i < playersQuantity; i++)
             {
+                Player player = new Player("p" + i.ToString());
+                this.players.Add(player);
             }
         }
 
-        
-
-        //? rules
-
-        //self.currentRound = 0
-        //self.currentStep = 0
-        //self.samplecounter = samplecounter
-        //self.winer = ''
-        //# steps
-        //self.thisStep = Step(currentStep = self.currentStep, currentgamedeck = self.GD)
-        //#self.previousStep = Step(self.currentStep-1)
-        //#players -----------------
-        //self.listofPlayers = []
-        //for x in range(self.GS.NrOfP):
-        //   name = 'Player ' + str(x)
-        //   self.listofPlayers.append(Player(name))
-        //# insert game in DB
-        //self.gamesettingsID = gsID
-        //self.gameID = mssql.insertGame(self)
         public void GetSnapshotStepData()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("game Snapshot");
+            Console.WriteLine("current round: {0}",currentRound.ToString());
+            Console.WriteLine("current step: {0}", currentStep.ToString());
         }
 
         public void PlayARound()
         {
-            throw new NotImplementedException();
-            Console.WriteLine("not implemented!");
+            currentRound++;
+            Console.WriteLine("round {0} is begins...", currentRound.ToString());
+            foreach (Player player in players)
+            {
+                if (currentRound == 10)
+                {
+                    wonedPlayer = player;
+                }
+                PlayAStep(player);
+            }
         }
-
-
 
         public void PlayAGame()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("a game is begining to play");
+            while (wonedPlayer is null)
+            {
+                PlayARound();
+            }
         }
 
-        public void PlayAStep()
+        public void PlayAStep(Player player)
         {
-            throw new NotImplementedException();
+            currentStep++;
+            Console.WriteLine("step {0} for player {1} is begining", currentStep.ToString(),player.playerName);
         }
 
-
-
-        public void InitializeGame(List<Player> players, List<Resource> resources, string configFile)
+        public void InitializeGame(string configPath)
         {
-            throw new NotImplementedException();
+            // Create configuration reader that reads the files once
+            ExeConfigurationFileMap configFileMap = new ExeConfigurationFileMap();
+            configFileMap.ExeConfigFilename = configPath;
+
+            // Get the mapped configuration file.
+            Configuration gameConfig = ConfigurationManager.OpenMappedExeConfiguration(configFileMap, ConfigurationUserLevel.None);
+            
         }
     }
 }
