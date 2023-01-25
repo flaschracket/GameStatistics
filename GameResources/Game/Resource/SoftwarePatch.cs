@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GameResources.Game.Resource
 {
-    public class SoftwarePatch : IResource
+    public class SoftwarePatch 
     {
         public Enum GetStatus()
         {

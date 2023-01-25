@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace GameResources.Game.Resource
 {
-    public class Board: IResource
+    public class Board
     {
         public int Id { get; set; } = 0;
         //public RAM boardRAM =  new();
@@ -17,7 +12,6 @@ namespace GameResources.Game.Resource
         {
             throw new NotImplementedException();
         }
-
 
         public Enum GetStatus()
         {

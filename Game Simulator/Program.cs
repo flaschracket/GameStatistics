@@ -9,10 +9,10 @@ namespace Game_Simulator
         {
             Console.WriteLine("Hello World!");
             string configPath = "D:\\my works\\Brettspiel\\game simulation\\Game Simulator Code\\GameResources\\Game\\GameSettings.config";
-            Game heartsGame = new Game("Hearts", configPath);
+            MinibitLand heartsGame = new MinibitLand("Hearts", configPath);
             heartsGame.GetSnapshotStepData();
             heartsGame.PlayAGame();
-            Console.WriteLine("the winner was {0}", heartsGame.wonedPlayer.playerName);
+            Console.WriteLine("the winner was not defined in programm.");
         }
     }
 }

@@ -2,30 +2,16 @@
 
 namespace GameResources.Game.Resource
 {
-    public class Card : Resource
+    public class Card 
     {
-        
-        public Enum GetStatus()
-        {
-            throw new NotImplementedException();
-        }
+        public CardType CardType { get; set; }
+       
+    }
 
-        public bool IsPublic()
-        {
-            return true;
-        }
-
-        Enum GetVariation()
-        {
-            Resource resource = new Resource();
-            return ResourceVariation.Card;
-        }
-
-        private enum CardType
-        {
-            Worm,
-            Event,
-            Resource
-        }
+    public enum CardType
+    {
+        Virus,
+        Event,
+        Resource
     }
 }
