@@ -17,7 +17,7 @@ namespace EF_DataAcessLayer
                 optionsBuilder.UseSqlServer(@"Server=.;Database=GameSimulator;Trusted_Connection=True;TrustServerCertificate=True;");
             }
 
-    }
+        }
         //entities
         public DbSet<Game> Games { get; set; }
         public DbSet<Player> players { get; set; }

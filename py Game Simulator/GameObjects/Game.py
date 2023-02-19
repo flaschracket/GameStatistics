@@ -80,7 +80,6 @@ class Game():
         return self
 
     def printgame(self,s):
-        
         print("it is a game print in " +s)
         print("step:" + str(self.currentStep))
         print("player: "+ self.thisStep.P.Name)

@@ -35,19 +35,21 @@ class decision(object):
 
     #rule 1= cpu is captured  
     def rule1(self): 
-            if (self.restart in self.tempReservedEc):
-                self.tempPCstatus.remove('CPU1Captured')
-                self.tempReservedEc.remove(self.restart)
-                self.decision = True
-                self.nofRoundPausing = 0
-            else: 
-                if (self.nofRoundPausing == 0):
-                    self.tempPCstatus.remove('CPU1Captured')
-                    self.decision = True
-                else:
-                    self.decision = False      
-                    self.nofRoundPausing = self.nofRoundPausing-1
+        #I commented because I did not found why it restarts
+        #    if (self.restart in self.tempReservedEc):
+         #       self.tempPCstatus.remove('CPU1Captured')
+         #       self.tempReservedEc.remove(self.restart)
+          #      self.decision = True
+           #     self.nofRoundPausing = 0
+            #else: 
+        if (self.nofRoundPausing == 0):
+            self.tempPCstatus.remove('CPU1Captured')
+            self.decision = True
+        else:
+            self.decision = False      
+            self.nofRoundPausing = self.nofRoundPausing-1
             return self
+
     #player can buy function from freelancer?
     def rule2(self):
         GS = GameSettings()

@@ -2,7 +2,7 @@
 import pyodbc
 import copy
 
-from GameObjects.Funcs import *
+from GameObjects.SoftwarePatches import *
 
 class mssql(object):
     """description of class"""
@@ -70,7 +70,7 @@ def insertStep(step,gameID,samplenr):
     quantityRemainedCards = str(len(step.currentMixedCards))
     currentEC = str(step.EC.currentEC)
     #make list of  names from player functions
-    funcObj = Funcs(step.P.playerVars, [],step.P.playerReservedEC)
+    funcObj = SoftwarePatches(step.P.playerVars, [],step.P.playerReservedEC)
     funcsname = ""
     listofFuncs = str(step.P.playerFuncs)
     strWCName= str(step.WC.playedWCName)

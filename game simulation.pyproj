@@ -40,7 +40,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="py Game Simulator\DB\__init__.py" />
-    <Compile Include="py Game Simulator\GameObjects\Funcs.py">
+    <Compile Include="py Game Simulator\GameObjects\SoftwarePatches.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="py Game Simulator\GameObjects\GameDeck.py">

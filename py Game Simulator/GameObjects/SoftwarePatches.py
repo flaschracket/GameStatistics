@@ -4,7 +4,7 @@ from GameObjects.GameSettings import GameSettings
 from GameObjects.MainRAMVars import MainRAMVars
 from DB.dbBazar import dbBazar
 
-class Funcs(object):
+class SoftwarePatches(object):
     """description of class"""
     def __init__(self,vars,playerfuncslist,ReservedEC):
         self.PV = copy.deepcopy(vars)

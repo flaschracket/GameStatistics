@@ -3,7 +3,7 @@ import copy
 import numpy as np
 from collections import Counter
 from GameObjects.MainRAMVars import MainRAMVars
-from GameObjects.Funcs import *
+from GameObjects.SoftwarePatches import *
 from GameObjects.GameSettings import *
 from GameObjects.Cards import *
 from DB.dbCards import *
@@ -23,7 +23,7 @@ class EventCards(Cards):
        # self.initialEC = currentgamedeck.initialEC
         #self.playingdeck = currentgamedeck.currentECdeck
         self.playerFuncs = playerFuncs
-        self.tempfuncs = Funcs(self.PV,self.playerFuncs,self.reservedEC)
+        self.tempfuncs = SoftwarePatches(self.PV,self.playerFuncs,self.reservedEC)
         return
 
     def shuffle(self):

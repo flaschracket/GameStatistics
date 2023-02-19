@@ -37,8 +37,7 @@ class Step():
         self.roundNr = kwargs.get('currentRound',0)
         self.stepNr = kwargs.get('currentStep',0)
         # initial it with 0 because it should not have data from past steps or rounds
-        self.F = Funcs([],[],self.P.playerReservedEC)
-        
+        self.CurrentPlayerFunctions = SoftwarePatches([],[],self.P.playerReservedEC)
         return
 
     def updatePlayer(self, afterstr):
@@ -52,21 +51,21 @@ class Step():
             self.P.playerVars = copy.deepcopy(self.EC.PV)
 
         if afterstr == 'Func':
-            self.P.playerFuncs = self.F.playerFuncs
-            self.P.playerVars = copy.deepcopy(self.F.PV)
-            self.P.playerReservedEC = self.F.reservedEC
+            self.P.playerFuncs = self.CurrentPlayerFunctions.playerFuncs
+            self.P.playerVars = copy.deepcopy(self.CurrentPlayerFunctions.PV)
+            self.P.playerReservedEC = self.CurrentPlayerFunctions.reservedEC
         
         #general
         #vars
-        self.F.PV = copy.deepcopy(self.P.playerVars)
+        self.CurrentPlayerFunctions.PV = copy.deepcopy(self.P.playerVars)
         self.EC.PV = copy.deepcopy(self.P.playerVars)
         self.WC.PV = copy.deepcopy(self.P.playerVars)
         #funcs
-        self.F.playerFuncs = copy.deepcopy(self.P.playerFuncs)
+        self.CurrentPlayerFunctions.playerFuncs = copy.deepcopy(self.P.playerFuncs)
         self.EC.playerFuncs = copy.deepcopy(self.P.playerFuncs)
         self.WC.playerFuncs = copy.deepcopy(self.P.playerFuncs)
         #reserved ec
-        self.F.reservedEC = self.P.playerReservedEC
+        self.CurrentPlayerFunctions.reservedEC = self.P.playerReservedEC
         self.EC.reservedEC = self.P.playerReservedEC
         self.WC.reservedEC = self.P.playerReservedEC
 
@@ -82,8 +81,8 @@ class Step():
         #if player want to buy?
         #d.rule5()
         #if d.buy == 'Func':
-        self.F = copy.deepcopy(Funcs(self.P.playerVars,self.P.playerFuncs,self.P.playerReservedEC))
-        self.F.buyFunc()
+        self.CurrentPlayerFunctions = copy.deepcopy(SoftwarePatches(self.P.playerVars,self.P.playerFuncs,self.P.playerReservedEC))
+        self.CurrentPlayerFunctions.buyFunc()
         self.updatePlayer('Func')
         return
 
@@ -137,6 +136,7 @@ class Step():
         self.P.update_afterdecision(d)
         #region play step
         #check if player can play this step or should pauseex. because of capture cpu
+        #?warum here is mydecision and not allowed to play!
         if self.P.mydecision:
             if (len(self.currentMixedCards) == 0):
                 self.currentMixedCards = self.initialMixedCards.deck
